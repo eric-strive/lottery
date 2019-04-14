@@ -1,0 +1,22 @@
+/*去除默认边距*/
+*{margin:0;padding:0;}
+/*设置字体*/
+body{ font: 12px/1.5em tahoma,arial,"宋体",sans-serif;}
+/*超链接去下划线*/
+a{text-decoration:none;}
+/*无序列表去小圆点*/
+ul{list-style-type:none;}
+/*图片链接去边框*/
+a img{border:0px;}
+/*div居中*/
+.allWrap{width:1000px;margin:0 auto;}
+/*清除浮动*/
+.clearfix{clear:both;}
+/*清除浮动*/
+.clearfix:after{clear:both;content:" "; display:block;height:0;visibility:hidden;}
+
+em{font-style: normal;}
+
+.left{float:left;}
+.right{float:right;}
+.red{color:red;}

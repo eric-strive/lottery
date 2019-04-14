@@ -2,10 +2,10 @@
 return [
     'type'        => 'mysql',
     'dsn'         => '',   
-    'hostname'    => 'mysql',
+    'hostname'    => '106.15.205.106',
     'database'    => 'lottery',
     'username'    => 'root',    
-    'password'    => 'root',    
+    'password'    => 'wang123456',
     'hostport'    => '3306',    
     'params'      => [],   
     'charset'     => 'utf8',    

@@ -1,0 +1,78 @@
+.listTopcaption {
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 999;
+}
+.listTopcaption .holder {
+    background: rgba(238, 238, 238, 0.3) none repeat scroll 0 0;
+    font-size: 14px;
+    padding: 0 45px;
+    position: relative;
+    text-align: center;
+}
+.listTopArrow {
+    background: rgba(0, 0, 0, 0) url("../images/icon/iconfont-angleleft-25x.png") no-repeat scroll center center / 25px auto;
+    display: block;
+    height: 45px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 45px;
+}
+
+.listTopArrow {
+    background: rgba(0, 0, 0, 0) url("../images/icon/iconfont-angleleft-25x.png") no-repeat scroll center center / 25px auto;
+    display: block;
+    height: 45px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 45px;
+}
+
+.listTopArrow.home {
+    background: rgba(0, 0, 0, 0) url("../images/icon/iconfont-icontitlehuishouye-30x.png") no-repeat scroll center center / 30px auto;
+    bottom: 0;
+    display: block;
+    height: 45px;
+    left: initial;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 45px;
+}
+
+body {
+    background-color: #efeff4;
+}
+body {
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    line-height: 1.6;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+.listTopcaption .holder p {
+    color: #666;
+    font-size: 16px;
+    font-weight: lighter;
+    height: 45px;
+    line-height: 45px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.TopcaptionPos {
+    background: #ffffff none repeat scroll 0 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    height: 45px;
+}
+.weui_cells_tips a{
+	color:#000;
+}

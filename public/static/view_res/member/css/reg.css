@@ -1,0 +1,20 @@
+.form li{
+	list-style-type:none;
+	margin:10px 0;
+}
+
+.form span{
+	display:inline-block;
+	width:100px;
+	text-align:right;
+}
+
+.text{
+	border:1px solid #ccc;
+	height:25px;
+	width:150px;
+}
+p{
+	padding:10px 0 0 40px;
+	font-size:12px;
+}
