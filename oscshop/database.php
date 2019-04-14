@@ -13,7 +13,7 @@ return [
 	'debug'       => true,
     'deploy'      => 0,    
     'rw_separate' => false,    
-    'master_num'  => 1,   
+    'master_num'  => 1,
     'slave_no'    => '',
 ];
 ?>

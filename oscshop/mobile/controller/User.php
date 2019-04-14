@@ -31,7 +31,7 @@ class User extends MobileBase
 	}
 	
 	function index(){
-		
+
 		$this->assign('no_pay',$this->order_count(config('default_order_status_id')));	
 		$this->assign('paid',$this->order_count(config('paid_order_status_id')));			
 		$this->assign('userinfo',Db::name('member')->where('uid',UID)->find());		
@@ -121,4 +121,13 @@ class User extends MobileBase
 		 
 		  return '/public/uploads/images/qrcode/'.$fileName;		 
 	}
+
+    /**
+     * 用户充值
+     */
+	public function recharge(){
+        $this->assign('top_title','金豆充值');
+        $this->assign('SEO',['title'=>'金豆充值-'.config('SITE_TITLE')]);
+        return $this->fetch();
+    }
 }

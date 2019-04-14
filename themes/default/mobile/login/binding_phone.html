@@ -13,7 +13,7 @@
 <div id="container">
     <div class="register">
 
-        <div class="weui_cells_title">用户注册</div>
+        <div class="weui_cells_title">绑定手机号</div>
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
                 <div class="weui_cell_hd">
@@ -29,15 +29,15 @@
             </div>
             {if condition="1 eq config('use_captcha')"}
             <!--<div class="weui_cell weui_vcode">-->
-                <!--<div class="weui_cell_hd">-->
-                    <!--<label class="weui_label">验证码</label>-->
-                <!--</div>-->
-                <!--<div class="weui_cell_bd weui_cell_primary">-->
-                    <!--<input name="captcha" id="captcha" class="weui_input" type="text" placeholder="请输入验证码">-->
-                <!--</div>-->
-                <!--<div class="weui_cell_ft">-->
-                    <!--<img class="verifyimg reloadverify" src="{:url('login/verify')}">-->
-                <!--</div>-->
+            <!--<div class="weui_cell_hd">-->
+            <!--<label class="weui_label">验证码</label>-->
+            <!--</div>-->
+            <!--<div class="weui_cell_bd weui_cell_primary">-->
+            <!--<input name="captcha" id="captcha" class="weui_input" type="text" placeholder="请输入验证码">-->
+            <!--</div>-->
+            <!--<div class="weui_cell_ft">-->
+            <!--<img class="verifyimg reloadverify" src="{:url('login/verify')}">-->
+            <!--</div>-->
             <!--</div>-->
             {/if}
             <div class="weui_cell">
@@ -67,10 +67,8 @@
                 </div>
             </div>
         </div>
-        <p class="weui_cells_tips"><a href="{:url('login/login')}">已有账号？去登录</a></p>
-
         <div class="weui_btn_area">
-            <a class="weui_btn weui_btn_primary js_btn">注册</a>
+            <a class="weui_btn weui_btn_primary js_btn">确认绑定</a>
         </div>
 
     </div>
@@ -159,7 +157,7 @@
 
     $('.js_btn').click(function () {
         $.post(
-            "{:url('login/reg')}",
+            "{:url('login/binding_phone')}",
             $('input[type=\'text\'],input[type=\'tel\'],input[type=\'password\']'),
             function (d) {
                 if (d.error) {
