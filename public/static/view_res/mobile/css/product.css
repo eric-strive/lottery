@@ -707,8 +707,8 @@ body {
 	display: block;
 	height: 45px;
 	width: 45px;
-	background: url(../images/icon/iconfont-cart-28x.png) center no-repeat;
-	background-image: -webkit-image-set(url(../images/icon/iconfont-cart-28x.png) 1x, url(../images/icon/iconfont-cart-56x.png) 2x);
+	background: url(../../../image/icon/icon.png) center no-repeat;
+	background-image: -webkit-image-set(url(../../../image/icon/icon.png) 1x, url(../../../image/icon/icon.png) 2x);
 	background-size: 28px;
 	text-align: right;
 	padding-top: 1px

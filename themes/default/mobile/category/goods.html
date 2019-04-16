@@ -1,13 +1,25 @@
 <div style="margin: 0 10px;"> </div>
 
 {volist name="goods" id="d"}
-	<section class="productListWrap hoz" onclick="location='{:url('goods/detail',array('id'=>$d['goods_id']))}';">
+	<section class="productListWrap hoz border" onclick="location='{:url('goods/detail',array('id'=>$d['goods_id']))}';">
 		<a class="productList clearfix">
 			<img src="IMG_ROOT{$d.image|resize=200,200}" />
-			<section>
+			
+		</a>
+		<!-- <section> -->
 				<title class="title">{$d.name}</title>
-				<span class="prices">¥{$d.price}</span>
-			</section>			
-		</a>		
+				<!-- <span class="prices">¥{$d.price}</span> -->
+				<div class="flex-between con2 ">
+					<div class="flex-col">
+						<div class="p">购买进度50%</div>
+						<div class="weui_progress">
+							<div class="weui_progress_bar">
+								<div class="weui_progress_inner_bar js_progress" style="width: 80%;"></div>
+							</div>
+						</div>
+					</div>
+					<a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_plain_primary btn" >开设房间</a>
+				</div>
+			<!-- </section>			 -->		
 	</section>
 {/volist}

@@ -4,6 +4,7 @@
 <link href="__PUBLIC__/view_res/mobile/css/product.css" type="text/css" rel="Stylesheet" />
 <link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet" />
 <link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet" />
+<link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
 <script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/jquery-weui/dist/js/swiper.min.js"></script>
 
@@ -15,7 +16,9 @@
 	    display: block;
 	    width: 100%;
 	}
-	.option_name{margin-left:5px;}
+	.option_name{
+		margin-left:5px;
+	}
 	      
 	/*重载jquery-weui.min.css中样式*/  
 	label > * {
@@ -43,130 +46,147 @@
 </div>
 
 <div id="container">
-<a class="uc-add-like">收藏</a>
-
 	<input type="hidden" value="{$goods.minimum}" name="quantity">
 	<input id="goods_id" type="hidden" value="{$goods.goods_id}" name="goods_id">
 	
 	<p class="vpd-title" style='height:auto;'>
            {$goods.name}
-    </p>
-    {if condition="isset($points_goods) AND ($points_goods EQ 'points')"}
-    	<input type="hidden" value="points" name="pay_type">
-	    <dl class="pd-dsc clearfix">
-	        <dt>积分：</dt>
-	        <dt class="prices" data-price="{$goods.pay_points|round=2}" id="pd-market-price">{$goods.pay_points|round=2}</dt>
-	   	</dl>
-   	{else/}
-	   	<dl class="pd-dsc clearfix">
-	        <dt>零售价：</dt>
-	        <dt class="prices" data-price="{$goods.price|round=2}" id="pd-market-price">&yen;{$goods.price|round=2}</dt>
-	   	</dl>
-   	{/if}
-   	<dl class="pd-dsc clearfix" id="product_stock_wrap">
-        <dt>库存量：</dt>
-        <dt id="pd-stock">{$goods.quantity}</dt>
-    </dl>
-    
+	</p>
+	
+	<div class="detaileBox">
+		{if condition="isset($points_goods) AND ($points_goods EQ 'points')"}
+			<input type="hidden" value="points" name="pay_type">
+			<dl class="pd-dsc clearfix">
+				<dt>积分：</dt>
+				<dt class="prices" data-price="{$goods.pay_points|round=2}" id="pd-market-price">{$goods.pay_points|round=2}</dt>
+			</dl>
+		{else/}
+			<dl class="pd-dsc clearfix">
+				<dt>期次：</dt>
+				<dt class="prices" data-price="123" id="pd-market-price">123</dt>
+			</dl>
+		{/if}
+		<dl class="pd-dsc clearfix" id="product_stock_wrap">
+			<dt>库存量：</dt>
+			<dt id="pd-stock">{$goods.quantity}</dt>
+		</dl>
+		<a class="uc-add-like collectBtn">收藏</a>
+	</div>
     {if condition="!empty($discount)"}
     <dl class="pd-dsc clearfix" id="product_stock_wrap">
-            <dt>批发价：</dt>
-            {volist name="discount" id="v"}
-            	<br />
-            	<dt id="pd-stock"> {$v.quantity}{$goods.sku} 或更多 &yen; {$v.price}</dt>
-            {/volist}
+		<dt>批发价：</dt>
+		{volist name="discount" id="v"}
+			<br />
+			<dt id="pd-stock"> {$v.quantity}{$goods.sku} 或更多 &yen; {$v.price}</dt>
+		{/volist}
     </dl>
 	{/if}
     
-    {if condition="$options"}	
-			      <div class="options">
-			        <h2>可选项</h2>			        
-			        {volist name="options" id="option"}				        
-				        {if condition="$option['type'] eq 'select' "}			        	
-				        <div class="boss_check">
-					        <div class="box-check">	
-						        <div id="option-{$option.goods_option_id}" class="option">
-						          <div class="title_text"><b>{$option.name}:</b>
-							          {if condition="$option['required'] eq 1"}
-							          	<span class="required">*</span>
-							          	{/if}
-						          </div>
-						          <select name="option[{$goods.goods_id},{$option.option_id}]">
-						            <option value=""> --- 请选择 --- </option>
-						            {volist name="$option['goods_option_value']" id="option_value" }	
-							            <option title="数量{$option_value.quantity}" value="{$option_value.option_value_id}">{$option_value.name}							            
-								            {if condition="$option_value['goods_price'] neq '0.00' "}		
-							            		({$option_value.price_prefix}￥{$option_value.price})
-							            	{/if}
-							            </option>
-						            {/volist}
-						          </select>
-						        </div>
-					         </div>
-				         </div>
-				        {/if}   
-			  
-						{if condition="$option['type'] eq 'radio' "}
-							<div class="boss_check">
-								<div class="box-check">
-							        <div id="option-{$option.goods_option_id}">
-							          <p><b>{$option.name}:</b>						      
-								          	{if condition="$option['required'] eq 1"}
-								          	<span class="required">*</span>
-								          	{/if}						          
-							          </p>
-							          {volist name="$option['goods_option_value']" id="option_value" }		
-							          {if condition="!empty($option_value['image'])"}			
-							          	<a title="数量{$option_value.quantity}" href="/uploads/{$option_value.image}">
-							          		<img src="IMG_ROOT{$option_value.image|resize=30,30}" />									          										          
-							          	</a>
-						          	 {/if}			          									          	
-							          <label for="option-value-{$option_value.goods_option_value_id}">								          	
-							          	<input  class="option" type="radio" name="option[{$goods.goods_id},{$option.option_id}]" value="{$option_value.option_value_id}" id="option-value-{$option_value.goods_option_value_id}" />									          	
-								          	<span class="option_name" title="数量{$option_value.quantity}">{$option_value.name}</span> 						          
-								            {if condition="$option_value['goods_price'] neq '0.00' "}		
-								            	({$option_value.price_prefix}￥{$option_value.price})
-								            {/if}								            
-							          </label>
-							          <br />
-							          {/volist}
-							        </div>
-								</div>
-							</div>	
-					     {/if}						        
-		        
-				        {if condition="$option['type'] eq 'checkbox' "}	
-						<div class="box-check">
-					        <div id="option-{$option.goods_option_id}" class="option">
-					          <p><b>{$option.name}:</b>
-						          {if condition="$option['required'] eq 1"}
-									   <span class="required">*</span>
-								  {/if}	
-					          </p>		        
-					          {volist name="$option['goods_option_value']" id="option_value" }	
-				         		   {if condition="!empty($option_value['image'])"}			
-							          	<a title="数量{$option_value.quantity}" href="/uploads/{$option_value.image}">
-							          		<img src="IMG_ROOT{$option_value.image|resize=30,30}" />									          										          
-							          	</a>
-					          	   {/if}
-						          <input type="checkbox" name="option[{$goods.goods_id},{$option.option_id}][]" value="{$option_value.option_value_id}" id="option-value-{$option_value.goods_option_value_id}" />
-						          <label for="option-value-{$option_value.goods_option_value_id}">
-							           
-							          <span title="数量{$option_value.quantity}">{$option_value.name}</span> 						          
-							           {if condition="$option_value['goods_price'] neq '0.00' "}		
-							            	({$option_value.price_prefix}￥{$option_value.price})
-							           {/if}
-						          </label>
-						          <br />
-					          {/volist}
-					        </div>
-				        </div>											       
-				       {/if}
-		        				      
-		        {/volist}
-		      </div>
-		      {/if}
-    
+    <!-- {if condition="$options"}	
+		<div class="options">
+		<h2>可选项</h2>			        
+		{volist name="options" id="option"}				        
+			{if condition="$option['type'] eq 'select' "}			        	
+			<div class="boss_check">
+				<div class="box-check">	
+					<div id="option-{$option.goods_option_id}" class="option">
+						<div class="title_text"><b>{$option.name}:</b>
+							{if condition="$option['required'] eq 1"}
+							<span class="required">*</span>
+							{/if}
+						</div>
+						<select name="option[{$goods.goods_id},{$option.option_id}]">
+						<option value=""> --- 请选择 --- </option>
+						{volist name="$option['goods_option_value']" id="option_value" }	
+							<option title="数量{$option_value.quantity}" value="{$option_value.option_value_id}">{$option_value.name}							            
+								{if condition="$option_value['goods_price'] neq '0.00' "}		
+									({$option_value.price_prefix}￥{$option_value.price})
+								{/if}
+							</option>
+						{/volist}
+						</select>
+					</div>
+					</div>
+				</div>
+			{/if}   
+	
+			{if condition="$option['type'] eq 'radio' "}
+				<div class="boss_check">
+					<div class="box-check">
+						<div id="option-{$option.goods_option_id}">
+							<p><b>{$option.name}:</b>						      
+								{if condition="$option['required'] eq 1"}
+								<span class="required">*</span>
+								{/if}						          
+							</p>
+							{volist name="$option['goods_option_value']" id="option_value" }		
+							{if condition="!empty($option_value['image'])"}			
+							<a title="数量{$option_value.quantity}" href="/uploads/{$option_value.image}">
+								<img src="IMG_ROOT{$option_value.image|resize=30,30}" />									          										          
+							</a>
+							{/if}			          									          	
+							<label for="option-value-{$option_value.goods_option_value_id}">								          	
+							<input  class="option" type="radio" name="option[{$goods.goods_id},{$option.option_id}]" value="{$option_value.option_value_id}" id="option-value-{$option_value.goods_option_value_id}" />									          	
+								<span class="option_name" title="数量{$option_value.quantity}">{$option_value.name}</span> 						          
+								{if condition="$option_value['goods_price'] neq '0.00' "}		
+									({$option_value.price_prefix}￥{$option_value.price})
+								{/if}								            
+							</label>
+							<br />
+							{/volist}
+						</div>
+					</div>
+				</div>	
+				{/if}						        
+	
+			{if condition="$option['type'] eq 'checkbox' "}	
+			<div class="box-check">
+				<div id="option-{$option.goods_option_id}" class="option">
+					<p><b>{$option.name}:</b>
+						{if condition="$option['required'] eq 1"}
+							<span class="required">*</span>
+						{/if}	
+					</p>		        
+					{volist name="$option['goods_option_value']" id="option_value" }	
+						{if condition="!empty($option_value['image'])"}			
+							<a title="数量{$option_value.quantity}" href="/uploads/{$option_value.image}">
+								<img src="IMG_ROOT{$option_value.image|resize=30,30}" />									          										          
+							</a>
+						{/if}
+						<input type="checkbox" name="option[{$goods.goods_id},{$option.option_id}][]" value="{$option_value.option_value_id}" id="option-value-{$option_value.goods_option_value_id}" />
+						<label for="option-value-{$option_value.goods_option_value_id}">
+							
+							<span title="数量{$option_value.quantity}">{$option_value.name}</span> 						          
+							{if condition="$option_value['goods_price'] neq '0.00' "}		
+								({$option_value.price_prefix}￥{$option_value.price})
+							{/if}
+						</label>
+						<br />
+					{/volist}
+				</div>
+			</div>											       
+			{/if}
+							
+	{/volist}
+		</div>
+	{/if} -->
+
+	<div class="weui_progress pregress">
+		<div class="weui_progress_bar">
+			<div class="weui_progress_inner_bar js_progress" style="width: 80%;"></div>
+		</div>
+	</div>
+	<div class="flex-between fs12">
+		<p>满<span>322323</span>人次开奖</p>
+		<p>剩余<span>4578</span></p>
+	</div>
+
+	<div class="dec fs12">
+		<p>商品总价值1223金币</p>
+		<p>单次价格1.00金币</p>
+		<div class="title">购买方式</div>
+		<div id="jionBtn" class="jionBtn">立即参与</div>
+	</div>
     
 </div>   
 
@@ -202,15 +222,9 @@
 	</div>
 {else/}
 <div id="appCartWrap" class="clearfix">    
-	<a class="button" id="addcart-button"  data-add="1">加入购物车</a>   
-	<a class="button" id="buy-button" data-add="0" >立即购买</a>  
-	<a id="toCart" href="{:url('cart/index')}"><i>
-		{if condition="session('mobile_total')"}
-			{$Think.session.mobile_total}
-		{else/}
-			0
-		{/if}
-		</i></a>
+	<a class="button" id="addcart-button" data-add="1">幸运购</a>
+	<a class="button" id="buy-button" data-add="0">立即参与</a>
+	<a id="toCart" href="{:url('cart/index')}"></a>
 </div>
 {/if}
 
@@ -273,10 +287,10 @@ $(function(){
     /**
      *加入购物车
      */
-    $('#buy-button,#addcart-button').bind('click', function() {		
+    $('#buy-button,#addcart-button,#jionBtn').on('click', function() {		
     	
 		var type=$(this).attr('data-add');			
-			
+		console.log("aaa")
 		$.ajax({
 				url: "{:url('cart/add')}",
 				type: 'post',
@@ -312,7 +326,7 @@ $(function(){
 					
 					if (json.success) {
 						<?php if(!isset($points_goods)){ ?>
-							$.toast("已加入购物车");						
+							// $.toast("已加入购物车");						
 							$('#toCart').find('i').text(json.total);
 							
 							if(type==0){							

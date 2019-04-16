@@ -1,6 +1,10 @@
 {extend name="public:base" /}
 {block name="head"}
-<link href="__PUBLIC__/view_res/mobile/css/home.css" type="text/css" rel="Stylesheet" />
+<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet" />
+<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet" />
+<link rel="Stylesheet" href="__PUBLIC__/view_res/mobile/css/home.css" type="text/css"  />
+<link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
+<script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/artTemplate/template.js"></script>
 <script src="__PUBLIC__/view_res/mobile/load_list.js"></script>
 <script src="__PUBLIC__/view_res/mobile/index.js"></script>
@@ -10,19 +14,82 @@
 {/block}
 
 {block name="content"}
-<section class="home-recom">
-    <section class="clearfix" id="goods_list">
 
+<section class="home-recom">
+    <div class="weui_grids nav">
+        <a href="buttons.html" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+            <img src="__PUBLIC__/image/icon/xinshouyindao.png" alt="新手指引">
+            </div>
+            <p class="weui_grid_label">
+            新手指引
+            </p>
+        </a>
+        <a href="cell.html" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+            <img src="__PUBLIC__/image/icon/service.png" alt="联系客服">
+            </div>
+            <p class="weui_grid_label">
+            联系客服
+            </p>
+        </a>
+        <a href="form.html" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+            <img src="__PUBLIC__/image/icon/chongzhi2.png" alt="金豆充值">
+            </div>
+            <p class="weui_grid_label">
+            金豆充值
+            </p>
+        </a>
+    </div>
+    <section class="clearfix" id="goods_list">
+        
     </section>
-    <div id="list-loading" style="display: none;"><img src="__PUBLIC__/view_res/mobile/images/icon/spinner-g-60.png" width="30"></div>
+
+    <div id="list-loading" style="display: none;">
+        <img src="__PUBLIC__/view_res/mobile/images/icon/spinner-g-60.png" width="30">
+    </div>
+
+    <div class="showOpenDoor" style="display:none;">
+        <div class="weui_mask weui_mask_visible" ></div>
+        <div  class="weui_dialog weui_dialog_visible">
+            <div class="weui_dialog_hd">
+                <strong class="weui_dialog_title">开设房间</strong>
+            </div>
+            <div class="weui_dialog_bd">
+                <p class="weui-prompt-text">请设置房间号和房间密码</p>
+                <input type="text" class="weui_input weui-prompt-input" id="id" value="" placeholder="输入房间号">
+                <input type="password" class="weui_input weui-prompt-input" id="password" value="" placeholder="输入密码">
+            </div>
+            <div class="weui_dialog_ft">
+                <a href="javascript:;" class="weui_btn_dialog default" id="cancel">取消</a>
+                <a href="javascript:;" class="weui_btn_dialog primary" id="submit">确定</a>
+            </div>
+        </div>
+    </div>
+    
 </section>
 <script id="list" type="text/html">
-    	<@each list as value i@>
-	        <a href="/mobile/goods/detail/id/<@value.goods_id@>" class="hplist">
-	                <img src="/<@value.image@>" />
-	                <p><@value.name@></p>
-	        <i>&yen;<@value.price@></i>
-	        </a>
+        <@each list as value i@>
+        <div class="flex-col hplist">
+            <a href="/mobile/goods/detail/id/<@value.goods_id@>" >
+                <img src="/<@value.image@>" />
+                <p><@value.name@></p>
+            <!-- <i>&yen;<@value.price@></i> -->
+            </a>
+            <div class="flex-between con ">
+                <div class="flex-col">
+                    <div class="p">购买进度50%</div>
+                    <div class="weui_progress">
+                        <div class="weui_progress_bar">
+                            <div class="weui_progress_inner_bar js_progress" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <a href="javascript:;" data-id="<@value.goods_id@>" class="weui_btn weui_btn_mini weui_btn_plain_primary btn openDoor" >开设房间</a>
+            </div>
+        </div>
+	        
         <@/each@>
 </script>
 {/block}
@@ -94,5 +161,25 @@ wx.ready(function(){
 $(function(){
 scroll_load('mobile/index/ajax_goods_list','list','goods_list');
 });
+var goodsId;
+$(document).on('click', '.openDoor', function() {
+    goodsId =$(".openDoor").attr("data-id");
+    console.log("goodsId.id1",goodsId);
+    $(".showOpenDoor").fadeIn();
+    });
+$("#cancel").on("click",function(){
+    $(".showOpenDoor").fadeOut();
+    $("#id").val(null);
+    $("#password").val(null);
+})
+$("#submit").on("click",function(){
+    let id = $("#id").val();
+    let password = $("#password").val();
+    if (!id || !password) {
+        alert("请设置房间名和密码~");
+    } else {
+        location.href = '/mobile/goods/detail/id/'+ goodsId;
+    }
+})
 </script>
 {/block}

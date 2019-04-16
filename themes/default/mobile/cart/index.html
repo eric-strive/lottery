@@ -8,6 +8,7 @@
 <link href="__PUBLIC__/view_res/mobile/css/cart.css" type="text/css" rel="Stylesheet" />
 <link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet" />
 <link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet" />
+<link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
 <script src="__PUBLIC__/jquery-weui/dist/lib/fastclick.js"></script>
 <script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/jquery-weui/dist/js/city-picker.js"></script>
@@ -100,9 +101,10 @@
             <span class="productCountNum"><input  onkeyup='change_quantity("{$d.goods_id}",this,"{$d.cart_id}","{$d.cart_id}");' minimum='{$d.minimum}' id="quantity{$d.cart_id}" size="5" type='text' value='{$d.quantity}' class="dcount productCountNumi" /></span>
             <a onclick='changeQty(1,"{$d.goods_id}","{$d.cart_id}","{$d.cart_id}"); return false;' class="btn productCountPlus" ></a>
             </dt>
-        </dl>
+		</dl>
+		<div class="fsc12">中奖概率为：<span>50%</span></div>
 		{/if}
-			
+		
         <a class='cartDelbtn' cart_id='{$d.cart_id}'></a>
     </div>
 	</section>
