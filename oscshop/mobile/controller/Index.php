@@ -22,7 +22,6 @@ class Index extends MobileBase
 {
     function index()
     {
-
         cookie('jump_url', request()->url(true));
 
         $this->assign('SEO', [
@@ -97,7 +96,7 @@ class Index extends MobileBase
                 if(isset($return['home_id'])){
                     return $return;
                 }
-                return ['error' => $return['error']??'新增出错'];
+                return ['error' => !isset($return['error'])&&'新增出错'];
             }
         }
     }
