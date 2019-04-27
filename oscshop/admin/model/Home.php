@@ -73,11 +73,11 @@ class Home
 
     public static function add_home($data)
     {
-        $home_name = $data['home_name'] ?? 0;
-        $password = $data['password'] ?? 0;
-        $periods = $data['periods'] ?? 0;
+        $home_name = isset($data['home_name']) ? $data['home_name'] : 0;
+        $password = isset($data['password']) ? $data['password'] : 0;
+        $periods = isset($data['periods']) ? $data['periods'] : 0;
         $gid = $data['gid'];
-        $uid = $data['uid'] ?? 0;
+        $uid = isset($data['uid']) ? $data['uid'] : 0;
         $type = 0;
         $home_num_id = 0;
         $goodInfo = Goods::get_goods_info($gid);
