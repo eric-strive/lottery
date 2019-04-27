@@ -1,0 +1,298 @@
+{extend name="public:base" /}
+
+{block name="jquery"}
+<script src="__PUBLIC__/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+{/block}
+
+{block name="head"}
+<link href="__PUBLIC__/view_res/mobile/css/cart.css" type="text/css" rel="Stylesheet"/>
+<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
+<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
+<link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
+<script src="__PUBLIC__/jquery-weui/dist/lib/fastclick.js"></script>
+<script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
+<script src="__PUBLIC__/jquery-weui/dist/js/city-picker.js"></script>
+<script src="__PUBLIC__/js/jquery/jquery-migrate-1.2.1.min.js"></script>
+<script src="__PUBLIC__/artTemplate/template.js"></script>
+<script src="__PUBLIC__/view_res/mobile/load_list.js"></script>
+{/block}
+{block name="header"}
+{include file="public/top-nav" /}
+{/block}
+
+{block name="content"}
+<header class="Thead">订单信息</header>
+
+<div id="orderDetailsWrapper" data-minheight="68px">
+    <section class="cartListWrap clearfix" id="">
+
+        <a href="{:url('goods/detail',array('id'=>$goods.goods_id))}"><img alt="{$goods.name}"
+                                                                           src="IMG_ROOT{$goods.image}"/></a>
+
+        <div class="cartListDesc">
+            <p class="title">
+                <a style="color:#000;" href="{:url('goods/detail',array('id'=>$goods.goods_id))}">{$goods.name}</a>
+            </p>
+            <p class="count">
+				<span class="spec Elipsis">
+
+                {volist name="$options" id="option"}
+				<small>{$option.name}:{$option.value}</small><br/>
+				{/volist}
+
+            </span>
+                <span class="dprice prices" id="prices">商品总价：&yen;{$goods.price}	</span>
+            </p>
+            <dl id="select_number" class="pd-dsc clearfix">
+                <span>购买份额：</span>
+                <dt class="productCount clearfix">
+                    <a id="productCountMinus" class="btn productCountMinus"></a>
+                    <span class="productCountNum">
+                        <input onkeyup='change_quantity("234",this,"234","234");' minimum='34'
+                               id="quantity" size="5" type='text' value='1'
+                               class="dcount productCountNumi"/>
+                    </span>
+                    <a id="productCountPlus" class="btn productCountPlus"></a>
+                </dt>
+            </dl>
+            <div class="fsc12">中奖概率为：<span>50%</span></div>
+        </div>
+        <div class="weui_progress pregress">
+            <div class="weui_progress_bar">
+                <div class="weui_progress_inner_bar js_progress" style="width: {$percentage};"></div>
+            </div>
+        </div>
+        <div class="flex-between fs12">
+            <p>满<span>{$buy_info.lottery_drifts}</span>份次开奖</p>
+            <p>剩余<span>{$buy_info.lottery_drifts-$buy_info.goods_buy_num}</span></p>
+        </div>
+    </section>
+</div>
+
+
+{if condition="!empty($goods)"}
+<!-- 订单总额 -->
+<div id="orderSummay">
+    <div>
+        购买金额 : <b class="prices"> &yen;</b> <b class="prices font13 last" id="order_amount_sig">1</b>
+    </div>
+    <!--<div>-->
+    <!--总计 : <b class="prices"> &yen;</b> <b class="prices last" id="order_amount">2342</b>-->
+    <!--</div>-->
+
+</div>
+
+{if condition="!isset($points)"}
+{if condition="in_wechat()"}
+<div class="weui_btn_area">
+    <a class="weui_btn weui_btn_primary payment" id="wechat-payment-btn">微信安全支付</a>
+</div>
+{else/}
+<div class="weui_btn_area">
+    <a class="weui_btn weui_btn_primary payment" id="alipay-payment-btn">支付宝支付</a>
+</div>
+{/if}
+
+
+{else/}
+<div class="weui_btn_area">
+    <a class="weui_btn weui_btn_primary payment" id="points-payment-btn">立即兑换</a>
+</div>
+{/if}
+
+{/if}
+<script>
+
+    //清空编辑地址的表单
+    function clear_form() {
+        $('input[name="name"]').val('');
+        $('input[name="tel"]').val('');
+        $('input[name="area"]').val('');
+        $('input[name="address"]').val('');
+    }
+
+    $(function () {
+//支付宝支付
+        $('#alipay-payment-btn').click(function () {
+
+            var city_id = $('#city_id').val();
+            var address_id = $('#address_id').val();
+            var comment = $('#comment').val();
+
+            $.post(
+                '{:url("payment/alipay_pay")}',
+                {
+                    city_id: city_id,
+                    comment: comment,
+                    address_id: address_id
+                },
+                function (d) {
+
+                    if (d.error) {
+                        $.toast(d.error, "forbidden");
+                    }
+
+                    if (d.url) {
+                        location = d.url;
+                    }
+                }
+            );
+
+        });
+
+    });
+</script>
+
+
+{//*************手机版 END  *************}
+
+
+{/block}
+{block name="script"}
+<?php if(in_wechat()){ ?>
+<!-- 微信JSSDK -->
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!-- 微信JSSDK -->
+<script type="text/javascript">
+    wx.config({
+            debug: false,
+            appId: '{$signPackage.appId}',
+            timestamp: {$signPackage.timestamp
+        },
+        nonceStr
+    :
+    '{$signPackage.nonceStr}',
+        signature
+    :
+    '{$signPackage.signature}',
+        jsApiList
+    :
+    ['chooseWXPay']
+    })
+    ;
+
+    var o = {};
+    // localStorage对象
+    o.Storage = window.localStorage;
+    // 收货地址加载标记
+    window.addressloaded = false;
+    // order id 生成标记
+    window.orderId = false;
+
+
+    /**
+     * 发起微信支付
+     */
+    $('#wechat-payment-btn').click(wepayCall);
+
+    /**
+     * 发起微信支付
+     * @returns {undefined}
+     */
+    function wepayCall() {
+
+
+        //需要配送的，判断收货地址是否已经获取
+    <
+            ? php
+        if ($shipping) {
+                ?
+        >
+            var address = $('#address_id').val();
+
+            if (address == '') {
+                alert('请选择收货地址');
+                return false;
+            }
+        <
+                ? php
+        }
+            ?
+    >
+
+        var city_id = $('#city_id').val();
+        var address_id = $('#address_id').val();
+        var comment = $('#comment').val();
+
+
+        $('#wechat-payment-btn').addClass('disable').html('支付发起中...');
+
+        $.post("{:url('Payment/weixin_pay')}",
+            {
+                city_id: city_id,
+                comment: comment,
+                address_id: address_id
+            },
+            function (r) {
+
+                if (r.error) {
+                    $.toast(r.error, "forbidden");
+                    return;
+                }
+
+                if (r.ret_code === 0) {
+
+                    if (r.bizPackage.package !== 'prepay_id=') {
+                        // 支付操作成功
+                        r.bizPackage.success = wepayCallback;
+                        // 支付操作取消
+                        r.bizPackage.cancel = wepayCancel;
+                        // 支付操作出错
+                        r.bizPackage.fail = wepayError;
+                        // 发起微信支付
+
+                        wx.chooseWXPay(r.bizPackage);
+                        // 按钮恢复
+                        $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+                    } else {
+                        wepayError();
+                    }
+                } else if (r.ret_code === 11) {
+                    $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+                    alert('订单创建失败！' + r.ret_msg);
+                }
+            });
+
+
+    }
+
+    /**
+     * 微信支付回调
+     * @param {type} res
+     * @returns {undefined}
+     */
+    function wepayCallback(res) {
+
+        if (res.errMsg == "chooseWXPay:ok") {
+            location.href = "{:url('PaySuccess/index')}";
+
+            $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+        } else {
+            alert(res.errMsg);
+        }
+
+    }
+
+    /**
+     * 微信支付失败
+     */
+    function wepayError() {
+        alert('微信支付发起失败');
+        // 按钮恢复
+        $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+    }
+
+    /**
+     * 微信支付手动取消
+     */
+    function wepayCancel() {
+        // 按钮恢复
+        $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+    }
+
+</script>
+
+<?php } ?>
+{/block}
+
+

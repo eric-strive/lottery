@@ -150,7 +150,7 @@ class Goods
         //数据量
         $limit = ((int)$limit_num * (int)$page) . "," . (int)$limit_num;
 
-        $sql = 'SELECT goods_id,image,price,name FROM ' . config('database.prefix') . 'goods WHERE status=1 ORDER BY goods_id LIMIT ' . $limit;
+        $sql = 'SELECT goods_id,periods,image,price,name FROM ' . config('database.prefix') . 'goods WHERE status=1 ORDER BY goods_id LIMIT ' . $limit;
 
         $list = Db::query($sql);
 

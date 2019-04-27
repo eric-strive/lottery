@@ -16,6 +16,7 @@ namespace osc\admin\controller;
 
 use osc\common\controller\AdminBase;
 use think\Db;
+use osc\admin\model\Home;
 
 class Goods extends AdminBase
 {
@@ -65,12 +66,12 @@ class Goods extends AdminBase
                 $this->error($error['error']);
             }
 
-            $return = $model->add_goods($data);
-
+            $homeData['gid'] = $return = $model->add_goods($data);
             if ($return) {
 
                 storage_user_action(UID, session('user_auth.username'), config('BACKEND_USER'), '新增了商品');
-
+                //新增初始房间
+                $a = Home::add_home($homeData);
                 $this->success('新增成功！', url('Goods/index'));
             } else {
                 $this->error('新增失败！');

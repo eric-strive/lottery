@@ -28,7 +28,7 @@
             
             <li><a href="#tab-links" data-toggle="tab">关联</a></li>   
             <li><a href="#tab-option" data-toggle="tab">选项</a></li>  
-            <li><a href="#tab-discount" data-toggle="tab">折扣</a></li>                    
+            <!--<li><a href="#tab-discount" data-toggle="tab">折扣</a></li>-->
             <li><a href="#tab-image" data-toggle="tab">商品相册</a></li>      
             <li><a href="#tab-mobile" data-toggle="tab">手机端描述</a></li>       
           </ul>
@@ -84,6 +84,12 @@
 						</div>
 					</div>
 					<div class="form-group required">
+						<label class="col-sm-2 control-label" for="input-meta-title2">幸运购金额：</label>
+						<div class="col-sm-10">
+							<input id="input-meta-title2" class="form-control" type="text" placeholder="幸运购金额" value="" name="lotter_price">
+						</div>
+					</div>
+					<div class="form-group required">
 						<label class="col-sm-2 control-label" for="input-meta-title2">单份金额：</label>
 						<div class="col-sm-10">
 							<input id="input-meta-title2" class="form-control" type="text" placeholder="单份金额" value="" name="doubao_price">
@@ -103,7 +109,7 @@
 						</div>
 					</div>
 					
-					<div class="form-group required">
+					<div class="form-group required" style="display: none;">
 						<label class="col-sm-2 control-label" for="input-meta-title2">购买可得积分：</label>
 						<div class="col-sm-10">
 							<input id="input-meta-title2" class="form-control" type="text" placeholder="购买可得积分" value="" name="points">
@@ -124,39 +130,39 @@
 						</div>
 					</div>
 					
-					<div class="form-group">
+					<div class="form-group" style="display: none;">
 						<label class="col-sm-2 control-label" for="input-subtract">扣减库存：</label>
-						
+
 							<div class="col-sm-10">
 								<label class="radio-inline">
 								<input type="radio" checked="checked" value="1" name="subtract">是</label>
 								<label class="radio-inline">
 								<input type="radio" value="0" name="subtract">否</label>
 							</div>
-						
-					</div>		           
-					
-					<div class="form-group">
+
+					</div>
+
+					<div class="form-group" style="display: none;">
 						<label class="col-sm-2 control-label">需要配送：</label>
 						<div class="col-sm-10">
 							<label class="radio-inline">
-							<input type="radio" checked="checked" value="1" name="shipping">是</label>
+							<input type="radio" value="1" name="shipping">是</label>
 							<label class="radio-inline">
-							<input type="radio" value="0" name="shipping">否</label>
+							<input type="radio" checked="checked" value="0" name="shipping">否</label>
 						</div>
-					</div>					
-					
-					<div class="form-group required">
+					</div>
+
+					<div class="form-group required" style="display: none;">
 						<label class="col-sm-2 control-label" for="input-meta-title2">重量：</label>
 						<div class="col-sm-10">
 							<input id="input-meta-title2" class="form-control" type="text" placeholder="重量" value="" name="weight">
 						</div>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group" style="display: none;">
 						<label class="col-sm-2 control-label" for="input-length-class">重量单位：</label>
 						<div class="col-sm-10">
-							
+
 							<select id="input-length-class" class="form-control" name="weight_class_id">
 								{volist name="weight_class" id="v"}
 									<option value="{$v.weight_class_id}"  >{$v.title}</option>
@@ -164,8 +170,8 @@
 							</select>
 						</div>
 					</div>
-		            
-		            <div class="form-group">
+
+		            <div class="form-group" style="display: none;">
 						<label class="col-sm-2 control-label" for="input-length">尺寸(L x W x H)：</label>
 						<div class="col-sm-10">
 							<div class="row">
@@ -183,10 +189,10 @@
 					</div>
 
 
-					<div class="form-group">
+					<div class="form-group" style="display: none;">
 						<label class="col-sm-2 control-label" for="input-length-class">尺寸单位：</label>
 						<div class="col-sm-10">
-							
+
 							<select id="input-length-class" class="form-control" name="length_class_id">
 								{volist name="length_class" id="v"}
 									<option value="{$v.length_class_id}">{$v.title}</option>
@@ -194,8 +200,8 @@
 							</select>
 						</div>
 					</div>
-		            
-		            <div class="form-group">
+
+		            <div class="form-group" style="display: none;">
 						<label class="col-sm-2 control-label">商品状态：</label>
 						<div class="col-sm-10">
 							<label class="radio-inline">
