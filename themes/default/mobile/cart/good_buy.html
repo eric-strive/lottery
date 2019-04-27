@@ -74,6 +74,7 @@
 <!-- 订单总额 -->
 <div id="orderSummay">
     <div>
+        <input type="hidden" id="pay_mount" value="1">
         购买金额 : <b class="prices"> &yen;</b> <b class="prices font13 last" id="order_amount_sig">1</b>
     </div>
     <!--<div>-->
@@ -85,12 +86,15 @@
 {if condition="!isset($points)"}
 {if condition="in_wechat()"}
 <div class="weui_btn_area">
-    <a class="weui_btn weui_btn_primary payment" id="wechat-payment-btn">微信安全支付</a>
+<a class="weui_btn weui_btn_primary payment" id="wechat-payment-btn">微信安全支付</a>
 </div>
 {else/}
 <div class="weui_btn_area">
-    <a class="weui_btn weui_btn_primary payment" id="alipay-payment-btn">支付宝支付</a>
+    <a class="weui_btn weui_btn_primary payment" id="wechat-payment-btn">微信安全支付</a>
 </div>
+<!--<div class="weui_btn_area">-->
+<!--<a class="weui_btn weui_btn_primary payment" id="alipay-payment-btn">支付宝支付</a>-->
+<!--</div>-->
 {/if}
 
 
@@ -102,15 +106,6 @@
 
 {/if}
 <script>
-
-    //清空编辑地址的表单
-    function clear_form() {
-        $('input[name="name"]').val('');
-        $('input[name="tel"]').val('');
-        $('input[name="area"]').val('');
-        $('input[name="address"]').val('');
-    }
-
     $(function () {
 //支付宝支付
         $('#alipay-payment-btn').click(function () {
@@ -139,37 +134,16 @@
             );
 
         });
-
     });
 </script>
 
-
-{//*************手机版 END  *************}
-
-
 {/block}
 {block name="script"}
-<?php if(in_wechat()){ ?>
 <!-- 微信JSSDK -->
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <!-- 微信JSSDK -->
 <script type="text/javascript">
-    wx.config({
-            debug: false,
-            appId: '{$signPackage.appId}',
-            timestamp: {$signPackage.timestamp
-        },
-        nonceStr
-    :
-    '{$signPackage.nonceStr}',
-        signature
-    :
-    '{$signPackage.signature}',
-        jsApiList
-    :
-    ['chooseWXPay']
-    })
-    ;
+
 
     var o = {};
     // localStorage对象
@@ -190,38 +164,15 @@
      * @returns {undefined}
      */
     function wepayCall() {
-
-
         //需要配送的，判断收货地址是否已经获取
-    <
-            ? php
-        if ($shipping) {
-                ?
-        >
-            var address = $('#address_id').val();
-
-            if (address == '') {
-                alert('请选择收货地址');
-                return false;
-            }
-        <
-                ? php
-        }
-            ?
-    >
-
-        var city_id = $('#city_id').val();
-        var address_id = $('#address_id').val();
-        var comment = $('#comment').val();
+        var pay_mount = $('#pay_mount').val();
 
 
         $('#wechat-payment-btn').addClass('disable').html('支付发起中...');
 
-        $.post("{:url('Payment/weixin_pay')}",
+        $.post("{:url('lottery_payment/weixin_pay')}",
             {
-                city_id: city_id,
-                comment: comment,
-                address_id: address_id
+                'pay_total': pay_mount,
             },
             function (r) {
 
@@ -291,8 +242,6 @@
     }
 
 </script>
-
-<?php } ?>
 {/block}
 
 

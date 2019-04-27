@@ -26,8 +26,9 @@ class Goods extends MobileBase
     {
 
         cookie('jump_url', request()->url(true));
-
-        if (!$list = osc_goods()->get_goods_info((int)input('param.id'))) {
+//$gid = (int)input('param.id');
+        $gid = 12;
+        if (!$list = osc_goods()->get_goods_info($gid)) {
             $this->error('商品不存在！！');
         }
         $homeId = input('param.home_id');
