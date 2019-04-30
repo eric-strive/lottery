@@ -143,7 +143,14 @@
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <!-- 微信JSSDK -->
 <script type="text/javascript">
-
+    wx.config({
+        debug: false,
+        appId: '{$signPackage.appId}',
+        timestamp: '{$signPackage.timestamp}',
+        nonceStr: '{$signPackage.nonceStr}',
+        signature: '{$signPackage.signature}',
+        jsApiList: ['chooseWXPay']
+    });
 
     var o = {};
     // localStorage对象
