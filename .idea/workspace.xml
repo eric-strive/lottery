@@ -2,11 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab9aee13-d223-48e2-bcc2-f55b7279d7c3" name="默认" comment="">
-      <change afterPath="$PROJECT_DIR$/oscshop/mobile/controller/LotteryPayment.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/image/icon/backgroundUrl.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/image/icon/kf.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/image/icon/rand.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/image/icon/wt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/image/icon/xr.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/image/icon/xs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/image/icon/yq.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/image/icon/zp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/js/fontsize.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/mobile/goods/luck.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/mobile/navBtn/newGuidelines.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/oscshop/mobile/controller/Goods.php" beforeDir="false" afterPath="$PROJECT_DIR$/oscshop/mobile/controller/Goods.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/image/icon/chongzhi2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/image/icon/service.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/image/icon/xinshouyindao.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/view_res/mobile/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/view_res/mobile/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/view_res/mobile/css/product.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/view_res/mobile/css/product.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/default/mobile/goods/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/goods/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/default/mobile/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/index/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/default/mobile/user/recharge.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/user/recharge.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,56 +38,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="47" column="14" selection-start-line="47" selection-start-column="14" selection-end-line="47" selection-end-column="14" />
-              <folding>
-                <element signature="e#398#431#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="detail.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="240" column="48" selection-start-line="240" selection-start-column="48" selection-end-line="240" selection-end-column="48" />
-              <folding>
-                <element signature="e#2233#2239#0" expanded="true" />
-                <element signature="e#2239#2245#0" expanded="true" />
-                <element signature="e#3179#6881#0" />
-              </folding>
+            <state relative-caret-position="5456">
+              <caret line="248" column="48" selection-start-line="248" selection-start-column="48" selection-end-line="248" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Goods.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Goods.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Goods.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-384">
-              <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+            <state relative-caret-position="264">
+              <caret line="114" column="36" selection-start-line="114" selection-start-column="36" selection-end-line="114" selection-end-column="36" />
               <folding>
                 <element signature="e#398#431#0#PHP" expanded="true" />
-                <element signature="e#2665#3387#0#PHP" />
+                <element signature="e#2439#2681#0#PHP" />
+                <element signature="e#2698#3420#0#PHP" />
+                <element signature="e#3426#3522#0#PHP" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="good_buy.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="good_buy.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="145" column="3" selection-start-line="145" selection-start-column="3" selection-end-line="145" selection-end-column="3" />
-              <folding>
-                <element signature="e#1074#2857#0" />
-                <element signature="e#1897#1902#0" expanded="true" />
-                <element signature="e#14572#14932#0" />
-                <element signature="e#22753#22995#0" />
-              </folding>
+            <state relative-caret-position="-111">
+              <caret line="119" column="9" selection-start-line="119" selection-start-column="9" selection-end-line="119" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="luck.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/luck.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="924">
+              <caret line="42" column="7" lean-forward="true" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -77,19 +83,11 @@
       <file leaf-file-name="LotteryPayment.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/LotteryPayment.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-233">
+            <state relative-caret-position="7700">
               <caret line="424" column="31" selection-start-line="424" selection-start-column="24" selection-end-line="424" selection-end-column="31" />
               <folding>
-                <element signature="e#399#430#0#PHP" expanded="true" />
                 <element signature="e#515#2546#0#PHP" />
                 <element signature="e#2564#2747#0#PHP" />
-                <element signature="e#2764#4139#0#PHP" />
-                <element signature="e#4157#6296#0#PHP" />
-                <element signature="e#6316#7118#0#PHP" />
-                <element signature="e#7138#8108#0#PHP" />
-                <element signature="e#8135#9726#0#PHP" />
-                <element signature="e#11171#11853#0#PHP" />
-                <element signature="e#11875#12877#0#PHP" />
               </folding>
             </state>
           </provider>
@@ -102,19 +100,14 @@
       </file>
       <file leaf-file-name="WxPayConfig.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/extend/payment/weixin/WxPayConfig.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-536" />
-          </provider>
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="Cart.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Cart.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="633">
+            <state relative-caret-position="2574">
               <caret line="131" column="16" selection-start-line="131" selection-start-column="16" selection-end-line="131" selection-end-column="16" />
-              <folding>
-                <element signature="e#399#432#0#PHP" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -122,7 +115,7 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7454">
+            <state relative-caret-position="2750">
               <caret line="125" column="67" selection-start-line="125" selection-start-column="60" selection-end-line="125" selection-end-column="67" />
             </state>
           </provider>
@@ -131,7 +124,7 @@
       <file leaf-file-name="Payment.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Payment.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
+            <state relative-caret-position="550">
               <caret line="320" column="26" selection-start-line="320" selection-start-column="26" selection-end-line="320" selection-end-column="26" />
               <folding>
                 <element signature="e#502#2054#0#PHP" />
@@ -237,8 +230,8 @@
         <option value="$PROJECT_DIR$/themes/default/mobile/goods/detail.html" />
         <option value="$PROJECT_DIR$/oscshop/mobile/controller/LotterPayment.php" />
         <option value="$PROJECT_DIR$/oscshop/mobile/controller/LotteryPayment.php" />
-        <option value="$PROJECT_DIR$/oscshop/mobile/controller/Goods.php" />
         <option value="$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html" />
+        <option value="$PROJECT_DIR$/oscshop/mobile/controller/Goods.php" />
       </list>
     </option>
   </component>
@@ -323,6 +316,32 @@
               <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
               <item name="lottery" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lottery" type="462c0819:PsiDirectoryNode" />
+              <item name="themes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lottery" type="462c0819:PsiDirectoryNode" />
+              <item name="themes" type="462c0819:PsiDirectoryNode" />
+              <item name="default" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lottery" type="462c0819:PsiDirectoryNode" />
+              <item name="themes" type="462c0819:PsiDirectoryNode" />
+              <item name="default" type="462c0819:PsiDirectoryNode" />
+              <item name="mobile" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lottery" type="462c0819:PsiDirectoryNode" />
+              <item name="themes" type="462c0819:PsiDirectoryNode" />
+              <item name="default" type="462c0819:PsiDirectoryNode" />
+              <item name="mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="goods" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -377,7 +396,8 @@
       <workItem from="1555212842559" duration="172000" />
       <workItem from="1555213016727" duration="24924000" />
       <workItem from="1555582410781" duration="4000" />
-      <workItem from="1555837713338" duration="28398000" />
+      <workItem from="1555837713338" duration="28899000" />
+      <workItem from="1556627839339" duration="214000" />
     </task>
     <task id="LOCAL-00001" summary="项目提交">
       <created>1555080506808</created>
@@ -463,11 +483,25 @@
       <option name="project" value="LOCAL" />
       <updated>1556343983599</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="样式">
+      <created>1556381517825</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1556381517825</updated>
+    </task>
+    <task id="LOCAL-00014" summary="样式">
+      <created>1556627913123</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1556627913123</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77524000" />
+    <option name="totallyTimeSpent" value="78239000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="23" width="1392" height="877" extended-state="0" />
@@ -476,11 +510,10 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5003723" side_tool="true" weight="0.28005284" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="File Transfer" order="7" weight="0.32893" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32893" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.4996277" weight="0.2985469" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19037037" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.4996277" visible="true" weight="0.2985469" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="LuaJ" order="3" />
       <window_info anchor="right" id="Database" order="3" />
@@ -494,31 +527,32 @@
       <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="File Transfer" order="7" weight="0.32893" />
       <window_info anchor="bottom" id="Find" order="1" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32893" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19037037" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="File Transfer" order="9" weight="0.32893" />
-      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="LuaJ" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="bottom" id="Messages" order="13" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4996277" visible="true" weight="0.2985469" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5003723" side_tool="true" weight="0.28005284" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Messages" order="13" />
+      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32893" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,13 +574,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/themes/default/mobile/balance/balance_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/oscshop/admin/view/goods/index.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -620,9 +647,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
           <caret line="40" column="30" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
-          <folding>
-            <element signature="e#19#25#1" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -630,9 +654,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="62" column="25" lean-forward="true" selection-start-line="62" selection-start-column="25" selection-end-line="62" selection-end-column="25" />
-          <folding>
-            <element signature="e#397#433#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -713,9 +734,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="73" column="29" lean-forward="true" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="29" />
-          <folding>
-            <element signature="e#397#433#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -733,9 +751,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
           <caret line="158" column="69" selection-start-line="158" selection-start-column="69" selection-end-line="158" selection-end-column="69" />
-          <folding>
-            <element signature="n#style#0;n#div#11;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -775,18 +790,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="381">
           <caret line="150" column="65" selection-start-line="150" selection-start-column="65" selection-end-line="150" selection-end-column="65" />
-          <folding>
-            <element signature="n#style#0;n#div#10;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#13;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#div#13;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#!!top" />
-            <element signature="n#style#0;n#div#14;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#15;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#16;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#17;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#18;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#19;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -799,7 +802,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
+        <state relative-caret-position="748">
           <caret line="47" column="14" selection-start-line="47" selection-start-column="14" selection-end-line="47" selection-end-column="14" />
           <folding>
             <element signature="e#398#431#0#PHP" expanded="true" />
@@ -825,9 +828,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-39">
           <caret line="102" column="28" lean-forward="true" selection-start-line="102" selection-start-column="28" selection-end-line="102" selection-end-column="28" />
-          <folding>
-            <element signature="e#392#405#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -840,7 +840,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Payment.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
+        <state relative-caret-position="550">
           <caret line="320" column="26" selection-start-line="320" selection-start-column="26" selection-end-line="320" selection-end-column="26" />
           <folding>
             <element signature="e#502#2054#0#PHP" />
@@ -857,59 +857,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7454">
+        <state relative-caret-position="2750">
           <caret line="125" column="67" selection-start-line="125" selection-start-column="60" selection-end-line="125" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Goods.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-384">
-          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-          <folding>
-            <element signature="e#398#431#0#PHP" expanded="true" />
-            <element signature="e#2665#3387#0#PHP" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="240" column="48" selection-start-line="240" selection-start-column="48" selection-end-line="240" selection-end-column="48" />
-          <folding>
-            <element signature="e#2233#2239#0" expanded="true" />
-            <element signature="e#2239#2245#0" expanded="true" />
-            <element signature="e#3179#6881#0" />
-          </folding>
+        <state relative-caret-position="5456">
+          <caret line="248" column="48" selection-start-line="248" selection-start-column="48" selection-end-line="248" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Cart.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="633">
+        <state relative-caret-position="2574">
           <caret line="131" column="16" selection-start-line="131" selection-start-column="16" selection-end-line="131" selection-end-column="16" />
-          <folding>
-            <element signature="e#399#432#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/LotteryPayment.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-233">
+        <state relative-caret-position="7700">
           <caret line="424" column="31" selection-start-line="424" selection-start-column="24" selection-end-line="424" selection-end-column="31" />
           <folding>
-            <element signature="e#399#430#0#PHP" expanded="true" />
             <element signature="e#515#2546#0#PHP" />
             <element signature="e#2564#2747#0#PHP" />
-            <element signature="e#2764#4139#0#PHP" />
-            <element signature="e#4157#6296#0#PHP" />
-            <element signature="e#6316#7118#0#PHP" />
-            <element signature="e#7138#8108#0#PHP" />
-            <element signature="e#8135#9726#0#PHP" />
-            <element signature="e#11171#11853#0#PHP" />
-            <element signature="e#11875#12877#0#PHP" />
           </folding>
         </state>
       </provider>
@@ -923,19 +896,31 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/extend/payment/weixin/WxPayConfig.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-536" />
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="145" column="3" selection-start-line="145" selection-start-column="3" selection-end-line="145" selection-end-column="3" />
+        <state relative-caret-position="-111">
+          <caret line="119" column="9" selection-start-line="119" selection-start-column="9" selection-end-line="119" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/luck.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="924">
+          <caret line="42" column="7" lean-forward="true" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Goods.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="114" column="36" selection-start-line="114" selection-start-column="36" selection-end-line="114" selection-end-column="36" />
           <folding>
-            <element signature="e#1074#2857#0" />
-            <element signature="e#1897#1902#0" expanded="true" />
-            <element signature="e#14572#14932#0" />
-            <element signature="e#22753#22995#0" />
+            <element signature="e#398#431#0#PHP" expanded="true" />
+            <element signature="e#2439#2681#0#PHP" />
+            <element signature="e#2698#3420#0#PHP" />
+            <element signature="e#3426#3522#0#PHP" />
           </folding>
         </state>
       </provider>

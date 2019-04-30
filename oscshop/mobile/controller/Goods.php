@@ -111,6 +111,9 @@ class Goods extends MobileBase
 
         return $this->detail();
     }
+    function luck(){
+        return $this->fetch('luck');
+    }
 }
 
 ?>
