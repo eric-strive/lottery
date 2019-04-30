@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="__PUBLIC__/js/fontsize.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/fontsize.js"></script>
     <link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet" />
     <link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet" />
     <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
-    <script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
+    <script src="__PUBLIC__/js/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
     <title>幸运购</title>
 </head>
 
@@ -41,5 +42,13 @@
         <input class="luck-btn " type="button" value="马上嗨一把">
     </div>
 </body>
+<script>
+    $(function() {
+        $('.luck-cen-btnBox input').on('click', function() {
+            $(this).siblings().removeClass('selected');
+            $(this).addClass('selected');
+        })
+    })
+</script>
 
 </html>
