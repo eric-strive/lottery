@@ -1,9 +1,7 @@
-{extend name="public:base" /}
-
-{block name="head"}
-<link href="__PUBLIC__/view_res/mobile/css/product.css" type="text/css" rel="Stylesheet"/>
-<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
-<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
+{extend name="public:base" /} {block name="head"}
+<link href="__PUBLIC__/view_res/mobile/css/product.css" type="text/css" rel="Stylesheet" />
+<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet" />
+<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet" />
 <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
 <script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/jquery-weui/dist/js/swiper.min.js"></script>
@@ -12,35 +10,29 @@
     .swiper-container {
         width: 100%;
     }
-
+    
     .swiper-container img {
         display: block;
         width: 100%;
     }
-
+    
     .option_name {
         margin-left: 5px;
     }
-
     /*重载jquery-weui.min.css中样式*/
-    label > * {
+    
+    label>* {
         pointer-events: auto;
     }
 </style>
-{/block}
-
-{block name="header"}
-{include file="public/top-nav" /}
-{/block}
-
-{block name="content"}
+{/block} {block name="header"} {include file="public/top-nav" /} {/block} {block name="content"}
 
 <div class="swiper-container">
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
         <!-- Slides -->
         {volist name="image" id="image"}
-        <div class="swiper-slide"><img src="IMG_ROOT{$image.image|resize=400,400}"/></div>
+        <div class="swiper-slide"><img src="IMG_ROOT{$image.image|resize=400,400}" /></div>
         {/volist}
     </div>
     <!-- If we need pagination -->
@@ -64,8 +56,7 @@
                 {$goods.pay_points|round=2}
             </dt>
         </dl>
-        {else/}
-        {if condition="isset($home_id)"}
+        {else/} {if condition="isset($home_id)"}
         <dl class="pd-dsc clearfix">
             <dt>房间号：</dt>
             <dt class="periods" data-periods="{$buy_info.home_num}" id="pd-market-home_num"> {$buy_info.home_num}</dt>
@@ -79,8 +70,7 @@
             <dt>期次：</dt>
             <dt class="periods" data-periods="{$goods.periods}" id="pd-market-periods"> 第{$goods.periods}期</dt>
         </dl>
-        {/if}
-        {/if}
+        {/if} {/if}
         <dl class="pd-dsc clearfix" id="product_stock_wrap">
             <dt>库存量：</dt>
             <dt id="pd-stock">{$goods.quantity}</dt>
@@ -89,11 +79,9 @@
     </div>
     {if condition="!empty($discount)"}
     <dl class="pd-dsc clearfix" id="product_stock_wrap">
-        <dt>批发价：</dt>
-        {volist name="discount" id="v"}
+        <dt>批发价：</dt> {volist name="discount" id="v"}
         <br/>
-        <dt id="pd-stock"> {$v.quantity}{$goods.sku} 或更多 &yen; {$v.price}</dt>
-        {/volist}
+        <dt id="pd-stock"> {$v.quantity}{$goods.sku} 或更多 &yen; {$v.price}</dt> {/volist}
     </dl>
     {/if}
 
@@ -200,11 +188,39 @@
         <p>商品总价值{$goods.price}金币</p>
         <p>单次价格{$goods.doubao_price}金币</p>
         <div class="title">购买方式</div>
-        <div id="jionBtn" class="jionBtn">进入私房</div>
+        <div id="jionBtn" class="jionBtn" data-privacy="true">进入私房</div>
     </div>
 
 </div>
+<!-- 进入私房弹窗 -->
+<div id="priView" class="none">
+    <div id="hide" class="weui_mask weui_mask_visible"></div>
 
+    <div class="priForm">
+        <div class="border2">
+            <div class="flex-between">
+                <div class="box1 ">
+                    <div class="flex-row margin">
+                        <p>房间号：</p>
+                        <p class="overhidden">123</p>
+                    </div>
+                    <div class="flex-row margin">
+                        <p>房间名：</p>
+                        <p class="overhidden">moafd</p>
+                    </div>
+                </div>
+                <div class="box2 flex-col-center">
+                    <input type="button" value="进入">
+                </div>
+            </div>
+            <div class="flex-row">
+                <p>房间密码：</p>
+                <input type="password" value="" placeholder="请输入房间密码">
+            </div>
+        </div>
+    </div>
+
+</div>
 <header class="Thead" id="vpd-detail-header">产品详情</header>
 <div id="vpd-content" class="notload">下拉加载详细介绍</div>
 
@@ -216,38 +232,26 @@
         {volist name="related_goods" id="d"}
         <a class="slist-item" href="{:url('goods/detail',array('id'=>$d['goods_id']))}">
             <div class='pd-box-inner'>
-                <img src="IMG_ROOT{$d.image|resize=120,120}" alt='{$d.name}'/>
+                <img src="IMG_ROOT{$d.image|resize=120,120}" alt='{$d.name}' />
                 <p class='Elipsis'>{$d.name}</p>
             </div>
         </a>
         {/volist}
     </div>
 </div>
-{/if}
-
-{/if}
-
-{/block}
-
-{block name="footer"}
-
-{if condition="isset($points_goods)"}
+{/if} {/if} {/block} {block name="footer"} {if condition="isset($points_goods)"}
 <div id="appCartWrap" class="clearfix" style="padding: 0 10px;">
     <a class="button" id="buy-button" style="width: 100%;" data-add="0">立即兑换</a>
 </div>
 {else/}
 <div id="appCartWrap" class="clearfix">
-    <a class="button" id="addcart-button" data-add="1">幸运购</a>
+    <a class="button" id="addcart-button" data-add="1" href="luck.html">幸运购</a>
     <a class="button" href="{:url('cart/good_buy',array('id'=>$goods['goods_id']))}" id="buy-button" data-add="0">立即参与</a>
     <a id="toCart" href="{:url('cart/index')}"></a>
 </div>
-{/if}
-
-{/block}
-
-{block name="script"}
+{/if} {/block} {block name="script"}
 <script>
-    $(function () {
+    $(function() {
 
         $(".swiper-container").swiper({
             loop: true,
@@ -262,7 +266,7 @@
         /**
          *加载商品详情
          */
-        $(window).scroll(function () {
+        $(window).scroll(function() {
             var totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()) - 5;
             if ($(window).height() <= totalheight && !contentLoaded) {
                 $('#vpd-content').html('');
@@ -273,15 +277,15 @@
                 $.ajax({
                     url: "{:url('goods/get_description',array('id'=>$goods['goods_id']))}",
                     dataType: 'html',
-                    success: function (data) {
+                    success: function(data) {
 
                         $('#vpd-content').html(data);
                         $('#vpd-detail-header').show();
                         $('.notload').removeClass('notload');
                         $('#vpd-content').fadeIn();
                         // 调整图片
-                        $('#vpd-content img').each(function () {
-                            $(this).on('load', function () {
+                        $('#vpd-content img').each(function() {
+                            $(this).on('load', function() {
                                 if ($(this).width() >= document.body.clientWidth) {
                                     $(this).css('display', 'block');
                                 }
@@ -290,11 +294,11 @@
                         });
                         $('#vpd-content').find('div').width('auto');
                     },
-                    error: function () {
+                    error: function() {
 
                     }
                 });
-                setTimeout(function () {
+                setTimeout(function() {
                     $.hideLoading();
                 }, 500);
             }
@@ -302,19 +306,22 @@
         /**
          *加入购物车
          */
-        $('#buy-button,#addcart-button,#jionBtn').on('click', function () {
+        $('#buy-button,#addcart-button,#jionBtn').on('click', function() {
 
             var type = $(this).attr('data-add');
-            console.log("aaa")
+            var privacy = $(this).attr('data-privacy');
+            console.log('privacy', privacy);
+
             $.ajax({
                 url: "{:url('cart/add')}",
                 type: 'post',
                 data: $('#container input[type=\'hidden\'],#container input[type=\'radio\']:checked,#container input[type=\'checkbox\']:checked,#container select'),
 
                 dataType: 'json',
-                success: function (json) {
+                success: function(json) {
                     $('.box-check').removeClass('text-error');
                     $('.text-danger').remove();
+                    console.log('json', json);
                     if (json.error) {
 
                         if (json['goods_option_id']) {
@@ -333,33 +340,33 @@
                             $.toast(json.error, "forbidden");
                         }
                         if (json.url) {
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 location.href = json.url;
                             }, 1000);
                         }
                     }
 
-                    if (json.success) {
-                    <?php
+                    if (json.success && !privacy) {
+                        <?php
                         if (!isset($points_goods)) {
                      ?>
-                            // $.toast("已加入购物车");
-                            $('#toCart').find('i').text(json.total);
+                        // $.toast("已加入购物车");
+                        $('#toCart').find('i').text(json.total);
 
-                            if (type == 0) {
-                                setTimeout(function () {
-                                    location = "{:url('cart/index')}";
-                                }, 1000);
-                            }
+                        if (type == 0) {
+                            setTimeout(function() {
+                                location = "{:url('cart/index')}";
+                            }, 1000);
+                        }
                         <?php
                         } else {
                         ?>
-                            $.showLoading();
-                            if (type == 0) {
-                                setTimeout(function () {
-                                    location = "{:url('cart/index',array('type'=>'points'))}";
-                                }, 1000);
-                            }
+                        $.showLoading();
+                        if (type == 0) {
+                            setTimeout(function() {
+                                location = "{:url('cart/index',array('type'=>'points'))}";
+                            }, 1000);
+                        }
                         <?php
                         }
                         ?>
@@ -367,19 +374,31 @@
 
                     }
 
+                    if (json.success && privacy) {
+                        $('#priView').removeClass('none').fadeIn();
+                    }
+
                 }
             });
         });
+
+        // 点击遮罩
+        $('#hide').on('click', function() {
+            // $('#priView').removeClass('show').addClass('none');
+            $('#priView').fadeOut();
+        })
+
         /**
          *加入收藏
          */
-        $('.uc-add-like').bind('click', function () {
+        $('.uc-add-like').bind('click', function() {
 
             var goods_id = $('#goods_id').val();
             $.post(
-                "{:url('goods/add_wish')}",
-                {id: goods_id},
-                function (d) {
+                "{:url('goods/add_wish')}", {
+                    id: goods_id
+                },
+                function(d) {
                     if (d) {
                         if (d.error) {
                             $.toast(d.error, "forbidden");
@@ -398,27 +417,21 @@
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript">
     wx.config({
-            debug: false,
-            appId: '{$signPackage.appId}',
-            timestamp: {$signPackage.timestamp
+        debug: false,
+        appId: '{$signPackage.appId}',
+        timestamp: {
+            $signPackage.timestamp
         },
-        nonceStr
-    :
-    '{$signPackage.nonceStr}',
-        signature
-    :
-    '{$signPackage.signature}',
-        jsApiList
-    :
-    [
-        'checkJsApi',
-        'onMenuShareTimeline',
-        'onMenuShareAppMessage'
-    ]
-    })
-    ;
+        nonceStr: '{$signPackage.nonceStr}',
+        signature: '{$signPackage.signature}',
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage'
+        ]
+    });
 
-    wx.ready(function () {
+    wx.ready(function() {
 
         var is_agent = '<?php echo user("is_agent"); ?>';
         var site_url = '<?php echo request()->domain(); ?>';
@@ -433,7 +446,7 @@
             title: '{$goods.name}',
             link: url,
             imgUrl: site_url + '{$goods.image|resize=100,100}',
-            success: function () {
+            success: function() {
                 pvShareCallback(url, '分享到朋友圈');
             }
         });
@@ -443,7 +456,7 @@
             desc: '{$goods.name}',
             link: url,
             imgUrl: site_url + 'IMG_ROOT{$goods.image|resize=100,100}',
-            success: function () {
+            success: function() {
                 pvShareCallback(url, '分享给朋友');
             }
         });
@@ -458,7 +471,5 @@
         }
 
     });
-
 </script>
-{/if}
-{/block}
+{/if} {/block}
