@@ -1,57 +1,41 @@
-{extend name="public:base" /}
-{block name="head"}
-<link href="__PUBLIC__/view_res/mobile/css/uc.css" type="text/css" rel="Stylesheet"/>
-<link href="__PUBLIC__/view_res/mobile/css/productlist.css" type="text/css" rel="Stylesheet"/>
-
+{extend name="public:base" /} {block name="head"}
+<link href="__PUBLIC__/view_res/mobile/css/uc.css" type="text/css" rel="Stylesheet" />
+<link href="__PUBLIC__/view_res/mobile/css/productlist.css" type="text/css" rel="Stylesheet" />
+<link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
 <script src="__PUBLIC__/artTemplate/template.js"></script>
 <script src="__PUBLIC__/view_res/mobile/load_list.js"></script>
 <script src="__PUBLIC__/view_res/mobile/index.js"></script>
-{/block}
-{block name="header"}
-{include file="public/top-nav" /}
-{/block}
-
-{block name="content"}
-<div class='weui-tab__panel page__bd page__bd_spacing' style="width: 100%;background: #f3f4f9;height: 100%;">
-
-    <div class="salesman-icon b" style="background: #ffffff;margin-top: 1px;margin-bottom: 20px;">
-        <div class="mon" att="100"
-             style="background: #ffdf2e;height: 60px;border-radius: 5px;padding-top:5%;text-align:center;width: 43%;float: left;margin-left: 4%">
-            <div style="font-size: 20px;font-family: '宋体';">充100元</div>
-        </div>
-        <div class="mon" att="200"
-             style="background: #f5f5f5;height: 60px;border-radius: 5px;padding-top:5%;text-align:center;width: 43%;float: right;margin-right: 4%">
-            <div style="font-size: 20px;font-family: '宋体';">充200元</div>
-        </div>
-        <div class="mon" att="500"
-             style="background: #f5f5f5;height: 60px;border-radius: 5px;padding-top:5%;text-align:center;width: 43%;float: left;margin-left: 4%;margin-top: 10px;">
-            <div style="font-size: 20px;font-family: '宋体';">充500元</div>
-        </div>
-        <input type="hidden" id="num" value="100">
-        <div class="mon" att="0"
-             style="background: #f5f5f5;height: 60px;border-radius: 5px;padding-top:5%;text-align:center;width: 43%;float: right;margin-right: 4%;margin-top: 10px;">
-            <div style="font-size: 20px;font-family: '宋体';">自定义金额</div>
-            <div style="color: #ff6666;font-size: 15px;">
-                <div class="weui-cell" style="padding:0px 0px;padding-left: 15%;">
-                    <div class="weui-cell__bd">
-                        <input type="text" class="weui-input" id="money" name="money" value="" placeholder="请输入100的倍数"/>
-                    </div>
-                </div>
-            </div>
-        </div>
+{/block} {block name="header"} {include file="public/top-nav" /} {/block} {block name="content"}
+<!-- <div class='weui-tab__panel page__bd page__bd_spacing'> -->
+<!-- <div class="salesman-icon b" style=""> -->
+<div style="display:flex;flex-flow: row wrap;width:100%;">
+    <div class="mon selectBtn active" att="100">
+        充100元
     </div>
-    <div class="btn-div login-form" style="margin-top: 0px;float: left;text-align: center;width: 100%;font-size: 25px;">
-        <butotn type="button" class="btn btn-block btn-grayish weui-btn_warn" id="chongzhi"
-                style="background: #ff6766;width: 80%;font-size: 20px;margin-left:7%;">确认充值
-        </butotn>
+    <div class="mon selectBtn" att="200">
+        充200元
+    </div>
+    <div class="mon selectBtn" att="500">
+        充500元
+    </div>
+    <input type="hidden" id="num" value="100">
+    <div class="mon selectBtn" att="0">
+        <input type="text" class="weui-input myinput" id="money" name="money" value="" placeholder="自定义金额" />
     </div>
 </div>
-{/block}
 
-{block name="footer"}
-{include file="public/footer-nav" /}
-{/block}
+<butotn type="button" class="myBtn" id="chongzhi">确认充值</butotn>
 
-{block name="script"}
-
+{/block} {block name="footer"} {include file="public/footer-nav" /} {/block} {block name="script"}
+<script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
+<script>
+    $(function() {
+        console.log('log');
+        $('.mon').on('click', function() {
+            console.log('this');
+            $(this).siblings().removeClass('active');
+            $(this).addClass('active');
+        })
+    })
+</script>
 {/block}
