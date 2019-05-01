@@ -17,6 +17,7 @@ namespace osc\mobile\controller;
 use osc\admin\model\PayOrder;
 use osc\common\controller\Base;
 use \think\Db;
+use think\Exception;
 use wechat\Curl;
 
 class LotteryPayment extends Base
@@ -336,27 +337,31 @@ class LotteryPayment extends Base
     function weixin_pay()
     {
         if (request()->isPost()) {
-            $uid = user('uid');
-            $return['pay_total'] = input('pay_total');
-            $return['subject'] = input('subject');
-            $return['attach'] = input('attach');
-            $return['pay_order_no'] = build_order_no();
-            $orderData = array(
-                'uid' => $uid,
-                'gid' => input('pay_total'),
-                'home_id' => input('home_id'),
-                'pay_order_no' => $return['pay_order_no'],
-                'pay_amount' => input('pay_total'),
-                'pay_type' => PayOrder::WEI_PAY,
-                'order_type' => $return['attach'],
-            );
-            //先生成订单
-            $a = PayOrder::addOrder($orderData);
-            if (!$a) {
-                return json(['ret_code' => 11, 'ret_msg' => '创建订单失败']);
+            try {
+                $uid = user('uid');
+                $return['pay_total'] = input('pay_total');
+                $return['subject'] = input('subject');
+                $return['attach'] = input('attach');
+                $return['pay_order_no'] = build_order_no();
+                $orderData = array(
+                    'uid' => $uid,
+                    'gid' => input('pay_total'),
+                    'home_id' => input('home_id'),
+                    'pay_order_no' => $return['pay_order_no'],
+                    'pay_amount' => input('pay_total'),
+                    'pay_type' => PayOrder::WEI_PAY,
+                    'order_type' => $return['attach'],
+                );
+                //先生成订单
+                $a = PayOrder::addOrder($orderData);
+                if (!$a) {
+                    throw new Exception('创建订单失败');
+                }
+                return $this->getBizPackage($return);
+            } catch (\Exception $e) {
+                return json(['ret_code' => 11, 'ret_msg' => $e->getMessage()]);
             }
 
-            return $this->getBizPackage($return);
         }
     }
 
@@ -466,7 +471,7 @@ class LotteryPayment extends Base
 
         if (empty($postObj->prepay_id) || $postObj->return_code == "FAIL") {
 
-            return json(['ret_code' => 11, 'bizPackage' => '']);
+            return json(['ret_code' => 11, 'ret_msg' => '创建支付失败']);
         } else {
 
             $packJs = array(

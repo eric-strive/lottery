@@ -15,6 +15,7 @@
 namespace osc\admin\model;
 
 use think\Db;
+use think\Exception;
 use think\exception\ErrorException;
 
 class PayOrder
@@ -48,9 +49,9 @@ class PayOrder
     public static function addOrder($orderInfo)
     {
         if (empty($orderInfo['uid'])) {
-            throw new ErrorException('用户不存在');
+            throw new Exception('用户不存在');
         }
-        $data = [
+        $data = array(
             'uid' => $orderInfo['uid'],
             'gid' => $orderInfo['gid'],
             'home_id' => $orderInfo['home_id'],
@@ -59,7 +60,7 @@ class PayOrder
             'pay_type' => $orderInfo['pay_type'],
             'order_type' => $orderInfo['order_type'],
             'create_at' => date('Y-m-d H:i:s'),
-        ];
+        );
         return Db::name('pay_order')->insert($data, false, true);
     }
 

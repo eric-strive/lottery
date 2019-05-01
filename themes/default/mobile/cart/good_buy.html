@@ -228,7 +228,8 @@
                         // 支付操作出错
                         r.bizPackage.fail = wepayError;
                         // 发起微信支付
-                        order_no = r.out_trade_no
+                        // order_no = r.out_trade_no;
+                        // alert(r.out_trade_no);
                         wx.chooseWXPay(r.bizPackage);
                         // 按钮恢复
                         $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
