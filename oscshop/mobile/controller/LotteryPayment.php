@@ -14,10 +14,15 @@
 
 namespace osc\mobile\controller;
 
+use osc\admin\model\duobaoRecord;
 use osc\admin\model\PayOrder;
 use osc\common\controller\Base;
+use osc\admin\model\Home;
+use osc\mobile\service\OrderProcess;
+use osc\mobile\service\WeixinPay;
 use \think\Db;
 use think\Exception;
+use think\exception\ErrorException;
 use wechat\Curl;
 
 class LotteryPayment extends Base
@@ -337,167 +342,97 @@ class LotteryPayment extends Base
     function weixin_pay()
     {
         if (request()->isPost()) {
+            Db::startTrans();
             try {
                 $uid = user('uid');
                 $return['pay_total'] = input('pay_total');
                 $return['subject'] = input('subject');
                 $return['attach'] = input('attach');
+                $return['goodsNum'] = input('goodsNum');
                 $return['pay_order_no'] = build_order_no();
+                $homeId = input('home_id');
+                $gid = input('gid');
+                //数据基础检验
+                $buyGoodsCheck = Home::buyGoodsCheck($gid, $return['pay_total'], $return['goodsNum']);
+                if (!$buyGoodsCheck) {
+                    throw new Exception('数据有误');
+                }
                 $orderData = array(
                     'uid' => $uid,
-                    'gid' => input('pay_total'),
-                    'home_id' => input('home_id'),
+                    'gid' => $gid,
+                    'home_id' => $homeId,
                     'pay_order_no' => $return['pay_order_no'],
                     'pay_amount' => input('pay_total'),
                     'pay_type' => PayOrder::WEI_PAY,
                     'order_type' => $return['attach'],
+                    'buy_num' => $return['goodsNum'],
                 );
                 //先生成订单
                 $a = PayOrder::addOrder($orderData);
                 if (!$a) {
                     throw new Exception('创建订单失败');
                 }
-                return $this->getBizPackage($return);
+                //判断以及减少商品份额新增减少该项份额
+                Home::changePortion($homeId, $return['goodsNum']);
+                $payResult = WeixinPay::getBizPackage($return);
+                Db::commit();
+                return $payResult;
             } catch (\Exception $e) {
+                Db::rollback();
                 return json(['ret_code' => 11, 'ret_msg' => $e->getMessage()]);
             }
 
         }
     }
 
-    //微信，我的订单-》立即支付
-    function weixin_repay()
-    {
-        $order_id = (int)input('param.order_id');
-
-        $check = osc_order()->check_goods_quantity($order_id);
-
-        if (isset($check['error'])) {
-            return $check;
-        }
-
-        $order = Db::name('order')->where('order_id', $order_id)->find();
-
-        if ($order && ($order['order_status_id'] != config('paid_order_status_id'))) {
-
-            $return['pay_total'] = $order['total'];
-            $return['subject'] = $order['pay_subject'];
-            $return['pay_order_no'] = $order['order_num_alias'];
-
-            return $this->getBizPackage($return);
-        } else {
-            return ['error' => '订单已经支付'];
-        }
-    }
-
     //微信jssdk回调
     public function jsskd_notify()
     {
+        Db::startTrans();
+        try {
+            if (wechat()->checkPaySign()) {
 
-        if (wechat()->checkPaySign()) {
+                $sourceStr = file_get_contents('php://input');
 
-            $sourceStr = file_get_contents('php://input');
-
-            // 读取数据
-            $postObj = simplexml_load_string($sourceStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-            Db::name('test')->insert(array(
-                'info' => json_encode($postObj),
-            ));
-            if (!$postObj) {
-                echo "<xml><return_code><![CDATA[FAIL]]></return_code></xml>";
-            } else {
-
-                $order = Db::name('order')->where('order_num_alias', $postObj->out_trade_no)->find();
-
-                if ($order && ($order['order_status_id'] != config('paid_order_status_id'))) {
-
-                    osc_order()->update_order($order['order_id']);
-
-                    echo "<xml><return_code><![CDATA[SUCCESS]]></return_code></xml>";
-
+                // 读取数据
+                $postObj = simplexml_load_string($sourceStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+                Db::name('test')->insert(array(
+                    'info' => json_encode($postObj),
+                ));
+                if (!$postObj) {
+                    throw new Exception('出错');
                 } else {
-                    echo "<xml><return_code><![CDATA[FAIL]]></return_code></xml>";
+                    $returnData = json_decode($postObj, true);
+                    OrderProcess::pay_notify($returnData);
+                    Db::commit();
+                    echo "<xml><return_code><![CDATA[SUCCESS]]></return_code></xml>";
                 }
-
+            } else {
+                throw new Exception('出错');
             }
-
-        } else {
-
+        } catch (Exception $e) {
+            Db::rollback();
             echo "<xml><return_code><![CDATA[FAIL]]></return_code></xml>";
-
-        }
-        die;
-    }
-
-    //微信支付 package
-    function getBizPackage($data)
-    {
-
-        $wx = wechat();
-        // 订单总额
-        $totalFee = ($data['pay_total']);
-//        $totalFee = ($data['pay_total']) * 100;
-        // 随机字符串
-        $nonceStr = $wx->generateNonceStr();
-
-        $config = payment_config('weixin');
-
-        // 时间戳
-        $timeStamp = strval(time());
-
-        $pack = array(
-            'appid' => $config['appid'],
-            'body' => $data['subject'],
-            'mch_id' => $config['weixin_partner'],
-            'nonce_str' => $nonceStr,
-            'notify_url' => request()->domain() . url('lottery_payment/jsskd_notify'),
-            'spbill_create_ip' => get_client_ip(),
-            'openid' => $wx->getOpenId(),
-            // 外部订单号
-            'out_trade_no' => $data['pay_order_no'],
-            'timeStamp' => $timeStamp,
-            'total_fee' => $totalFee,
-            'attach' => isset($data['attach']) ? $data['attach'] : 'other',
-            'trade_type' => 'JSAPI'
-        );
-
-        $pack['sign'] = $wx->paySign($pack);
-
-        $xml = $wx->toXML($pack);
-
-        $ret = Curl::post('https://api.mch.weixin.qq.com/pay/unifiedorder', $xml);
-
-        $postObj = json_decode(json_encode(simplexml_load_string($ret, 'SimpleXMLElement', LIBXML_NOCDATA)));
-
-        if (empty($postObj->prepay_id) || $postObj->return_code == "FAIL") {
-
-            return json(['ret_code' => 11, 'ret_msg' => '创建支付失败']);
-        } else {
-
-            $packJs = array(
-                'appId' => $config['appid'],
-                'timeStamp' => $timeStamp,
-                'nonceStr' => $nonceStr,
-                'package' => "prepay_id=" . $postObj->prepay_id,
-                'signType' => 'MD5'
-            );
-
-            $JsSign = $wx->paySign($packJs);
-
-            $p['timestamp'] = $timeStamp;
-            $p['nonceStr'] = $nonceStr;
-            $p['package'] = "prepay_id=" . $postObj->prepay_id;
-            $p['signType'] = 'MD5';
-            $p['paySign'] = $JsSign;
-
-            return json(['ret_code' => 0, 'bizPackage' => $p, 'out_trade_no' => $data['pay_order_no']]);
-
         }
     }
 
+    /**
+     * 取消或订单出错
+     * @throws Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * @throws \think\exception\PDOException
+     */
     public function cancel_order()
     {
-
+        $uid = user('uid');
+        $return['gid'] = input('gid');
+        $return['order_no'] = input('order_no');
+        $return['status'] = input('status');
+        PayOrder::editStatus($return['order_no'], $return['status']);
+        //删除减去该用户购买的份额
+        Home::changePortion(input('home_id'), input('goodsNum'), Home::REDUCE_NUM);
     }
 }
 

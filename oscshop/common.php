@@ -524,13 +524,26 @@ function write_to_file($path, $data = array())
     file_put_contents($path, var_export($data, true));
 }
 
+/**
+ * 获取中奖号码
+ * @param $lottery_timestamp
+ * @param $lottery_drifts
+ * @return int
+ */
 function arithmetic($lottery_timestamp, $lottery_drifts)
 {
     $rand_num = rand(11111, 999999);
     $lottery_num = ($lottery_timestamp + $rand_num) % $lottery_drifts;
-    return $lottery_num;
+    return [$lottery_num, $rand_num];
 }
 
+/**
+ * 获取中奖随机数
+ * @param $lottery_timestamp
+ * @param $lottery_num
+ * @param $lottery_drifts
+ * @return float|int
+ */
 function re_arithmetic($lottery_timestamp, $lottery_num, $lottery_drifts)
 {
     $beishu = floor(($lottery_timestamp - $lottery_num) / $lottery_drifts) + rand(9, 50);

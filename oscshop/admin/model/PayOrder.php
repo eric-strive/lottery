@@ -36,9 +36,6 @@ class PayOrder
     const LUCK_BUY_TYPE = 2;
     const RECHARGE_TYPE = 3;
     const GAME_TYPE = 4;
-    const ORDER_TYPE = array(
-        self::COMMON_TYPE => ''
-    );
 
     /**
      * 新增订单
@@ -54,6 +51,7 @@ class PayOrder
         $data = array(
             'uid' => $orderInfo['uid'],
             'gid' => $orderInfo['gid'],
+            'buy_num' => $orderInfo['buy_num'],
             'home_id' => $orderInfo['home_id'],
             'pay_amount' => $orderInfo['pay_amount'],
             'pay_order_no' => $orderInfo['pay_order_no'],
@@ -76,8 +74,23 @@ class PayOrder
     {
         $return = Db::name('pay_order')
             ->where('pay_order_no="' . $orderNo . '"')
-            ->update(array('status' => $status));
+            ->update(array('status' => $status, 'update_at' => date('Y-m-d H:i:s')));
         return $return;
+    }
+
+    /**
+     * 获取订单信息
+     * @param $orderNo
+     * @return array|false|\PDOStatement|string|\think\Model
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function orderInfo($orderNo)
+    {
+        return Db::name('pay_order')
+            ->where('pay_order_no="' . $orderNo . '"')
+            ->find();
     }
 }
 

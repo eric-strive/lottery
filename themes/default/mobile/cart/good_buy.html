@@ -135,7 +135,6 @@
 
             if (parseInt(goodsNum) > 1) {
                 goodsNum = parseInt(goodsNum) - 1;
-                $('#quantity').val(goodsNum);
                 changeNum(goodsNum);
             }
         })
@@ -168,6 +167,7 @@
                 goodsNum = 1;
                 $(this).val(1);
             }
+            $('#quantity').val(goodsNum);
             $('#order_amount_sig').text(Number(prices) / Number(share) * Number(goodsNum));
             $('#pay_mount').val(Number(prices) / Number(share) * Number(goodsNum));
             $('#probability').text((Number(goodsNum) / Number(share) * 100).toFixed(2) + '%');
@@ -194,6 +194,7 @@
     $('#wechat-payment-btn').click(wepayCall);
     var home_id = '{:input("home_id")}';
     var gid = '{$buy_info["gid"]}';
+    var order_no = '';
 
     /**
      * 发起微信支付
@@ -203,7 +204,8 @@
         //需要配送的，判断收货地址是否已经获取
         var pay_mount = $('#pay_mount').val();
         var subject = $('#subject').val();
-        var order_no = '';
+        var goodsNum = $('#quantity').val();
+        ;
 
         $('#wechat-payment-btn').addClass('disable').html('支付发起中...');
 
@@ -211,6 +213,7 @@
                 'pay_total': pay_mount,
                 'subject': subject,
                 'attach': '1',
+                'goodsNum': goodsNum,
                 'home_id': home_id,
                 'gid': gid,
             },
@@ -228,8 +231,7 @@
                         // 支付操作出错
                         r.bizPackage.fail = wepayError;
                         // 发起微信支付
-                        // order_no = r.out_trade_no;
-                        // alert(r.out_trade_no);
+                        order_no = r.out_trade_no;
                         wx.chooseWXPay(r.bizPackage);
                         // 按钮恢复
                         $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
@@ -281,38 +283,18 @@
     }
 
     function cancelOrder(status) {
-        alert(order_no);
-        order_no = order_no;
+        var goodsNum = $('#quantity').val();
         $.post("{:url('lottery_payment/cancel_order')}", {
                 'home_id': home_id,
                 'gid': gid,
                 'order_no': order_no,
+                'goodsNum': goodsNum,
                 'status': status,
             },
             function (r) {
                 if (r.error) {
                     $.toast(r.error, "forbidden");
                     return;
-                }
-                if (r.ret_code === 0) {
-                    if (r.bizPackage.package !== 'prepay_id=') {
-                        // 支付操作成功
-                        r.bizPackage.success = wepayCallback;
-                        // 支付操作取消
-                        r.bizPackage.cancel = wepayCancel;
-                        // 支付操作出错
-                        r.bizPackage.fail = wepayError;
-                        // 发起微信支付
-
-                        wx.chooseWXPay(r.bizPackage);
-                        // 按钮恢复
-                        $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
-                    } else {
-                        wepayError();
-                    }
-                } else if (r.ret_code === 11) {
-                    $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
-                    alert('订单创建失败！' + r.ret_msg);
                 }
             });
     }

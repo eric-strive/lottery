@@ -15,10 +15,14 @@
 namespace osc\admin\model;
 
 use think\Db;
+use think\Exception;
 use think\exception\ErrorException;
 
 class Home
 {
+
+    const ADD_NUM = 0;
+    const REDUCE_NUM = 1;
 
     public function validate($data)
     {
@@ -90,6 +94,7 @@ class Home
             $type = 1;
         } else {
             $periods = $periods + 1;
+            Goods::setPeriods($gid, $periods);
         }
         $homeInfo = [
             'uid' => $uid,
@@ -103,7 +108,6 @@ class Home
             'type' => $type,
         ];
         $insertId = Db::name('home')->insert($homeInfo, false, true);
-        Goods::setPeriods($gid, $periods);
         return ['home_id' => $insertId];
     }
 
@@ -116,6 +120,15 @@ class Home
         return $home_num_id ? $home_num_id + 1 : 1;
     }
 
+    /**
+     * 判断用户是否有私开房间
+     * @param $uid
+     * @param $gid
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public static function getUserHome($uid, $gid)
     {
         $info = Db::name('home')
@@ -126,6 +139,7 @@ class Home
             return ['error' => '该商品您已经开过一个，请先投满！'];
         }
     }
+
 
     public static function home_info_by_gid($gid, $goods_periods, $type = 0)
     {
@@ -143,6 +157,93 @@ class Home
                 ->where('goods_periods', $goods_periods)
                 ->find();
         }
+    }
+
+    /**
+     * 判断金额是否正确
+     * @param $gid
+     * @param $payTotal
+     * @param $goodsNum
+     * @return bool
+     */
+    public static function buyGoodsCheck($gid, $payTotal, $goodsNum)
+    {
+        $goodsOneAmount = Db::name('goods')
+            ->where('goods_id=' . $gid)
+            ->value('doubao_price');
+        if (intval($payTotal) != intval($goodsNum * $goodsOneAmount)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 新增或减少份额
+     * @param $homeId
+     * @param $goodsNum
+     * @param int $changeType
+     * @return int|true
+     * @throws Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function changePortion($homeId, $goodsNum, $changeType = self::ADD_NUM)
+    {
+        $homeInfo = Db::name('home')->where('id=' . $homeId)->lock(true)->find();
+        if ($changeType == 0) {
+            $remain = $homeInfo['lottery_drifts'] - $homeInfo['goods_buy_num'];
+            if (intval($remain) < intval($goodsNum)) {
+                throw new Exception('商品剩余份额不足！');
+            }
+            return Db::name('home')->where('id=' . $homeId)->setInc('goods_buy_num', $goodsNum);
+        } else {
+            if (intval($homeInfo['goods_buy_num']) < intval($goodsNum)) {
+                throw new Exception('处理份额出错！');
+            }
+            return Db::name('home')->where('id=' . $homeId)->setDec('goods_buy_num', $goodsNum);
+        }
+    }
+
+    /**
+     * 获取私房信息
+     * @param $homeId
+     * @return array|false|\PDOStatement|string|\think\Model
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getHomeInfo($homeId, $isLock = false)
+    {
+        return Db::name('home')
+            ->where('id', $homeId)
+            ->lock($isLock)
+            ->find();
+    }
+
+    /**
+     * 满房
+     * @param $homeId
+     * @param $uid
+     * @param $lottery_num
+     * @param $rand_num
+     * @param $lottery_timestamp
+     * @return int|string
+     * @throws Exception
+     * @throws \think\exception\PDOException
+     */
+    public static function homeFull($homeId, $uid, $lottery_num, $rand_num, $lottery_timestamp)
+    {
+        $return = Db::name('home')
+            ->where('id', $homeId)
+            ->update(array(
+                'lottery_uid' => $uid,
+                'lottery_num' => $lottery_num,
+                'lottery_rand' => $rand_num,
+                'lottery_timestamp' => $lottery_timestamp,
+                'status' => 1,
+            ));
+        return $return;
     }
 }
 
