@@ -93,7 +93,7 @@ class PayOrder
             ->find();
     }
     public static function savePayInfo($data){
-        Db::name('pay_record')->insert($data);
+       return Db::name('pay_record')->insert($data);
     }
 }
 

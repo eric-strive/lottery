@@ -350,11 +350,9 @@
                     }
 
                     if (json.success && !privacy) {
-                    <
-                            ? php
+                    <?php
                         if (!isset($points_goods)) {
-                                ?
-                        >
+                    ?>
                             // $.toast("已加入购物车");
                             $('#toCart').find('i').text(json.total);
 
@@ -363,22 +361,18 @@
                                     location = "{:url('cart/index')}";
                                 }, 1000);
                             }
-                        <
-                                ? php
+                        <?php
                         } else {
-                                ?
-                        >
+                        ?>
                             $.showLoading();
                             if (type == 0) {
                                 setTimeout(function () {
                                     location = "{:url('cart/index',array('type'=>'points'))}";
                                 }, 1000);
                             }
-                        <
-                                ? php
+                        <?php
                         }
-                            ?
-                    >
+                        ?>
 
 
                     }

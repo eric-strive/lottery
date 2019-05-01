@@ -15,7 +15,9 @@
 namespace osc\mobile\controller;
 
 use osc\admin\model\duobaoRecord;
+use osc\admin\model\Goods as GoodsModel;
 use osc\admin\model\Home as HomeModel;
+use osc\admin\model\LuckRecord;
 use think\Db;
 
 class Goods extends MobileBase
@@ -112,6 +114,10 @@ class Goods extends MobileBase
         return $this->detail();
     }
 
+    /**
+     * 幸运购页面
+     * @return mixed
+     */
     function luck()
     {
         $gid = (int)input('param.id');
@@ -127,6 +133,34 @@ class Goods extends MobileBase
         $list['goods']['image'] = resize($list['goods']['image'], 80, 80);
         $this->assign('goods', $list['goods']);
         return $this->fetch('luck');
+    }
+
+    /**
+     * 抽奖成功
+     * @return mixed
+     */
+    function luck_success()
+    {
+        $isLottery = false;
+        $gid = (int)input('id');
+        $order_no = (int)input('order_no');
+        $uid = user('uid');
+        if (empty($gid)) {
+            $this->error('商品不存在！！');
+        }
+        if (empty($uid)) {
+            $this->error('请先登录！！', url('login/login'));
+        }
+        $goodsInfo = GoodsModel::getGoodsInfo($gid);
+        $recordSum = LuckRecord::recordSum($gid, $uid);
+        if ($recordSum >= $goodsInfo['lotter_price']) {
+            //中奖了
+            LuckRecord::setLottery($order_no);
+            $isLottery = true;
+        }
+        $this->assign('goodsInfo', $goodsInfo);
+        $this->assign('isLottery', $isLottery);
+        return $this->fetch('luck_success');
     }
 }
 

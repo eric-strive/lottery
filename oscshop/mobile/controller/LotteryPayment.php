@@ -15,6 +15,7 @@
 namespace osc\mobile\controller;
 
 use osc\admin\model\duobaoRecord;
+use osc\admin\model\LuckRecord;
 use osc\admin\model\PayOrder;
 use osc\common\controller\Base;
 use osc\admin\model\Home;
@@ -352,11 +353,6 @@ class LotteryPayment extends Base
                 $return['pay_order_no'] = build_order_no();
                 $homeId = input('home_id');
                 $gid = input('gid');
-                //数据基础检验
-                $buyGoodsCheck = Home::buyGoodsCheck($gid, $return['pay_total'], $return['goodsNum']);
-                if (!$buyGoodsCheck) {
-                    throw new Exception('数据有误');
-                }
                 $orderData = array(
                     'uid' => $uid,
                     'gid' => $gid,
@@ -372,8 +368,20 @@ class LotteryPayment extends Base
                 if (!$a) {
                     throw new Exception('创建订单失败');
                 }
-                //判断以及减少商品份额新增减少该项份额
-                Home::changePortion($homeId, $return['goodsNum']);
+                //数据基础检验
+                switch ($return['attach']) {
+                    case '1':
+                        $buyGoodsCheck = Home::buyGoodsCheck($gid, $return['pay_total'], $return['goodsNum']);
+                        if (!$buyGoodsCheck) {
+                            throw new Exception('数据有误');
+                        }
+                        //判断以及减少商品份额新增减少该项份额
+                        Home::changePortion($homeId, $return['goodsNum']);
+                        break;
+                    case '2':
+                        LuckRecord::addLuckRecord($orderData);
+                        break;
+                }
                 $payResult = WeixinPay::getBizPackage($return);
                 Db::commit();
                 return $payResult;
@@ -391,9 +399,7 @@ class LotteryPayment extends Base
         Db::startTrans();
         try {
             if (wechat()->checkPaySign()) {
-
                 $sourceStr = file_get_contents('php://input');
-
                 // 读取数据
                 $postObj = simplexml_load_string($sourceStr, 'SimpleXMLElement', LIBXML_NOCDATA);
                 Db::name('test')->insert(array(
@@ -402,8 +408,7 @@ class LotteryPayment extends Base
                 if (!$postObj) {
                     throw new Exception('出错');
                 } else {
-                    $returnData = json_decode($postObj, true);
-                    OrderProcess::pay_notify($returnData);
+                    OrderProcess::pay_notify($postObj);
                     Db::commit();
                     echo "<xml><return_code><![CDATA[SUCCESS]]></return_code></xml>";
                 }

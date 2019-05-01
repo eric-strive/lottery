@@ -534,6 +534,7 @@ function arithmetic($lottery_timestamp, $lottery_drifts)
 {
     $rand_num = rand(11111, 999999);
     $lottery_num = ($lottery_timestamp + $rand_num) % $lottery_drifts;
+    $lottery_num = $lottery_num ? $lottery_num : $lottery_drifts;
     return [$lottery_num, $rand_num];
 }
 

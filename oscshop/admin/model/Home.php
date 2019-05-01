@@ -84,7 +84,7 @@ class Home
         $uid = isset($data['uid']) ? $data['uid'] : 0;
         $type = 0;
         $home_num_id = 0;
-        $goodInfo = Goods::get_goods_info($gid);
+        $goodInfo = Goods::getGoodsInfo($gid);
         if (!empty($home_name) && !empty($password)) {
             $getUserHome = self::getUserHome($uid, $gid);
             if (!empty($getUserHome)) {

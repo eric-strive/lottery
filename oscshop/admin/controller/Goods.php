@@ -57,7 +57,6 @@ class Goods extends AdminBase
         if (request()->isPost()) {
 
             $data = input('post.');
-
             $model = osc_model('admin', 'goods');
 
             $error = $model->validate($data);

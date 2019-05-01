@@ -88,6 +88,7 @@
      * 发起微信支付
      */
     $('#wechat-payment-btn').click(wepayCall);
+    var order_no = '';
 
     /**
      * 发起微信支付
@@ -97,13 +98,15 @@
         //需要配送的，判断收货地址是否已经获取
         var pay_mount = $('#pay_mount').val();
         var subject = $('#subject-price').val();
+        var gid = '{$goods["goods_id"]}';
 
         $('#wechat-payment-btn').addClass('disable').html('支付发起中...');
 
         $.post("{:url('lottery_payment/weixin_pay')}", {
-                'pay_total': pay_mount,
+                'pay_total': parseInt(pay_mount),
                 'subject': subject,
-                'attach': 'luck_buy',
+                'gid': gid,
+                'attach': '2',
             },
             function (r) {
                 if (r.error) {
@@ -119,7 +122,7 @@
                         // 支付操作出错
                         r.bizPackage.fail = wepayError;
                         // 发起微信支付
-
+                        order_no = r.out_trade_no;
                         wx.chooseWXPay(r.bizPackage);
                         // 按钮恢复
                         $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
@@ -141,9 +144,8 @@
      * @returns {undefined}
      */
     function wepayCallback(res) {
-
         if (res.errMsg == "chooseWXPay:ok") {
-            location.href = "{:url('mobile/goods/detail',array('id'=>$goods['goods_id']))}";
+            location.href = "{:url('mobile/goods/luck_success',array('id'=>$goods['goods_id']))}"+'/order_no/'+order_no;
 
             $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
         } else {
@@ -156,7 +158,6 @@
      * 微信支付失败
      */
     function wepayError() {
-        alert('微信支付发起失败');
         // 按钮恢复
         $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
     }

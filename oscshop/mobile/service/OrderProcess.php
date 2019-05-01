@@ -17,6 +17,7 @@ namespace osc\mobile\service;
 use osc\admin\model\duobaoRecord;
 use osc\admin\model\Goods;
 use osc\admin\model\Home;
+use osc\admin\model\LuckRecord;
 use osc\admin\model\PayOrder;
 use think\Db;
 use think\Exception;
@@ -33,15 +34,15 @@ class OrderProcess
      * @throws \think\exception\DbException
      * @throws \think\exception\PDOException
      */
-    public static function pay_notify($returnData)
+    public static function pay_notify($postObj)
     {
-        $orderNo = $returnData['out_trade_no'];
-        $cashFee = $returnData['cash_fee'];
+        $orderNo = $postObj->out_trade_no;
+        $cashFee = $postObj->cash_fee;
         $orderInfo = PayOrder::orderInfo($orderNo);
         if (empty($orderInfo) || $orderInfo['status'] == PayOrder::STATUS_SUCCESS_PAY) {
             throw new Exception('出错');
         }
-        $attach = isset($returnData['attach']) ? $returnData['attach'] : '';
+        $attach = isset($postObj->attach) ? $postObj->attach : '';
         switch ($attach) {
             case '1':
                 $homeId = $orderInfo['home_id'];
@@ -49,6 +50,10 @@ class OrderProcess
                     throw new Exception('订单有误');
                 }
                 self::addNumber($orderInfo, $homeId);
+                break;
+            case '2':
+                LuckRecord::setStatus($orderNo);
+                break;
         }
         PayOrder::savePayInfo(array(
             'uid' => $orderInfo['uid'],
@@ -59,7 +64,7 @@ class OrderProcess
             'pay_type' => 1,
             'pay_time' => date('Y-m-d H:i:s'),
         ));
-        PayOrder::editStatus($returnData['out_trade_no'], PayOrder::STATUS_SUCCESS_PAY);
+        PayOrder::editStatus($orderNo, PayOrder::STATUS_SUCCESS_PAY);
     }
 
     /**

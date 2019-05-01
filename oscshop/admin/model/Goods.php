@@ -58,7 +58,10 @@ class Goods
         $goods['model'] = $data['model'];
         $goods['sku'] = $data['sku'];
         $goods['location'] = $data['location'];
+        $goods['doubao_price'] = (float)$data['doubao_price'];
+        $goods['lotter_price'] = (float)$data['lotter_price'];
         $goods['price'] = (float)$data['price'];
+        $goods['return_venosa'] = (int)$data['return_venosa'];
         $goods['quantity'] = (int)$data['quantity'];
         $goods['points'] = $data['points'];
         $goods['pay_points'] = $data['pay_points'];
@@ -319,7 +322,7 @@ class Goods
         }
     }
 
-    public static function get_goods_info($gid)
+    public static function getGoodsInfo($gid)
     {
         return Db::name('goods')->where('goods_id', $gid)->find();
     }
@@ -343,9 +346,8 @@ class Goods
      */
     public static function buyGoods($gid)
     {
-        Db::name('good')->where('goods_id', $gid)->setDec('quantity');
-        Db::name('good')->where('goods_id', $gid)->setInc('sale_count');
-
+        Db::name('goods')->where('goods_id', $gid)->setDec('quantity');
+        Db::name('goods')->where('goods_id', $gid)->setInc('sale_count');
     }
 }
 
