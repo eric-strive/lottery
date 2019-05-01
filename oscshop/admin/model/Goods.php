@@ -324,9 +324,28 @@ class Goods
         return Db::name('goods')->where('goods_id', $gid)->find();
     }
 
-    public static function setPeriods($id,$periods)
+    /**
+     * 设置期数
+     * @param $id
+     * @param $periods
+     * @throws \think\Exception
+     * @throws \think\exception\PDOException
+     */
+    public static function setPeriods($id, $periods)
     {
         Db::name('goods')->where('goods_id', $id)->update(['periods' => $periods]);
+    }
+
+    /**
+     * 卖出一件商品
+     * @param $gid
+     * @throws \think\Exception
+     */
+    public static function buyGoods($gid)
+    {
+        Db::name('good')->where('goods_id', $gid)->setDec('quantity');
+        Db::name('good')->where('goods_id', $gid)->setInc('sale_count');
+
     }
 }
 

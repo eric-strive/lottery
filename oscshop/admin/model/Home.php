@@ -241,6 +241,7 @@ class Home
                 'lottery_num' => $lottery_num,
                 'lottery_rand' => $rand_num,
                 'lottery_timestamp' => $lottery_timestamp,
+                'lottery_at' => date('Y-m-d H:i:s'),
                 'status' => 1,
             ));
         return $return;

@@ -92,6 +92,9 @@ class PayOrder
             ->where('pay_order_no="' . $orderNo . '"')
             ->find();
     }
+    public static function savePayInfo($data){
+        Db::name('pay_record')->insert($data);
+    }
 }
 
 ?>

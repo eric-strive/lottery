@@ -110,13 +110,6 @@ class Cart extends MobileBase
 
     function good_buy()
     {
-       $a = OrderProcess::pay_notify([
-            'out_trade_no'=>'2019050150509850',
-            'cash_fee'=>111,
-            'attach'=>'1',
-        ]);
-       var_dump($a);
-        exit;
         $uid = osc_service('mobile', 'user')->is_login();
 
         if (in_wechat()) {

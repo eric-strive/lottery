@@ -15,6 +15,7 @@
 namespace osc\mobile\service;
 
 use osc\admin\model\duobaoRecord;
+use osc\admin\model\Goods;
 use osc\admin\model\Home;
 use osc\admin\model\PayOrder;
 use think\Db;
@@ -35,6 +36,7 @@ class OrderProcess
     public static function pay_notify($returnData)
     {
         $orderNo = $returnData['out_trade_no'];
+        $cashFee = $returnData['cash_fee'];
         $orderInfo = PayOrder::orderInfo($orderNo);
         if (empty($orderInfo) || $orderInfo['status'] == PayOrder::STATUS_SUCCESS_PAY) {
             throw new Exception('出错');
@@ -48,6 +50,15 @@ class OrderProcess
                 }
                 self::addNumber($orderInfo, $homeId);
         }
+        PayOrder::savePayInfo(array(
+            'uid' => $orderInfo['uid'],
+            'gid' => $orderInfo['gid'],
+            'home_id' => $orderInfo['home_id'],
+            'amount' => $cashFee,
+            'order_no' => $orderNo,
+            'pay_type' => 1,
+            'pay_time' => date('Y-m-d H:i:s'),
+        ));
         PayOrder::editStatus($returnData['out_trade_no'], PayOrder::STATUS_SUCCESS_PAY);
     }
 
@@ -132,6 +143,8 @@ class OrderProcess
                 throw new Exception('开新房间出错');
             }
         }
+        //库存减一
+        Goods::buyGoods($homeInfo['gid']);
     }
 }
 
