@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="text/javascript" src="__PUBLIC__/js/fontsize.js"></script>
-    <link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet" />
-    <link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet" />
+    <link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
+    <link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
     <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
     <script src="__PUBLIC__/js/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
@@ -15,40 +15,159 @@
 </head>
 
 <body>
-    <div class="luck-con">
-        <nav>
-            <a href="javascript:window.history.go(-1)" onclick="">返回</a>
-        </nav>
-        <div class="luck-cen">
-            <div class="flex-col-center luck-cen-gl">
-                <p>本次中奖概率</p>
-                <p>0.10%</p>
-            </div>
-            <div class="flex-row-center luck-cen-btnBox">
-                <input type="button" value="1元嗨" class="selected">
-                <input type="button" value="x3倍">
-                <input type="button" value="x5倍">
-            </div>
-            <div class="flex-row luck-cen-bottom">
-                <img src="http://temp.im/20x20" alt="">
-                <div class="flex-col-center">
-                    <p class="prices">抽奖价:<span>￥1.01</span></p>
-                    <p class="original-price">￥1000.00</p>
-                </div>
-
-            </div>
+<div class="luck-con">
+    <nav>
+        <a href="javascript:window.history.go(-1)" onclick="">返回</a>
+    </nav>
+    <div class="luck-cen">
+        <div class="flex-col-center luck-cen-gl">
+            <p>本次中奖概率</p>
+            <p id="percentage">0.10%</p>
         </div>
-        <p class="luck-p">采用绝对公平公开的算法</p>
-        <input class="luck-btn " type="button" value="马上嗨一把">
+        <div class="flex-row-center luck-cen-btnBox">
+            <input type="button" att="1" value="1元嗨" class="selected">
+            <input type="button" att="3" value="x3倍">
+            <input type="button" att="5" value="x5倍">
+        </div>
+        <div class="flex-row luck-cen-bottom">
+            <img src="IMG_ROOT{$goods.image}" alt="">
+            <div class="flex-col-center">
+                <input type="hidden" id="pay_mount" value="1.01">
+                <input type="hidden" id="original-price" value="{$goods.price}">
+                <input type="hidden" id="subject-price" value="{$goods.name}">
+                <p class="prices">抽奖价:<span>￥<em id="pay_value">1</em></span></p>
+                <p class="original-price">￥{$goods.price}</p>
+            </div>
+
+        </div>
     </div>
+    <p class="luck-p">采用绝对公平公开的算法</p>
+    <input class="luck-btn" id="wechat-payment-btn" type="button" value="马上嗨一把">
+</div>
 </body>
 <script>
-    $(function() {
-        $('.luck-cen-btnBox input').on('click', function() {
+    $(function () {
+        var num = randomShu();
+        var originalPrice = $('#original-price').val();
+        $('.luck-cen-btnBox input').on('click', function () {
             $(this).siblings().removeClass('selected');
             $(this).addClass('selected');
-        })
+            var att = $(this).attr('att');
+            p(num * att);
+        });
+
+        function randomShu() {
+            return (Math.random() * (0.6) + 0.8);
+        }
+
+        p(num);
+
+        function p(num) {
+            $("#pay_mount").val(num.toFixed(2));
+            $("#pay_value").text(num.toFixed(2));
+            $('#percentage').text((Number(num) / Number(originalPrice) * 100).toFixed(2) + '%');
+        }
     })
 </script>
+{block name="script"}
+<!-- 微信JSSDK -->
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!-- 微信JSSDK -->
+<script type="text/javascript">
+    '{if condition="in_wechat()"}'
+    wx.config({
+        debug: false,
+        appId: '{$signPackage.appId}',
+        timestamp: '{$signPackage.timestamp}',
+        nonceStr: '{$signPackage.nonceStr}',
+        signature: '{$signPackage.signature}',
+        jsApiList: ['chooseWXPay']
+    });
+    '{/if}'
+    /**
+     * 发起微信支付
+     */
+    $('#wechat-payment-btn').click(wepayCall);
 
+    /**
+     * 发起微信支付
+     * @returns {undefined}
+     */
+    function wepayCall() {
+        //需要配送的，判断收货地址是否已经获取
+        var pay_mount = $('#pay_mount').val();
+        var subject = $('#subject-price').val();
+
+        $('#wechat-payment-btn').addClass('disable').html('支付发起中...');
+
+        $.post("{:url('lottery_payment/weixin_pay')}", {
+                'pay_total': pay_mount,
+                'subject': subject,
+                'attach': 'luck_buy',
+            },
+            function (r) {
+                if (r.error) {
+                    $.toast(r.error, "forbidden");
+                    return;
+                }
+                if (r.ret_code === 0) {
+                    if (r.bizPackage.package !== 'prepay_id=') {
+                        // 支付操作成功
+                        r.bizPackage.success = wepayCallback;
+                        // 支付操作取消
+                        r.bizPackage.cancel = wepayCancel;
+                        // 支付操作出错
+                        r.bizPackage.fail = wepayError;
+                        // 发起微信支付
+
+                        wx.chooseWXPay(r.bizPackage);
+                        // 按钮恢复
+                        $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+                    } else {
+                        wepayError();
+                    }
+                } else if (r.ret_code === 11) {
+                    $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+                    alert('订单创建失败！' + r.ret_msg);
+                }
+            });
+
+
+    }
+
+    /**
+     * 微信支付回调
+     * @param {type} res
+     * @returns {undefined}
+     */
+    function wepayCallback(res) {
+
+        if (res.errMsg == "chooseWXPay:ok") {
+            location.href = "{:url('mobile/goods/detail',array('id'=>$goods['goods_id']))}";
+
+            $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+        } else {
+            alert(res.errMsg);
+        }
+
+    }
+
+    /**
+     * 微信支付失败
+     */
+    function wepayError() {
+        alert('微信支付发起失败');
+        // 按钮恢复
+        $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+    }
+
+    /**
+     * 微信支付手动取消
+     */
+    function wepayCancel() {
+        // 按钮恢复
+        $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+    }
+</script>
+{/block}
 </html>

@@ -120,22 +120,16 @@ class Cart extends MobileBase
             $this->assign('signPackage', $wechat->getJsSign(request()->url(true)));
             session('jssdk_order', null);
         }
-
-        if (!$list = osc_goods()->get_goods_info((int)input('param.id'))) {
+        $homeId = input('home_id');
+        $buy_info = HomeModel::home_info_by_gid('', $homeId, 1);
+        $gid = $buy_info['gid'];
+        if (!$list = osc_goods()->get_goods_info($gid)) {
             $this->error('商品不存在！！');
         }
-        $homeId = input('param.home_id');
-        if ($homeId) {
-            $this->assign('home_id', $homeId);
-            $this->assign('buy_info', HomeModel::home_info_by_gid($list['goods']['goods_id'], $homeId, 1));
-            $this->assign('percentage', duobaoRecord::get_duobao_num($homeId, $list['goods']['goods_id'], 1));
-        } else {
-            $this->assign('buy_info',
-                HomeModel::home_info_by_gid($list['goods']['goods_id'], $list['goods']['periods']));
-            $this->assign('percentage',
-                duobaoRecord::get_duobao_num($list['goods']['periods'], $list['goods']['goods_id']));
-        }
         $list['goods']['image'] = resize($list['goods']['image'], 80, 80);
+        $this->assign('home_id', $homeId);
+        $this->assign('buy_info', $buy_info);
+        $this->assign('percentage', duobaoRecord::get_periods($buy_info));
         $this->assign('top_title', $list['goods']['name']);
         $this->assign('goods', $list['goods']);
         $this->assign('image', $list['image']);
@@ -143,8 +137,8 @@ class Cart extends MobileBase
         $this->assign('discount', $list['discount']);
         $this->assign('mobile_description', $list['mobile_description']);
 
-        $this->assign('SEO', ['title' => '幸运购-' . config('SITE_TITLE')]);
-        $this->assign('top_title', '幸运购');
+        $this->assign('SEO', ['title' => '乐购宝-' . config('SITE_TITLE')]);
+        $this->assign('top_title', '乐购宝');
         return $this->fetch();
     }
 

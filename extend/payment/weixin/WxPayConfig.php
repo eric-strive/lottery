@@ -38,10 +38,10 @@ class WxPayConfig
 //        $this->notify_url = $options['notify_url'];
 //    }
 	protected static $cfg = array(
-		'APPID'     => '',
-		'MCHID'     => '',
-		'KEY'       => '',
-		'APPSECRET' => '',
+		'APPID'     => 'wx4c0b669c3258529c',
+		'MCHID'     => '1532026521',
+		'KEY'       => 'd62c564271684f487c4fd20db3a4e9d7',
+		'APPSECRET' => '0a1452c58e273a0fdc1445295f7f79e6',
 		'NOTIFY_URL' => '',
 		'SSLCERT_PATH' => '../cert/apiclient_cert.pem',
 		'SSLKEY_PATH'  => '../cert/apiclient_key.pem',

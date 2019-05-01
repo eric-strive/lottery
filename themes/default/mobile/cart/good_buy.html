@@ -1,9 +1,9 @@
 {extend name="public:base" /} {block name="jquery"}
 <script src="__PUBLIC__/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
 {/block} {block name="head"}
-<link href="__PUBLIC__/view_res/mobile/css/cart.css" type="text/css" rel="Stylesheet" />
-<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet" />
-<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet" />
+<link href="__PUBLIC__/view_res/mobile/css/cart.css" type="text/css" rel="Stylesheet"/>
+<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
+<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
 <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
 <script src="__PUBLIC__/jquery-weui/dist/lib/fastclick.js"></script>
 <script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
@@ -17,7 +17,8 @@
 <div id="orderDetailsWrapper" data-minheight="68px">
     <section class="cartListWrap clearfix" id="">
 
-        <a href="{:url('goods/detail',array('id'=>$goods.goods_id))}"><img alt="{$goods.name}" src="IMG_ROOT{$goods.image}" /></a>
+        <a href="{:url('goods/detail',array('id'=>$goods.goods_id))}"><img alt="{$goods.name}"
+                                                                           src="IMG_ROOT{$goods.image}"/></a>
 
         <div class="cartListDesc">
             <p class="title">
@@ -38,9 +39,9 @@
                 <dt class="productCount clearfix">
                     <a id="productCountMinus" class="btn productCountMinus"></a>
                     <span class="productCountNum">
-                        <input onkeyup='change_quantity("234",this,"234","234");' minimum='34'
-                               id="quantity" size="5" type='text' value='1'
-                               class="dcount productCountNumi"/>
+                        <input minimum='1' id="quantity" size="5" type='number' value='1'
+                               class="dcount productCountNumi" onkeyup="value=value.replace(/[^\d]/g,'') "
+                               onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>
                     </span>
                     <a id="productCountPlus" class="btn productCountPlus"></a>
                 </dt>
@@ -64,7 +65,10 @@
 <!-- 订单总额 -->
 <div id="orderSummay">
     <div>
-        <input type="hidden" id="pay_mount" value="1"> 购买金额 : <b class="prices"> &yen;</b> <b class="prices font13 last" id="order_amount_sig">1</b>
+        <input type="hidden" id="subject" value="{$goods.name}">
+        <input type="hidden" id="pay_mount" value="1"> 购买金额 :
+        <b class="prices"> &yen;</b>
+        <b class="prices font13 last" id="order_amount_sig">1</b>
     </div>
     <!--<div>-->
     <!--总计 : <b class="prices"> &yen;</b> <b class="prices last" id="order_amount">2342</b>-->
@@ -89,9 +93,9 @@
 </div>
 {/if} {/if}
 <script>
-    $(function() {
+    $(function () {
         //支付宝支付
-        $('#alipay-payment-btn').click(function() {
+        $('#alipay-payment-btn').click(function () {
 
             var city_id = $('#city_id').val();
             var address_id = $('#address_id').val();
@@ -103,7 +107,7 @@
                     comment: comment,
                     address_id: address_id
                 },
-                function(d) {
+                function (d) {
 
                     if (d.error) {
                         $.toast(d.error, "forbidden");
@@ -123,39 +127,58 @@
 <!-- 微信JSSDK -->
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script>
-    $(function() {
+    $(function () {
+        var goodsNum, prices, share, remain;
         // 减键
-        $('#productCountMinus').on('click', function() {
-            let goodsNum = $('#quantity').val(), //购买份额
-                prices = $('#prices').text(), //总价
-                share = $('#share').text(); //总份额
-
+        $('#productCountMinus').on('click', function () {
+            let goodsNum = $('#quantity').val();
 
             if (parseInt(goodsNum) > 1) {
                 goodsNum = parseInt(goodsNum) - 1;
                 $('#quantity').val(goodsNum);
-                $('#order_amount_sig').text(Number(prices) / Number(share) * Number(goodsNum));
-                $('#probability').text(Number(goodsNum) / Number(share) * 100);
+                changeNum(goodsNum);
             }
         })
 
         // 加键
-        $('#productCountPlus').on('click', function() {
+        $('#productCountPlus').on('click', function () {
             let goodsNum = $('#quantity').val(),
-                remain = $('#remain').text(), //剩余份额
-                share = $('#share').text(); //总份额
+                remain = $('#remain').text(); //剩余份额
 
             if (parseInt(goodsNum) < parseInt(remain)) {
                 goodsNum = parseInt(goodsNum) + 1;
                 $('#quantity').val(goodsNum);
-                $('#order_amount_sig').text(Number(prices) / Number(share) * Number(goodsNum));
-                $('#probability').text(Number(goodsNum) / Number(share) * 100);
+                changeNum(goodsNum);
             }
         })
+        $('.productCountNumi').change(function () {
+            goodsNum = parseInt($(this).val());
+            changeNum(goodsNum);
+        })
+
+        function changeNum(goodsNum) {
+            remain = parseInt($('#remain').text()); //剩余份额
+            prices = $('#prices').text(); //总价
+            share = parseInt($('#share').text()); //总份额
+            if (goodsNum > remain) {
+                goodsNum = remain;
+                $(this).val(remain);
+            }
+            if (goodsNum < 1 || goodsNum === "" || goodsNum == null) {
+                goodsNum = 1;
+                $(this).val(1);
+            }
+            $('#order_amount_sig').text(Number(prices) / Number(share) * Number(goodsNum));
+            $('#pay_mount').val(Number(prices) / Number(share) * Number(goodsNum));
+            $('#probability').text((Number(goodsNum) / Number(share) * 100).toFixed(2) + '%');
+        }
+
+        changeNum(1);
     })
 </script>
 <!-- 微信JSSDK -->
 <script type="text/javascript">
+    '{if condition="in_wechat()"}'
     wx.config({
         debug: false,
         appId: '{$signPackage.appId}',
@@ -164,20 +187,13 @@
         signature: '{$signPackage.signature}',
         jsApiList: ['chooseWXPay']
     });
-
-    var o = {};
-    // localStorage对象
-    o.Storage = window.localStorage;
-    // 收货地址加载标记
-    window.addressloaded = false;
-    // order id 生成标记
-    window.orderId = false;
-
-
+    '{/if}'
     /**
      * 发起微信支付
      */
     $('#wechat-payment-btn').click(wepayCall);
+    var home_id = '{:input("home_id")}';
+    var gid = '{$buy_info["gid"]}';
 
     /**
      * 发起微信支付
@@ -186,22 +202,24 @@
     function wepayCall() {
         //需要配送的，判断收货地址是否已经获取
         var pay_mount = $('#pay_mount').val();
-
+        var subject = $('#subject').val();
+        var order_no = '';
 
         $('#wechat-payment-btn').addClass('disable').html('支付发起中...');
 
         $.post("{:url('lottery_payment/weixin_pay')}", {
                 'pay_total': pay_mount,
+                'subject': subject,
+                'attach': '1',
+                'home_id': home_id,
+                'gid': gid,
             },
-            function(r) {
-
+            function (r) {
                 if (r.error) {
                     $.toast(r.error, "forbidden");
                     return;
                 }
-
                 if (r.ret_code === 0) {
-
                     if (r.bizPackage.package !== 'prepay_id=') {
                         // 支付操作成功
                         r.bizPackage.success = wepayCallback;
@@ -210,7 +228,7 @@
                         // 支付操作出错
                         r.bizPackage.fail = wepayError;
                         // 发起微信支付
-
+                        order_no = r.out_trade_no
                         wx.chooseWXPay(r.bizPackage);
                         // 按钮恢复
                         $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
@@ -234,7 +252,7 @@
     function wepayCallback(res) {
 
         if (res.errMsg == "chooseWXPay:ok") {
-            location.href = "{:url('PaySuccess/index')}";
+            location.href = "{:url('mobile/goods/detail',array('id'=>$goods['goods_id']))}";
 
             $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
         } else {
@@ -247,7 +265,7 @@
      * 微信支付失败
      */
     function wepayError() {
-        alert('微信支付发起失败');
+        cancelOrder(2);
         // 按钮恢复
         $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
     }
@@ -256,8 +274,46 @@
      * 微信支付手动取消
      */
     function wepayCancel() {
+        cancelOrder(3);
         // 按钮恢复
         $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+    }
+
+    function cancelOrder(status) {
+        alert(order_no);
+        order_no = order_no;
+        $.post("{:url('lottery_payment/cancel_order')}", {
+                'home_id': home_id,
+                'gid': gid,
+                'order_no': order_no,
+                'status': status,
+            },
+            function (r) {
+                if (r.error) {
+                    $.toast(r.error, "forbidden");
+                    return;
+                }
+                if (r.ret_code === 0) {
+                    if (r.bizPackage.package !== 'prepay_id=') {
+                        // 支付操作成功
+                        r.bizPackage.success = wepayCallback;
+                        // 支付操作取消
+                        r.bizPackage.cancel = wepayCancel;
+                        // 支付操作出错
+                        r.bizPackage.fail = wepayError;
+                        // 发起微信支付
+
+                        wx.chooseWXPay(r.bizPackage);
+                        // 按钮恢复
+                        $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+                    } else {
+                        wepayError();
+                    }
+                } else if (r.ret_code === 11) {
+                    $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+                    alert('订单创建失败！' + r.ret_msg);
+                }
+            });
     }
 </script>
 {/block}

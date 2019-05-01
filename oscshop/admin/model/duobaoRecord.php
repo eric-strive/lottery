@@ -53,7 +53,11 @@ class duobaoRecord
             $query->where('goods_periods', $periods);
         }
         $date = $query->find();
+        return self::get_periods($date);
+    }
 
+    public static function get_periods($date)
+    {
         if (empty($date)) {
             return '0%';
         }

@@ -14,6 +14,7 @@
 
 namespace osc\mobile\controller;
 
+use osc\admin\model\PayOrder;
 use osc\common\controller\Base;
 use \think\Db;
 use wechat\Curl;
@@ -335,9 +336,26 @@ class LotteryPayment extends Base
     function weixin_pay()
     {
         if (request()->isPost()) {
-            $return['pay_total'] = 0.1;
-            $return['subject'] = '423wewe';
-            $return['pay_order_no'] = '343344'.rand(32423,3424242);
+            $uid = user('uid');
+            $return['pay_total'] = input('pay_total');
+            $return['subject'] = input('subject');
+            $return['attach'] = input('attach');
+            $return['pay_order_no'] = build_order_no();
+            $orderData = array(
+                'uid' => $uid,
+                'gid' => input('pay_total'),
+                'home_id' => input('home_id'),
+                'pay_order_no' => $return['pay_order_no'],
+                'pay_amount' => input('pay_total'),
+                'pay_type' => PayOrder::WEI_PAY,
+                'order_type' => $return['attach'],
+            );
+            //先生成订单
+            $a = PayOrder::addOrder($orderData);
+            if (!$a) {
+                return json(['ret_code' => 11, 'ret_msg' => '创建订单失败']);
+            }
+
             return $this->getBizPackage($return);
         }
     }
@@ -377,7 +395,9 @@ class LotteryPayment extends Base
 
             // 读取数据
             $postObj = simplexml_load_string($sourceStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-
+            Db::name('test')->insert(array(
+                'info' => json_encode($postObj),
+            ));
             if (!$postObj) {
                 echo "<xml><return_code><![CDATA[FAIL]]></return_code></xml>";
             } else {
@@ -410,7 +430,8 @@ class LotteryPayment extends Base
 
         $wx = wechat();
         // 订单总额
-        $totalFee = ($data['pay_total']) * 100;
+        $totalFee = ($data['pay_total']);
+//        $totalFee = ($data['pay_total']) * 100;
         // 随机字符串
         $nonceStr = $wx->generateNonceStr();
 
@@ -424,13 +445,14 @@ class LotteryPayment extends Base
             'body' => $data['subject'],
             'mch_id' => $config['weixin_partner'],
             'nonce_str' => $nonceStr,
-            'notify_url' => request()->domain() . url('payment/jsskd_notify'),
+            'notify_url' => request()->domain() . url('lottery_payment/jsskd_notify'),
             'spbill_create_ip' => get_client_ip(),
             'openid' => $wx->getOpenId(),
             // 外部订单号
             'out_trade_no' => $data['pay_order_no'],
             'timeStamp' => $timeStamp,
             'total_fee' => $totalFee,
+            'attach' => isset($data['attach']) ? $data['attach'] : 'other',
             'trade_type' => 'JSAPI'
         );
 
@@ -463,9 +485,13 @@ class LotteryPayment extends Base
             $p['signType'] = 'MD5';
             $p['paySign'] = $JsSign;
 
-            return json(['ret_code' => 0, 'bizPackage' => $p]);
+            return json(['ret_code' => 0, 'bizPackage' => $p, 'out_trade_no' => $data['pay_order_no']]);
 
         }
+    }
+
+    public function cancel_order()
+    {
 
     }
 }

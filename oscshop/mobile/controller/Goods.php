@@ -26,22 +26,22 @@ class Goods extends MobileBase
     {
 
         cookie('jump_url', request()->url(true));
-//$gid = (int)input('param.id');
-        $gid = 12;
+        $gid = (int)input('param.id');
         if (!$list = osc_goods()->get_goods_info($gid)) {
             $this->error('商品不存在！！');
         }
         $homeId = input('param.home_id');
         if ($homeId) {
             $this->assign('home_id', $homeId);
-            $this->assign('buy_info', HomeModel::home_info_by_gid($list['goods']['goods_id'], $homeId, 1));
-            $this->assign('percentage', duobaoRecord::get_duobao_num($homeId, $list['goods']['goods_id'], 1));
+            $buy_info = HomeModel::home_info_by_gid($list['goods']['goods_id'], $homeId, 1);
         } else {
-            $this->assign('buy_info',
-                HomeModel::home_info_by_gid($list['goods']['goods_id'], $list['goods']['periods']));
-            $this->assign('percentage',
-                duobaoRecord::get_duobao_num($list['goods']['periods'], $list['goods']['goods_id']));
+            $buy_info = HomeModel::home_info_by_gid($list['goods']['goods_id'], $list['goods']['periods']);
         }
+        if (empty($buy_info)) {
+            $this->error('该商品有误，请联系客服修正！');
+        }
+        $this->assign('buy_info', $buy_info);
+        $this->assign('percentage', duobaoRecord::get_periods($buy_info));
         $this->assign('SEO', [
             'title' => $list['goods']['name'] . '-' . config('SITE_TITLE'),
             'keywords' => $list['goods']['meta_keyword'],
@@ -111,7 +111,21 @@ class Goods extends MobileBase
 
         return $this->detail();
     }
-    function luck(){
+
+    function luck()
+    {
+        $gid = (int)input('param.id');
+        if (!$list = osc_goods()->get_goods_info($gid)) {
+            $this->error('商品不存在！！');
+        }
+        if (in_wechat()) {
+            $wechat = wechat();
+            //调用微信收货地址接口，需要开通微信支付
+            $this->assign('signPackage', $wechat->getJsSign(request()->url(true)));
+            session('jssdk_order', null);
+        }
+        $list['goods']['image'] = resize($list['goods']['image'], 80, 80);
+        $this->assign('goods', $list['goods']);
         return $this->fetch('luck');
     }
 }
