@@ -1,0 +1,110 @@
+{extend name="./oscshop/admin/view/public/base.html" /}
+{block name="content"}
+<table class="table table-striped table-bordered table-hover search-form">
+    <thead>
+    <!--<th><input name="order_num" type="text" placeholder="输入房间名" value="{:input('param.order_num')}"/></th>-->
+    <!--<th><input name="user_name" type="text" placeholder="输入会员名" value="{:input('param.user_name')}"/></th>-->
+    <!--<th>-->
+    <!--<a class="btn btn-primary" href="javascript:;" id="search" url="{:url('OrderBackend/index')}">查询</a>-->
+    <!--</th>-->
+    </thead>
+</table>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>操作</th>
+                    <th>期数</th>
+                    <th>房间号</th>
+                    <th>房间名</th>
+                    <th>中奖号码</th>
+                    <th>份额</th>
+                    <th>已购买份额</th>
+                    <th>总价</th>
+                    <th>商品名</th>
+                    <th>中奖用户</th>
+                    <th>中奖时间戳</th>
+                    <th>中奖随机数</th>
+                    <th>房间类型</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="list" id="v" empty="$empty"}
+                <tr>
+                    <td>{$v.id}</td>
+                    <td>
+                        <a class="btn btn-xs btn-info"
+                           href='{:url("HomeBackend/update_home",array("id"=>$v["id"]))}'>
+                            <i class="fa fa-eye bigger-120"></i>
+                        </a>
+                    </td>
+                    <td>{$v.goods_periods}</td>
+                    <td>{$v.home_num}</td>
+                    <td>{$v.home_name}</td>
+                    <td>{$v.lottery_num}</td>
+                    <td>{$v.lottery_drifts}</td>
+                    <td>{$v.goods_buy_num}</td>
+                    <td>￥{$v.goods_price}</td>
+                    <td style="width: 100px;">{$v.name}</td>
+                    <td>{$v.lottery_uid}【{$v.nickname}】</td>
+                    <td>{$v.lottery_timestamp}</td>
+                    <td>{$v.lottery_rand}</td>
+                    <td>
+                        {if condition="$v['type'] EQ '0'"}
+                        公共场
+                        {else/}
+                        私开房间
+                        {/if}
+                    </td>
+                    <td>
+                        {if condition="$v['status'] EQ '0'"}
+                        投注中
+                        {elseif condition="$v['status'] EQ '1'"}
+                        待领取奖品
+                        {else/}
+                        已领取奖品
+                        {/if}
+                    </td>
+                    <td>
+                        <a class="btn btn-xs btn-info"
+                           href='{:url("HomeBackend/update_home",array("id"=>$v["id"]))}'>
+                            <i class="fa fa-eye bigger-120"></i>
+                        </a>
+                    </td>
+                </tr>
+                {/volist}
+
+                <tr>
+                    <td colspan="20" class="page">{$list->render()}</td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="javascript"}
+<script>
+    $(function () {
+        $("#search").click(function () {
+            var url = $(this).attr('url');
+            var query = $('.search-form').find('input,select').serialize();
+            query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g, '');
+            query = query.replace(/^&/g, '');
+            if (url.indexOf('?') > 0) {
+                url += '&' + query;
+            } else {
+                url += '?' + query;
+            }
+            window.location.href = url;
+        });
+    });
+</script>
+{/block}

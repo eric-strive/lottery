@@ -25,17 +25,15 @@
                 <a style="color:#000;" href="{:url('goods/detail',array('id'=>$goods.goods_id))}">{$goods.name}</a>
             </p>
             <p class="count">
-                <span class="spec Elipsis">
-
-                {volist name="$options" id="option"}
-				<small>{$option.name}:{$option.value}</small><br/>
-				{/volist}
-
-            </span> 商品总价：&yen;
-                <span class="dprice prices" id="prices">{$goods.price}	</span>
+                {notempty name="buy_info['home_name']"}
+                房间名：{$buy_info['home_name']}<br>
+                {/notempty}
+                商品总价：&yen;
+                <span class="dprice prices" id="prices">{$goods.price}
+                </span>
             </p>
             <dl id="select_number" class="pd-dsc clearfix">
-                <span>购买份额：</span>
+                <span style="font-size: 14px;">购买份额：</span>
                 <dt class="productCount clearfix">
                     <a id="productCountMinus" class="btn productCountMinus"></a>
                     <span class="productCountNum">

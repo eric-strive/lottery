@@ -76,7 +76,7 @@ class Points extends MobileBase
 		$this->assign('signPackage',wechat()->getJsSign(request()->url(true)));	
 		
 		$this->assign('points_goods','points');			
-        return $this->fetch('goods:detail');
+        return $this->fetch('detail');
 	}
 	function points_list(){
 		$this->assign('user_info',Db::name('member')->where(array('uid'=>UID))->find());	

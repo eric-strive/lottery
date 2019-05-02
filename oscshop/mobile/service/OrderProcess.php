@@ -18,6 +18,7 @@ use osc\admin\model\duobaoRecord;
 use osc\admin\model\Goods;
 use osc\admin\model\Home;
 use osc\admin\model\LuckRecord;
+use osc\admin\model\Member;
 use osc\admin\model\PayOrder;
 use think\Db;
 use think\Exception;
@@ -55,16 +56,49 @@ class OrderProcess
                 LuckRecord::setStatus($orderNo);
                 break;
         }
+        self::addOtherInfo($orderInfo, $cashFee, $attach);
+        PayOrder::editStatus($orderNo, PayOrder::STATUS_SUCCESS_PAY);
+    }
+
+    /**
+     * @param $orderInfo
+     * @param $cashFee
+     * @param $orderNo
+     * @param $attach
+     * @throws Exception
+     */
+    public static function addOtherInfo($orderInfo, $cashFee, $attach)
+    {
+        $home_id = empty($orderInfo['home_id']) ? 0 : $orderInfo['home_id'];
+        $gid = empty($orderInfo['gid']) ? 0 : $orderInfo['gid'];
         PayOrder::savePayInfo(array(
             'uid' => $orderInfo['uid'],
-            'gid' => $orderInfo['gid'],
-            'home_id' => $orderInfo['home_id'],
+            'gid' => $gid,
+            'home_id' => $home_id,
             'amount' => $cashFee,
-            'order_no' => $orderNo,
+            'order_no' => $orderInfo['pay_order_no'],
             'pay_type' => 1,
             'pay_time' => date('Y-m-d H:i:s'),
         ));
-        PayOrder::editStatus($orderNo, PayOrder::STATUS_SUCCESS_PAY);
+        switch ($attach) {
+            case '1':
+                $description = sprintf('夺宝花费%s获得', $cashFee);
+                break;
+            case '2':
+                $description = sprintf('幸运购花费%s获得', $cashFee);
+                break;
+        }
+        Member::addPoints($orderInfo['uid'], $cashFee);
+        Member::addPointsRecord(array(
+            'uid' => $orderInfo['uid'],
+            'home_id' => $home_id,
+            'points' => $cashFee,
+            'order_no' => $orderInfo['pay_order_no'],
+            'prefix' => 1,
+            'type' => 1,
+            'creat_time' => time(),
+            'description' => $description,
+        ));
     }
 
     /**

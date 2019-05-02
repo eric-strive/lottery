@@ -24,6 +24,11 @@ class Home
     const ADD_NUM = 0;
     const REDUCE_NUM = 1;
 
+    const NOT_COMPLETE = 0;//未完成
+    const LOTTERY = 1;//已开奖
+    const COMPLETE = 2;//完成
+    const NOT_GET = 3;//未领取
+
     public function validate($data)
     {
 
@@ -132,10 +137,13 @@ class Home
     public static function getUserHome($uid, $gid)
     {
         $info = Db::name('home')
-            ->where('gid', $gid)
-            ->where('uid', $uid)
+            ->where(array(
+                'gid' => $gid,
+                'uid' => $uid,
+                'status' => self::NOT_COMPLETE,
+            ))
             ->find();
-        if (!empty($info) && $info['status'] == 0) {
+        if (!empty($info)) {
             return ['error' => '该商品您已经开过一个，请先投满！'];
         }
     }
@@ -245,6 +253,49 @@ class Home
                 'status' => 1,
             ));
         return $return;
+    }
+
+    /**
+     * @param $gid
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getHomeListByGid($gid)
+    {
+        return Db::name('home')
+            ->where(array(
+                'home_num' => array('<>', 0),
+                'gid' => $gid,
+                'status' => self::NOT_COMPLETE
+            ))->select();
+    }
+
+    public static function getHomeList()
+    {
+        return Db::view('Home', '*')
+            ->view('Goods', 'name', 'Home.gid=Goods.goods_id')
+            ->view('Member', 'nickname', 'Member.uid=Home.lottery_uid','left')
+            ->order('Home.status asc Home.id asc')
+            ->paginate(20, false);
+    }
+
+    /**
+     * @param $uid
+     * @param int $status
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getHomeListByUid($uid, $status = self::NOT_COMPLETE)
+    {
+        return Db::name('home')
+            ->where(array(
+                'uid' => $uid,
+                'status' => $status
+            ))->select();
     }
 }
 

@@ -26,7 +26,6 @@ class Goods extends MobileBase
     //商品详情
     function detail()
     {
-
         cookie('jump_url', request()->url(true));
         $gid = (int)input('param.id');
         if (!$list = osc_goods()->get_goods_info($gid)) {
@@ -39,6 +38,7 @@ class Goods extends MobileBase
         } else {
             $buy_info = HomeModel::home_info_by_gid($list['goods']['goods_id'], $list['goods']['periods']);
         }
+        $homeList = HomeModel::getHomeListByGid($gid);
         if (empty($buy_info)) {
             $this->error('该商品有误，请联系客服修正！');
         }
@@ -51,7 +51,7 @@ class Goods extends MobileBase
         ]);
 
         osc_goods()->update_goods_viewed((int)input('param.id'));
-
+        $this->assign('homeList', $homeList);
         $this->assign('top_title', $list['goods']['name']);
         $this->assign('goods', $list['goods']);
         $this->assign('image', $list['image']);
@@ -162,6 +162,8 @@ class Goods extends MobileBase
         $this->assign('isLottery', $isLottery);
         return $this->fetch('luck_success');
     }
+
+
 }
 
 ?>

@@ -200,27 +200,32 @@
     <div id="hide" class="weui_mask weui_mask_visible"></div>
 
     <div class="priForm">
+        {volist name="homeList" id="h"}
         <div class="border2">
             <div class="flex-between">
                 <div class="box1 ">
                     <div class="flex-row margin">
                         <p>房间号：</p>
-                        <p class="overhidden">123</p>
+                        <p class="overhidden">0000{$h.home_num}</p>
                     </div>
                     <div class="flex-row margin">
                         <p>房间名：</p>
-                        <p class="overhidden">moafd</p>
+                        <p class="overhidden">{$h.home_name}</p>
                     </div>
                 </div>
                 <div class="box2 flex-col-center">
-                    <input type="button" value="进入">
+                    <input type="button" class="join_home" value="进入">
                 </div>
             </div>
             <div class="flex-row">
                 <p>房间密码：</p>
-                <input type="password" value="" placeholder="请输入房间密码">
+                <input type="password" class="input_password" value="" placeholder="请输入房间密码">
+                <input type="hidden" class="real_password" value="{$h.password}" placeholder="">
+                <input type="hidden" class="home_id" value="{$h.id}" placeholder="">
             </div>
         </div>
+
+        {/volist}
     </div>
 
 </div>
@@ -248,8 +253,10 @@
 </div>
 {else/}
 <div id="appCartWrap" class="clearfix">
-    <a class="button" id="addcart-button" data-add="1" href="{:url('goods/luck',array('id'=>$goods['goods_id']))}">幸运购</a>
-    <a class="button" href="{:url('cart/good_buy',array('home_id'=>$buy_info['id']))}" id="buy-button" data-add="0">立即参与</a>
+    <a class="button" id="addcart-button" data-add="1"
+       href="{:url('goods/luck',array('id'=>$goods['goods_id']))}">幸运购</a>
+    <a class="button" href="{:url('cart/good_buy',array('home_id'=>$buy_info['id']))}" id="buy-button"
+       data-add="0">立即参与</a>
     <!--<a id="toCart" href="{:url('cart/index')}"></a>-->
 </div>
 {/if} {/block} {block name="script"}
@@ -307,82 +314,10 @@
             }
         });
         /**
-         *加入购物车
+         *房间列表
          */
-        $('#buy-button,#addcart-button,#jionBtn').on('click', function () {
-
-            var type = $(this).attr('data-add');
-            var privacy = $(this).attr('data-privacy');
-            console.log('privacy', privacy);
-
-            $.ajax({
-                url: "{:url('cart/add')}",
-                type: 'post',
-                data: $('#container input[type=\'hidden\'],#container input[type=\'radio\']:checked,#container input[type=\'checkbox\']:checked,#container select'),
-
-                dataType: 'json',
-                success: function (json) {
-                    $('.box-check').removeClass('text-error');
-                    $('.text-danger').remove();
-                    console.log('json', json);
-                    if (json.error) {
-
-                        if (json['goods_option_id']) {
-
-                            var id = json['goods_option_id'];
-
-                            var element = $('#option-' + id);
-
-                            if (element.parent().hasClass('box-check')) {
-                                element.parent().addClass('text-error').after('<div class="text-danger">' + json.error + '</div>');
-                            } else {
-                                element.after('<div class="text-danger">' + json.error + '</div>');
-                            }
-                            $.toast(json.error, "forbidden");
-                        } else {
-                            $.toast(json.error, "forbidden");
-                        }
-                        if (json.url) {
-                            setTimeout(function () {
-                                location.href = json.url;
-                            }, 1000);
-                        }
-                    }
-
-                    if (json.success && !privacy) {
-                    <?php
-                        if (!isset($points_goods)) {
-                    ?>
-                            // $.toast("已加入购物车");
-                            $('#toCart').find('i').text(json.total);
-
-                            if (type == 0) {
-                                setTimeout(function () {
-                                    location = "{:url('cart/index')}";
-                                }, 1000);
-                            }
-                        <?php
-                        } else {
-                        ?>
-                            $.showLoading();
-                            if (type == 0) {
-                                setTimeout(function () {
-                                    location = "{:url('cart/index',array('type'=>'points'))}";
-                                }, 1000);
-                            }
-                        <?php
-                        }
-                        ?>
-
-
-                    }
-
-                    if (json.success && privacy) {
-                        $('#priView').removeClass('none').fadeIn();
-                    }
-
-                }
-            });
+        $('#jionBtn').on('click', function () {
+            $('#priView').removeClass('none').fadeIn();
         });
 
         // 点击遮罩
@@ -412,7 +347,22 @@
                 }
             );
         });
-
+        //进入房间
+        $(".join_home").click(function () {
+            var parentObj = $(this).parent().parent().parent();
+            var input_password = parentObj.find('.input_password').val();
+            var real_password = parentObj.find('.real_password').val();
+            var home_id = parentObj.find('.home_id').val();
+            if (input_password == '') {
+                alert('密码不能为空');
+                return false;
+            }
+            if (input_password != real_password) {
+                alert('密码错误');
+                return false;
+            }
+            location.href = '/mobile/cart/good_buy/home_id/' + home_id + '&password=' + input_password;
+        })
 
     });
 </script>

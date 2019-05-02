@@ -1,0 +1,94 @@
+{extend name="./oscshop/admin/view/public/base.html" /}
+{block name="content"}
+<div class="page-header">
+    <h1>
+        {$breadcrumb2}
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            {$crumbs}
+        </small>
+    </h1>
+</div>
+<ul class="nav nav-tabs">
+
+    <li class="active"><a href="#tab-member" data-toggle="tab">编辑房间</a></li>
+
+    <!--<li><a href="#tab-shipping" data-toggle="tab">收货地址</a></li>-->
+
+</ul>
+
+<form class="form-horizontal" id="validation-form" method="post" action='{:url("HomeBackend/update_home")}'>
+    <div class="tab-content">
+        <input name="uid" type="hidden" value="{$Request.param.id}"/>
+        <div class="tab-pane active" id="tab-member">
+            <table class="table table-binfoed">
+                <tr>
+                    <td>ID</td>
+                    <td>{$data.id}</td>
+                </tr>
+                <tr>
+                    <td>期数</td>
+                    <td>{$data.goods_periods}</td>
+                </tr>
+                <tr>
+                    <td>房间号</td>
+                    <td>{$data.home_num}</td>
+                </tr>
+                <tr>
+                    <td>房间名</td>
+                    <td>{$data.home_name}</td>
+                </tr>
+                <tr>
+                    <td>中奖号码</td>
+                    <td>
+                        <input name="lottery_num" type="number" placeholder="中奖号码" value="{$data.lottery_num}"/>
+                        <input name="id" type="hidden" placeholder="中奖号码" value="{$data.id}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>状态</td>
+                    <td>
+                        <label class="radio-inline">
+                            <input type="radio" checked="checked" value="0" name="status">投注中</label>
+                        <label class="radio-inline">
+                            <input type="radio" value="1" name="status">未领取</label>
+                        <label class="radio-inline">
+                            <input type="radio" value="2" name="status">已领取</label>
+                    </td>
+                </tr>
+            </table>
+            <div class="form-group">
+
+                <div style="margin-left:20px;">
+                    <input name="send" type="submit" value="提交" class="btn btn-primary"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{/block}
+{block name="javascript"}
+
+<script>
+    $(function () {
+
+        {if condition = "$Request.param.id"}
+        Oscshop.setValue("status", {$data.status |default= 0});
+        {/if}
+
+            $('.btn').click(function () {
+
+                // if($('#pwd').val()==''){
+                // 	alert('密码必填');
+                // 	return false;
+                // }
+                // if($('#pwd').val().length<6){
+                // 	alert('密码长度必须大于等于6位！！');
+                // 	return false;
+                // }
+            });
+        }
+    );
+</script>
+{/block}

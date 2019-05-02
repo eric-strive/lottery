@@ -29,15 +29,6 @@ class Balance extends MobileBase
 		}		
 	}
 	
-	function index(){
-
-		$this->assign('SEO',['title'=>'积分兑换']);
-		
-		$this->assign('top_title','积分兑换');
-		$this->assign('flag','user');
-		return $this->fetch();
-	}
-	
 	public function ajax_goods_list(){
 
         $page=input('param.page');//页码

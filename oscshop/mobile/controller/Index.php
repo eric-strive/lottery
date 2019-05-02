@@ -93,10 +93,12 @@ class Index extends MobileBase
                 }
                 $data['uid'] = user('uid');
                 $return = Home::add_home($data);
-                if(isset($return['home_id'])){
+
+                if (isset($return['home_id'])) {
                     return $return;
                 }
-                return ['error' => !isset($return['error'])&&'新增出错'];
+                $error = isset($return['error']) ? $return['error'] : '新增出错';
+                return ['error' => $error];
             }
         }
     }

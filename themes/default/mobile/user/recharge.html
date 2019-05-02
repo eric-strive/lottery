@@ -1,6 +1,6 @@
 {extend name="public:base" /} {block name="head"}
-<link href="__PUBLIC__/view_res/mobile/css/uc.css" type="text/css" rel="Stylesheet" />
-<link href="__PUBLIC__/view_res/mobile/css/productlist.css" type="text/css" rel="Stylesheet" />
+<link href="__PUBLIC__/view_res/mobile/css/uc.css" type="text/css" rel="Stylesheet"/>
+<link href="__PUBLIC__/view_res/mobile/css/productlist.css" type="text/css" rel="Stylesheet"/>
 <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
 <script src="__PUBLIC__/artTemplate/template.js"></script>
 <script src="__PUBLIC__/view_res/mobile/load_list.js"></script>
@@ -20,22 +20,98 @@
     </div>
     <input type="hidden" id="num" value="100">
     <div class="mon selectBtn" att="0">
-        <input type="text" class="weui-input myinput" id="money" name="money" value="" placeholder="自定义金额" />
+        <input type="text" class="weui-input myinput" id="money" name="money" value="" placeholder="自定义金额"/>
     </div>
 </div>
 
-<butotn type="button" class="myBtn" id="chongzhi">确认充值</butotn>
+<butotn type="button" class="myBtn" id="wechat-payment-btn">确认充值</butotn>
 
 {/block} {block name="footer"} {include file="public/footer-nav" /} {/block} {block name="script"}
 <script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
 <script>
-    $(function() {
+    $(function () {
         console.log('log');
-        $('.mon').on('click', function() {
+        $('.mon').on('click', function () {
             console.log('this');
             $(this).siblings().removeClass('active');
             $(this).addClass('active');
         })
     })
+</script>
+<script type="text/javascript">
+    '{if condition="in_wechat()"}'
+    wx.config({
+        debug: false,
+        appId: '{$signPackage.appId}',
+        timestamp: '{$signPackage.timestamp}',
+        nonceStr: '{$signPackage.nonceStr}',
+        signature: '{$signPackage.signature}',
+        jsApiList: ['chooseWXPay']
+    });
+    '{/if}'
+    /**
+     * 发起微信支付
+     */
+    $('#wechat-payment-btn').click(wepayCall);
+
+    var order_no = '';
+
+    /**
+     * 发起微信支付
+     * @returns {undefined}
+     */
+    function wepayCall() {
+        //需要配送的，判断收货地址是否已经获取
+        var pay_mount = $('#pay_mount').val();
+
+        $('#wechat-payment-btn').addClass('disable').html('支付发起中...');
+
+        $.post("{:url('lottery_payment/weixin_pay')}", {
+                'pay_total': 1,
+                'subject': '用户充值',
+                'attach': '3',
+            },
+            function (r) {
+                if (r.error) {
+                    $.toast(r.error, "forbidden");
+                    return;
+                }
+                if (r.ret_code === 0) {
+                    if (r.bizPackage.package !== 'prepay_id=') {
+                        // 支付操作成功
+                        r.bizPackage.success = wepayCallback;
+                        // 发起微信支付
+                        order_no = r.out_trade_no;
+                        wx.chooseWXPay(r.bizPackage);
+                        // 按钮恢复
+                        $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+                    } else {
+                        wepayError();
+                    }
+                } else if (r.ret_code === 11) {
+                    $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+                    alert('订单创建失败！' + r.ret_msg);
+                }
+            });
+
+
+    }
+
+    /**
+     * 微信支付回调
+     * @param {type} res
+     * @returns {undefined}
+     */
+    function wepayCallback(res) {
+
+        if (res.errMsg == "chooseWXPay:ok") {
+            location.href = "{:url('mobile/user/index')}";
+
+            $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+        } else {
+            alert(res.errMsg);
+        }
+
+    }
 </script>
 {/block}

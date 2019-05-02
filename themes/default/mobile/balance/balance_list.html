@@ -12,8 +12,10 @@
 <div id="ulist">
     {volist name="list" id="p" empty="$empty"}
     <section class="ulist clearfix">
-        <div>{$p.description} <?php if(isset($p['order_id'])){ ?><a style="color:red;margin:0 6px;"
-                                                                    href='{:url("order/order_info",array("order_id"=>$p["order_id"]))}'>{$p.order_num_alias}</a><?php } ?>  <?php if($p['prefix']==1){echo '+';}else{echo '-';} ?><?php echo $p['points'].' '.date('Y-m-d',$p['creat_time']); ?>
+        <div>{$p.description} <?php if(isset($p['order_id'])){ ?>
+            <a style="color:red;margin:0 6px;" href='{:url("order/order_info",array("order_id"=>$p["order_id"]))}'>{$p.order_num_alias}</a>
+            <?php } ?>  <?php if($p['prefix']==1){echo '+';}else{echo '-';} ?>
+            <?php echo $p['amount'].' '.date('Y-m-d',$p['create_time']); ?>
         </div>
     </section>
     {/volist}
