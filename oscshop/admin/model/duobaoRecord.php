@@ -120,6 +120,20 @@ class duobaoRecord
             'home_id' => $homeId
         ))->find();
     }
+
+    public static function getNumbers($homeId)
+    {
+        $list = Db::name('duobao_record')
+            ->field('group_concat(dduonum) as dduonums,uid')
+            ->where('home_id', $homeId)
+            ->group('uid')
+            ->select();
+        foreach ($list as $key => $item) {
+            $list[$key]['nickname'] = Db::name('member')
+                ->where('uid', $item['uid'])->value('nickname');
+        }
+        return $list;
+    }
 }
 
 ?>

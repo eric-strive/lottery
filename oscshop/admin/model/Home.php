@@ -276,7 +276,7 @@ class Home
     {
         return Db::view('Home', '*')
             ->view('Goods', 'name', 'Home.gid=Goods.goods_id')
-            ->view('Member', 'nickname', 'Member.uid=Home.lottery_uid','left')
+            ->view('Member', 'nickname', 'Member.uid=Home.lottery_uid', 'left')
             ->order('Home.status asc Home.id asc')
             ->paginate(20, false);
     }
@@ -296,6 +296,46 @@ class Home
                 'uid' => $uid,
                 'status' => $status
             ))->select();
+    }
+
+    public static function HomeList($status = null, $limit = null)
+    {
+        $where['dr.uid'] = 2;
+        if ($status !== null) {
+            $where['h.status'] = $status;
+        }
+        return Db::name('home')
+            ->alias('h')
+            ->join('duobao_record dr', 'h.id=dr.home_id')
+            ->where($where)
+            ->group('dr.home_id')
+            ->limit($limit)
+            ->select();
+    }
+
+    /**
+     * @param $id
+     * @param $uid
+     * @return int|string
+     * @throws Exception
+     * @throws \think\exception\PDOException
+     */
+    public static function confirmGet($id, $uid)
+    {
+        $confirm = Db::name('home')
+            ->where(array(
+                'id' => $id,
+                'lottery_uid' => $uid,
+            ))
+            ->update(array(
+                'status' => self::COMPLETE,
+                'confirm_at' => date('Y-m-d H:i:s'),
+            ));
+        if ($confirm) {
+            //送金豆给用户
+            $homeInfo = self::getHomeInfo($id);
+            Member::giveBalanceLuck($homeInfo);
+        }
     }
 }
 

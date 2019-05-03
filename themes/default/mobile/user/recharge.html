@@ -24,7 +24,7 @@
     </div>
 </div>
 
-<butotn type="button" class="myBtn" id="wechat-payment-btn">确认充值</butotn>
+<butotn type="button" class="myBtn" style="font-weight:bold" id="wechat-payment-btn">确认充值</butotn>
 
 {/block} {block name="footer"} {include file="public/footer-nav" /} {/block} {block name="script"}
 <script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
@@ -38,6 +38,8 @@
         })
     })
 </script>
+<!-- 微信JSSDK -->
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript">
     '{if condition="in_wechat()"}'
     wx.config({
@@ -61,13 +63,12 @@
      * @returns {undefined}
      */
     function wepayCall() {
-        //需要配送的，判断收货地址是否已经获取
         var pay_mount = $('#pay_mount').val();
 
         $('#wechat-payment-btn').addClass('disable').html('支付发起中...');
 
         $.post("{:url('lottery_payment/weixin_pay')}", {
-                'pay_total': 1,
+                'pay_total': 100,
                 'subject': '用户充值',
                 'attach': '3',
             },

@@ -40,7 +40,7 @@
     <div class="swiper-pagination"></div>
 </div>
 
-<div id="container">
+<div id="container" style="font-weight:bold">
     <input type="hidden" value="{$goods.minimum}" name="quantity">
     <input id="goods_id" type="hidden" value="{$goods.goods_id}" name="goods_id">
 
@@ -190,8 +190,8 @@
     <div class="dec fs12">
         <p>商品总价值{$goods.price}金币</p>
         <p>单次价格{$goods.doubao_price}金币</p>
-        <div class="title">购买方式</div>
-        <div id="jionBtn" class="jionBtn" data-privacy="true">进入私房</div>
+        <div class="title" >购买方式</div>
+        <div id="jionBtn" class="jionBtn" style="font-weight:bold" data-privacy="true">进入私房</div>
     </div>
 
 </div>
@@ -252,7 +252,7 @@
     <a class="button" id="buy-button" style="width: 100%;" data-add="0">立即兑换</a>
 </div>
 {else/}
-<div id="appCartWrap" class="clearfix">
+<div id="appCartWrap" class="clearfix" style="font-weight:bold">
     <a class="button" id="addcart-button" data-add="1"
        href="{:url('goods/luck',array('id'=>$goods['goods_id']))}">幸运购</a>
     <a class="button" href="{:url('cart/good_buy',array('home_id'=>$buy_info['id']))}" id="buy-button"

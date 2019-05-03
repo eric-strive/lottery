@@ -76,11 +76,11 @@
 
 {if condition="!isset($points)"} {if condition="in_wechat()"}
 <div class="weui_btn_area">
-    <a class="weui_btn weui_btn_primary payment" id="wechat-payment-btn">微信安全支付</a>
+    <a style="font-weight:bold" class="weui_btn weui_btn_primary payment" id="wechat-payment-btn">微信支付</a>
 </div>
 {else/}
 <div class="weui_btn_area">
-    <a class="weui_btn weui_btn_primary payment" id="wechat-payment-btn">微信安全支付</a>
+    <a style="font-weight:bold" class="weui_btn weui_btn_primary payment" id="wechat-payment-btn">微信支付</a>
 </div>
 <!--<div class="weui_btn_area">-->
 <!--<a class="weui_btn weui_btn_primary payment" id="alipay-payment-btn">支付宝支付</a>-->
@@ -232,12 +232,12 @@
                         order_no = r.out_trade_no;
                         wx.chooseWXPay(r.bizPackage);
                         // 按钮恢复
-                        $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+                        $('#wechat-payment-btn').removeClass('disable').html('微信支付');
                     } else {
                         wepayError();
                     }
                 } else if (r.ret_code === 11) {
-                    $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+                    $('#wechat-payment-btn').removeClass('disable').html('微信支付');
                     alert('订单创建失败！' + r.ret_msg);
                 }
             });
@@ -255,7 +255,7 @@
         if (res.errMsg == "chooseWXPay:ok") {
             location.href = "{:url('mobile/goods/detail',array('id'=>$goods['goods_id']))}";
 
-            $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+            $('#wechat-payment-btn').removeClass('disable').html('微信支付');
         } else {
             alert(res.errMsg);
         }
@@ -268,7 +268,7 @@
     function wepayError() {
         cancelOrder(2);
         // 按钮恢复
-        $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+        $('#wechat-payment-btn').removeClass('disable').html('微信支付');
     }
 
     /**
@@ -277,7 +277,7 @@
     function wepayCancel() {
         cancelOrder(3);
         // 按钮恢复
-        $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+        $('#wechat-payment-btn').removeClass('disable').html('微信支付');
     }
 
     function cancelOrder(status) {

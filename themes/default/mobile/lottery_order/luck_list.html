@@ -1,0 +1,95 @@
+{/block}{extend name="public:base" /}
+{block name="head"}
+<link href="__PUBLIC__/view_res/mobile/css/wshop_company_center.css" type="text/css" rel="Stylesheet"/>
+
+{/block}
+{block name="header"}
+{include file="public/top-nav" /}
+{/block}
+
+{block name="content"}
+<div class="comspreadstat clearfix">
+    <span class="spread-item not_lottery" style="width:50%;">总记录<b>{$luck_list->count()|default='0'}</b></span>
+    <span class="spread-item lottery" style="width:50%;">中奖数<b>{$lotteryList->count()|default='0'}</b></span>
+</div>
+<header class="Thead">幸运购记录</header>
+<div id="ulist">
+    {volist name="luck_list" id="l" empty="暂无数据～"}
+    <section class="ulist clearfix">
+        <div class="ucoi-con">
+            <!-- 商品标题 -->
+            <span class="title" style='height:42px;'>{$l.name}</span>
+            <span class="price">
+                <span class="dprice">&yen;{$l.amount}</span> x
+                <span class="dcount">{$l.order_no}</span>
+            </span>
+        </div>
+        <div>
+            <span class="spec Elipsis">{$l.create_at}</span>
+            {if condition="$l.is_lottery EQ 0"}
+            <span>未中奖</span>
+            {else/}
+            <span>恭喜中奖</span>
+            {/if}
+        </div>
+    </section>
+    {/volist}
+    <div>
+        <span colspan="20" class="page">{$luck_list->render()}</span>
+    </div>
+</div>
+<div id="lottery" style='display: none;'>
+    {volist name="lotteryList" id="l" empty="暂无数据～"}
+    <section class="ulist clearfix">
+        <div class="ucoi-con">
+            <!-- 商品标题 -->
+            <span class="title" style='height:42px;'>{$l.name}</span>
+            <span class="spec Elipsis"></span>
+            <span class="price">
+                <span class="dprice">&yen;{$l.amount}</span>
+                <span class="dcount">{$l.order_no}</span>
+                <span class="dprice">{$l.create_at}</span>
+            </span>
+        </div>
+        <div class="uc-summary clearfix confirm_get" att="{$l.luck_record_id}"
+             style='padding:8px 7px;text-align:right;font-weight: bold'>
+            {if condition="$l.is_draw EQ 0"}
+            <a class="olbtn wepay" href='javascript:void(0)'>确认领取</a>
+            {else/}
+            <span>已领取</span>
+            {/if}
+        </div>
+    </section>
+    {/volist}
+    <div>
+        <span colspan="20" class="page">{$lotteryList->render()}</span>
+    </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+    $('.lottery').click(function () {
+        $("#lottery").show();
+        $("#ulist").hide();
+    })
+    $('.not_lottery').click(function () {
+        $("#ulist").show();
+        $("#lottery").hide();
+    })
+    $(".confirm_get").click(function () {
+        if (confirm('你确认已领取吗?')) {
+            var luck_record_id = $(this).attr('att');
+            $.post('{:url("lottery_order/confirm_get")}', {
+                luck_record_id: luck_record_id
+            }, function (d) {
+                if (d.error) {
+                    $.toast(d.error, "forbidden");
+                    return;
+                }
+                window.location.reload();
+            });
+        }
+    })
+</script>
+{/block}
+

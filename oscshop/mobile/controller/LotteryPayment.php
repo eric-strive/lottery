@@ -346,13 +346,13 @@ class LotteryPayment extends Base
             Db::startTrans();
             try {
                 $uid = user('uid');
-                $return['pay_total'] = input('pay_total');
-                $return['subject'] = input('subject');
-                $return['attach'] = input('attach');
-                $return['goodsNum'] = input('goodsNum');
+                $return['pay_total'] = input('pay_total', 0);
+                $return['subject'] = input('subject', 0);
+                $return['attach'] = input('attach', 0);
+                $return['goodsNum'] = input('goodsNum', 0);
                 $return['pay_order_no'] = build_order_no();
-                $homeId = input('home_id');
-                $gid = input('gid');
+                $homeId = input('home_id', 0);
+                $gid = input('gid', 0);
                 $orderData = array(
                     'uid' => $uid,
                     'gid' => $gid,
@@ -396,15 +396,18 @@ class LotteryPayment extends Base
     //微信jssdk回调
     public function jsskd_notify()
     {
+        $sourceStr = file_get_contents('php://input');
+        // 读取数据
+        $postObj = simplexml_load_string($sourceStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+        Db::name('test')->insert(array(
+            'info' => json_encode($postObj),
+        ));
         Db::startTrans();
         try {
             if (wechat()->checkPaySign()) {
-                $sourceStr = file_get_contents('php://input');
-                // 读取数据
-                $postObj = simplexml_load_string($sourceStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-                Db::name('test')->insert(array(
-                    'info' => json_encode($postObj),
-                ));
+//                $sourceStr = file_get_contents('php://input');
+//                // 读取数据
+//                $postObj = simplexml_load_string($sourceStr, 'SimpleXMLElement', LIBXML_NOCDATA);
                 if (!$postObj) {
                     throw new Exception('出错');
                 } else {
@@ -417,6 +420,9 @@ class LotteryPayment extends Base
             }
         } catch (Exception $e) {
             Db::rollback();
+            Db::name('test')->insert(array(
+                'info' => json_encode($e->getMessage()),
+            ));
             echo "<xml><return_code><![CDATA[FAIL]]></return_code></xml>";
         }
     }

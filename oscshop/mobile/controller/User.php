@@ -36,10 +36,10 @@ class User extends MobileBase
     function index()
     {
 
-//        $this->assign('not_complete', $this->order_count(Home::NOT_COMPLETE));
-//        $this->assign('lottery', $this->order_count(Home::LOTTERY));
-//        $this->assign('not_get', $this->order_count(Home::NOT_GET));
-//        $this->assign('complete', $this->order_count(Home::COMPLETE));
+        $this->assign('not_complete', $this->lottery_order_count(Home::NOT_COMPLETE));
+        $this->assign('lottery', $this->lottery_order_count(Home::LOTTERY));
+        $this->assign('not_get', $this->lottery_order_count(Home::NOT_GET));
+        $this->assign('complete', $this->lottery_order_count(Home::COMPLETE));
         $this->assign('userinfo', Db::name('member')->where('uid', UID)->find());
         $this->assign('SEO', ['title' => config('SITE_TITLE')]);
 
@@ -51,8 +51,9 @@ class User extends MobileBase
     function lottery_order_count($status)
     {
         if ($status == Home::NOT_GET) {
-            return count(Db::name('home')->where(array('order_status_id' => $status, 'uid' => UID))->select());
+            return count(Db::name('home')->where(array('status' => Home::LOTTERY, 'lottery_uid' => 2))->select());
         }
+        return count(Home::HomeList($status));
     }
 
     function wish_list()
@@ -141,11 +142,12 @@ class User extends MobileBase
      */
     public function recharge()
     {
+        echo '开发中…………………………………………';
+        exit;
         if (in_wechat()) {
             $wechat = wechat();
             //调用微信收货地址接口，需要开通微信支付
             $this->assign('signPackage', $wechat->getJsSign(request()->url(true)));
-            session('jssdk_order', null);
         }
         $this->assign('top_title', '金豆充值');
         $this->assign('SEO', ['title' => '金豆充值-' . config('SITE_TITLE')]);

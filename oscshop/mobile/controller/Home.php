@@ -9,6 +9,7 @@
 namespace osc\mobile\controller;
 
 use think\Db;
+use osc\admin\model\Home as HomeModel;
 
 class Home extends MobileBase
 {
@@ -64,5 +65,15 @@ class Home extends MobileBase
     {
         $homeList = Db::name('home')->where(['gid' => $gid])->order('status,create_at')->select();
         $this->assign('home_list', $homeList);
+    }
+
+    public function is_full()
+    {
+        $homeId = input('home_id');
+        $homeInfo = HomeModel::getHomeInfo($homeId);
+        if ($homeInfo['status'] == HomeModel::LOTTERY) {
+            return $homeInfo;
+        }
+        return false;
     }
 }

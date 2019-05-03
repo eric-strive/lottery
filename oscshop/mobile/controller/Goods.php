@@ -132,6 +132,7 @@ class Goods extends MobileBase
         }
         $list['goods']['image'] = resize($list['goods']['image'], 80, 80);
         $this->assign('goods', $list['goods']);
+        echo '开发中…………………………………………';exit;
         return $this->fetch('luck');
     }
 

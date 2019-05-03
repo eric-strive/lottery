@@ -102,4 +102,9 @@ class Index extends MobileBase
             }
         }
     }
+
+    function new_guidelines()
+    {
+        return $this->fetch('index/new_guidelines');
+    }
 }

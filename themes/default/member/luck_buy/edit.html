@@ -1,0 +1,60 @@
+{extend name="./oscshop/admin/view/public/base.html" /}
+{block name="content"}
+<ul class="nav nav-tabs">
+
+    <li class="active"><a href="#tab-member" data-toggle="tab">编辑房间</a></li>
+
+    <!--<li><a href="#tab-shipping" data-toggle="tab">收货地址</a></li>-->
+
+</ul>
+
+<form class="form-horizontal" id="validation-form" method="post" action='{:url("LuckBuy/edit")}'>
+    <div class="tab-content">
+        <input name="id" type="hidden" value="{$Request.param.id}"/>
+        <div class="tab-pane active" id="tab-member">
+            <table class="table table-binfoed">
+                <tr>
+                    <td>是否领取</td>
+                    <td>
+                        <label class="radio-inline">
+                            <input type="radio" checked="checked" value="0" name="is_draw">未领取</label>
+                        <label class="radio-inline">
+                            <input type="radio" value="1" name="is_draw">已领取</label>
+                    </td>
+                </tr>
+            </table>
+            <div class="form-group">
+
+                <div style="margin-left:20px;">
+                    <input name="send" type="submit" value="提交" class="btn btn-primary"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{/block}
+{block name="javascript"}
+
+<script>
+    $(function () {
+
+        {if condition = "$Request.param.id"}
+        Oscshop.setValue("status", {$data.is_draw |default= 0});
+        {/if}
+
+            $('.btn').click(function () {
+
+                // if($('#pwd').val()==''){
+                // 	alert('密码必填');
+                // 	return false;
+                // }
+                // if($('#pwd').val().length<6){
+                // 	alert('密码长度必须大于等于6位！！');
+                // 	return false;
+                // }
+            });
+        }
+    );
+</script>
+{/block}

@@ -14,6 +14,8 @@
 
 namespace osc\mobile\controller;
 
+use osc\admin\model\LuckRecord;
+use osc\admin\model\Home as HomeModel;
 use think\Db;
 
 class LotteryOrder extends MobileBase
@@ -34,49 +36,28 @@ class LotteryOrder extends MobileBase
 
     function index()
     {
-        $this->assign('status', (int)input('param.status'));
+        $status = input('status') !== null ? (int)input('param.status', '') : '';
+        $this->assign('status', $status);
         $this->assign('top_title', '我的订单');
         $this->assign('SEO', ['title' => '我的订单-' . config('SITE_TITLE')]);
-        if (in_wechat()) {
-            $this->assign('signPackage', wechat()->getJsSign(request()->url(true)));
-        }
-
         return $this->fetch();
     }
 
     function ajax_order_list()
     {
-
         $page = (int)input('param.page');//页码
-
-        $status = (int)input('param.status');
+        $status = input('status') !== null ? (int)input('param.status', '') : '';
         //开始数字,数据量
-        $limit = (5 * $page) . ",5";
-
-        if ($status == '') {
-            $where = array('Order.uid' => UID);
+        $limit = (8 * $page) . ",8";
+        if ($status === '') {
+            $orders = HomeModel::HomeList(null, $limit);
+        } elseif ($status === HomeModel::NOT_GET) {
+            $orders = Db::name('home')->where(array('status' => HomeModel::LOTTERY, 'lottery_uid' => 2))->select();
         } else {
-            $where = array('Order.uid' => UID, 'Order.order_status_id' => $status);
+            $orders = HomeModel::HomeList($status, $limit);
         }
-
-        $orders = Db::view('Order',
-            'order_id,order_num_alias,uid,total,comment,order_status_id,points_order,pay_points')
-            ->view('OrderGoods', 'goods_id,name,order_goods_id,quantity,price', 'OrderGoods.order_id=Order.order_id')
-            ->view('Goods', 'image', 'Goods.goods_id=OrderGoods.goods_id')
-            ->where($where)->order('Order.order_id desc')->limit($limit)->select();
-
-        $orders_list = null;
-
-        if (isset($orders) && is_array($orders)) {
-
-            foreach ($orders as $k => $v) {
-                $orders_list[$v['order_id']]['order'] = $v;
-                $orders_list[$v['order_id']]['list'][] = $v;
-            }
-
-        }
-
-        $this->assign('order', $orders_list);
+        $this->assign('order', $orders);
+        $this->assign('uid', 2);
         exit($this->fetch());
 
     }
@@ -100,4 +81,25 @@ class LotteryOrder extends MobileBase
         return 1;
     }
 
+    public function luck_list()
+    {
+        $lickList = LuckRecord::getRecord(UID);
+        $lotteryList = LuckRecord::getRecord(UID, LuckRecord::LOTTERY);
+        $this->assign('luck_list', $lickList);
+        $this->assign('lotteryList', $lotteryList);
+        $this->assign('SEO', ['title' => '幸运购记录-' . config('SITE_TITLE')]);
+        $this->assign('top_title', '幸运购记录');
+        return $this->fetch();
+    }
+
+    public static function confirm_get()
+    {
+        $luck_record_id = input('luck_record_id');
+        $home_id = input('home_id');
+        if ($home_id) {
+            HomeModel::confirmGet($home_id, 2);
+        } else {
+            LuckRecord::setDraw($luck_record_id, UID);
+        }
+    }
 }

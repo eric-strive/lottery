@@ -9,7 +9,7 @@
     <div class="close"></div>
 </div>
 
-<div class="uc-headwrap" style='background-image: url(__RES__/mobile/images/ucbag/bag4.jpg);'>
+<div class="uc-headwrap" style='font-weight: bold; background-image: url(__RES__/mobile/images/ucbag/bag4.jpg);'>
     <div class="uc-head">
         {if condition="in_wechat()"}
         <a class="headwrap"><img src="{$userinfo.userpic}/0"/></a>
@@ -34,48 +34,49 @@
     </div>
 </div>
 
-<!--<div class="uc-section" onclick="location.href = '{:url(\'lottery_order/index\')}';"><i class='dingdan'></i>-->
-    <!--<b>查看全部</b>我的订单-->
-<!--</div>-->
-
-<!--<div class='uc-order-sec clearfix'>-->
-    <!--<a class='uc-order-btn fahuo'-->
-       <!--href="{:url('lottery_order/index',array('status'=>config('default_order_status_id')))}"><i></i>待开奖-->
-        <!--<b class='prices'>{$not_complete|default='0'}</b></a>-->
-    <!--<a class='uc-order-btn fukuan' href="{:url('lottery_order/index',array('status'=>config('paid_order_status_id')))}"><i></i>已开奖-->
-        <!--<b class='prices'>{$lottery|default='0'}</b>-->
-    <!--</a>-->
-    <!--<a class='uc-order-btn fahuo'-->
-       <!--href="{:url('lottery_order/index',array('status'=>config('default_order_status_id')))}"><i></i>待领取-->
-        <!--<b class='prices'>{$not_get|default='0'}</b></a>-->
-    <!--</a>-->
-    <!--<a class='uc-order-btn fukuan' href="{:url('lottery_order/index',array('status'=>config('paid_order_status_id')))}"><i></i>已完成-->
-        <!--<b class='prices'>{$complete|default='0'}</b>-->
-    <!--</a>-->
-<!--</div>-->
-
-<div class="uc-section" onclick="location.href = '{:url(\'user/wish_list\')}';">
-<i></i><b>我喜欢，我收藏</b>我的收藏
+<div class="uc-section" onclick="location.href = '{:url(\'lottery_order/index\')}';"><i class='dingdan'></i>
+    <b>查看全部</b>我的订单
 </div>
 
-<div class="uc-section" onclick="location.href = '{:url(\'user/recharge\')}'">
-<i class='credit'></i><b>您有 {$userinfo.balance}金豆</b>金豆充值
+<div class='uc-order-sec clearfix'>
+    <a class='uc-order-btn fahuo'
+       href="{:url('lottery_order/index',array('status'=>0))}"><i></i>待开奖
+        <b class='prices'>{$not_complete|default='0'}</b></a>
+    <a class='uc-order-btn fukuan' href="{:url('lottery_order/index',array('status'=>1))}"><i></i>已开奖
+        <b class='prices'>{$lottery|default='0'}</b>
+    </a>
+    <a class='uc-order-btn fahuo'
+       href="{:url('lottery_order/index',array('status'=>3))}"><i></i>待领取
+        <b class='prices'>{$not_get|default='0'}</b></a>
+    </a>
+    <a class='uc-order-btn fukuan' href="{:url('lottery_order/index',array('status'=>2))}"><i></i>已完成
+        <b class='prices'>{$complete|default='0'}</b>
+    </a>
+</div>
+<div class="uc-section" onclick="location.href = '{:url(\'lottery_order/luck_list\')}';">
+    <i></i><b>查看记录</b>幸运购
+</div>
+<div class="uc-section" onclick="location.href = '{:url(\'user/wish_list\')}';">
+    <i></i><b>我喜欢，我收藏</b>我的收藏
+</div>
+
+<div class="uc-section" onclick="location.href = '{:url(\'/mobile/user/recharge/1\')}'">
+    <i class='credit'></i><b>您有 {$userinfo.balance}金豆</b>金豆充值
 </div>
 <div class="uc-section" onclick="location.href = '{:url(\'Points/points_list\')}'">
-<i class='credit'></i><b>您有 {$userinfo.points-$userinfo.cash_points} 积分可兑换</b>积分兑换
+    <i class='credit'></i><b>您有 {$userinfo.points-$userinfo.cash_points} 积分可兑换</b>积分兑换
 </div>
-
 {empty name="$userinfo['telephone']"}
 <div class="uc-section" onclick="location.href = '{:url(\'login/binding_phone\')}'">
-<i class='infoedit'></i><b>绑定可账号密码登录</b>绑定手机号
+    <i class='infoedit'></i><b>绑定可账号密码登录</b>绑定手机号
 </div>
 {/empty}
 {if condition="$userinfo['is_agent'] EQ 1"}
 <div class="uc-section" onclick="location.href = '{:url(\'Agent/sub_agent\')}'">
-<i class='hezuo'></i><b>总收益： &yen; {$userinfo.total_bonus|0} </b>我的代理
+    <i class='hezuo'></i><b>总收益： &yen; {$userinfo.total_bonus|0} </b>我的代理
 </div>
 <div class="uc-section" onclick="location.href = '{:url(\'Agent/my_agent_info\')}'">
-<i class='infoedit'></i><b>可查看/修改资料</b>我的资料
+    <i class='infoedit'></i><b>可查看/修改资料</b>我的资料
 </div>
 <div class="uc-section" id="companyQrcode">
     <i class='qrcode'></i><b>一起来推广吧</b>推广分享

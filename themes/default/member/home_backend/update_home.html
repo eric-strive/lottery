@@ -13,7 +13,7 @@
 
     <li class="active"><a href="#tab-member" data-toggle="tab">编辑房间</a></li>
 
-    <!--<li><a href="#tab-shipping" data-toggle="tab">收货地址</a></li>-->
+    <li><a href="#tab-shipping" data-toggle="tab">夺宝记录</a></li>
 
 </ul>
 
@@ -64,6 +64,20 @@
                 </div>
             </div>
         </div>
+        <div class="tab-pane" id="tab-shipping">
+            <table class="table table-binfoed">
+                <tr>
+                    <td>夺宝用户</td>
+                    <td>夺宝号码</td>
+                </tr>
+                {volist name="duobaoRecord" id="vo"}
+                <tr>
+                    <td>{$vo.nickname}</td>
+                    <td style="width: 80%;word-wrap:break-word;word-break:break-all;">{$vo.dduonums}</td>
+                </tr>
+                {/volist}
+            </table>
+        </div>
     </div>
 </form>
 
@@ -73,9 +87,15 @@
 <script>
     $(function () {
 
-        {if condition = "$Request.param.id"}
-        Oscshop.setValue("status", {$data.status |default= 0});
-        {/if}
+        {
+            if condition = "$Request.param.id"}
+        Oscshop.setValue("status", {$data.status |
+    default
+        = 0
+    })
+        ;
+        {
+            /if}
 
             $('.btn').click(function () {
 

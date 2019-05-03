@@ -14,6 +14,7 @@
 
 namespace osc\member\controller;
 
+use osc\admin\model\duobaoRecord;
 use osc\admin\model\Home;
 use osc\admin\model\Member;
 use osc\common\controller\AdminBase;
@@ -61,12 +62,11 @@ class HomeBackend extends AdminBase
             }
 
             if ($homeInfo['status'] == Home::LOTTERY && $status == Home::COMPLETE) {
-                Db::name('home')->where('id', $id)->setField('status', Home::COMPLETE);
-                //送金豆给用户
-                Member::giveBalanceLuck($homeInfo);
+                Home::confirmGet($id, $homeInfo['lottery_uid']);
             }
             $this->success('编辑成功', url('HomeBackend/index'));
         }
+        $this->assign('duobaoRecord', duobaoRecord::getNumbers(input('param.id')));
         $this->assign('data', Db::name('Home')->find(input('param.id')));
         $this->assign('crumbs', '编辑房间');
         return $this->fetch();

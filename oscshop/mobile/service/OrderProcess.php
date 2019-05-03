@@ -55,6 +55,19 @@ class OrderProcess
             case '2':
                 LuckRecord::setStatus($orderNo);
                 break;
+            case '3':
+                $rechargeAmount = $cashFee;
+                Member::addBalance($orderInfo['uid'], $rechargeAmount);
+                Member::addBalanceRecord(array(
+                    'uid' => $orderInfo['uid'],
+                    'amount' => $rechargeAmount,
+                    'description' => '用户充值',
+                    'prefix' => 1,
+                    'create_time' => time(),
+                    'type' => 3,
+                    'order_no' => $orderNo,
+                ));
+                break;
         }
         self::addOtherInfo($orderInfo, $cashFee, $attach);
         PayOrder::editStatus($orderNo, PayOrder::STATUS_SUCCESS_PAY);
@@ -86,6 +99,9 @@ class OrderProcess
                 break;
             case '2':
                 $description = sprintf('幸运购花费%s获得', $cashFee);
+                break;
+            case '3':
+                return true;
                 break;
         }
         Member::addPoints($orderInfo['uid'], $cashFee);

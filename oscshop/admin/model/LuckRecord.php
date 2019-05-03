@@ -31,6 +31,9 @@ class LuckRecord
     const STATUS_FAIL_PAY = 2;
     const STATUS_CANCEL_PAY = 3;
 
+    const NOT_LOTTERY = 0;
+    const  LOTTERY = 1;
+
     /**
      * 新增幸运购记录
      * @param $orderInfo
@@ -90,6 +93,27 @@ class LuckRecord
     }
 
     /**
+     * @param $id
+     * @param $uid
+     * @param int $status
+     * @return int|string
+     * @throws Exception
+     * @throws \think\exception\PDOException
+     */
+    public static function setDraw($id, $uid, $status = self::LOTTERY)
+    {
+        return Db::name('luck_record')
+            ->where(array(
+                'luck_record_id' => $id,
+                'uid' => $uid,
+            ))
+            ->update(array(
+                'is_draw' => $status,
+                'update_at' => date('Y-m-d H:i:s'),
+            ));
+    }
+
+    /**
      * @param $order_no
      * @return array|false|\PDOStatement|string|\think\Model
      * @throws \think\db\exception\DataNotFoundException
@@ -131,6 +155,23 @@ class LuckRecord
                 throw new Exception('状态出错');
             }
         });
+    }
+
+    public static function getRecord($uid = null, $isLottery = null, $count = 20)
+    {
+        $query = Db::view('LuckRecord', '*')
+            ->view('Goods', 'name', 'LuckRecord.gid=Goods.goods_id')
+            ->where('LuckRecord.status', self::STATUS_SUCCESS_PAY);
+        if ($uid) {
+            $query->where('LuckRecord.uid', $uid);
+        } else {
+            $query->view('Member', 'nickname', 'Member.uid=LuckRecord.uid', 'left');
+        }
+        if ($isLottery !== null) {
+            $query->where('LuckRecord.is_lottery', $isLottery);
+        }
+        return $query->order('LuckRecord.status asc LuckRecord.id asc')
+            ->paginate($count, false);
     }
 }
 
