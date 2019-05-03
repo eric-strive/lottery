@@ -108,6 +108,11 @@ class Member
             ));
         }
     }
+
+    public static function getMemberInfo($uid, $lock = false)
+    {
+        return Db::name('member')->lock($lock)->find($uid);
+    }
 }
 
 ?>

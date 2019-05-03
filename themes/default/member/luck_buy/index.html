@@ -17,6 +17,7 @@
                 <thead>
                 <tr>
                     <th>ID</th>
+                    <th>操作</th>
                     <th>用户</th>
                     <th>商品</th>
                     <th>幸运购金额</th>
@@ -30,6 +31,12 @@
                 {volist name="list" id="v" empty="$empty"}
                 <tr>
                     <td>{$v.luck_record_id}</td>
+                    <td>
+                        <a class="btn btn-xs btn-info"
+                           href='{:url("LuckBuy/edit",array("id"=>$v["luck_record_id"]))}'>
+                            <i class="fa fa-eye bigger-120"></i>
+                        </a>
+                    </td>
                     <td>{$v.nickname}</td>
                     <td>{$v.name}</td>
                     <td>{$v.amount}</td>

@@ -50,35 +50,16 @@ class LotteryOrder extends MobileBase
         //开始数字,数据量
         $limit = (8 * $page) . ",8";
         if ($status === '') {
-            $orders = HomeModel::HomeList(null, $limit);
+            $orders = HomeModel::HomeList(null,UID, $limit);
         } elseif ($status === HomeModel::NOT_GET) {
             $orders = Db::name('home')->where(array('status' => HomeModel::LOTTERY, 'lottery_uid' => 2))->select();
         } else {
-            $orders = HomeModel::HomeList($status, $limit);
+            $orders = HomeModel::HomeList($status, UID,$limit);
         }
         $this->assign('order', $orders);
         $this->assign('uid', 2);
         exit($this->fetch());
 
-    }
-
-    function order_info()
-    {
-        if (!$order = osc_order()->order_info(input('param.order_id'), UID)) {
-            $this->error('非法操作！！');
-        }
-
-        $this->assign('order', $order);
-        $this->assign('SEO', ['title' => '订单详情-' . config('SITE_TITLE')]);
-        $this->assign('top_title', '订单详情');
-        return $this->fetch();
-    }
-
-    function cancel_order()
-    {
-        osc_order()->cancel_order((int)input('param.order_id'), UID);
-        storage_user_action(UID, user('nickname'), config('FRONTEND_USER'), '取消了订单');
-        return 1;
     }
 
     public function luck_list()

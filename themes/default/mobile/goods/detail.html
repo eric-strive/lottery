@@ -60,10 +60,10 @@
         {else/} {if condition="isset($home_id)"}
         <dl class="pd-dsc clearfix">
             <dt>房间号：</dt>
-            <dt class="periods" data-periods="{$buy_info.home_num}" id="pd-market-home_num"> {$buy_info.home_num}</dt>
+            <dt class="periods" data-periods="{$homeInfo.home_num}" id="pd-market-home_num"> {$homeInfo.home_num}</dt>
             <dt>&nbsp;&nbsp;|&nbsp;&nbsp;</dt>
             <dt>房间名：</dt>
-            <dt class="periods" data-periods="{$buy_info.home_name}" id="pd-market-home_name"> {$buy_info.home_name}
+            <dt class="periods" data-periods="{$homeInfo.home_name}" id="pd-market-home_name"> {$homeInfo.home_name}
             </dt>
         </dl>
         {else/}
@@ -183,14 +183,14 @@
         </div>
     </div>
     <div class="flex-between fs12">
-        <p>满<span>{$buy_info.lottery_drifts}</span>份次开奖</p>
-        <p>剩余<span>{$buy_info.lottery_drifts-$buy_info.goods_buy_num}</span></p>
+        <p>满<span>{$homeInfo.lottery_drifts}</span>份次开奖</p>
+        <p>剩余<span>{$homeInfo.lottery_drifts-$homeInfo.goods_buy_num}</span></p>
     </div>
 
     <div class="dec fs12">
         <p>商品总价值{$goods.price}金币</p>
         <p>单次价格{$goods.doubao_price}金币</p>
-        <div class="title" >购买方式</div>
+        <div class="title">购买方式</div>
         <div id="jionBtn" class="jionBtn" style="font-weight:bold" data-privacy="true">进入私房</div>
     </div>
 
@@ -255,7 +255,7 @@
 <div id="appCartWrap" class="clearfix" style="font-weight:bold">
     <a class="button" id="addcart-button" data-add="1"
        href="{:url('goods/luck',array('id'=>$goods['goods_id']))}">幸运购</a>
-    <a class="button" href="{:url('cart/good_buy',array('home_id'=>$buy_info['id']))}" id="buy-button"
+    <a class="button" href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id']))}" id="buy-button"
        data-add="0">立即参与</a>
     <!--<a id="toCart" href="{:url('cart/index')}"></a>-->
 </div>
@@ -364,72 +364,32 @@
             location.href = '/mobile/cart/good_buy/home_id/' + home_id + '&password=' + input_password;
         })
 
-    });
-</script>
-{if condition="in_wechat()"}
-<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-<script type="text/javascript">
-    wx.config({
-            debug: false,
-            appId: '{$signPackage.appId}',
-            timestamp: {
-                $signPackage.timestamp
-        },
-        nonceStr
-    :
-    '{$signPackage.nonceStr}',
-        signature
-    :
-    '{$signPackage.signature}',
-        jsApiList
-    :
-    [
-        'checkJsApi',
-        'onMenuShareTimeline',
-        'onMenuShareAppMessage'
-    ]
-    })
-    ;
+        var home_id = '{:input("home_id")}';
+        var lottery_num = '{$lottery_num}';
+        var lottery_status = '{$homeInfo["status"]}';
+        var setTime = 3000;
 
-    wx.ready(function () {
+        //定时检查是否开奖
+        function checkLottery() {
+            $.post("{:url('home/is_full')}", {
+                    'home_id': home_id,
+                },
+                function (r) {
+                    if (r.status > 0) {
+                        //这里需要放烟花
+                        alert('开奖啦！中奖号码是' + r.lottery_num+'中奖用户');
+                    } else {
+                        setTimeout(checkLottery, setTime);
+                    }
+                });
+        }
 
-        var is_agent = '<?php echo user("is_agent"); ?>';
-        var site_url = '<?php echo request()->domain(); ?>';
-        if (is_agent == 1) {
-            var url = site_url + '/mobile/goods/agent_share/osc_aid/' + '<?php echo hashids()->encode(user("uid")); ?>' + '/id/' + '<?php echo input("param.id") ?>';
+        if (lottery_status > 0) {
+            //这里不需要放烟花
+            alert('已开奖，中奖号码是' + lottery_num);
         } else {
-            var url = '<?php echo request()->url(true); ?>';
+            setTimeout(checkLottery, setTime);
         }
-
-        //获取“分享到朋友圈”按钮点击状态及自定义分享内容接口
-        wx.onMenuShareTimeline({
-            title: '{$goods.name}',
-            link: url,
-            imgUrl: site_url + '{$goods.image|resize=100,100}',
-            success: function () {
-                pvShareCallback(url, '分享到朋友圈');
-            }
-        });
-        //获取“分享给朋友”按钮点击状态及自定义分享内容接口
-        wx.onMenuShareAppMessage({
-            title: '{$goods.name}',
-            desc: '{$goods.name}',
-            link: url,
-            imgUrl: site_url + 'IMG_ROOT{$goods.image|resize=100,100}',
-            success: function () {
-                pvShareCallback(url, '分享给朋友');
-            }
-        });
-
-        function pvShareCallback(url, type) {
-
-            $.post("{:url('Index/add_share')}", {
-                url: url,
-                uid: '<?php echo user("uid"); ?>',
-                type: type
-            });
-        }
-
     });
 </script>
-{/if} {/block}
+{/block}

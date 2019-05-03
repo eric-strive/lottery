@@ -34,16 +34,21 @@ class Goods extends MobileBase
         $homeId = input('param.home_id');
         if ($homeId) {
             $this->assign('home_id', $homeId);
-            $buy_info = HomeModel::home_info_by_gid($list['goods']['goods_id'], $homeId, 1);
+            $homeInfo = HomeModel::home_info_by_gid($list['goods']['goods_id'], $homeId, 1);
         } else {
-            $buy_info = HomeModel::home_info_by_gid($list['goods']['goods_id'], $list['goods']['periods']);
+            $homeInfo = HomeModel::home_info_by_gid($list['goods']['goods_id'], $list['goods']['periods']);
         }
         $homeList = HomeModel::getHomeListByGid($gid);
-        if (empty($buy_info)) {
+        if (empty($homeInfo)) {
             $this->error('该商品有误，请联系客服修正！');
         }
-        $this->assign('buy_info', $buy_info);
-        $this->assign('percentage', duobaoRecord::get_periods($buy_info));
+        if($homeInfo['status']!=0){
+            $this->assign('lottery_num', $homeInfo['lottery_num']);
+        }else{
+            $this->assign('lottery_num', '');
+        }
+        $this->assign('homeInfo', $homeInfo);
+        $this->assign('percentage', duobaoRecord::get_periods($homeInfo));
         $this->assign('SEO', [
             'title' => $list['goods']['name'] . '-' . config('SITE_TITLE'),
             'keywords' => $list['goods']['meta_keyword'],

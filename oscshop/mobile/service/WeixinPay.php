@@ -2,6 +2,8 @@
 
 namespace osc\mobile\service;
 
+use osc\admin\model\Member;
+use osc\admin\model\PayOrder;
 use think\Db;
 use think\Exception;
 use wechat\Curl;
@@ -10,7 +12,7 @@ use wechat\Curl;
 class WeixinPay
 {
 //微信支付 package
-    public static function  getBizPackage($data)
+    public static function getBizPackage($data)
     {
 
         $wx = wechat();
@@ -70,6 +72,38 @@ class WeixinPay
 
             return json(['ret_code' => 0, 'bizPackage' => $p, 'out_trade_no' => $data['pay_order_no']]);
         }
+    }
+
+    /**
+     * 余额支付
+     * @param $data
+     * @throws Exception
+     */
+    public static function balancePay($data, $homeId, $uid)
+    {
+        $memberInfo = Member::getMemberInfo($uid, true);
+        $pay_total = $data['pay_total'];
+        $orderNo = $data['pay_order_no'];
+        if ($pay_total > $memberInfo['balance']) {
+            throw new Exception('余额不足!请充值。');
+        }
+        $s = Member::addBalance($uid, $pay_total, Member::REDUCE);
+        if ($s === false) {
+            throw new Exception('订单出错');
+        }
+        Member::addBalanceRecord(array(
+            'uid' => $uid,
+            'amount' => $pay_total,
+            'description' => '夺宝消费',
+            'prefix' => Member::REDUCE,
+            'create_time' => time(),
+            'home_id' => $homeId,
+            'type' => 1,
+            'order_no' => $orderNo,
+        ));
+        $orderInfo = PayOrder::orderInfo($orderNo);
+        OrderProcess::addNumber($orderInfo, $homeId);
+        PayOrder::editStatus($orderNo, PayOrder::STATUS_SUCCESS_PAY);
     }
 }
 

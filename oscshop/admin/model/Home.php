@@ -199,7 +199,7 @@ class Home
     public static function changePortion($homeId, $goodsNum, $changeType = self::ADD_NUM)
     {
         $homeInfo = Db::name('home')->where('id=' . $homeId)->lock(true)->find();
-        if ($changeType == 0) {
+        if ($changeType == self::ADD_NUM) {
             $remain = $homeInfo['lottery_drifts'] - $homeInfo['goods_buy_num'];
             if (intval($remain) < intval($goodsNum)) {
                 throw new Exception('商品剩余份额不足！');
@@ -298,9 +298,9 @@ class Home
             ))->select();
     }
 
-    public static function HomeList($status = null, $limit = null)
+    public static function HomeList($status = null,$uid, $limit = null)
     {
-        $where['dr.uid'] = 2;
+        $where['dr.uid'] = $uid;
         if ($status !== null) {
             $where['h.status'] = $status;
         }

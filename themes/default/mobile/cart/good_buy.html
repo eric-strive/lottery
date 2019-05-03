@@ -25,8 +25,8 @@
                 <a style="color:#000;" href="{:url('goods/detail',array('id'=>$goods.goods_id))}">{$goods.name}</a>
             </p>
             <p class="count">
-                {notempty name="buy_info['home_name']"}
-                房间名：{$buy_info['home_name']}<br>
+                {notempty name="homeInfo['home_name']"}
+                房间名：{$homeInfo['home_name']}<br>
                 {/notempty}
                 商品总价：&yen;
                 <span class="dprice prices" id="prices">{$goods.price}
@@ -52,14 +52,11 @@
             </div>
         </div>
         <div class="flex-between fs12">
-            <p>满<span id="share">{$buy_info.lottery_drifts}</span>份次开奖</p>
-            <p>剩余<span id="remain">{$buy_info.lottery_drifts-$buy_info.goods_buy_num}</span></p>
+            <p>满<span id="share">{$homeInfo.lottery_drifts}</span>份次开奖</p>
+            <p>剩余<span id="remain">{$homeInfo.lottery_drifts-$homeInfo.goods_buy_num}</span></p>
         </div>
     </section>
 </div>
-
-
-{if condition="!empty($goods)"}
 <!-- 订单总额 -->
 <div id="orderSummay">
     <div>
@@ -74,22 +71,18 @@
 
 </div>
 
-{if condition="!isset($points)"} {if condition="in_wechat()"}
+{if condition="in_wechat()"}
 <div class="weui_btn_area">
     <a style="font-weight:bold" class="weui_btn weui_btn_primary payment" id="wechat-payment-btn">微信支付</a>
 </div>
 {else/}
-<div class="weui_btn_area">
-    <a style="font-weight:bold" class="weui_btn weui_btn_primary payment" id="wechat-payment-btn">微信支付</a>
-</div>
 <!--<div class="weui_btn_area">-->
 <!--<a class="weui_btn weui_btn_primary payment" id="alipay-payment-btn">支付宝支付</a>-->
 <!--</div>-->
-{/if} {else/}
+{/if}
 <div class="weui_btn_area">
-    <a class="weui_btn weui_btn_primary payment" id="points-payment-btn">立即兑换</a>
+    <a style="font-weight:bold" class="weui_btn weui_btn_primary payment" id="balance-payment-btn">金豆支付</a>
 </div>
-{/if} {/if}
 <script>
     $(function () {
         //支付宝支付
@@ -191,7 +184,7 @@
      */
     $('#wechat-payment-btn').click(wepayCall);
     var home_id = '{:input("home_id")}';
-    var gid = '{$buy_info["gid"]}';
+    var gid = '{$homeInfo["gid"]}';
     var order_no = '';
 
     /**
@@ -253,8 +246,9 @@
     function wepayCallback(res) {
 
         if (res.errMsg == "chooseWXPay:ok") {
-            location.href = "{:url('mobile/goods/detail',array('id'=>$goods['goods_id']))}";
-
+            setTimeout(function () {
+                location.href = "{:url('mobile/goods/detail',array('id'=>$goods['goods_id']))}";
+            }, 1000);
             $('#wechat-payment-btn').removeClass('disable').html('微信支付');
         } else {
             alert(res.errMsg);
@@ -295,6 +289,84 @@
                     return;
                 }
             });
+    }
+</script>
+<!--金豆支付-->
+<script type="text/javascript">
+    $('#balance-payment-btn').click(wepayCall);
+    var home_id = '{:input("home_id")}';
+    var gid = '{$homeInfo["gid"]}';
+    var lottery_num = '{$lottery_num}';
+    var lottery_status = '{$homeInfo["status"]}';
+
+    /**
+     * 发起金豆支付
+     * @returns {undefined}
+     */
+    function wepayCall() {
+        //需要配送的，判断收货地址是否已经获取
+        var pay_mount = $('#pay_mount').val();
+        var subject = $('#subject').val();
+        var goodsNum = $('#quantity').val();
+        ;
+
+        $('#balance-payment-btn').addClass('disable').html('支付发起中...');
+
+        $.post("{:url('lottery_payment/balance_pay')}", {
+                'pay_total': pay_mount,
+                'subject': subject,
+                'attach': '1',
+                'goodsNum': goodsNum,
+                'home_id': home_id,
+                'gid': gid,
+            },
+            function (r) {
+                if (r.error) {
+                    $.toast(r.error, "forbidden");
+                    $('#balance-payment-btn').removeClass('disable').html('金豆支付');
+                    return;
+                }
+                if (r.ret_code === 0) {
+                } else if (r.ret_code === 11) {
+                    $('#balance-payment-btn').removeClass('disable').html('金豆支付');
+                    alert(r.ret_msg);
+                } else {
+                    $.toast('支付成功');
+                    setTimeout(function () {
+                        location.href = "{:url('mobile/goods/detail',array('id'=>$goods['goods_id']))}";
+                    }, 3000);
+                }
+            });
+    }
+
+    //定时检查是否开奖
+    var setTime = 3000;
+
+    function checkLottery() {
+        $.post("{:url('home/is_full')}", {
+                'home_id': home_id,
+            },
+            function (r) {
+                if (r.status > 0) {
+                    if (r.is_self > 0) {
+                        alert('是自己')
+                    } else {
+                        alert('不是自己')
+                    }
+                    //这里需要放烟花
+                    alert('开奖啦！中奖号码是' + r.lottery_num);
+                    return true;
+                } else {
+                    setTimeout(checkLottery, setTime);
+                }
+            });
+    }
+
+    if (lottery_status > 0) {
+        //这里不需要放烟花
+        alert('已开奖，中奖号码是' + lottery_num);
+    } else {
+        setTimeout(checkLottery, setTime);
     }
 </script>
 {/block}

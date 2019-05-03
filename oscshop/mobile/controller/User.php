@@ -53,7 +53,7 @@ class User extends MobileBase
         if ($status == Home::NOT_GET) {
             return count(Db::name('home')->where(array('status' => Home::LOTTERY, 'lottery_uid' => 2))->select());
         }
-        return count(Home::HomeList($status));
+        return count(Home::HomeList($status,UID));
     }
 
     function wish_list()

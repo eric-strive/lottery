@@ -120,18 +120,23 @@ class Cart extends MobileBase
         }
         $homeId = input('home_id');
         $password = input('password');
-        $buy_info = HomeModel::home_info_by_gid('', $homeId, 1);
-        $gid = $buy_info['gid'];
-        if (!empty($buy_info['password']) && $buy_info['uid'] != $uid && $buy_info['password'] != $password) {
+        $homeInfo = HomeModel::home_info_by_gid('', $homeId, 1);
+        $gid = $homeInfo['gid'];
+        if (!empty($homeInfo['password']) && $homeInfo['uid'] != $uid && $homeInfo['password'] != $password) {
             $this->error('该房间访问需要密码！', url('mobile/goods/detail', array('id' => $gid)));
         }
         if (!$list = osc_goods()->get_goods_info($gid)) {
             $this->error('商品不存在！！');
         }
         $list['goods']['image'] = resize($list['goods']['image'], 80, 80);
+        if($homeInfo['status']!=0){
+            $this->assign('lottery_num', $homeInfo['lottery_num']);
+        }else{
+            $this->assign('lottery_num', '');
+        }
         $this->assign('home_id', $homeId);
-        $this->assign('buy_info', $buy_info);
-        $this->assign('percentage', duobaoRecord::get_periods($buy_info));
+        $this->assign('homeInfo', $homeInfo);
+        $this->assign('percentage', duobaoRecord::get_periods($homeInfo));
         $this->assign('top_title', $list['goods']['name']);
         $this->assign('goods', $list['goods']);
         $this->assign('image', $list['image']);

@@ -175,12 +175,13 @@ class OrderProcess
         //获取中奖号码
         $lottery_timestamp = time();
         $lottery_drifts = $homeInfo['lottery_drifts'];
-        if (empty($homeInfo['lottery_num'])) {
-            list($lottery_num, $rand_num) = arithmetic($lottery_timestamp, $lottery_drifts);
-        } else {
+        if ($homeInfo['lottery_num'] > 0) {
             $lottery_num = $homeInfo['lottery_num'];
             $rand_num = re_arithmetic($lottery_timestamp, $lottery_num, $lottery_drifts);
+        } else {
+            list($lottery_num, $rand_num) = arithmetic($lottery_timestamp, $lottery_drifts);
         }
+
         //根据中奖号码获取中奖用户
         $dInfo = duobaoRecord::getLotteryInfo($lottery_num, $homeInfo['id']);
         //修改房间状态

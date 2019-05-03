@@ -67,13 +67,21 @@ class Home extends MobileBase
         $this->assign('home_list', $homeList);
     }
 
+    /**
+     * 判断是否满房
+     * @return array|false|\PDOStatement|string|\think\Model
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function is_full()
     {
         $homeId = input('home_id');
         $homeInfo = HomeModel::getHomeInfo($homeId);
-        if ($homeInfo['status'] == HomeModel::LOTTERY) {
+        if ($homeInfo['status'] > HomeModel::ADD_NUM) {
+            $homeInfo['is_self'] = $homeInfo['lottery_uid'] == UID ? 1 : 0;
             return $homeInfo;
         }
-        return false;
+        return array('status' => 0);
     }
 }
