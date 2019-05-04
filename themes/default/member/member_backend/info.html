@@ -61,6 +61,11 @@
                         <input name="reduce_points" type="number" placeholder="减少积分" value=""/>
                     </td>
                 </tr>
+                <tr>
+                    <td>系统昵称</td>
+                    <td><input name="system_nickname" type="text" style="width: 70%;"
+                               value="{$data.info.system_nickname|default=''}"/></td>
+                </tr>
                 <!--<tr>-->
                 <!--<td>密码</td>-->
                 <!--<td><input id="pwd" name="password" type="text" style="width:400px;" value="<?php echo think_ucenter_decrypt($data['info']['password'],config('PWD_KEY')); ?>" /></td>-->
@@ -75,7 +80,6 @@
                     <td>联系电话</td>
                     <td><input name="telephone" type="text" style="width: 70%;"
                                value="{$data.info.telephone|default=''}"/></td>
-
                 </tr>
 
                 <!--<tr>-->

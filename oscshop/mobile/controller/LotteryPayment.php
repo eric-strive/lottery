@@ -17,6 +17,7 @@ namespace osc\mobile\controller;
 use osc\admin\model\duobaoRecord;
 use osc\admin\model\LuckRecord;
 use osc\admin\model\PayOrder;
+use osc\admin\service\GameHomeService;
 use osc\common\controller\Base;
 use osc\admin\model\Home;
 use osc\mobile\service\OrderProcess;
@@ -69,6 +70,10 @@ class LotteryPayment extends Base
                         break;
                     case '2':
                         LuckRecord::addLuckRecord($orderData);
+                        break;
+                    case '3':
+                        //开设房间
+                        GameHomeService::set_game_home();
                         break;
                 }
                 $payResult = WeixinPay::getBizPackage($return);
@@ -126,7 +131,6 @@ class LotteryPayment extends Base
      */
     public function cancel_order()
     {
-        $uid = user('uid');
         $return['gid'] = input('gid');
         $return['order_no'] = input('order_no');
         $return['status'] = input('status');
@@ -173,7 +177,7 @@ class LotteryPayment extends Base
                         //判断以及减少商品份额新增减少该项份额
                         Home::changePortion($homeId, $return['goodsNum']);
                         //支付处理
-                        WeixinPay::balancePay($return, $homeId,$uid);
+                        WeixinPay::balancePay($return, $homeId, $uid);
                         break;
                 }
                 Db::commit();

@@ -104,6 +104,7 @@ class MemberBackend extends AdminBase
             $member['email'] = $date['email'];
             $member['checked'] = $date['checked'];
             $member['telephone'] = $date['telephone'];
+            $member['system_nickname'] = $date['system_nickname'];
 //			$member['groupid']=$date['groupid'];
             if (Db::name('member')->where('uid', $date['uid'])->update($member) !== false) {
 //                Db::name('member_auth_group_access')->where('uid',

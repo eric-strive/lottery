@@ -58,7 +58,6 @@
                 </tr>
             </table>
             <div class="form-group">
-
                 <div style="margin-left:20px;">
                     <input name="send" type="submit" value="提交" class="btn btn-primary"/>
                 </div>
@@ -72,7 +71,7 @@
                 </tr>
                 {volist name="duobaoRecord" id="vo"}
                 <tr>
-                    <td>{$vo.nickname}</td>
+                    <td>{$vo.system_nickname}【{$vo.nickname}】</td>
                     <td style="width: 80%;word-wrap:break-word;word-break:break-all;">{$vo.dduonums}</td>
                 </tr>
                 {/volist}

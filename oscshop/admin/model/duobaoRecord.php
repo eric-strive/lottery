@@ -131,6 +131,8 @@ class duobaoRecord
         foreach ($list as $key => $item) {
             $list[$key]['nickname'] = Db::name('member')
                 ->where('uid', $item['uid'])->value('nickname');
+            $list[$key]['system_nickname'] = Db::name('member')
+                ->where('uid', $item['uid'])->value('system_nickname');
         }
         return $list;
     }
