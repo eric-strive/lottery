@@ -1,7 +1,7 @@
 {extend name="public:base" /} {block name="head"}
-<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
-<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
-<link rel="Stylesheet" href="__PUBLIC__/view_res/mobile/css/home.css" type="text/css"/>
+<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet" />
+<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet" />
+<link rel="Stylesheet" href="__PUBLIC__/view_res/mobile/css/home.css" type="text/css" />
 <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
 <script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/artTemplate/template.js"></script>
@@ -11,7 +11,7 @@
     .weui_grid {
         width: 25%;
     }
-
+    
     .home-recom section .hplist p {
         color: #000;
     }
@@ -69,14 +69,10 @@
             </div>
             <div class="weui_dialog_bd">
                 <p class="weui-prompt-text">请设置房间号和房间密码</p>
-                <input type="hidden" class="weui_input weui-prompt-input" id="goods_periods" name="goods_periods"
-                       value="" placeholder="输房间号">
-                <input type="hidden" class="weui_input weui-prompt-input" id="good_id" name="gid" value=""
-                       placeholder="">
-                <input type="text" class="weui_input weui-prompt-input" id="home_name" name="home_name" value=""
-                       placeholder="输入房间名">
-                <input type="password" class="weui_input weui-prompt-input" id="password" name="password" value=""
-                       placeholder="输入密码">
+                <input type="hidden" class="weui_input weui-prompt-input" id="goods_periods" name="goods_periods" value="" placeholder="输房间号">
+                <input type="hidden" class="weui_input weui-prompt-input" id="good_id" name="gid" value="" placeholder="">
+                <input type="text" class="weui_input weui-prompt-input" id="home_name" name="home_name" value="" placeholder="输入房间名">
+                <input type="password" class="weui_input weui-prompt-input" id="password" name="password" value="" placeholder="输入密码">
             </div>
             <div class="weui_dialog_ft">
                 <a href="javascript:;" class="weui_btn_dialog default" id="cancel">取消</a>
@@ -96,29 +92,29 @@
 </section>
 <script id="list" type="text/html">
     <@each list as value i@>
-    <div class="flex-col hplist">
-        <a href="/mobile/goods/detail/id/<@value.goods_id@>">
-            <img src="/<@value.image@>"/>
-            <p><@value.name@></p>
+        <div class="flex-col hplist">
+            <a href="/mobile/goods/detail/id/<@value.goods_id@>">
+                <img src="/<@value.image@>"/>
+            <!-- <p><@value.name@></p> -->
             <!-- <i>&yen;<@value.price@></i> -->
-        </a>
-        <div class="flex-between con ">
-            <div class="flex-col">
-                <div class="p">购买进度
-                    <@value.schedule@>
-                </div>
-                <div class="weui_progress">
-                    <div class="weui_progress_bar">
-                        <div class="weui_progress_inner_bar js_progress" style="width: <@value.schedule@>;"></div>
+                <div class="flex-col con">
+                    <div class="p">购买进度
+                        <@value.schedule@>
+                    </div>
+                    <div class="weui_progress">
+                        <div class="weui_progress_bar">
+                            <div class="weui_progress_inner_bar js_progress" style="width: <@value.schedule@>;"></div>
+                        </div>
                     </div>
                 </div>
+            </a>
+            <div class="flex-between">
+                <a href="javascript:;" data-id="<@value.goods_id@>" prop_periods="<@value.periods@>" class=" btn openDoor leftBtn fswhite12">进入房间</a>
+                <a href="javascript:;" data-id="<@value.goods_id@>" prop_periods="<@value.periods@>" class=" btn openDoor rightBtn fscred12">开设房间</a>
             </div>
-            <a href="javascript:;" data-id="<@value.goods_id@>" prop_periods="<@value.periods@>"
-               class="weui_btn weui_btn_mini weui_btn_plain_primary btn openDoor">开设房间</a>
         </div>
-    </div>
 
-    <@/each@>
+        <@/each@>
 </script>
 {/block} {block name="footer"} {include file="public/footer-nav" /} {/block} {block name="script"} {if condition="in_wechat()"}
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
@@ -136,7 +132,7 @@
         ]
     });
 
-    wx.ready(function () {
+    wx.ready(function() {
 
         var is_agent = '<?php echo user("is_agent"); ?>';
         var site_url = '<?php echo request()->domain(); ?>';
@@ -151,7 +147,7 @@
             title: '<?php echo config("SITE_NAME"); ?>',
             link: url,
             imgUrl: site_url + '/uploads/<?php echo config("SITE_ICON"); ?>',
-            success: function () {
+            success: function() {
                 pvShareCallback(url, '分享到朋友圈');
             }
         });
@@ -161,7 +157,7 @@
             desc: '<?php echo config("SITE_NAME"); ?>',
             link: url,
             imgUrl: site_url + '/uploads/<?php echo config("SITE_ICON"); ?>',
-            success: function () {
+            success: function() {
                 pvShareCallback(url, '分享给朋友');
             }
         });
@@ -179,14 +175,14 @@
 </script>
 {/if}
 <script>
-    $(function () {
+    $(function() {
         scroll_load('mobile/index/ajax_goods_list', 'list', 'goods_list');
     });
     //联系客服
-    $('#serviceBtn').on('click', function () {
+    $('#serviceBtn').on('click', function() {
         $("#serviceView").removeClass('none').addClass('show');
     })
-    $('#hide').on('click', function () {
+    $('#hide').on('click', function() {
         $("#serviceView").removeClass('show').addClass('none');
     })
 
@@ -194,19 +190,19 @@
     var goodsId;
     var _isError = false;
     var goodsPeriods;
-    $(document).on('click', '.openDoor', function () {
+    $(document).on('click', '.openDoor', function() {
         goodsId = $(this).parent().find(".openDoor").attr("data-id");
         goodsPeriods = $(this).parent().find(".openDoor").attr("prop_periods");
         $("#good_id").val(goodsId);
         $("#goods_periods").val(goodsPeriods);
         $(".showOpenDoor").fadeIn();
     });
-    $("#cancel").on("click", function () {
+    $("#cancel").on("click", function() {
         $(".showOpenDoor").fadeOut();
         $("#id").val(null);
         $("#password").val(null);
     })
-    $("#submit").on("click", function () {
+    $("#submit").on("click", function() {
         if (_isError) {
             return false;
         }
@@ -220,7 +216,7 @@
             $.post(
                 '{:url("Index/add_home")}',
                 $('input[type="password"],input[type="text"],input[type="hidden"]'),
-                function (d) {
+                function(d) {
                     if (d.error) {
                         _isError = false;
                         $.toast(d.error, "forbidden");

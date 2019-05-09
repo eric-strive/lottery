@@ -58,12 +58,22 @@ input[type='button'] {
     font-size: 12px;
 }
 
-.fsc12 span {
+.fswhite12 {
+    color: #fff;
+    font-size: 12px;
+}
+
+.fsc12 span,
+.fscred12 {
     color: #e4393c;
     font-size: 12px;
 }
 
-.con,
+.con {
+    padding: 4px 5px 10px;
+    overflow: hidden;
+}
+
 .con2 {
     padding: 0 5px 10px;
     overflow: hidden;
@@ -74,9 +84,8 @@ input[type='button'] {
 }
 
 .con div:first-child {
-    width: 50%;
     font-size: 12px;
-    color: #999;
+    color: #444;
 }
 
 .con div:first-child .p,
@@ -107,6 +116,11 @@ input[type='button'] {
 .pregress+div p span {
     color: #444;
     font-weight: 600;
+}
+
+.pregress2 {
+    /* margin-top: 4px; */
+    margin: 4px 6px;
 }
 
 .collectBtn {
@@ -167,13 +181,13 @@ input[type='button'] {
 }
 
 .weui_progress_bar {
-    height: 6px;
-    border-radius: 3px;
+    height: 8px;
+    border-radius: 4px;
 }
 
 .weui_progress_inner_bar {
     background-color: #e4393c;
-    border-radius: 3px;
+    border-radius: 4px;
 }
 
 .weui_grids:before {
@@ -476,4 +490,22 @@ nav a {
     font-weight: bold;
     font-size: 14px;
     border-radius: 1rem;
+}
+
+.leftBtn {
+    width: 50%;
+    background: #FE2D48;
+    line-height: 27px;
+    text-align: center;
+    box-sizing: border-box;
+    border-top: 1px solid #efefef;
+    border-right: 1px solid #efefef;
+}
+
+.rightBtn {
+    width: 50%;
+    background: #fff;
+    border-top: 1px solid #efefef;
+    line-height: 27px;
+    text-align: center;
 }
