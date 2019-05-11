@@ -19,8 +19,8 @@
         充500元
     </div>
     <input type="hidden" id="num" value="100">
-    <div class="mon selectBtn" att="0">
-        <input type="text" class="weui-input myinput" id="money" name="money" value="" placeholder="自定义金额"/>
+    <div class="selectBtn" att="0">
+        <input type="number" class="weui-input myinput" id="money" name="money" value="100" placeholder="自定义金额"/>
     </div>
 </div>
 
@@ -57,18 +57,20 @@
     $('#wechat-payment-btn').click(wepayCall);
 
     var order_no = '';
-
+    $(".mon").click(function () {
+        var money = $(this).attr('att');
+        $("#money").val(money);
+    })
     /**
      * 发起微信支付
      * @returns {undefined}
      */
     function wepayCall() {
-        var pay_mount = $('#pay_mount').val();
-
+        var pay_mount = $("#money").val();
         $('#wechat-payment-btn').addClass('disable').html('支付发起中...');
 
         $.post("{:url('lottery_payment/weixin_pay')}", {
-                'pay_total': 100,
+                'pay_total': pay_mount,
                 'subject': '用户充值',
                 'attach': '3',
             },
@@ -85,12 +87,12 @@
                         order_no = r.out_trade_no;
                         wx.chooseWXPay(r.bizPackage);
                         // 按钮恢复
-                        $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+                        $('#wechat-payment-btn').removeClass('disable').html('微信支付');
                     } else {
                         wepayError();
                     }
                 } else if (r.ret_code === 11) {
-                    $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+                    $('#wechat-payment-btn').removeClass('disable').html('微信支付');
                     alert('订单创建失败！' + r.ret_msg);
                 }
             });
@@ -108,7 +110,7 @@
         if (res.errMsg == "chooseWXPay:ok") {
             location.href = "{:url('mobile/user/index')}";
 
-            $('#wechat-payment-btn').removeClass('disable').html('微信安全支付');
+            $('#wechat-payment-btn').removeClass('disable').html('微信支付');
         } else {
             alert(res.errMsg);
         }

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="程序">
+  <component name="PublishConfigData" serverName="lottery">
     <serverData>
-      <paths name="程序">
+      <paths name="lottery">
         <serverdata>
           <mappings>
             <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
-            <mapping local="" />
           </mappings>
         </serverdata>
       </paths>

@@ -55,6 +55,9 @@
             <p>满<span id="share">{$homeInfo.lottery_drifts}</span>份次开奖</p>
             <p>剩余<span id="remain">{$homeInfo.lottery_drifts-$homeInfo.goods_buy_num}</span></p>
         </div>
+        <div class="weui_btn_area">
+            <a style="font-weight:bold" class="weui_btn weui_btn_primary payment" id="package_tail">包尾</a>
+        </div>
     </section>
 </div>
 <!-- 订单总额 -->
@@ -129,7 +132,10 @@
                 changeNum(goodsNum);
             }
         })
-
+        $('#package_tail').on('click', function () {
+            remain = $('#remain').text(); //剩余份额
+            changeNum(remain);
+        })
         // 加键
         $('#productCountPlus').on('click', function () {
             let goodsNum = $('#quantity').val(),
@@ -176,7 +182,44 @@
         timestamp: '{$signPackage.timestamp}',
         nonceStr: '{$signPackage.nonceStr}',
         signature: '{$signPackage.signature}',
-        jsApiList: ['chooseWXPay']
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'onMenuShareQZone',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard',
+            'chooseWXPay']
     });
     '{/if}'
     /**
@@ -368,5 +411,70 @@
     } else {
         setTimeout(checkLottery, setTime);
     }
+</script>
+
+<script>
+    // 2. 分享接口
+    // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
+    wx.ready(function () {
+        wx.onMenuShareAppMessage({
+            title: '好友邀请',
+            desc: '老铁，我已经把房开好了，来不来就看你了',
+            link: "http://{$_SERVER['HTTP_HOST']}{:url('mobile/cart/good_buy&home_id='.$home_id.'&sign='.$homeInfo['sign'])}",
+            //&home_id=.$home_id.&sign=.$homeInfo[sign]
+            imgUrl: "http://{$_SERVER['HTTP_HOST']}IMG_ROOT{$goods.image}",
+            trigger: function (res) {
+                // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+//                    alert('用户点击发送给朋友');
+            },
+            success: function (res) {
+//                    alert('已分享');
+            },
+            cancel: function (res) {
+//                    alert('已取消');
+            },
+            fail: function (res) {
+                alert(JSON.stringify(res));
+            }
+        });
+
+        // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+//            document.querySelector('#juantuijian').onclick = function () {
+        wx.onMenuShareTimeline({
+            title: '好友邀请',
+            desc: '老铁，我已经把房开好了，来不来就看你了',
+            link: "http://{$_SERVER['HTTP_HOST']}{:url('mobile/cart/good_buy&home_id='.$home_id.'&sign='.$homeInfo['sign'])}",
+            imgUrl: "http://{$_SERVER['HTTP_HOST']}IMG_ROOT{$goods.image}",
+            trigger: function (res) {
+                // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+//                    alert('用户点击分享到朋友圈');
+            },
+            success: function (res) {
+//                    alert('已分享');
+            },
+            cancel: function (res) {
+//                    alert('已取消');
+            },
+            fail: function (res) {
+                alert(JSON.stringify(res));
+            }
+        });
+        wx.hideMenuItems({
+            menuList: [
+                "menuItem:exposeArticle",
+                "menuItem:share:qq",
+                "menuItem:copyUrl",
+                "menuItem:share:QZone",
+                "menuItem:originPage",
+                "menuItem:openWithQQBrowser",
+                "menuItem:openWithSafari",
+                "menuItem:share:email",
+                'menuItem:copyUrl' // 复制链接
+            ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+        });
+    });
+    wx.error(function (res) {
+        alert(res.errMsg);
+    });
 </script>
 {/block}

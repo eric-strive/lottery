@@ -1,0 +1,28 @@
+<div class="priForm">
+    {volist name="homeList" id="h"}
+    <div class="border2">
+        <div class="flex-between">
+            <div class="box1 ">
+                <div class="flex-row margin">
+                    <p>房间号：</p>
+                    <p class="overhidden">0000{$h.home_num}</p>
+                </div>
+                <div class="flex-row margin">
+                    <p>房间名：</p>
+                    <p class="overhidden">{$h.home_name}</p>
+                </div>
+            </div>
+            <div class="box2 flex-col-center">
+                <input type="button" class="join_home" value="进入">
+            </div>
+        </div>
+        <div class="flex-row">
+            <p>房间密码：</p>
+            <input type="password" class="input_password" value="" placeholder="请输入房间密码">
+            <input type="hidden" class="real_password" value="{$h.password}" placeholder="">
+            <input type="hidden" class="home_id" value="{$h.id}" placeholder="">
+        </div>
+    </div>
+
+    {/volist}
+</div>

@@ -111,6 +111,7 @@ class Home
             'home_name' => $home_name,
             'password' => $password,
             'type' => $type,
+            'sign' => build_order_no(),
         ];
         $insertId = Db::name('home')->insert($homeInfo, false, true);
         return ['home_id' => $insertId];
@@ -298,7 +299,7 @@ class Home
             ))->select();
     }
 
-    public static function HomeList($status = null,$uid, $limit = null)
+    public static function HomeList($status = null, $uid, $limit = null)
     {
         $where['dr.uid'] = $uid;
         if ($status !== null) {
@@ -336,6 +337,13 @@ class Home
             $homeInfo = self::getHomeInfo($id);
             Member::giveBalanceLuck($homeInfo);
         }
+    }
+    public static function home_info_by_sign($home_id)
+    {
+        return Db::name('home')
+            ->where('id', $home_id)
+//            ->where('sign', $sign)
+            ->find();
     }
 }
 

@@ -44,9 +44,9 @@
     <input type="hidden" value="{$goods.minimum}" name="quantity">
     <input id="goods_id" type="hidden" value="{$goods.goods_id}" name="goods_id">
 
-    <p class="vpd-title" style='height:auto;'>
-        {$goods.name}
-    </p>
+<!--    <p class="vpd-title" style='height:auto;'>-->
+<!--        {$goods.name}-->
+<!--    </p>-->
 
     <div class="detaileBox">
         {if condition="isset($points_goods) AND ($points_goods EQ 'points')"}
@@ -227,11 +227,24 @@
 
         {/volist}
     </div>
-
 </div>
 <header class="Thead" id="vpd-detail-header">产品详情</header>
-<div id="vpd-content" class="notload">下拉加载详细介绍</div>
-
+<div id="vpd-content" class="notload">点击查看产品详情</div>
+<div class='pd-box clearfix'>
+    {volist name="duobaoList" id="d"}
+        <div class='pd-box-inner'>
+            {if condition="!empty($d['userpic'])"}
+            <img src="{$d.userpic}" alt='{$d.nickname}'/>
+            {else/}
+            <img src="__RES__/mobile/images/icon/iconfont-iconname_2x.png"/>
+            {/if}
+            <p class='Elipsis'>昵称：{$d.nickname}</p>
+            <p class='Elipsis'>购买份额：{$d.num}</p>
+            <p class='Elipsis'>购买时间：{$d.dlasttime}</p>
+        </div>
+    </a>
+    {/volist}
+</div>
 {if condition="!isset($points_goods)"}
 <header class="Thead">随便逛逛</header>
 {if condition="isset($related_goods)"}
@@ -276,7 +289,7 @@
         /**
          *加载商品详情
          */
-        $(window).scroll(function () {
+        $("#vpd-content").click(function () {
             var totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()) - 5;
             if ($(window).height() <= totalheight && !contentLoaded) {
                 $('#vpd-content').html('');
@@ -377,7 +390,7 @@
                 function (r) {
                     if (r.status > 0) {
                         //这里需要放烟花
-                        alert('开奖啦！中奖号码是' + r.lottery_num+'中奖用户');
+                        alert('开奖啦！中奖号码是' + r.lottery_num + '中奖用户');
                     } else {
                         setTimeout(checkLottery, setTime);
                     }

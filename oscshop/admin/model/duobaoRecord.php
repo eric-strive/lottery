@@ -124,16 +124,26 @@ class duobaoRecord
     public static function getNumbers($homeId)
     {
         $list = Db::name('duobao_record')
-            ->field('group_concat(dduonum) as dduonums,uid')
+            ->field('group_concat(dduonum) as dduonums,count(dduonum) as num,dlasttime,uid')
             ->where('home_id', $homeId)
             ->group('uid')
             ->select();
         foreach ($list as $key => $item) {
-            $list[$key]['nickname'] = Db::name('member')
-                ->where('uid', $item['uid'])->value('nickname');
-            $list[$key]['system_nickname'] = Db::name('member')
-                ->where('uid', $item['uid'])->value('system_nickname');
+            $userInfo = Db::name('member')
+                ->where('uid', $item['uid'])
+                ->find();
+            $list[$key]['nickname'] = $userInfo['nickname'];
+            $list[$key]['system_nickname'] = $userInfo['system_nickname'];
+            $list[$key]['userpic'] = $userInfo['userpic'];
         }
+        return $list;
+    }
+
+    public static function getDuobaoNum($homeId)
+    {
+        $list = Db::name('duobao_record')
+            ->where('home_id', $homeId)
+            ->column('dduonum','id');;
         return $list;
     }
 }

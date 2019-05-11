@@ -42,9 +42,9 @@ class Goods extends MobileBase
         if (empty($homeInfo)) {
             $this->error('该商品有误，请联系客服修正！');
         }
-        if($homeInfo['status']!=0){
+        if ($homeInfo['status'] != 0) {
             $this->assign('lottery_num', $homeInfo['lottery_num']);
-        }else{
+        } else {
             $this->assign('lottery_num', '');
         }
         $this->assign('homeInfo', $homeInfo);
@@ -54,8 +54,9 @@ class Goods extends MobileBase
             'keywords' => $list['goods']['meta_keyword'],
             'description' => $list['goods']['meta_description']
         ]);
-
+        $duobaoList = duobaoRecord::getNumbers($homeInfo['id']);
         osc_goods()->update_goods_viewed((int)input('param.id'));
+        $this->assign('duobaoList', $duobaoList);
         $this->assign('homeList', $homeList);
         $this->assign('top_title', $list['goods']['name']);
         $this->assign('goods', $list['goods']);
@@ -82,6 +83,13 @@ class Goods extends MobileBase
         $this->assign('description', Db::name('goods_mobile_description_image')->where('goods_id',
             (int)input('param.id'))->order('sort_order asc')->select());
 
+        exit($this->fetch());
+    }
+
+    function get_home_list()
+    {
+        $homeList = HomeModel::getHomeListByGid((int)input('param.id'));
+        $this->assign('homeList', $homeList);
         exit($this->fetch());
     }
 
@@ -137,7 +145,6 @@ class Goods extends MobileBase
         }
         $list['goods']['image'] = resize($list['goods']['image'], 80, 80);
         $this->assign('goods', $list['goods']);
-        echo '开发中…………………………………………';exit;
         return $this->fetch('luck');
     }
 

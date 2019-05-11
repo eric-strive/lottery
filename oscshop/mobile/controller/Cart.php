@@ -129,9 +129,9 @@ class Cart extends MobileBase
             $this->error('商品不存在！！');
         }
         $list['goods']['image'] = resize($list['goods']['image'], 80, 80);
-        if($homeInfo['status']!=0){
+        if ($homeInfo['status'] != 0) {
             $this->assign('lottery_num', $homeInfo['lottery_num']);
-        }else{
+        } else {
             $this->assign('lottery_num', '');
         }
         $this->assign('home_id', $homeId);
@@ -457,6 +457,23 @@ class Cart extends MobileBase
             'address' => $address,
             'area' => get_area_name($address['province_id']) . ' ' . get_area_name($address['city_id']) . ' ' . get_area_name($address['country_id'])
         ];
+    }
+
+    public function entering_room()
+    {
+        $home_id = (int)input('param.home_id');
+//        $sign = (int)input('param.sign');
+        $homeInfo = HomeModel::home_info_by_sign($home_id);
+        if (empty($homeInfo)) {
+            $this->error('您没有访问权限');
+        }
+        $duobaoList = duobaoRecord::getNumbers($home_id);
+        $duobaoNumList = duobaoRecord::getDuobaoNum($home_id);
+        $this->assign('duobaoList', $duobaoList);
+        $this->assign('duobaoNumList', $duobaoNumList);
+        $this->assign('SEO', ['title' => '房间-' . config('SITE_TITLE')]);
+        $this->assign('top_title', '私房');
+        return $this->fetch();
     }
 
 }

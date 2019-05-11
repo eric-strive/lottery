@@ -20,7 +20,7 @@
 
 <section class="home-recom">
     <div class="weui_grids nav">
-        <a href="mobile/index/new_guidelines" class="weui_grid js_grid">
+        <a href="/mobile/index/new_guidelines" class="weui_grid js_grid">
             <div class="weui_grid_icon">
                 <img src="__PUBLIC__/image/icon/xs.png" alt="新手指引">
             </div>
@@ -36,7 +36,7 @@
                 联系客服
             </p>
         </a>
-        <a href="mobile/user/recharge" class="weui_grid js_grid">
+        <a href="/mobile/user/recharge" class="weui_grid js_grid">
             <div class="weui_grid_icon">
                 <img src="__PUBLIC__/image/icon/xr.png" alt="金豆充值">
             </div>
@@ -44,7 +44,7 @@
                 金豆充值
             </p>
         </a>
-        <a href="/game/index.html" class="weui_grid js_grid">
+        <a href="/mobile/game/index.html" class="weui_grid js_grid">
             <div class="weui_grid_icon">
                 <img src="__PUBLIC__/image/icon/zp.png" alt="游戏专区">
             </div>
@@ -68,7 +68,7 @@
                 <strong class="weui_dialog_title">开设房间</strong>
             </div>
             <div class="weui_dialog_bd">
-                <p class="weui-prompt-text">请设置房间号和房间密码</p>
+                <p class="weui-prompt-text">请为房间起名和设置密码</p>
                 <input type="hidden" class="weui_input weui-prompt-input" id="goods_periods" name="goods_periods" value="" placeholder="输房间号">
                 <input type="hidden" class="weui_input weui-prompt-input" id="good_id" name="gid" value="" placeholder="">
                 <input type="text" class="weui_input weui-prompt-input" id="home_name" name="home_name" value="" placeholder="输入房间名">
@@ -89,6 +89,10 @@
             <p class="p fs14">扫一扫上面的二维码图案，添加客服微信</p>
         </div>
     </div>
+    <!-- 进入私房弹窗 -->
+    <div id="priView" class="none">
+        <div id="home_list_hide" class="weui_mask weui_mask_visible"></div>
+    </div>
 </section>
 <script id="list" type="text/html">
     <@each list as value i@>
@@ -96,7 +100,7 @@
             <a href="/mobile/goods/detail/id/<@value.goods_id@>">
                 <img src="/<@value.image@>"/>
             <!-- <p><@value.name@></p> -->
-            <!-- <i>&yen;<@value.price@></i> -->
+             <i>&yen;<@value.price@></i>
                 <div class="flex-col con">
                     <div class="p">购买进度
                         <@value.schedule@>
@@ -109,7 +113,7 @@
                 </div>
             </a>
             <div class="flex-between">
-                <a href="javascript:;" data-id="<@value.goods_id@>" prop_periods="<@value.periods@>" class=" btn openDoor leftBtn fswhite12">进入房间</a>
+                <a href="javascript:;" data-id="<@value.goods_id@>" prop_periods="<@value.periods@>" class=" btn enterRoom leftBtn fswhite12">进入房间</a>
                 <a href="javascript:;" data-id="<@value.goods_id@>" prop_periods="<@value.periods@>" class=" btn openDoor rightBtn fscred12">开设房间</a>
             </div>
         </div>
@@ -226,6 +230,42 @@
                 }
             );
         }
+    })
+    $(document).on('click', '.enterRoom', function() {
+        goodsId = $(this).parent().find(".enterRoom").attr("data-id");
+        $.post(
+            '{:url("goods/get_home_list")}',
+            {'id':goodsId},
+            function(d) {
+                $("#priView").html(d);
+                $("#priView").show();
+                if (d.error) {
+                    _isError = false;
+                    $.toast(d.error, "forbidden");
+                } else {
+                    // location.href = '/mobile/cart/good_buy/home_id/' + d.home_id;
+                }
+            }
+        );
+    });
+    //进入房间
+    $("#priView").on('click', '.join_home', function() {
+        var parentObj = $(this).parent().parent().parent();
+        var input_password = parentObj.find('.input_password').val();
+        var real_password = parentObj.find('.real_password').val();
+        var home_id = parentObj.find('.home_id').val();
+        if (input_password == '') {
+            alert('密码不能为空');
+            return false;
+        }
+        if (input_password != real_password) {
+            alert('密码错误');
+            return false;
+        }
+        location.href = '/mobile/cart/good_buy/home_id/' + home_id + '&password=' + input_password;
+    })
+    $('#home_list_hide').on('click', function () {
+        $('#priView').fadeOut();
     })
 </script>
 {/block}

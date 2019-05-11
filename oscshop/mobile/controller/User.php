@@ -142,8 +142,6 @@ class User extends MobileBase
      */
     public function recharge()
     {
-        echo '开发中…………………………………………';
-        exit;
         if (in_wechat()) {
             $wechat = wechat();
             //调用微信收货地址接口，需要开通微信支付

@@ -73,6 +73,10 @@ class LotteryPayment extends Base
                         break;
                     case '3':
                         //开设房间
+//                        GameHomeService::set_game_home();
+                        break;
+                    case '4':
+                        //开设房间
                         GameHomeService::set_game_home();
                         break;
                 }
