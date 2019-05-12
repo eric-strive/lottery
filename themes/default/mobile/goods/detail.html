@@ -1,8 +1,9 @@
 {extend name="public:base" /} {block name="head"}
-<link href="__PUBLIC__/view_res/mobile/css/product.css" type="text/css" rel="Stylesheet"/>
-<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
-<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
+<link href="__PUBLIC__/view_res/mobile/css/product.css" type="text/css" rel="Stylesheet" />
+<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet" />
+<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet" />
 <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
+<script src="__PUBLIC__/js/fontsize.js"></script>
 <script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/jquery-weui/dist/js/swiper.min.js"></script>
 
@@ -10,19 +11,18 @@
     .swiper-container {
         width: 100%;
     }
-
+    
     .swiper-container img {
         display: block;
         width: 100%;
     }
-
+    
     .option_name {
         margin-left: 5px;
     }
-
     /*重载jquery-weui.min.css中样式*/
-
-    label > * {
+    
+    label>* {
         pointer-events: auto;
     }
 </style>
@@ -33,7 +33,7 @@
     <div class="swiper-wrapper">
         <!-- Slides -->
         {volist name="image" id="image"}
-        <div class="swiper-slide"><img src="IMG_ROOT{$image.image|resize=400,400}"/></div>
+        <div class="swiper-slide"><img src="IMG_ROOT{$image.image|resize=400,400}" /></div>
         {/volist}
     </div>
     <!-- If we need pagination -->
@@ -44,9 +44,9 @@
     <input type="hidden" value="{$goods.minimum}" name="quantity">
     <input id="goods_id" type="hidden" value="{$goods.goods_id}" name="goods_id">
 
-<!--    <p class="vpd-title" style='height:auto;'>-->
-<!--        {$goods.name}-->
-<!--    </p>-->
+    <!--    <p class="vpd-title" style='height:auto;'>-->
+    <!--        {$goods.name}-->
+    <!--    </p>-->
 
     <div class="detaileBox">
         {if condition="isset($points_goods) AND ($points_goods EQ 'points')"}
@@ -80,11 +80,9 @@
     </div>
     {if condition="!empty($discount)"}
     <dl class="pd-dsc clearfix" id="product_stock_wrap">
-        <dt>批发价：</dt>
-        {volist name="discount" id="v"}
+        <dt>批发价：</dt> {volist name="discount" id="v"}
         <br/>
-        <dt id="pd-stock"> {$v.quantity}{$goods.sku} 或更多 &yen; {$v.price}</dt>
-        {/volist}
+        <dt id="pd-stock"> {$v.quantity}{$goods.sku} 或更多 &yen; {$v.price}</dt> {/volist}
     </dl>
     {/if}
 
@@ -187,12 +185,12 @@
         <p>剩余<span>{$homeInfo.lottery_drifts-$homeInfo.goods_buy_num}</span></p>
     </div>
 
-    <div class="dec fs12">
+    <!-- <div class="dec fs12">
         <p>商品总价值{$goods.price}金币</p>
         <p>单次价格{$goods.doubao_price}金币</p>
         <div class="title">购买方式</div>
-        <div id="jionBtn" class="jionBtn" style="font-weight:bold" data-privacy="true">进入私房</div>
-    </div>
+        <input id="jionBtn" class="jionBtn" type="button" value="进入私房" data-privacy="true">
+    </div> -->
 
 </div>
 <!-- 进入私房弹窗 -->
@@ -201,29 +199,28 @@
 
     <div class="priForm">
         {volist name="homeList" id="h"}
-        <div class="border2" style="border: 1px solid black;padding: 10px;">
+        <div class="border2">
+            <div class="box1 ">
+                <div class="flex-row margin">
+                    <p style="line-height:30px;">房间名：</p>
+                    <p class="overhidden" style="font-size: 20px;color: red">{$h.home_name}</p>
+                </div>
+            </div>
             <div class="flex-between">
-                <div class="box1 ">
-                    <div class="flex-row margin">
-                        <p style="line-height:30px;">房间名：</p>
-                        <p class="overhidden" style="font-size: 20px;color: red">{$h.home_name}</p>
-                    </div>
+                <div class="flex-row">
+                    <p style="line-height:40px;">密&nbsp;&nbsp;码：</p>
+                    <input type="password" style="height: 30px;" class="input_password" value="" placeholder="请输入房间密码">
+                    <input type="hidden" class="real_password" value="{$h.password}" placeholder="">
+                    <input type="hidden" class="home_id" value="{$h.id}" placeholder="">
                 </div>
                 <div class="box2 flex-col-center">
                     <input type="button" class="join_home" value="进入">
                 </div>
             </div>
-            <div class="flex-row">
-                <p style="line-height:40px;">密&nbsp;&nbsp;码：</p>
-                <input type="password" style="height: 30px;" class="input_password" value="" placeholder="请输入房间密码">
-                <input type="hidden" class="real_password" value="{$h.password}" placeholder="">
-                <input type="hidden" class="home_id" value="{$h.id}" placeholder="">
-            </div>
             <div class="flex-row margin" style="text-align: right;">
                 <p class="overhidden">第{$h.home_num}号房间</p>
             </div>
         </div>
-
         {/volist}
     </div>
 </div>
@@ -231,18 +228,26 @@
 <div id="vpd-content" class="notload">点击查看产品详情</div>
 <div class='pd-box clearfix'>
     {volist name="duobaoList" id="d"}
-        <div class='pd-box-inner'>
+    <div class='pd-box-inner'>
+        <div class="flex-row listMsg">
             {if condition="!empty($d['userpic'])"}
-            <img src="{$d.userpic}" alt='{$d.nickname}'/>
-            {else/}
-            <img src="__RES__/mobile/images/icon/iconfont-iconname_2x.png"/>
-            {/if}
-            <p class='Elipsis'>昵称：{$d.nickname}</p>
+            <img class="photo" src="{$d.userpic}" alt='{$d.nickname}' /> {else/}
+            <img class="photo" src="__RES__/mobile/images/icon/iconfont-iconname_2x.png" /> {/if}
+            <p class='Elipsis'>{$d.nickname}</p>
+        </div>
+        <div class="flex-between listMsg">
             <p class='Elipsis'>购买份额：{$d.num}</p>
             <p class='Elipsis'>购买时间：{$d.dlasttime}</p>
         </div>
-    </a>
+
+
+    </div>
     {/volist}
+</div>
+
+<div class="luckBox">
+    <a id="addcart-button" data-add="1" href="{:url('goods/luck',array('id'=>$goods['goods_id']))}">
+        <span>幸运购</span></a>
 </div>
 {if condition="!isset($points_goods)"}
 <header class="Thead">随便逛逛</header>
@@ -252,7 +257,7 @@
         {volist name="related_goods" id="d"}
         <a class="slist-item" href="{:url('goods/detail',array('id'=>$d['goods_id']))}">
             <div class='pd-box-inner'>
-                <img src="IMG_ROOT{$d.image|resize=120,120}" alt='{$d.name}'/>
+                <img src="IMG_ROOT{$d.image|resize=120,120}" alt='{$d.name}' />
                 <p class='Elipsis'>{$d.name}</p>
             </div>
         </a>
@@ -265,15 +270,14 @@
 </div>
 {else/}
 <div id="appCartWrap" class="clearfix" style="font-weight:bold">
-    <a class="button" id="addcart-button" data-add="1"
-       href="{:url('goods/luck',array('id'=>$goods['goods_id']))}">幸运购</a>
-    <a class="button" href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id']))}" id="buy-button"
-       data-add="0">立即参与</a>
+
+    <a href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id']))}" id="buy-button" class="flex-row-center" data-add="0">立即参与</a>
+    <a href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id']))}" id="buy-button" class="flex-row-center" data-add="0">按钮</a>
     <!--<a id="toCart" href="{:url('cart/index')}"></a>-->
 </div>
 {/if} {/block} {block name="script"}
 <script>
-    $(function () {
+    $(function() {
 
         $(".swiper-container").swiper({
             loop: true,
@@ -288,7 +292,7 @@
         /**
          *加载商品详情
          */
-        $("#vpd-content").click(function () {
+        $("#vpd-content").click(function() {
             var totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()) - 5;
             if ($(window).height() <= totalheight && !contentLoaded) {
                 $('#vpd-content').html('');
@@ -299,15 +303,15 @@
                 $.ajax({
                     url: "{:url('goods/get_description',array('id'=>$goods['goods_id']))}",
                     dataType: 'html',
-                    success: function (data) {
+                    success: function(data) {
 
                         $('#vpd-content').html(data);
                         $('#vpd-detail-header').show();
                         $('.notload').removeClass('notload');
                         $('#vpd-content').fadeIn();
                         // 调整图片
-                        $('#vpd-content img').each(function () {
-                            $(this).on('load', function () {
+                        $('#vpd-content img').each(function() {
+                            $(this).on('load', function() {
                                 if ($(this).width() >= document.body.clientWidth) {
                                     $(this).css('display', 'block');
                                 }
@@ -316,11 +320,11 @@
                         });
                         $('#vpd-content').find('div').width('auto');
                     },
-                    error: function () {
+                    error: function() {
 
                     }
                 });
-                setTimeout(function () {
+                setTimeout(function() {
                     $.hideLoading();
                 }, 500);
             }
@@ -328,12 +332,12 @@
         /**
          *房间列表
          */
-        $('#jionBtn').on('click', function () {
+        $('#jionBtn').on('click', function() {
             $('#priView').removeClass('none').fadeIn();
         });
 
         // 点击遮罩
-        $('#hide').on('click', function () {
+        $('#hide').on('click', function() {
             // $('#priView').removeClass('show').addClass('none');
             $('#priView').fadeOut();
         })
@@ -341,14 +345,14 @@
         /**
          *加入收藏
          */
-        $('.uc-add-like').bind('click', function () {
+        $('.uc-add-like').bind('click', function() {
 
             var goods_id = $('#goods_id').val();
             $.post(
                 "{:url('goods/add_wish')}", {
                     id: goods_id
                 },
-                function (d) {
+                function(d) {
                     if (d) {
                         if (d.error) {
                             $.toast(d.error, "forbidden");
@@ -360,7 +364,7 @@
             );
         });
         //进入房间
-        $(".join_home").click(function () {
+        $(".join_home").click(function() {
             var parentObj = $(this).parent().parent().parent();
             var input_password = parentObj.find('.input_password').val();
             var real_password = parentObj.find('.real_password').val();
@@ -386,7 +390,7 @@
             $.post("{:url('home/is_full')}", {
                     'home_id': home_id,
                 },
-                function (r) {
+                function(r) {
                     if (r.status > 0) {
                         //这里需要放烟花
                         alert('开奖啦！中奖号码是' + r.lottery_num + '中奖用户');

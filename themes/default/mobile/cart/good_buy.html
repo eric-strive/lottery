@@ -1,9 +1,9 @@
 {extend name="public:base" /} {block name="jquery"}
 <script src="__PUBLIC__/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
 {/block} {block name="head"}
-<link href="__PUBLIC__/view_res/mobile/css/cart.css" type="text/css" rel="Stylesheet"/>
-<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
-<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
+<link href="__PUBLIC__/view_res/mobile/css/cart.css" type="text/css" rel="Stylesheet" />
+<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet" />
+<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet" />
 <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
 <script src="__PUBLIC__/jquery-weui/dist/lib/fastclick.js"></script>
 <script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
@@ -17,18 +17,15 @@
 <div id="orderDetailsWrapper" data-minheight="68px">
     <section class="cartListWrap clearfix" id="">
 
-        <a href="{:url('goods/detail',array('id'=>$goods.goods_id))}"><img alt="{$goods.name}"
-                                                                           src="IMG_ROOT{$goods.image}"/></a>
+        <a href="{:url('goods/detail',array('id'=>$goods.goods_id))}"><img alt="{$goods.name}" src="IMG_ROOT{$goods.image}" /></a>
 
         <div class="cartListDesc">
             <p class="title">
                 <a style="color:#000;" href="{:url('goods/detail',array('id'=>$goods.goods_id))}">{$goods.name}</a>
             </p>
             <p class="count">
-                {notempty name="homeInfo['home_name']"}
-                房间名：{$homeInfo['home_name']}<br>
-                {/notempty}
-                商品总价：&yen;
+                {notempty name="homeInfo['home_name']"} 房间名：{$homeInfo['home_name']}
+                <br> {/notempty} 商品总价：&yen;
                 <span class="dprice prices" id="prices">{$goods.price}
                 </span>
             </p>
@@ -44,7 +41,10 @@
                     <a id="productCountPlus" class="btn productCountPlus"></a>
                 </dt>
             </dl>
-            <div class="fsc12">中奖概率为：<span id="probability">0%</span></div>
+            <div class="fsc12 flex-between">
+                <div style="line-height: 1.5rem;">中奖概率为：<span id="probability">0%</span></div>
+                <input type="button" value="包尾" class="payment1" id="package_tail">
+            </div>
         </div>
         <div class="weui_progress pregress">
             <div class="weui_progress_bar">
@@ -55,9 +55,9 @@
             <p>满<span id="share">{$homeInfo.lottery_drifts}</span>份次开奖</p>
             <p>剩余<span id="remain">{$homeInfo.lottery_drifts-$homeInfo.goods_buy_num}</span></p>
         </div>
-        <div class="weui_btn_area">
+        <!-- <div class="weui_btn_area">
             <a style="font-weight:bold" class="weui_btn weui_btn_primary payment" id="package_tail">包尾</a>
-        </div>
+        </div> -->
     </section>
 </div>
 <!-- 订单总额 -->
@@ -87,9 +87,9 @@
     <a style="font-weight:bold" class="weui_btn weui_btn_primary payment" id="balance-payment-btn">金豆支付</a>
 </div>
 <script>
-    $(function () {
+    $(function() {
         //支付宝支付
-        $('#alipay-payment-btn').click(function () {
+        $('#alipay-payment-btn').click(function() {
 
             var city_id = $('#city_id').val();
             var address_id = $('#address_id').val();
@@ -101,7 +101,7 @@
                     comment: comment,
                     address_id: address_id
                 },
-                function (d) {
+                function(d) {
 
                     if (d.error) {
                         $.toast(d.error, "forbidden");
@@ -121,10 +121,10 @@
 <!-- 微信JSSDK -->
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script>
-    $(function () {
+    $(function() {
         var goodsNum, prices, share, remain;
         // 减键
-        $('#productCountMinus').on('click', function () {
+        $('#productCountMinus').on('click', function() {
             let goodsNum = $('#quantity').val();
 
             if (parseInt(goodsNum) > 1) {
@@ -132,12 +132,12 @@
                 changeNum(goodsNum);
             }
         })
-        $('#package_tail').on('click', function () {
-            remain = $('#remain').text(); //剩余份额
-            changeNum(remain);
-        })
-        // 加键
-        $('#productCountPlus').on('click', function () {
+        $('#package_tail').on('click', function() {
+                remain = $('#remain').text(); //剩余份额
+                changeNum(remain);
+            })
+            // 加键
+        $('#productCountPlus').on('click', function() {
             let goodsNum = $('#quantity').val(),
                 remain = $('#remain').text(); //剩余份额
 
@@ -147,7 +147,7 @@
                 changeNum(goodsNum);
             }
         })
-        $('.productCountNumi').change(function () {
+        $('.productCountNumi').change(function() {
             goodsNum = parseInt($(this).val());
             changeNum(goodsNum);
         })
@@ -219,7 +219,8 @@
             'addCard',
             'chooseCard',
             'openCard',
-            'chooseWXPay']
+            'chooseWXPay'
+        ]
     });
     '{/if}'
     /**
@@ -238,8 +239,7 @@
         //需要配送的，判断收货地址是否已经获取
         var pay_mount = $('#pay_mount').val();
         var subject = $('#subject').val();
-        var goodsNum = $('#quantity').val();
-        ;
+        var goodsNum = $('#quantity').val();;
 
         $('#wechat-payment-btn').addClass('disable').html('支付发起中...');
 
@@ -251,7 +251,7 @@
                 'home_id': home_id,
                 'gid': gid,
             },
-            function (r) {
+            function(r) {
                 if (r.error) {
                     $.toast(r.error, "forbidden");
                     return;
@@ -289,7 +289,7 @@
     function wepayCallback(res) {
 
         if (res.errMsg == "chooseWXPay:ok") {
-            setTimeout(function () {
+            setTimeout(function() {
                 location.href = "{:url('mobile/goods/detail',array('id'=>$goods['goods_id']))}";
             }, 1000);
             $('#wechat-payment-btn').removeClass('disable').html('微信支付');
@@ -326,7 +326,7 @@
                 'goodsNum': goodsNum,
                 'status': status,
             },
-            function (r) {
+            function(r) {
                 if (r.error) {
                     $.toast(r.error, "forbidden");
                     return;
@@ -350,8 +350,7 @@
         //需要配送的，判断收货地址是否已经获取
         var pay_mount = $('#pay_mount').val();
         var subject = $('#subject').val();
-        var goodsNum = $('#quantity').val();
-        ;
+        var goodsNum = $('#quantity').val();;
 
         $('#balance-payment-btn').addClass('disable').html('支付发起中...');
 
@@ -363,19 +362,18 @@
                 'home_id': home_id,
                 'gid': gid,
             },
-            function (r) {
+            function(r) {
                 if (r.error) {
                     $.toast(r.error, "forbidden");
                     $('#balance-payment-btn').removeClass('disable').html('金豆支付');
                     return;
                 }
-                if (r.ret_code === 0) {
-                } else if (r.ret_code === 11) {
+                if (r.ret_code === 0) {} else if (r.ret_code === 11) {
                     $('#balance-payment-btn').removeClass('disable').html('金豆支付');
                     alert(r.ret_msg);
                 } else {
                     $.toast('支付成功');
-                    setTimeout(function () {
+                    setTimeout(function() {
                         location.href = "{:url('mobile/goods/detail',array('id'=>$goods['goods_id']))}";
                     }, 3000);
                 }
@@ -389,7 +387,7 @@
         $.post("{:url('home/is_full')}", {
                 'home_id': home_id,
             },
-            function (r) {
+            function(r) {
                 if (r.status > 0) {
                     if (r.is_self > 0) {
                         alert('是自己')
@@ -416,64 +414,64 @@
 <script>
     // 2. 分享接口
     // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
-    wx.ready(function () {
+    wx.ready(function() {
         wx.onMenuShareAppMessage({
             title: '好友邀请',
             desc: '老铁，我已经把房开好了，来不来就看你了',
             link: "http://{$_SERVER['HTTP_HOST']}{:url('mobile/cart/good_buy&home_id='.$home_id.'&sign='.$homeInfo['sign'])}",
             //&home_id=.$home_id.&sign=.$homeInfo[sign]
             imgUrl: "http://{$_SERVER['HTTP_HOST']}IMG_ROOT{$goods.image}",
-            trigger: function (res) {
+            trigger: function(res) {
                 // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
-//                    alert('用户点击发送给朋友');
+                //                    alert('用户点击发送给朋友');
             },
-            success: function (res) {
-//                    alert('已分享');
+            success: function(res) {
+                //                    alert('已分享');
             },
-            cancel: function (res) {
-//                    alert('已取消');
+            cancel: function(res) {
+                //                    alert('已取消');
             },
-            fail: function (res) {
+            fail: function(res) {
                 alert(JSON.stringify(res));
             }
         });
 
         // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
-//            document.querySelector('#juantuijian').onclick = function () {
+        //            document.querySelector('#juantuijian').onclick = function () {
         wx.onMenuShareTimeline({
             title: '好友邀请',
             desc: '老铁，我已经把房开好了，来不来就看你了',
             link: "http://{$_SERVER['HTTP_HOST']}{:url('mobile/cart/good_buy&home_id='.$home_id.'&sign='.$homeInfo['sign'])}",
             imgUrl: "http://{$_SERVER['HTTP_HOST']}IMG_ROOT{$goods.image}",
-            trigger: function (res) {
+            trigger: function(res) {
                 // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
-//                    alert('用户点击分享到朋友圈');
+                //                    alert('用户点击分享到朋友圈');
             },
-            success: function (res) {
-//                    alert('已分享');
+            success: function(res) {
+                //                    alert('已分享');
             },
-            cancel: function (res) {
-//                    alert('已取消');
+            cancel: function(res) {
+                //                    alert('已取消');
             },
-            fail: function (res) {
+            fail: function(res) {
                 alert(JSON.stringify(res));
             }
         });
         wx.hideMenuItems({
             menuList: [
-                "menuItem:exposeArticle",
-                "menuItem:share:qq",
-                "menuItem:copyUrl",
-                "menuItem:share:QZone",
-                "menuItem:originPage",
-                "menuItem:openWithQQBrowser",
-                "menuItem:openWithSafari",
-                "menuItem:share:email",
-                'menuItem:copyUrl' // 复制链接
-            ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+                    "menuItem:exposeArticle",
+                    "menuItem:share:qq",
+                    "menuItem:copyUrl",
+                    "menuItem:share:QZone",
+                    "menuItem:originPage",
+                    "menuItem:openWithQQBrowser",
+                    "menuItem:openWithSafari",
+                    "menuItem:share:email",
+                    'menuItem:copyUrl' // 复制链接
+                ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
         });
     });
-    wx.error(function (res) {
+    wx.error(function(res) {
         alert(res.errMsg);
     });
 </script>
