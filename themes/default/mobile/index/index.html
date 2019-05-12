@@ -75,7 +75,7 @@
                 <input type="text" class="weui_input weui-prompt-input" id="home_name" name="home_name" value="" placeholder="输入房间名">
                 <input type="password" class="weui_input weui-prompt-input" id="password" name="password" value="" placeholder="输入密码">
             </div>
-            <div class="weui_dialog_ft" style="font-size: 18px;">
+            <div class="weui_dialog_ft" style="font-size: 14px;">
                 <a href="javascript:;" class="weui_btn_dialog default cancel" id="cancel">取消</a>
                 <a href="javascript:;" class="weui_btn_dialog primary submit" id="submit">确定</a>
             </div>
@@ -115,8 +115,8 @@
                 </div>
             </a>
             <div class="flex-between" >
-                <a href="javascript:;" style="font-size: 14px;" data-id="<@value.goods_id@>" prop_periods="<@value.periods@>" class=" btn enterRoom leftBtn">进入房间</a>
-                <a href="javascript:;" style="font-size: 14px;" data-id="<@value.goods_id@>" prop_periods="<@value.periods@>" class=" btn openDoor rightBtn">开设房间</a>
+                <a href="javascript:;" style="font-size: 14px;" data-id="<@value.goods_id@>" prop_periods="<@value.periods@>" class="click-wav btn enterRoom leftBtn">进入房间</a>
+                <a href="javascript:;" style="font-size: 14px;" data-id="<@value.goods_id@>" prop_periods="<@value.periods@>" class="click-wav btn openDoor rightBtn">开设房间</a>
             </div>
         </div>
 
@@ -217,7 +217,7 @@
         let password = $("#password").val();
         if (!home_name || !password) {
             _isError = false;
-            $.toast("请设置房间名和密码~", "forbidden");
+            base_alert('请设置房间名和密码~');
         } else {
             $.post(
                 '{:url("Index/add_home")}',
@@ -225,7 +225,7 @@
                 function(d) {
                     if (d.error) {
                         _isError = false;
-                        $.toast(d.error, "forbidden");
+                        base_alert(d.error);
                     } else {
                         location.href = '/mobile/cart/good_buy/home_id/' + d.home_id;
                     }
@@ -244,7 +244,7 @@
                 $("#priView").removeClass('none');
                 if (d.error) {
                     _isError = false;
-                    $.toast(d.error, "forbidden");
+                    base_alert(d.error);
                 } else {
                     // location.href = '/mobile/cart/good_buy/home_id/' + d.home_id;
                 }
@@ -258,11 +258,11 @@
         var real_password = parentObj.find('.real_password').val();
         var home_id = parentObj.find('.home_id').val();
         if (input_password == '') {
-            alert('密码不能为空');
+            base_alert('密码不能为空');
             return false;
         }
         if (input_password != real_password) {
-            alert('密码错误');
+            base_alert('密码错误');
             return false;
         }
         location.href = '/mobile/cart/good_buy/home_id/' + home_id + '&password=' + input_password;

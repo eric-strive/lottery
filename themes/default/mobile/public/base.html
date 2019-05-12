@@ -7,14 +7,28 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no">    
+    <meta name="format-detection" content="telephone=no">
     {block name="jquery"}
-    <script src="__PUBLIC__/js/jquery/jquery-1.10.2.min.js"></script>   
-    {/block}  
-    {block name="head"}{/block}    
+    <script src="__PUBLIC__/js/jquery/jquery-1.10.2.min.js"></script>
+    {/block}
+    {block name="head"}{/block}
 </head>
 <body style="font-weight: bold">
 {block name="header"}{/block}
+<div class="weui_dialog weui_dialog_visible" id="base-dialog-weui" style="z-index: 5000;display: none;">
+    <div class="weui_dialog_hd" style="text-align:left;height:200px;background: url('__PUBLIC__/image/dialogq.jpg') no-repeat; background-size: 100% 100%;">
+        <p class="weui-prompt-text" id="base-dialog-info" style="color: white;margin-left:10%;margin-top:12%;">
+
+        </p>
+    </div>
+    <div class="weui_dialog_ft" style="    font-size: 16px;
+    margin-top: -10%;
+    background: #352f69;
+    color: white;
+    border-radius: 5px;">
+        <a href="javascript:;"style="color: white" class="weui_btn_dialog primary" id="base-dialog-submit">确定</a>
+    </div>
+</div>
 {block name="content"}{/block}
 {block name="footer"}{/block}
 </body>
@@ -24,9 +38,17 @@ var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
   hm.src = "//hm.baidu.com/hm.js?32e3cb4cf7e5c6772c4dc1f5d496b6af";
-  var s = document.getElementsByTagName("script")[0]; 
+  var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();
+$("#base-dialog-submit").click(function () {
+    $("#base-dialog-weui").hide();
+})
+function base_alert(info) {
+    $("#base-dialog-info").html(info);
+    $("#base-dialog-weui").show();
+}
+
 </script>
 
 
