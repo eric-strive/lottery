@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../../public/static/view_res/mobile/css/alert.css" type="text/css">
+    <script src="../../../public/static/js/fontsize.js"></script>
+    <title>抽奖</title>
+    <style>
+        body,
+        html {
+            background: #eee;
+        }
+        
+        .draw,
+        .lottery-main {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background: #fff;
+            z-index: 101;
+            overflow-y: hidden;
+            color: #000;
+            width: 80%;
+            height: 60%;
+            padding: 16px 10px;
+            box-sizing: border-box;
+            box-shadow: 0 0 4px 4px rgba(0, 10, 100, 0.1);
+        }
+        
+        .wrap-main {
+            position: relative;
+            height: 80%;
+            overflow-y: scroll;
+        }
+        
+        .lottery-wrap {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* border: 1px solid red; */
+        }
+        
+        .lottery-list {
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div id="draw">
+        <div id="hide" class="weui_mask weui_mask_visible"></div>
+        <div>
+            <div>
+                <p>4785</p>
+            </div>
+        </div>
+    </div> -->
+    <div id="lottery-main" class="lottery-main">
+        <div class="wrap-main">
+            <div class="lottery-wrap" id="lottery-wrap">
+
+                <div class="clearfix lottery-list" data-id="" data-namezh="3630" data-nameen="avatar1">
+                    <div class="f-l lottery-content">
+
+                        <div class="content-detail">
+                            <b>抽奖号码：</b>
+                            <span>3 6 3 0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix lottery-list" data-id="" data-namezh="1693" data-nameen="avatar46">
+                    <div class="f-l lottery-content">
+
+                        <div class="content-detail">
+                            <b>抽奖号码：</b>
+                            <span>1 6 9 3</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix lottery-list" data-id="" data-namezh="1693" data-nameen="avatar46">
+                    <div class="f-l lottery-content">
+
+                        <div class="content-detail">
+                            <b>抽奖号码：</b>
+                            <span>1 6 9 3</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix lottery-list" data-id="" data-namezh="3630" data-nameen="avatar1">
+                    <div class="f-l lottery-content">
+
+                        <div class="content-detail">
+                            <b>抽奖号码：</b>
+                            <span>3 6 3 0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix lottery-list" data-id="" data-namezh="1693" data-nameen="avatar46">
+                    <div class="f-l lottery-content">
+
+                        <div class="content-detail">
+                            <b>抽奖号码：</b>
+                            <span>1 6 9 3</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix lottery-list" data-id="" data-namezh="1693" data-nameen="avatar46">
+                    <div class="f-l lottery-content">
+
+                        <div class="content-detail">
+                            <b>抽奖号码：</b>
+                            <span>1 6 9 3</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--抽奖按钮-->
+        <div class="dashboard">
+            <!-- <div class="cirle-btn award" id="award-1" data-award="1" class="none">一</div>
+            <div class="cirle-btn award" id="award-2" data-award="2" class="none">二</div> -->
+            <div class="btn btn-red-outline lottery-btn" id="lottery-btn" data-award="">点击开始</div>
+            <!-- <div class="cirle-btn award" id="award-3" data-award="3" class="none">三</div>
+            <div class="cirle-btn award award-active" id="award-4" data-award="4" class="none">纪</div> -->
+        </div>
+    </div>
+
+    <!-- 中奖者数据展示模板 start -->
+    <script type="text/template" id="awardcon-tpl">
+        <li class="clearfix win-li">
+            <div class="avatar">
+            </div>
+            <div class="name">中奖名称</div>
+            <a class="f-l delete" href="javascript:;">&times;</a>
+        </li>
+    </script>
+    <!-- 中奖者数据展示模板 end -->
+
+    <!--音乐开关-->
+    <a id="music-control" class="animated infinite bounce" href="javascript:;" data-open="1"></a>
+    <!--清除数据开关-->
+    <a id="clear-control" href="javascript:;" data-open="1"></a>
+
+    <audio id="music" loop preload="auto" src="shiji.mp3">
+        你的浏览器不支持audio标签
+    </audio>
+    <script src="../../../public/static/jquery-weui/dist/js/jquery-weui.min.js"></script>
+    <script src="../../../public/static/js/draw/underscore.js"></script>
+    <!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->
+    <!-- <script type="text/javascript" src="lottery_data.js"></script> -->
+    <script src="../../../public/static/js/draw/boot-modal.js"></script>
+    <script src="../../../public/static/js/draw/snow-plugin.js"></script>
+    <script src="../../../public/static/js/draw/pc_draw.js"></script>
+</body>
+
+</html>
