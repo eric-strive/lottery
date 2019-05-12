@@ -3,6 +3,7 @@
 <link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet" />
 <link rel="Stylesheet" href="__PUBLIC__/view_res/mobile/css/home.css" type="text/css" />
 <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
+<script src="__PUBLIC__/js/fontsize.js"></script>
 <script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
 <script src="__PUBLIC__/artTemplate/template.js"></script>
 <script src="__PUBLIC__/view_res/mobile/load_list.js"></script>
@@ -75,8 +76,8 @@
                 <input type="password" class="weui_input weui-prompt-input" id="password" name="password" value="" placeholder="输入密码">
             </div>
             <div class="weui_dialog_ft">
-                <a href="javascript:;" class="weui_btn_dialog default" id="cancel">取消</a>
-                <a href="javascript:;" class="weui_btn_dialog primary" id="submit">确定</a>
+                <a href="javascript:;" class="weui_btn_dialog default cancel" id="cancel">取消</a>
+                <a href="javascript:;" class="weui_btn_dialog primary submit" id="submit">确定</a>
             </div>
         </div>
     </div>
@@ -92,6 +93,7 @@
     <!-- 进入私房弹窗 -->
     <div id="priView" class="none">
         <div id="home_list_hide" class="weui_mask weui_mask_visible"></div>
+        <!-- <div id="home_list_hide" class="priForm"></div> -->
     </div>
 </section>
 <script id="list" type="text/html">
@@ -113,8 +115,8 @@
                 </div>
             </a>
             <div class="flex-between">
-                <a href="javascript:;" data-id="<@value.goods_id@>" prop_periods="<@value.periods@>" class=" btn enterRoom leftBtn fswhite12">进入房间</a>
-                <a href="javascript:;" data-id="<@value.goods_id@>" prop_periods="<@value.periods@>" class=" btn openDoor rightBtn fscred12">开设房间</a>
+                <a href="javascript:;" data-id="<@value.goods_id@>" prop_periods="<@value.periods@>" class=" btn enterRoom leftBtn">进入房间</a>
+                <a href="javascript:;" data-id="<@value.goods_id@>" prop_periods="<@value.periods@>" class=" btn openDoor rightBtn">开设房间</a>
             </div>
         </div>
 
@@ -234,11 +236,12 @@
     $(document).on('click', '.enterRoom', function() {
         goodsId = $(this).parent().find(".enterRoom").attr("data-id");
         $.post(
-            '{:url("goods/get_home_list")}',
-            {'id':goodsId},
+            '{:url("goods/get_home_list")}', {
+                'id': goodsId
+            },
             function(d) {
-                $("#priView").html(d);
-                $("#priView").show();
+                $("#priView").append(d);
+                $("#priView").removeClass('none');
                 if (d.error) {
                     _isError = false;
                     $.toast(d.error, "forbidden");
@@ -249,7 +252,7 @@
         );
     });
     //进入房间
-    $("#priView").on('click', '.join_home', function() {
+    $(document).on('click', '.join_home', function() {
         var parentObj = $(this).parent().parent().parent();
         var input_password = parentObj.find('.input_password').val();
         var real_password = parentObj.find('.real_password').val();
@@ -264,8 +267,8 @@
         }
         location.href = '/mobile/cart/good_buy/home_id/' + home_id + '&password=' + input_password;
     })
-    $('#home_list_hide').on('click', function () {
-        $('#priView').fadeOut();
+    $('#home_list_hide').on('click', function() {
+        $('#priView').addClass('none');
     })
 </script>
-{/block}
+{/block} {/block}

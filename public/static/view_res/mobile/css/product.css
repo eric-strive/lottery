@@ -801,7 +801,7 @@ body {
 
 #appCartWrap {
     padding: 0 10px;
-    padding-right: 43px;
+    /* padding-right: 43px; */
     background: rgba(238, 238, 238, 0.8);
     position: fixed;
     bottom: 0;
@@ -867,7 +867,7 @@ body {
 }
 
 #buy-button {
-    margin-right: 115px
+    /* margin-right: 115px */
 }
 
 #buy-button.hover {
