@@ -603,6 +603,7 @@ nav a {
     font-weight: bold;
     font-size: 20px;
     color: black;
+    margin-right: 8%;
     background: url('../../../image/icon/join.png') no-repeat;
     background-size: 100% 100%;
 }
@@ -673,7 +674,9 @@ nav a {
 }
 
 .returnIcon {
-    color: #fff;
+    margin-top: -0.2rem;
+    margin-left: -0.2rem;
+    color: #f28c09;
     font-weight: 600;
     font-size: 24px !important;
 }
