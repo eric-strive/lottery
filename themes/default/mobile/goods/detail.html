@@ -244,10 +244,6 @@
     {/volist}
 </div>
 
-<div class="luckBox">
-    <a id="addcart-button" data-add="1" href="{:url('goods/luck',array('id'=>$goods['goods_id']))}">
-        <span style="font-weight:bold;font-size: 14px;">幸运购</span></a>
-</div>
 {if condition="!isset($points_goods)"}
 <header class="Thead">随便逛逛</header>
 {if condition="isset($related_goods)"}
@@ -268,10 +264,10 @@
     <a class="button" id="buy-button" style="width: 100%;" data-add="0">立即兑换</a>
 </div>
 {else/}
-<div id="appCartWrap" class="clearfix">
+<div id="appCartWrap" class="clearfix flex-row-end">
 
-    <a href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id']))}" style="font-weight:bold;font-size: 20px;color: black" id="buy-button" class="flex-row-center" data-add="0">立即参与</a>
-    <a href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id']))}" style="font-weight:bold;font-size: 20px;color: black" id="buy-button" class="flex-row-center" data-add="0">按钮</a>
+    <a href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id']))}" id="buy-button" class="flex-row-center" data-add="0">立即参与</a>
+    <a id="addcart-button" data-add="1" href="{:url('goods/luck',array('id'=>$goods['goods_id']))}" class="flex-row-end" data-add="0">幸运购</a>
     <!--<a id="toCart" href="{:url('cart/index')}"></a>-->
 </div>
 {/if} {/block} {block name="script"}

@@ -4,6 +4,12 @@
     justify-content: space-between;
 }
 
+.flex-row-end {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
 .flex-col {
     display: flex;
     flex-flow: column nowrap;
@@ -584,25 +590,31 @@ nav a {
     display: flex;
     width: 100%;
     padding: 0;
-}
-
-#appCartWrap a {
-    display: flex;
-    width: 50%;
-    padding: 20px 0;
-    font-size: 14px;
-    color: #fff;
+    background: none;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
 }
 
 #appCartWrap a:first-child {
-    /* background: #FE2D48; */
+    display: flex;
+    width: 50%;
+    height: 3rem;
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
     background: url('../../../image/icon/join.png') no-repeat;
     background-size: 100% 100%;
 }
 
 #appCartWrap a:nth-child(2) {
+    display: flex;
+    width: 30%;
     background: #fff;
-    color: #000;
+    color: #fff;
+    height: 4.6rem;
+    background: url('../../../image/icon/luck.png') no-repeat;
+    background-size: 100% 100%;
 }
 
 .listTopArrow {

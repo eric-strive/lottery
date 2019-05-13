@@ -8,14 +8,26 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1187301_i9qeaut0ppk.css" type="text/css"> {block name="jquery"}
+    <meta name="format-detection" content="telephone=no"> {block name="jquery"}
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1187301_i9qeaut0ppk.css">
     <script src="__PUBLIC__/js/jquery/jquery-1.10.2.min.js"></script>
     {/block} {block name="head"}{/block}
 </head>
 
 <body style="font-weight: bold">
-    {block name="header"}{/block} {block name="content"}{/block} {block name="footer"}{/block}
+    {block name="header"}{/block}
+    <div class="weui_dialog weui_dialog_visible" id="base-dialog-weui" style="z-index: 5000;display: none;">
+        <div class="weui_dialog_hd" style="text-align:left;height:200px;background: url('__PUBLIC__/image/dialogq.jpg') no-repeat; background-size: 100% 100%;">
+            <p class="weui-prompt-text" id="base-dialog-info" style="color: white;margin: 12% 10% 0;
+            text-align: center;font-size:18px">
+
+            </p>
+        </div>
+        <div class="weui_dialog_ft" style="font-size: 20px;margin-top: -10%;background: #352f69;color: white;border-radius: 5px;">
+            <a href=" " style="color: white" class="weui_btn_dialog primary" id="base-dialog-submit">确定</a>
+        </div>
+    </div>
+    {block name="content"}{/block} {block name="footer"}{/block}
 </body>
 
 <script>
@@ -26,6 +38,14 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
+    $("#base-dialog-submit").click(function() {
+        $("#base-dialog-weui").hide();
+    })
+
+    function base_alert(info) {
+        $("#base-dialog-info").html(info);
+        $("#base-dialog-weui").show();
+    }
 </script>
 
 
