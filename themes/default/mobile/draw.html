@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="height=device-height, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../../../public/static/view_res/mobile/css/alert.css" type="text/css">
     <script src="../../../public/static/js/fontsize.js"></script>
@@ -11,6 +12,8 @@
     <style>
         body,
         html {
+            width: 100%;
+            height: 100%;
             background: #eee;
         }
         
@@ -50,18 +53,123 @@
             padding: 1rem 0;
             border-bottom: 1px solid #eee;
         }
+        
+        #modal-close {
+            position: fixed;
+            top: 27%;
+            left: 57%;
+            -webkit-appearance: none;
+        }
+        
+        .modal-backdrop {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: #000;
+        }
+        
+        .modal-dialog {
+            /*position: relative;*/
+            width: auto;
+            height: 90%;
+            margin: 10px;
+            position: absolute;
+            top: 0;
+            left: calc(50% - 150px);
+        }
+        
+        .modal.fade .modal-dialog {
+            -webkit-transition: -webkit-transform .3s ease-out;
+            -o-transition: -o-transform .3s ease-out;
+            transition: transform .3s ease-out;
+            -webkit-transform: translate(0, -25%);
+            -ms-transform: translate(0, -25%);
+            -o-transform: translate(0, -25%);
+            transform: translate(0, -25%);
+            z-index: 104;
+            /*top: 15%;*/
+        }
+        
+        .modal.in .modal-dialog {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            -webkit-transform: translate(0, 0);
+            -ms-transform: translate(0, 0);
+            -o-transform: translate(0, 0);
+            transform: translate(0, 0)
+        }
+        
+        .modal-content {
+            position: relative;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            width: 100%;
+            outline: 0;
+        }
+        
+        .modal-content #lottery-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+        
+        .modal-content #lottery-canvas {
+            background: url('../../../public/static/image/draw/award_0.png')no-repeat;
+            background-size: 100% 100%;
+            margin: 0 auto;
+            /*display: block;*/
+            /*width: 100%;*/
+            display: none;
+        }
+        
+        .stop-main {
+            text-align: center;
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1002;
+        }
+        
+        .stop-main #stop-time {
+            text-align: center;
+            line-height: 180px;
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            margin-top: 280px;
+            font-size: 160px;
+            color: #FD361F;
+            font-family: 'STKaiti', 'KaiTi ';
+            border-radius: 100%;
+        }
+        
+        .stop-main .back:after {
+            content: '';
+            width: 100%;
+        }
+        
+        .stop-main .back {
+            top: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 
 <body>
-    <!-- <div id="draw">
-        <div id="hide" class="weui_mask weui_mask_visible"></div>
-        <div>
-            <div>
-                <p>4785</p>
-            </div>
-        </div>
-    </div> -->
     <div id="lottery-main" class="lottery-main">
         <div class="wrap-main">
             <div class="lottery-wrap" id="lottery-wrap">
@@ -126,14 +234,31 @@
 
         <!--抽奖按钮-->
         <div class="dashboard">
-            <!-- <div class="cirle-btn award" id="award-1" data-award="1" class="none">一</div>
-            <div class="cirle-btn award" id="award-2" data-award="2" class="none">二</div> -->
-            <div class="btn btn-red-outline lottery-btn" id="lottery-btn" data-award="">点击开始</div>
-            <!-- <div class="cirle-btn award" id="award-3" data-award="3" class="none">三</div>
-            <div class="cirle-btn award award-active" id="award-4" data-award="4" class="none">纪</div> -->
+            <div class="cirle-btn award none" id="award-1" data-award="1">一</div>
+            <div class="cirle-btn award none" id="award-2" data-award="2">二</div>
+            <div class="btn btn-red-outline lottery-btn none" id="lottery-btn" data-award="2">点击开始</div>
+            <div class="cirle-btn award none" id="award-3" data-award="3">三</div>
+            <div class="cirle-btn award award-active none" id="award-4" data-award="4">纪</div>
         </div>
     </div>
 
+    <!-- 中奖弹框 -->
+    <!--倒计时展示-->
+    <div class="stop-main" style="line-height: calc(100%);">
+        <div id="stop-time">叁</div>
+        <div class="back"></div>
+    </div>
+    <button class="close" id="modal-close" data-dismiss="modal" style="visibility: hidden;">
+        <span aria-hidden="true" class="btn_x">&times;</span>
+    </button>
+    <div class="modal fade" id="lottery-result" role="dialog" aria-hidden="true">
+        <canvas id="canvas"></canvas>
+        <div class="modal-dialog">
+            <div class="modal-content" style="height: calc(100% - 40px);padding-top: 40px;">
+                <canvas id="lottery-canvas"></canvas>
+            </div>
+        </div>
+    </div>
     <!-- 中奖者数据展示模板 start -->
     <script type="text/template" id="awardcon-tpl">
         <li class="clearfix win-li">
@@ -150,16 +275,17 @@
     <!--清除数据开关-->
     <a id="clear-control" href="javascript:;" data-open="1"></a>
 
-    <audio id="music" loop preload="auto" src="shiji.mp3">
+    <audio id="music" loop preload="auto" src="../../../public/static/js/draw/shiji.mp3">
         你的浏览器不支持audio标签
     </audio>
+    <script src="../../../public/static/js/jquery/jquery-1.10.2.min.js"></script>
     <script src="../../../public/static/jquery-weui/dist/js/jquery-weui.min.js"></script>
     <script src="../../../public/static/js/draw/underscore.js"></script>
-    <!-- <script type="text/javascript" src="js/jquery.min.js"></script> -->
-    <!-- <script type="text/javascript" src="lottery_data.js"></script> -->
+
     <script src="../../../public/static/js/draw/boot-modal.js"></script>
     <script src="../../../public/static/js/draw/snow-plugin.js"></script>
     <script src="../../../public/static/js/draw/pc_draw.js"></script>
+
 </body>
 
 </html>

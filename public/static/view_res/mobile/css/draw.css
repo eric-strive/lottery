@@ -1,0 +1,156 @@
+body,
+html {
+    width: 100%;
+    height: 100%;
+    background: #eee;
+}
+
+.draw,
+.lottery-main {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: #fff;
+    z-index: 101;
+    overflow-y: hidden;
+    color: #000;
+    width: 80%;
+    height: 60%;
+    padding: 16px 10px;
+    box-sizing: border-box;
+    box-shadow: 0 0 4px 4px rgba(0, 10, 100, 0.1);
+}
+
+.wrap-main {
+    position: relative;
+    height: 80%;
+    overflow-y: scroll;
+}
+
+.lottery-wrap {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* border: 1px solid red; */
+}
+
+.lottery-list {
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+#modal-close {
+    position: fixed;
+    top: 27%;
+    left: 57%;
+    -webkit-appearance: none;
+}
+
+.modal-backdrop {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+}
+
+.modal-dialog {
+    /*position: relative;*/
+    width: auto;
+    height: 90%;
+    margin: 10px;
+    position: absolute;
+    top: 0;
+    left: calc(50% - 150px);
+}
+
+.modal.fade .modal-dialog {
+    -webkit-transition: -webkit-transform .3s ease-out;
+    -o-transition: -o-transform .3s ease-out;
+    transition: transform .3s ease-out;
+    -webkit-transform: translate(0, -25%);
+    -ms-transform: translate(0, -25%);
+    -o-transform: translate(0, -25%);
+    transform: translate(0, -25%);
+    z-index: 104;
+    /*top: 15%;*/
+}
+
+.modal.in .modal-dialog {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0)
+}
+
+.modal-content {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    outline: 0;
+}
+
+.modal-content #lottery-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.modal-content #lottery-canvas {
+    background: url('../../../public/static/image/draw/award_0.png')no-repeat;
+    background-size: 100% 100%;
+    margin: 0 auto;
+    /*display: block;*/
+    /*width: 100%;*/
+    display: none;
+}
+
+.stop-main {
+    text-align: center;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1002;
+}
+
+.stop-main #stop-time {
+    text-align: center;
+    line-height: 180px;
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    margin-top: 280px;
+    font-size: 160px;
+    color: #FD361F;
+    font-family: 'STKaiti', 'KaiTi ';
+    border-radius: 100%;
+}
+
+.stop-main .back:after {
+    content: '';
+    width: 100%;
+}
+
+.stop-main .back {
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+}
