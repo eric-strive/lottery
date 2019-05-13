@@ -110,7 +110,7 @@ html {
 }
 
 .modal-content #lottery-canvas {
-    background: url('../../../public/static/image/draw/award_0.png')no-repeat;
+    background: url('/public/static/image/draw/award_0.png')no-repeat;
     background-size: 100% 100%;
     margin: 0 auto;
     /*display: block;*/
