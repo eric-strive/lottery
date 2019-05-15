@@ -8,6 +8,7 @@
 
 namespace osc\mobile\controller;
 
+use osc\admin\model\duobaoRecord;
 use think\Db;
 use osc\admin\model\Home as HomeModel;
 
@@ -79,7 +80,10 @@ class Home extends MobileBase
         $homeId = input('home_id');
         $homeInfo = HomeModel::getHomeInfo($homeId);
         if ($homeInfo['status'] > HomeModel::ADD_NUM) {
+            $numList = duobaoRecord::getDuobaoNum($homeId);
             $homeInfo['is_self'] = $homeInfo['lottery_uid'] == UID ? 1 : 0;
+            $this->assign('numList', $numList);
+            $homeInfo['numHtml'] = $this->fetch('is_full');
             return $homeInfo;
         }
         return array('status' => 0);

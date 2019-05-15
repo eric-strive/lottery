@@ -1,9 +1,9 @@
 {extend name="public:base" /} {block name="jquery"}
 <script src="__PUBLIC__/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
 {/block} {block name="head"}
-<link href="__PUBLIC__/view_res/mobile/css/cart.css" type="text/css" rel="Stylesheet" />
-<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet" />
-<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet" />
+<link href="__PUBLIC__/view_res/mobile/css/cart.css" type="text/css" rel="Stylesheet"/>
+<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
+<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
 <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
 <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/draw.css" type="text/css">
 <script src="__PUBLIC__/jquery-weui/dist/lib/fastclick.js"></script>
@@ -24,7 +24,8 @@
 <div id="orderDetailsWrapper" data-minheight="68px">
     <section class="cartListWrap clearfix" id="">
 
-        <a href="{:url('goods/detail',array('id'=>$goods.goods_id))}"><img alt="{$goods.name}" src="IMG_ROOT{$goods.image}" /></a>
+        <a href="{:url('goods/detail',array('id'=>$goods.goods_id))}"><img alt="{$goods.name}"
+                                                                           src="IMG_ROOT{$goods.image}"/></a>
 
         <div class="cartListDesc">
             <p class="title">
@@ -147,7 +148,7 @@
         <div class="dashboard">
             <div class="cirle-btn award none" id="award-1" data-award="1">一</div>
             <div class="cirle-btn award none" id="award-2" data-award="2">二</div>
-            <div class="btn btn-red-outline lottery-btn none" id="lottery-btn" data-award="2">点击开始</div>
+            <div class="btn btn-red-outline lottery-btn none" id="lottery-btn" award="2">点击开始</div>
             <div class="cirle-btn award none" id="award-3" data-award="3">三</div>
             <div class="cirle-btn award award-active none" id="award-4" data-award="4">纪</div>
         </div>
@@ -160,13 +161,15 @@
         <div class="back"></div>
     </div>
     <button class="close" id="modal-close" data-dismiss="modal" style="visibility: hidden;">
-            <span aria-hidden="true" class="btn_x">&times;</span>
-        </button>
+        <span aria-hidden="true" class="btn_x">&times;</span>
+    </button>
     <div class="modal fade" id="lottery-result" role="dialog" aria-hidden="true">
-        <canvas id="canvas"></canvas>
+        <canvas id="canvas" style="margin-top:-100%"></canvas>
         <div class="modal-dialog">
             <div class="modal-content" style="height: calc(100% - 40px);padding-top: 40px;">
                 <canvas id="lottery-canvas"></canvas>
+                <a style="font-weight:bold;font-size: 22px;background: #cc1813" href="/mobile"
+                   class="weui_btn weui_btn_primary">确定</a>
             </div>
         </div>
     </div>
@@ -187,8 +190,8 @@
     <a id="clear-control" href="javascript:;" data-open="1"></a>
 
     <audio id="music" loop preload="auto" src="../../../../public/static/js/draw/shiji.mp3">
-            你的浏览器不支持audio标签
-        </audio>
+        你的浏览器不支持audio标签
+    </audio>
 </div>
 {if condition="in_wechat()"}
 <div class="weui_btn_area">
@@ -203,9 +206,9 @@
     <a style="font-weight:bold" class="weui_btn weui_btn_primary payment" id="balance-payment-btn">金豆支付</a>
 </div>
 <script>
-    $(function() {
+    $(function () {
         //支付宝支付
-        $('#alipay-payment-btn').click(function() {
+        $('#alipay-payment-btn').click(function () {
 
             var city_id = $('#city_id').val();
             var address_id = $('#address_id').val();
@@ -217,7 +220,7 @@
                     comment: comment,
                     address_id: address_id
                 },
-                function(d) {
+                function (d) {
 
                     if (d.error) {
                         $.toast(d.error, "forbidden");
@@ -237,10 +240,10 @@
 <!-- 微信JSSDK -->
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script>
-    $(function() {
+    $(function () {
         var goodsNum, prices, share, remain;
         // 减键
-        $('#productCountMinus').on('click', function() {
+        $('#productCountMinus').on('click', function () {
             let goodsNum = $('#quantity').val();
 
             if (parseInt(goodsNum) > 1) {
@@ -248,12 +251,12 @@
                 changeNum(goodsNum);
             }
         })
-        $('#package_tail').on('click', function() {
-                remain = $('#remain').text(); //剩余份额
-                changeNum(remain);
-            })
-            // 加键
-        $('#productCountPlus').on('click', function() {
+        $('#package_tail').on('click', function () {
+            remain = $('#remain').text(); //剩余份额
+            changeNum(remain);
+        })
+        // 加键
+        $('#productCountPlus').on('click', function () {
             let goodsNum = $('#quantity').val(),
                 remain = $('#remain').text(); //剩余份额
 
@@ -263,7 +266,7 @@
                 changeNum(goodsNum);
             }
         })
-        $('.productCountNumi').change(function() {
+        $('.productCountNumi').change(function () {
             goodsNum = parseInt($(this).val());
             changeNum(goodsNum);
         })
@@ -355,7 +358,8 @@
         //需要配送的，判断收货地址是否已经获取
         var pay_mount = $('#pay_mount').val();
         var subject = $('#subject').val();
-        var goodsNum = $('#quantity').val();;
+        var goodsNum = $('#quantity').val();
+        ;
 
         $('#wechat-payment-btn').addClass('disable').html('支付发起中...');
 
@@ -367,7 +371,7 @@
                 'home_id': home_id,
                 'gid': gid,
             },
-            function(r) {
+            function (r) {
                 if (r.error) {
                     $.toast(r.error, "forbidden");
                     return;
@@ -405,7 +409,7 @@
     function wepayCallback(res) {
 
         if (res.errMsg == "chooseWXPay:ok") {
-            setTimeout(function() {
+            setTimeout(function () {
                 location.href = "{:url('mobile/goods/detail',array('id'=>$goods['goods_id']))}";
             }, 1000);
             $('#wechat-payment-btn').removeClass('disable').html('微信支付');
@@ -442,7 +446,7 @@
                 'goodsNum': goodsNum,
                 'status': status,
             },
-            function(r) {
+            function (r) {
                 if (r.error) {
                     $.toast(r.error, "forbidden");
                     return;
@@ -466,7 +470,8 @@
         //需要配送的，判断收货地址是否已经获取
         var pay_mount = $('#pay_mount').val();
         var subject = $('#subject').val();
-        var goodsNum = $('#quantity').val();;
+        var goodsNum = $('#quantity').val();
+        ;
 
         $('#balance-payment-btn').addClass('disable').html('支付发起中...');
 
@@ -478,13 +483,14 @@
                 'home_id': home_id,
                 'gid': gid,
             },
-            function(r) {
+            function (r) {
                 if (r.error) {
                     $.toast(r.error, "forbidden");
                     $('#balance-payment-btn').removeClass('disable').html('金豆支付');
                     return;
                 }
-                if (r.ret_code === 0) {} else if (r.ret_code === 11) {
+                if (r.ret_code === 0) {
+                } else if (r.ret_code === 11) {
                     $('#balance-payment-btn').removeClass('disable').html('金豆支付');
                     alert(r.ret_msg);
                 } else {
@@ -503,16 +509,13 @@
         $.post("{:url('home/is_full')}", {
                 'home_id': home_id,
             },
-            function(r) {
+            function (r) {
                 // console.log('r', r);
                 if (r.status > 0) {
-                    if (r.is_self > 0) {
-                        alert('是自己')
-                    } else {
-                        alert('不是自己')
-                    }
                     //这里需要放烟花
                     // alert('开奖啦！中奖号码是' + r.lottery_num);
+                    $('#lottery-wrap').html(r.numHtml)
+                    $("#lottery-btn").attr('award', r.lottery_num);
                     $('#yanhua').fadeIn();
                     //一进来就开始滚动抽奖
                     lottery_btn_fun();
@@ -520,6 +523,9 @@
                     setTimeout(() => {
                         lottery_btn_fun();
                     }, 5000);
+                    if (r.is_self > 0) {
+                        // base_alert('恭喜你中奖了')
+                    }
                     return true;
                 } else {
                     setTimeout(checkLottery, setTime);
@@ -527,6 +533,7 @@
             });
     }
 
+    checkLottery();
     if (lottery_status > 0) {
         //这里不需要放烟花
         alert('已开奖，中奖号码是' + lottery_num);
@@ -538,24 +545,24 @@
 <script>
     // 2. 分享接口
     // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
-    wx.ready(function() {
+    wx.ready(function () {
         wx.onMenuShareAppMessage({
             title: '好友邀请',
             desc: '老铁，我已经把房开好了，来不来就看你了',
             link: "http://{$_SERVER['HTTP_HOST']}{:url('mobile/cart/good_buy&home_id='.$home_id.'&sign='.$homeInfo['sign'])}",
             //&home_id=.$home_id.&sign=.$homeInfo[sign]
             imgUrl: "http://{$_SERVER['HTTP_HOST']}IMG_ROOT{$goods.image}",
-            trigger: function(res) {
+            trigger: function (res) {
                 // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
                 //                    alert('用户点击发送给朋友');
             },
-            success: function(res) {
+            success: function (res) {
                 //                    alert('已分享');
             },
-            cancel: function(res) {
+            cancel: function (res) {
                 //                    alert('已取消');
             },
-            fail: function(res) {
+            fail: function (res) {
                 alert(JSON.stringify(res));
             }
         });
@@ -567,35 +574,35 @@
             desc: '老铁，我已经把房开好了，来不来就看你了',
             link: "http://{$_SERVER['HTTP_HOST']}{:url('mobile/cart/good_buy&home_id='.$home_id.'&sign='.$homeInfo['sign'])}",
             imgUrl: "http://{$_SERVER['HTTP_HOST']}IMG_ROOT{$goods.image}",
-            trigger: function(res) {
+            trigger: function (res) {
                 // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
                 //                    alert('用户点击分享到朋友圈');
             },
-            success: function(res) {
+            success: function (res) {
                 //                    alert('已分享');
             },
-            cancel: function(res) {
+            cancel: function (res) {
                 //                    alert('已取消');
             },
-            fail: function(res) {
+            fail: function (res) {
                 alert(JSON.stringify(res));
             }
         });
         wx.hideMenuItems({
             menuList: [
-                    "menuItem:exposeArticle",
-                    "menuItem:share:qq",
-                    "menuItem:copyUrl",
-                    "menuItem:share:QZone",
-                    "menuItem:originPage",
-                    "menuItem:openWithQQBrowser",
-                    "menuItem:openWithSafari",
-                    "menuItem:share:email",
-                    'menuItem:copyUrl' // 复制链接
-                ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+                "menuItem:exposeArticle",
+                "menuItem:share:qq",
+                "menuItem:copyUrl",
+                "menuItem:share:QZone",
+                "menuItem:originPage",
+                "menuItem:openWithQQBrowser",
+                "menuItem:openWithSafari",
+                "menuItem:share:email",
+                'menuItem:copyUrl' // 复制链接
+            ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
         });
     });
-    wx.error(function(res) {
+    wx.error(function (res) {
         alert(res.errMsg);
     });
 </script>

@@ -143,7 +143,7 @@ class duobaoRecord
     {
         $list = Db::name('duobao_record')
             ->where('home_id', $homeId)
-            ->column('dduonum','id');;
+            ->column(' cast(dduonum as char)','id');;
         return $list;
     }
 }
