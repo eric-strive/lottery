@@ -1,6 +1,7 @@
 {extend name="public:base" /} {block name="jquery"}
 <script src="__PUBLIC__/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
 {/block} {block name="head"}
+<link href="__PUBLIC__/num_move/css/globle.css" type="text/css" rel="Stylesheet"/>
 <link href="__PUBLIC__/view_res/mobile/css/cart.css" type="text/css" rel="Stylesheet"/>
 <link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
 <link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
@@ -18,6 +19,8 @@
 <script src="__PUBLIC__/js/draw/boot-modal.js"></script>
 <script src="__PUBLIC__/js/draw/snow-plugin.js"></script>
 <script src="__PUBLIC__/js/draw/pc_draw.js"></script>
+<script src="__PUBLIC__/num_move/js/num.js"></script>
+
 {/block} {block name="header"} {include file="public/top-nav" /} {/block} {block name="content"}
 <header class="Thead">订单信息</header>
 
@@ -148,7 +151,7 @@
         <div class="dashboard">
             <div class="cirle-btn award none" id="award-1" data-award="1">一</div>
             <div class="cirle-btn award none" id="award-2" data-award="2">二</div>
-            <div class="btn btn-red-outline lottery-btn none" id="lottery-btn" award="2">点击开始</div>
+            <div class="btn btn-red-outline lottery-btn none" id="lottery-btn" data-award="2">点击开始</div>
             <div class="cirle-btn award none" id="award-3" data-award="3">三</div>
             <div class="cirle-btn award award-active none" id="award-4" data-award="4">纪</div>
         </div>
@@ -205,6 +208,9 @@
 <div class="weui_btn_area">
     <a style="font-weight:bold" class="weui_btn weui_btn_primary payment" id="balance-payment-btn">金豆支付</a>
 </div>
+<div id="dataNums"></div>
+<div id="dataNums2"> </div>
+
 <script>
     $(function () {
         //支付宝支付
@@ -501,7 +507,11 @@
                 }
             });
     }
-
+    function set_num(num){
+        $("#dataNums").rollNumDaq({
+            deVal:num
+        });
+    }
     //定时检查是否开奖
     var setTime = 3000;
 
@@ -514,15 +524,16 @@
                 if (r.status > 0) {
                     //这里需要放烟花
                     // alert('开奖啦！中奖号码是' + r.lottery_num);
-                    $('#lottery-wrap').html(r.numHtml)
-                    $("#lottery-btn").attr('award', r.lottery_num);
-                    $('#yanhua').fadeIn();
-                    //一进来就开始滚动抽奖
-                    lottery_btn_fun();
-
-                    setTimeout(() => {
-                        lottery_btn_fun();
-                    }, 5000);
+                    // $('#lottery-wrap').html(r.numHtml)
+                    // $("#lottery-btn").attr('data-award', r.lottery_num);
+                    set_num( num_complement(r.lottery_num,4))
+                    // $('#yanhua').fadeIn();
+                    // //一进来就开始滚动抽奖
+                    // lottery_btn_fun();
+                    //
+                    // setTimeout(() => {
+                    //     lottery_btn_fun();
+                    // }, 5000);
                     if (r.is_self > 0) {
                         // base_alert('恭喜你中奖了')
                     }
@@ -532,9 +543,7 @@
                 }
             });
     }
-
-    checkLottery();
-    if (lottery_status > 0) {
+        if (lottery_status > 0) {
         //这里不需要放烟花
         alert('已开奖，中奖号码是' + lottery_num);
     } else {

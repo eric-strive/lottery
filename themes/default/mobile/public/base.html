@@ -46,6 +46,9 @@
         $("#base-dialog-info").html(info);
         $("#base-dialog-weui").show();
     }
+    function num_complement(num, length) {
+        return (num/Math.pow(10,length)).toFixed(length).substr(2);
+    }
 </script>
 
 
