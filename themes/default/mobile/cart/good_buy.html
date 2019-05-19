@@ -43,18 +43,18 @@
             <dl id="select_number" class="pd-dsc clearfix">
                 <span style="font-size: 14px;">购买份额：</span>
                 <dt class="productCount clearfix">
-                    <a id="productCountMinus" class="btn productCountMinus"></a>
+                    <a id="productCountMinus" class="btn productCountMinus base_sound"></a>
                     <span class="productCountNum">
                         <input minimum='1' id="quantity" size="5" type='number' value='1'
                                class="dcount productCountNumi" onkeyup="value=value.replace(/[^\d]/g,'') "
                                onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"/>
                     </span>
-                    <a id="productCountPlus" class="btn productCountPlus"></a>
+                    <a id="productCountPlus" class="btn productCountPlus base_sound"></a>
                 </dt>
             </dl>
             <div class="fsc12 flex-between">
                 <div style="line-height: 1.5rem;">中奖概率为：<span id="probability">0%</span></div>
-                <input type="button" value="包尾" class="payment1" id="package_tail">
+                <input type="button" value="包尾" class="payment1 base_sound" id="package_tail">
             </div>
         </div>
         <div class="weui_progress pregress">
@@ -198,7 +198,7 @@
 </div>
 {if condition="in_wechat()"}
 <div class="weui_btn_area">
-    <a style="font-weight:bold;font-size: 22px;" class="weui_btn weui_btn_primary" id="wechat-payment-btn">微信支付</a>
+    <a style="font-weight:bold;font-size: 22px;" class="weui_btn weui_btn_primary base_sound" id="wechat-payment-btn">微信支付</a>
 </div>
 {else/}
 <!--<div class="weui_btn_area">-->
@@ -206,10 +206,10 @@
 <!--</div>-->
 {/if}
 <div class="weui_btn_area">
-    <a style="font-weight:bold" class="weui_btn weui_btn_primary payment" id="balance-payment-btn">金豆支付</a>
+    <a style="font-weight:bold" class="weui_btn weui_btn_primary payment base_sound" id="balance-payment-btn">金豆支付</a>
 </div>
 <div id="dataNums"></div>
-<div id="dataNums2"> </div>
+<div id="dataNums2"></div>
 
 <script>
     $(function () {
@@ -507,11 +507,13 @@
                 }
             });
     }
-    function set_num(num){
+
+    function set_num(num) {
         $("#dataNums").rollNumDaq({
-            deVal:num
+            deVal: num
         });
     }
+
     //定时检查是否开奖
     var setTime = 3000;
 
@@ -526,7 +528,7 @@
                     // alert('开奖啦！中奖号码是' + r.lottery_num);
                     // $('#lottery-wrap').html(r.numHtml)
                     // $("#lottery-btn").attr('data-award', r.lottery_num);
-                    set_num( num_complement(r.lottery_num,4))
+                    set_num(num_complement(r.lottery_num, 4))
                     // $('#yanhua').fadeIn();
                     // //一进来就开始滚动抽奖
                     // lottery_btn_fun();
@@ -543,9 +545,11 @@
                 }
             });
     }
-        if (lottery_status > 0) {
+
+    if (lottery_status > 0) {
         //这里不需要放烟花
-        alert('已开奖，中奖号码是' + lottery_num);
+        checkLottery()
+        // base_alert('已开奖，中奖号码是' + lottery_num, '/mobile');
     } else {
         setTimeout(checkLottery, setTime);
     }

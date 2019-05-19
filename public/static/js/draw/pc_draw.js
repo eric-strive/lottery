@@ -6,16 +6,16 @@ if (!window.localStorage) {
 // 处理 localstorage 中奖数据
 var local_handle = {
     local_item: "lottery_datas",
-    get: function(key) {
+    get: function (key) {
         return window.localStorage.getItem(key) || ''
     },
 
-    set: function(key, val) {
+    set: function (key, val) {
         window.localStorage.setItem(key, val);
     },
-    delete: function(datas, name) {
+    delete: function (datas, name) {
         var res = [];
-        datas.forEach(function(val, index) {
+        datas.forEach(function (val, index) {
             if (name != val.nameen) {
                 res.push(val);
             }
@@ -24,7 +24,7 @@ var local_handle = {
         this.set(this.local_item, new_datas);
         return res;
     },
-    clear: function() {
+    clear: function () {
         window.localStorage.clear()
     }
 };
@@ -54,7 +54,7 @@ if (local_handle.get("award_1")) {
     $('#award-01').show();
     var award1_storage = window.localStorage.getItem('award_1');
     var award1_datas = JSON.parse(award1_storage);
-    award1_datas.forEach(function(val, key) {
+    award1_datas.forEach(function (val, key) {
         var award_tpl = $('#awardcon-tpl').html();
         var award_dom = substitute(award_tpl, val);
         $('#award-01 .win').append(award_dom)
@@ -97,20 +97,20 @@ var nextFrame = window.requestAnimationFrame ||
     window.webkitRequestAnimationFrame ||
     window.mozRequestAnimationFrame ||
     window.msRequestAnimationFrame ||
-    function(callback) {
+    function (callback) {
         var currTime = +new Date,
             delay = Math.max(1000 / 60, 1000 / 60 - (currTime - lastTime));
         lastTime = currTime + delay;
         return setTimeout(callback, delay);
     },
     cancelFrame = window.cancelAnimationFrame ||
-    window.webkitCancelAnimationFrame ||
-    window.webkitCancelRequestAnimationFrame ||
-    window.mozCancelRequestAnimationFrame ||
-    window.msCancelRequestAnimationFrame ||
-    clearTimeout,
+        window.webkitCancelAnimationFrame ||
+        window.webkitCancelRequestAnimationFrame ||
+        window.mozCancelRequestAnimationFrame ||
+        window.msCancelRequestAnimationFrame ||
+        clearTimeout,
     // 初始滚动速度
-    speed = 30,
+    speed = 10,
     // 每个对话框外部高度(包括padding与margin)
     // 注：为了方便，这里统一设置为 132+28 = 160
     item_outer_height = $('.lottery-list:eq(1)').outerHeight(true),
@@ -148,8 +148,8 @@ function justGo(isMove) {
     $('#lottery-wrap').html($('#lottery-wrap').html() + $('#lottery-wrap').html());
     //      $('#lottery-wrap').html($('#lottery-wrap').html());
 
-    var justMove = function(flag) {
-        timer = nextFrame(function() {
+    var justMove = function (flag) {
+        timer = nextFrame(function () {
             moveY -= speed;
             moveDom.style.top = moveY + 'px';
             if (-(moveY) >= move_height) {
@@ -180,29 +180,30 @@ function startLottery() {
     lottery_btn.text('正在滚动 ^_^');
     lottery_btn.css('background', '#FFBFB7');
 
-    setout_time = setTimeout(function() {
+    setout_time = setTimeout(function () {
         speed = 10;
     }, 1000);
 
-    setout_time = setTimeout(function() {
+    setout_time = setTimeout(function () {
+        speed = 20;
+    }, 1000);
+
+    setout_time = setTimeout(function () {
         speed = 25;
+    }, 1000);
+    setout_time = setTimeout(function () {
+        speed = 30;
     }, 2000);
+    setout_time = setTimeout(function () {
 
-    setout_time = setTimeout(function() {
         speed = 40;
-    }, 3000);
-    setout_time = setTimeout(function() {
-        speed = 55;
-    }, 4000);
-    setout_time = setTimeout(function() {
-
-        speed = 70;
         $('#lottery-btn').text('可抽奖啦 @_@');
         //	             当速度达到最终的设置峰值是，isLock 将会解锁，此时，才可以停止动画
         isLock = false;
     }, 5000);
     console.log('开始滚动')
 }
+
 //加速
 var time = 0;
 
@@ -211,7 +212,7 @@ function speedUp(resd) {
     console.log(resd);
     speed = resd;
     if (speed >= 70) {
-        timeinter = setInterval(function() {
+        timeinter = setInterval(function () {
             time++;
             console.log(time);
             if (time >= 5) {
@@ -223,12 +224,14 @@ function speedUp(resd) {
         time = 0;
     }
 }
+
 //减速
 function speedCut(resd) {
     console.log(resd);
     speed = resd;
     time = 0;
 }
+
 //关闭提示框
 function closeToolTip() {
     if (!can_stop) {
@@ -237,21 +240,13 @@ function closeToolTip() {
     }
     $('#lottery-result').modal('hide');
 }
+
 // 结束抽奖
 function stopLottery() {
     var moveDom = document.getElementById('lottery-wrap');
-
-    // 当isLock 锁还没解锁时， 此时不能停止抽奖，将会抛出没结束的异常
-    if (isLock) {
-        console.log('还没结束，请稍等...');
-        return;
-    } else {
-        clearInterval(interval)
-    }
     isStart = false;
     isMove = false;
-    speed = 8;
-
+    speed = 10;
     /*-------- 随机数停止方案 --------*/
     // 获取当前总的抽奖框
     var lottery_size = $('#lottery-wrap .lottery-list').size();
@@ -277,11 +272,9 @@ function stopLottery() {
         var left_distance = 156;
         var sure_index = stop_index;
     }
-
-
     // 移动到要到达的指定位置
-    var lastStep = function() {
-        time02 = nextFrame(function() {
+    var lastStep = function () {
+        time02 = nextFrame(function () {
             top -= 2; //移动距离
             moveDom.style.top = (-stop_top + top) + 'px';
             if (-top <= left_distance) {
@@ -290,84 +283,23 @@ function stopLottery() {
                 cancelFrame(time02);
                 // 处理中奖后的相关样式效果
                 $('#lottery-wrap .lottery-list').eq(sure_index).addClass('sure-active');
-                var award_tpl = $('#awardcon-tpl').html();
-                var award_dom = substitute(award_tpl, award_tmp);
                 $('#award-0' + award).show();
                 if (award == 4) {
                     $('#award-123').hide();
                     $('#award-04').show();
-                    // $('#award04-toggle').css('display', 'inline-block');
                 }
-                $('#award-0' + award + ' .win').append(award_dom);
             }
         });
     };
     lastStep();
-    // 停止动画
-    cancelFrame(timer);
 
-    var award = $('#lottery-btn').data('award');
-    var sure_index = $('#lottery-btn').data('award')-1;
+
+    var award = $('#lottery-btn').attr('data-award');
+    var sure_index = $('#lottery-btn').attr('data-award') - 1;
     var lottery_name_zh = $('#lottery-wrap .lottery-list').eq(sure_index).data('namezh');
     var lottery_name_en = $('#lottery-wrap .lottery-list').eq(sure_index).data('nameen');
 
-    // 移动完剩下的尺度
-    var top = 0;
-    var time02 = null;
-    // 最后的倒计时
-    $('.stop-main').fadeIn();
-    //        $('#stop-time').fadeIn();
-    var stop_time = setTimeout(function() {
-        $('#stop-time').fadeIn();
-        $('#stop-time').text('贰');
-        $('#stop-time').fadeOut();
-    }, 1000);
-    stop_time = setTimeout(function() {
-        $('#stop-time').fadeIn();
-        $('#stop-time').text('壹');
-    }, 2000);
-    stop_time = setTimeout(function() {
-        $('#stop-time').fadeOut();
-        clearTimeout(stop_time);
-        $('.stop-main').hide();
-    }, 2500);
-
-    // 向 localstorage 中写入中奖人数据
-    var local_award = local_handle.get('award_' + award);
-    var award_tmp = null;
-    if (local_award) {
-        var award_datas = JSON.parse(local_award);
-        award_tmp = {
-            'nameen': lottery_name_en,
-            'namezh': lottery_name_zh
-        };
-        award_datas.push(award_tmp);
-        local_handle.set("award_" + award, JSON.stringify(award_datas));
-    } else {
-        var award_datas = [];
-        award_tmp = {
-            'nameen': lottery_name_en,
-            'namezh': lottery_name_zh
-        };
-        award_datas.push(award_tmp);
-        local_handle.set("award_" + award, JSON.stringify(award_datas));
-    }
-    // 写入上次抽中的奖项记录
-    local_handle.set("award_history", award);
-
-    // 删除已经中奖的人数据
-    // local_handle.delete(lottery_datas, lottery_name_en);
-    // 该项奖项将减1
-    // award_log['award0' + award] -= 1;
-    // local_handle.set('award_log', JSON.stringify(award_log));
-
-    // 绘制最后出现的中奖canvas图
-    //      drawAward(award, lottery_name_zh, lottery_name_en);
-
-    // 为防止最后出现空白
-    $('#lottery-wrap').html($('#lottery-wrap').html() + $('#lottery-wrap').html());
-
-    setTimeout(function() {
+    setTimeout(function () {
         $('#lottery-result').modal('show');
         $("#canvas").css("opacity", "0");
         $(".modal-backdrop.in").css("opacity", "0");
@@ -386,23 +318,27 @@ function stopLottery() {
 
     }, 1 * 1000)
 
-    setTimeout(function() {
-            $("#canvas").css("opacity", "0.7");
-            $(".modal-backdrop.in").css("opacity", "0.5");
-            can_stop = true;
-            clearTimeout(arguments.callee);
-            //中奖信息
-            drawAward(award, lottery_name_zh, lottery_name_en);
-            $(".modal-content #lottery-canvas").css("display", "block")
-        }, 4000)
-        //自动关闭中奖提示框
-    setTimeout(function() {
-        closeToolTip();
+    setTimeout(function () {
+        $("#canvas").css("opacity", "0.7");
+        $(".modal-backdrop.in").css("opacity", "0.5");
+        can_stop = true;
         clearTimeout(arguments.callee);
-        //		//结束回调
-        window.external.callbackStopLottery();
-    }, 66 * 1000)
+        //中奖信息
+        drawAward(award, lottery_name_zh, lottery_name_en);
+        $(".modal-content #lottery-canvas").css("display", "block")
+        // 停止动画
+        cancelFrame(timer);
+        $("#lottery-main").hide();
+    }, 2000)
+    //自动关闭中奖提示框
+    setTimeout(function () {
+        // closeToolTip();
+        // clearTimeout(arguments.callee);
+        // //		//结束回调
+        // window.external.callbackStopLottery();
+    }, 10 * 1000)
 }
+
 // canvas 绘制中奖结果
 function drawAward(award, name_zh, name_en, pic_format) {
     var canvas = document.getElementById('lottery-canvas');
@@ -416,7 +352,7 @@ function drawAward(award, name_zh, name_en, pic_format) {
     //		var avatar = new Image();
     //      avatar.src = './img/avatar/'+name_en+'.jpg';
     back_img.src = '/public/static/image/draw/award_' + 0 + '.' + pic_format;
-    back_img.onload = function() {
+    back_img.onload = function () {
         //		context.drawImage(back_img, 0, 0);
 
         // 绘制圆形头像
@@ -449,6 +385,7 @@ function drawAward(award, name_zh, name_en, pic_format) {
         //          }
     };
 }
+
 //烟花特效
 function initVars() {
 
@@ -467,7 +404,7 @@ function initVars() {
     gravity = .02;
     seeds = new Array();
     sparkPics = new Array();
-    s = "../../../../public/static/image/draw/";
+    s = "/public/static/image/draw/";
     for (i = 1; i <= 10; ++i) {
         sparkPic = new Image();
         sparkPic.src = s + 'spark' + i + '.png';
@@ -504,7 +441,7 @@ function rasterizePoint(x, y, z) {
         rx4 = x,
         ry4 = z,
         uc = (ry4 - ry3) * (rx2 - rx1) - (rx4 - rx3) * (ry2 - ry1);
-    if (!uc) return { x: 0, y: 0, d: -1 };
+    if (!uc) return {x: 0, y: 0, d: -1};
     var ua = ((rx4 - rx3) * (ry1 - ry3) - (ry4 - ry3) * (rx1 - rx3)) / uc;
     var ub = ((rx2 - rx1) * (ry1 - ry3) - (ry2 - ry1) * (rx1 - rx3)) / uc;
     if (!z) z = .000000001;
@@ -547,12 +484,18 @@ function splode(x, y, z) {
             break;
         case 1:
             pic1 = parseInt(Math.random() * 10);
-            do { pic2 = parseInt(Math.random() * 10); } while (pic2 == pic1);
+            do {
+                pic2 = parseInt(Math.random() * 10);
+            } while (pic2 == pic1);
             break;
         case 2:
             pic1 = parseInt(Math.random() * 10);
-            do { pic2 = parseInt(Math.random() * 10); } while (pic2 == pic1);
-            do { pic3 = parseInt(Math.random() * 10); } while (pic3 == pic1 || pic3 == pic2);
+            do {
+                pic2 = parseInt(Math.random() * 10);
+            } while (pic2 == pic1);
+            do {
+                pic3 = parseInt(Math.random() * 10);
+            } while (pic3 == pic1 || pic3 == pic2);
             break;
     }
     for (m = 1; m < t; ++m) {
@@ -790,66 +733,14 @@ function circleImg(ctx, img, x, y, r) {
 
 // 简单的模板替换引擎
 function substitute(str, o, regexp) {
-    return str.replace(regexp || /\\?\{([^{}]+)\}/g, function(match, name) {
+    return str.replace(regexp || /\\?\{([^{}]+)\}/g, function (match, name) {
         return (o[name] === undefined) ? '' : o[name];
     });
 }
 
-$(function() {
+$(function () {
 
     justGo(isMove);
-
-    // 关闭中奖后弹出的 modal
-    // $('#modal-close').click(function() {
-    //     if (!can_stop) {
-    //         console.error('还没结束，无法重开！');
-    //         return false;
-    //     }
-    //     $('#lottery-result').modal('hide');
-    // });
-
-    // 音乐开关
-    var music_local = (local_handle.get('music') == '') ? '1' : local_handle.get('music');
-    var music_config = {
-        music: document.getElementById('music'),
-        music_bool: (music_local == '1'),
-        init: function() {
-            if (this.music_bool) {
-                //                  this.play();
-            } else {
-                //                  this.music.pause();
-            }
-        },
-        play: function() {
-            this.music.play();
-            $('#music-control').addClass('animated infinite bounce');
-            local_handle.set('music', 1);
-            this.music_bool = true
-        },
-        pause: function() {
-            this.music.pause();
-            $('#music-control').removeClass('animated infinite bounce');
-            local_handle.set('music', 0);
-            this.music_bool = false;
-        }
-    };
-    music_config.init();
-    $('#music-control').click(function() {
-        if (music_config.music_bool) {
-            music_config.pause()
-        } else {
-            music_config.play();
-        }
-    });
-
-    // 清除数据开关
-    $('#clear-control').click(function() {
-        var sure = confirm('警告：确定清除所有数据？！');
-        if (sure) {
-            local_handle.clear();
-            window.location.reload();
-        }
-    });
 
     // 控制：显示/隐藏 抽奖名单和抽奖奖品显示
     if (local_handle.get("mingdan_toggle") == 1) {
@@ -867,22 +758,22 @@ $(function() {
         $('#liwu').show();
     }
 
-    $('#mingdan').click(function() {
+    $('#mingdan').click(function () {
         $(this).fadeIn();
         $('#mingdan-con').slideDown(1000);
         local_handle.set("mingdan_toggle", 1);
     });
-    $('#mingdan-title').click(function() {
+    $('#mingdan-title').click(function () {
         $('#mingdan-con').slideUp(1000);
         $('#mingdan').show();
         local_handle.set("mingdan_toggle", 0);
     });
-    $('#liwu').click(function() {
+    $('#liwu').click(function () {
         $(this).fadeOut();
         $('#liwu-con').slideDown(1000);
         local_handle.set("liwu_toggle", 1);
     });
-    $('#liwu-title').click(function() {
+    $('#liwu-title').click(function () {
         $('#liwu-con').slideUp(1000);
         $('#liwu').show();
         local_handle.set("liwu_toggle", 0);
@@ -921,50 +812,52 @@ $(function() {
         $('.award').eq(3).addClass('award-active');
         $('#lottery-btn').data('award', 4);
     }
-    $('.award').click(function() {
+    $('.award').click(function () {
         if (isStart) {
             console.error('正在抽奖ing，不允许更改奖项设置哦 ^_^');
             return false;
         }
         local_handle.set('select_award', $(this).data('award'));
         $('#lottery-btn').data('award', $(this).data('award'));
-        $(this).addClass(function() {
+        $(this).addClass(function () {
             return $(this).hasClass('award-active') ? false : 'award-active';
         }).siblings('.award').removeClass('award-active')
     });
+
     //开始抽奖fun
     function lottery_btn_fun() {
-            var lottery_size = $('#lottery-wrap .lottery-list').size();
-            var cur_lottery = $('#lottery-btn').data('award');
-            if (!cur_lottery) {
-                alert('请先设置好奖项再抽奖哦 ^_^');
-                return;
-            }
-
-            // if (award_log['award0' + cur_lottery] <= 0) {
-            //     alert('该奖项已经抽完啦，请选择其它奖项哦 ^_^！');
-            //     return;
-            // }
-
-            // 当本轮抽奖结束后，抽奖将会进入短暂休眠期，此时将不会响应抽奖行为
-            if (!isStart && !isMove) {
-                console.log('本轮已结束');
-                window.location.reload();
-                return false;
-            }
-
-            if (!isStart && isMove) {
-                startLottery();
-            } else if (isStart) {
-                stopLottery();
-            }
+        var lottery_size = $('#lottery-wrap .lottery-list').size();
+        var cur_lottery = $('#lottery-btn').data('award');
+        if (!cur_lottery) {
+            alert('请先设置好奖项再抽奖哦 ^_^');
+            return;
         }
-        // 开始抽奖按钮
-        // lottery_btn.click(lottery_btn_fun);
+
+        // if (award_log['award0' + cur_lottery] <= 0) {
+        //     alert('该奖项已经抽完啦，请选择其它奖项哦 ^_^！');
+        //     return;
+        // }
+
+        // 当本轮抽奖结束后，抽奖将会进入短暂休眠期，此时将不会响应抽奖行为
+        if (!isStart && !isMove) {
+            console.log('本轮已结束');
+            window.location.reload();
+            return false;
+        }
+
+        if (!isStart && isMove) {
+            startLottery();
+        } else if (isStart) {
+            stopLottery();
+        }
+    }
+
+    // 开始抽奖按钮
+    // lottery_btn.click(lottery_btn_fun);
 
 
     // 执行空格键操作，等价于执行 “抽奖按钮点击” 操作
-    $(document).keypress(function(e) {
+    $(document).keypress(function (e) {
         if (e.keyCode == 32) {
             lottery_btn.click();
         }
@@ -993,7 +886,7 @@ $(function() {
     var rooltop = 0;
     var rollheight = $("#roll").height();
     var rolldivheight = $("#roll-div").height() / 2;
-    var rooldinterval = setInterval(function() {
+    var rooldinterval = setInterval(function () {
         rooltop = rooltop - 2;
         if (Math.abs(rooltop) > (rolldivheight - rollheight)) {
             rooltop = 0;
@@ -1001,6 +894,7 @@ $(function() {
         $("#roll-div").css("top", rooltop + "px");
     }, 30)
 });
+
 //开始抽奖fun
 function lottery_btn_fun() {
     var lottery_size = $('#lottery-wrap .lottery-list').size();

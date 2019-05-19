@@ -1,0 +1,60 @@
+{extend name="public:base" /} {block name="head"}
+<link href="__PUBLIC__/view_res/mobile/css/product.css" type="text/css" rel="Stylesheet"/>
+<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
+<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
+<link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
+<script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
+<script src="__PUBLIC__/jquery-weui/dist/js/swiper.min.js"></script>
+
+<style>
+    .swiper-container {
+        width: 100%;
+    }
+
+    .swiper-container img {
+        display: block;
+        width: 100%;
+    }
+
+    .option_name {
+        margin-left: 5px;
+    }
+
+    /*重载jquery-weui.min.css中样式*/
+
+    label > * {
+        pointer-events: auto;
+    }
+</style>
+{/block} {block name="header"}
+{include file="public/top-nav" /}
+{/block}
+{block name="content"}
+
+<div id="container" style="font-weight:bold">
+    <ul>
+        {volist name="duobaoNumList" id="l"}
+        <li>{$l}</li>
+        {/volist}
+    </ul>
+    <div class='pd-box clearfix'>
+        {volist name="duobaoList" id="d"}
+        <div class='pd-box-inner'>
+            {if condition="!empty($d['userpic'])"}
+            <img src="{$d.userpic}" alt='{$d.nickname}'/>
+            {else/}
+            <img src="__RES__/mobile/images/icon/iconfont-iconname_2x.png"/>
+            {/if}
+            <p class='Elipsis'>昵称：{$d.nickname}</p>
+            <p class='Elipsis'>购买份额：{$d.num}</p>
+            <p class='Elipsis'>购买时间：{$d.dlasttime}</p>
+        </div>
+        </a>
+        {/volist}
+    </div>
+
+</div>
+{/block}
+
+{block name="script"}
+{/block}

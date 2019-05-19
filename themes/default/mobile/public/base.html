@@ -24,12 +24,13 @@
             </p>
         </div>
         <div class="weui_dialog_ft" style="font-size: 20px;margin-top: -10%;background: #352f69;color: white;border-radius: 5px;">
-            <a href=" " style="color: white" class="weui_btn_dialog primary" id="base-dialog-submit">确定</a>
+            <a href="javascript:void(0)" style="color: white" class="base_sound weui_btn_dialog primary" id="base-dialog-submit">确定</a>
         </div>
     </div>
     {block name="content"}{/block} {block name="footer"}{/block}
 </body>
-
+<script src="__PUBLIC__/act/guessing_game/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PUBLIC__/act/guessing_game/js/click.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var _hmt = _hmt || [];
     (function() {
@@ -42,13 +43,23 @@
         $("#base-dialog-weui").hide();
     })
 
-    function base_alert(info) {
+    function base_alert(info,url) {
         $("#base-dialog-info").html(info);
         $("#base-dialog-weui").show();
+        if(url){
+            $('#base-dialog-submit').attr('href',url);
+        }
     }
     function num_complement(num, length) {
         return (num/Math.pow(10,length)).toFixed(length).substr(2);
     }
+    var sd=new FUI.soundComponent({src:'__PUBLIC__/act/guessing_game/video/btn_dialog.mp3',altSrc:'__PUBLIC__/act/guessing_game/video/btn_dialog.mp3'});
+    $('.base_sound').click(function () {
+        sd.play();
+    });
+    $("#goods_list").delegate('.base_sound','click',function () {
+        sd.play();
+    })
 </script>
 
 

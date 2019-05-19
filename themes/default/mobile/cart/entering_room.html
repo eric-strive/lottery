@@ -1,60 +1,524 @@
-{extend name="public:base" /} {block name="head"}
-<link href="__PUBLIC__/view_res/mobile/css/product.css" type="text/css" rel="Stylesheet"/>
-<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
-<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
-<link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
-<script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
-<script src="__PUBLIC__/jquery-weui/dist/js/swiper.min.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/animate.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/draw.css" type="text/css">
+    <style>
+        #lottery-main {
+            width: 50%;
+            opacity: 0.5;
+            height: 60%;
+            margin-top: -1rem;
+        }
 
-<style>
-    .swiper-container {
-        width: 100%;
-    }
+        #lottery-main .content-detail {
+            font-size: 36px;
+            letter-spacing: 8px;
+            color: #a75980;
+            font-weight: bold;
+            height: 50%;
+        }
 
-    .swiper-container img {
-        display: block;
-        width: 100%;
-    }
+        #lottery-main .wrap-main {
+            height: 100%;
+        }
 
-    .option_name {
-        margin-left: 5px;
-    }
+        .fui-btn {
+            border-radius: 100px;
+        }
 
-    /*重载jquery-weui.min.css中样式*/
-
-    label > * {
-        pointer-events: auto;
-    }
-</style>
-{/block} {block name="header"}
-{include file="public/top-nav" /}
-{/block}
-{block name="content"}
-
-<div id="container" style="font-weight:bold">
-    <ul>
-        {volist name="duobaoNumList" id="l"}
-        <li>{$l}</li>
-        {/volist}
-    </ul>
-    <div class='pd-box clearfix'>
-        {volist name="duobaoList" id="d"}
-        <div class='pd-box-inner'>
-            {if condition="!empty($d['userpic'])"}
-            <img src="{$d.userpic}" alt='{$d.nickname}'/>
+        #i_tixian .shiyongjilu .tx_list {
+            word-break: break-all;
+            overflow: scroll;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+<div class="h_header">
+    <div class="hea_min hea_min1 fl_l fui-btn">
+        <div class="hid_img">
+            {if condition="!empty($homeUserInfo['userpic'])"}
+            <img src="{$homeUserInfo.userpic}" alt="">
             {else/}
-            <img src="__RES__/mobile/images/icon/iconfont-iconname_2x.png"/>
+            <img src="__PUBLIC__/act/guessing_game/img/header.jpg" alt="">
             {/if}
-            <p class='Elipsis'>昵称：{$d.nickname}</p>
-            <p class='Elipsis'>购买份额：{$d.num}</p>
-            <p class='Elipsis'>购买时间：{$d.dlasttime}</p>
         </div>
-        </a>
-        {/volist}
+        <div class="hid_name">{$homeInfo.home_name} <i class="dj dj1"></i></div>
     </div>
-
+    <div class="hea_min hea_min2 fl_r">
+        <div class="h_xzz">
+            <i class="zsyc"></i>
+            <span>&nbsp;&nbsp;&nbsp;房间号:{$homeInfo.home_num}</span>
+        </div>
+        <div class="tuichu"><i class="tcsde"></i></div>
+    </div>
 </div>
-{/block}
+<div id="home">
+    <div class="meinv clearfix">
+        <div class="meinv-left fl">
+            <ul>
+                {for start='0' end='5' step='1' name='i'}
+                <li>
+                    {if condition="isset($duobaoList[$i]['dduonums'])"}
+                    {if condition="!empty($duobaoList[$i]['userpic'])"}
+                    <img att="{$duobaoList[$i]['dduonums']}" src="{$duobaoList[$i]['userpic']}"
+                         alt="{$duobaoList[$i]['nickname']}" class="fui-btn user-info"/>
+                    {else/}
+                    <img att="{$duobaoList[$i]['dduonums']}" src="__PUBLIC__/act/guessing_game/img/header.jpg"
+                         class="fui-btn user-info"/>
+                    {/if}
+                    <span>份额：{$duobaoList[$i]['num']}</span>
+                    {else/}
+                    <img src="__PUBLIC__/act/guessing_game/img/header.jpg" class="fui-btn">
+                    {/if}
+                </li>
+                {/for}
+            </ul>
+        </div>
+        <div class="bg-meinv fl">
+            <div id="yanhua" class="none">
+                <div id="lottery-main" class="lottery-main">
+                    <div class="wrap-main">
+                        <div class="lottery-wrap" id="lottery-wrap">
+                            {volist name="duobaoNumList" id="n"}
+                            <div class="clearfix lottery-list" data-id="" data-namezh="{$n}" data-nameen="avatar1">
+                                <div class="f-l lottery-content">
+                                    <div class="content-detail">
+                                        <span>{$n}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {/volist}
+                        </div>
+                    </div>
 
-{block name="script"}
-{/block}
+                    <!--抽奖按钮-->
+                    <div class="dashboard">
+                        <div class="btn btn-red-outline lottery-btn none" id="lottery-btn" data-award="111">点击开始</div>
+                    </div>
+                </div>
+
+                <!-- 中奖弹框 -->
+                <button class="close" id="modal-close" data-dismiss="modal" style="visibility: hidden;">
+                    <span aria-hidden="true" class="btn_x">&times;</span>
+                </button>
+                <div class="modal fade" id="lottery-result" role="dialog" aria-hidden="true">
+                    <canvas id="canvas" style="margin-top:-100%"></canvas>
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="height: calc(100% - 40px);padding-top: 40px;">
+                            <canvas id="lottery-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- 中奖者数据展示模板 start -->
+                <script type="text/template" id="awardcon-tpl">
+                    <li class="clearfix win-li">
+                        <div class="avatar">
+                        </div>
+                        <div class="name">中奖名称</div>
+                        <a class="f-l delete" href="javascript:;">&times;</a>
+                    </li>
+                </script>
+                <!-- 中奖者数据展示模板 end -->
+
+                <!--音乐开关-->
+                <a id="music-control" class="animated infinite bounce" href="javascript:;" data-open="1"></a>
+                <!--清除数据开关-->
+                <a id="clear-control" href="javascript:;" data-open="1"></a>
+
+                <audio id="music" loop preload="auto" src="/public/static/js/draw/shiji.mp3">
+                    你的浏览器不支持audio标签
+                </audio>
+            </div>
+        </div>
+        <div class="meinv-right fr">
+            <ul>
+                {for start='5' end='10' step='1' name='i'}
+                <li>
+                    {if condition="isset($duobaoList[$i]['dduonums'])"}
+                    {if condition="!empty($duobaoList[$i]['userpic'])"}
+                    <img att="{$duobaoList[$i]['dduonums']}" src="{$duobaoList[$i]['userpic']}"
+                         alt="{$duobaoList[$i]['nickname']}" class="fui-btn user-info"/>
+                    {else/}
+                    <img att="{$duobaoList[$i]['dduonums']}" src="__PUBLIC__/act/guessing_game/img/header.jpg"
+                         class="fui-btn user-info"/>
+                    {/if}
+                    <span>份额：{$duobaoList[$i]['num']}</span>
+                    {else/}
+                    <img src="__PUBLIC__/act/guessing_game/img/header.jpg" class="fui-btn">
+                    {/if}
+                </li>
+                {/for}
+            </ul>
+        </div>
+    </div>
+    <div id="nav-bottom">
+        <ul class="clearfix">
+            <li>
+                <div>
+                    <a href="#"><img src="__PUBLIC__/act/guessing_game/img/jingjiren.png"></a>
+                </div>
+
+            </li>
+            <li class="wid40">
+                <div class="btn butdonghua fui-btn">
+                    <a class="jinruyouxi"
+                       href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id'],'sign'=>$homeInfo['sign']))}">
+                        <img src="__PUBLIC__/act/guessing_game/img/icon_home_classical.png" alt="">
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <a href="javascript:location.reload();">
+                        <img src="__PUBLIC__/act/guessing_game/img/paihangbang.png"/>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="i_tixian" class="none">
+    <div class="i_header">
+        <h1>购买号码列表</h1>
+    </div>
+    <div class="ui-content">
+        <div class="shiyongjilu">
+            <div class="tx_list">
+
+            </div>
+        </div>
+    </div>
+    <div data-role="footer">
+        <h1>
+            <a class="guanbitanchuang" data-rel="back">关闭</a>
+        </h1>
+    </div>
+    <div>
+        <div class="close fui-btn" onclick="bounceInUp(this)"></div>
+    </div>
+</div>
+<div class="head_deloa">
+    <div class="head_content">
+        <div class="closeee fui-btn"></div>
+        <div class="dl_header">
+            <div class="eadimg fl_l">
+                {if condition="!empty($homeUserInfo['userpic'])"}
+                <img src="{$homeUserInfo.userpic}" alt="">
+                {else/}
+                <img src="__PUBLIC__/act/guessing_game/img/header.jpg" alt="">
+                {/if}
+            </div>
+            <div class="useinfo fl_l">
+                <div class="nammme">
+                    <div class="nana fl_l">{$homeUserInfo['nickname']}</div>
+                    <div class="phone fl_r"><i class="icophone"></i></div>
+                </div>
+                <div class="moneyy">
+                    <div class="h_xzz">
+                        <i class="zsyc"></i>
+                        <span>&nbsp;&nbsp;&nbsp;房间号:00234</span>
+                    </div>
+                </div>
+            </div>
+            <div class="setingg">
+                <!--                <div class="fl_l"><a href=""></a></div>-->
+                <div class="fl_l l">音乐</div>
+                <div class="yinyuekg">
+                    <i class="gdd"></i>
+                    <span class="kai">ON</span>
+                    <span class="guan">OFF</span>
+                </div>
+                <div class="fl_l l">音效</div>
+                <div class="yinxiao">
+                    <i class="gdd"></i>
+                    <span class="kai">ON</span>
+                    <span class="guan">OFF</span>
+                </div>
+            </div>
+        </div>
+        <div class="xianxixinxi">
+            <div class="hd_v">
+                <div class="ll">用户</div>
+                <div class="ll">份额</div>
+            </div>
+            <div class="listt">
+                <ul>
+                    {volist name="duobaoList" id="d"}
+                    <li><span>{$d.nickname}</span></li>
+                    <li style="text-align:center;"><span>{$d.num}</span></li>
+                    {/volist}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="__PUBLIC__/act/guessing_game/js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PUBLIC__/act/guessing_game/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PUBLIC__/act/guessing_game/js/click.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PUBLIC__/js/draw/underscore.js"></script>
+<script src="__PUBLIC__/js/draw/boot-modal.js"></script>
+<script src="__PUBLIC__/js/draw/snow-plugin.js"></script>
+<script src="__PUBLIC__/js/draw/pc_draw.js"></script>
+<script src="__PUBLIC__/num_move/js/num.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    $('.head_deloa .closeee').click(function () {
+        $('.head_deloa').hide()
+    });
+    $('.h_header .hea_min1').click(function () {
+        $('.head_deloa').show()
+    });
+
+    $('.chongzhi .closeee').click(function () {
+        $('.chongzhi').hide()
+    });
+    $('.hd .buyao').click(function () {
+        $('.chonzghi2').show();
+        $('.chongzhi').hide()
+    });
+    $('.chonzghi2 .closeee').click(function () {
+        $('.chonzghi2').hide()
+    });
+    $('.playyy .closeee').click(function () {
+        $('.playyy').hide()
+    });
+    $('.jinruyouxi').click(function () {
+        $('.playyy').show()
+    });
+
+    var sd = new FUI.soundComponent({
+        src: '__PUBLIC__/act/guessing_game/video//btn_dialog.mp3',
+        altSrc: '__PUBLIC__/act/guessing_game/video//btn_dialog.mp'
+    });
+    var returnz = new FUI.soundComponent({
+        src: '__PUBLIC__/act/guessing_game/video//return.mp3',
+        altSrc: '__PUBLIC__/act/guessing_game/video//return.mp'
+    });
+    var all_bg = new FUI.soundComponent({
+        src: '__PUBLIC__/act/guessing_game/video//all_bg.mp3',
+        altSrc: '__PUBLIC__/act/guessing_game/video//all_bg.mp',
+        loop: true
+    });
+    if (!($('.yinyuekg').hasClass('o'))) {
+        $('.fui-btn').bind('click', function (e) {
+            if (!($('.yinxiao').hasClass('o'))) {
+                sd.play();
+            }
+        });
+        $('.tuichu').bind('click', function (e) {
+            if (!($('.yinxiao').hasClass('o'))) {
+                returnz.play();
+            }
+        });
+        // all_bg.play();
+    }
+
+    $('.yinyuekg').click(function () {
+        if ($(this).hasClass('o')) {
+            $(this).removeClass('o');
+            all_bg.play();
+        } else {
+            $(this).addClass('o');
+            all_bg.stop();
+        }
+    });
+    $('.yinxiao').click(function () {
+        if ($(this).hasClass('o')) {
+            $(this).removeClass('o');
+            $('.fui-btn').bind('click', function (e) {
+                sd.play();
+            });
+        } else {
+            $(this).addClass('o');
+            $('.fui-btn').bind('click', function (e) {
+                sd.stop();
+            });
+        }
+    });
+    $('.paihangbang .hd .l').click(function () {
+        $(this).addClass('active').siblings().removeClass('active');
+        $('.paihangbang .list .vc').eq($(this).index()).show().siblings().hide();
+    }).eq(0).click();
+    $(".paihangbang .closeee").click(function () {
+        $(".paihangbang").hide();
+    });
+    $('.quanminpaihangbang').click(function () {
+        $(".paihangbang").show();
+    })
+
+    $('.user-info').on('click', function () {
+        var donum = $(this).attr('att');
+        $("#i_tixian").find('.tx_list').html(donum);
+        $("#i_tixian").removeClass('none').addClass('show');
+    })
+    $('#hide').on('click', function () {
+        $("#serviceView").removeClass('show').addClass('none');
+    });
+    //定时检查是否开奖
+    var setTime = 3000;
+    var lottery_num = '{$homeInfo["lottery_num"]}';
+    var home_id = '{$homeInfo["id"]}';
+    var lottery_status = '{$homeInfo["status"]}';
+
+    function checkLottery() {
+        $.post("{:url('home/is_full')}", {
+                'home_id': home_id,
+            },
+            function (r) {
+                // console.log('r', r);
+                if (r.status > 0) {
+                    //这里需要放烟花
+                    // alert('开奖啦！中奖号码是' + r.lottery_num);
+                    $('#lottery-wrap').html(r.numHtml)
+                    $("#lottery-btn").attr('data-award', r.lottery_num);
+                    $('#yanhua').fadeIn();
+                    // //一进来就开始滚动抽奖
+                    justGo(true);
+                    startLottery()
+                    setTimeout(stopLottery,2000);
+                    // //
+                    // setTimeout(() => {
+                    //     lottery_btn_fun();
+                    // }, 5000);
+                    if (r.is_self > 0) {
+                        // base_alert('恭喜你中奖了')
+                    }
+                    return true;
+                } else {
+                    setTimeout(checkLottery, setTime);
+                }
+            });
+    }
+
+    setTimeout(checkLottery, 10000);
+    // setTimeout(stopLottery, 2000);
+    // if (lottery_status > 0) {
+    //     //这里不需要放烟花
+    //     alert('已开奖，中奖号码是' + lottery_num);
+    //     // location.href = "/mobile";
+    // } else {
+    //     setTimeout(checkLottery, setTime);
+    // }
+</script>
+<script>
+    '{if condition="in_wechat()"}'
+    wx.config({
+        debug: false,
+        appId: '{$signPackage.appId}',
+        timestamp: '{$signPackage.timestamp}',
+        nonceStr: '{$signPackage.nonceStr}',
+        signature: '{$signPackage.signature}',
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'onMenuShareQZone',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard',
+            'chooseWXPay'
+        ]
+    });
+    '{/if}'
+    // 2. 分享接口
+    // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
+    wx.ready(function () {
+        wx.onMenuShareAppMessage({
+            title: '好友邀请',
+            desc: '老铁，我已经把房开好了，来不来就看你了',
+            link: "http://{$_SERVER['HTTP_HOST']}{:url('mobile/cart/entering_room&home_id='.$homeInfo['id'].'&sign='.$homeInfo['sign'])}",
+            //&home_id=.$home_id.&sign=.$homeInfo[sign]
+            imgUrl: "http://{$_SERVER['HTTP_HOST']}IMG_ROOT{$goods.image}",
+            trigger: function (res) {
+                // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                //                    alert('用户点击发送给朋友');
+            },
+            success: function (res) {
+                //                    alert('已分享');
+            },
+            cancel: function (res) {
+                //                    alert('已取消');
+            },
+            fail: function (res) {
+                alert(JSON.stringify(res));
+            }
+        });
+
+        // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+        //            document.querySelector('#juantuijian').onclick = function () {
+        wx.onMenuShareTimeline({
+            title: '好友邀请',
+            desc: '老铁，我已经把房开好了，来不来就看你了',
+            link: "http://{$_SERVER['HTTP_HOST']}{:url('mobile/cart/entering_room&home_id='.$homeInfo['id'].'&sign='.$homeInfo['sign'])}",
+            imgUrl: "http://{$_SERVER['HTTP_HOST']}IMG_ROOT{$goods.image}",
+            trigger: function (res) {
+                // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                //                    alert('用户点击分享到朋友圈');
+            },
+            success: function (res) {
+                //                    alert('已分享');
+            },
+            cancel: function (res) {
+                //                    alert('已取消');
+            },
+            fail: function (res) {
+                alert(JSON.stringify(res));
+            }
+        });
+        wx.hideMenuItems({
+            menuList: [
+                "menuItem:exposeArticle",
+                "menuItem:share:qq",
+                "menuItem:copyUrl",
+                "menuItem:share:QZone",
+                "menuItem:originPage",
+                "menuItem:openWithQQBrowser",
+                "menuItem:openWithSafari",
+                "menuItem:share:email",
+                'menuItem:copyUrl' // 复制链接
+            ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+        });
+    });
+    wx.error(function (res) {
+        alert(res.errMsg);
+    });
+</script>
+</html>

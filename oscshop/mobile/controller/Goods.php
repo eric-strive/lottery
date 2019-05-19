@@ -173,6 +173,7 @@ class Goods extends MobileBase
         }
         $this->assign('goodsInfo', $goodsInfo);
         $this->assign('isLottery', $isLottery);
+        $this->assign('top_title', '抽奖');
         return $this->fetch('luck_success');
     }
 

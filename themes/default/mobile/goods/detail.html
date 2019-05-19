@@ -3,9 +3,6 @@
 <link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet" />
 <link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet" />
 <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
-<script src="__PUBLIC__/js/fontsize.js"></script>
-<script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
-<script src="__PUBLIC__/jquery-weui/dist/js/swiper.min.js"></script>
 
 <style>
     .swiper-container {
@@ -76,7 +73,7 @@
             <dt>库存量：</dt>
             <dt id="pd-stock">{$goods.quantity}</dt>
         </dl>
-        <a class="uc-add-like collectBtn">收藏</a>
+        <a class="uc-add-like collectBtn base_sound">收藏</a>
     </div>
     {if condition="!empty($discount)"}
     <dl class="pd-dsc clearfix" id="product_stock_wrap">
@@ -214,7 +211,7 @@
                     <input type="hidden" class="home_id" value="{$h.id}" placeholder="">
                 </div>
                 <div class="box2 flex-col-center">
-                    <input type="button" class="join_home" value="进入">
+                    <input type="button" class="join_home base_sound" value="进入">
                 </div>
             </div>
             <div class="flex-row margin" style="text-align: right;">
@@ -225,7 +222,7 @@
     </div>
 </div>
 <header class="Thead" id="vpd-detail-header">产品详情</header>
-<div id="vpd-content" class="notload">点击查看产品详情</div>
+<div id="vpd-content" class="notload base_sound">点击查看产品详情</div>
 <div class='pd-box clearfix'>
     {volist name="duobaoList" id="d"}
     <div class='pd-box-inner'>
@@ -266,11 +263,15 @@
 {else/}
 <div id="appCartWrap" class="clearfix flex-row-end">
 
-    <a href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id']))}" id="buy-button" class="flex-row-center" data-add="0">立即参与</a>
-    <a id="addcart-button" data-add="1" href="{:url('goods/luck',array('id'=>$goods['goods_id']))}" class="flex-row-end" data-add="0">幸运购</a>
+    <a href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id']))}" id="buy-button" class="flex-row-center base_sound" data-add="0">立即参与</a>
+    <a id="addcart-button" data-add="1" href="{:url('goods/luck',array('id'=>$goods['goods_id']))}" class="flex-row-end base_sound" data-add="0">幸运购</a>
     <!--<a id="toCart" href="{:url('cart/index')}"></a>-->
 </div>
-{/if} {/block} {block name="script"}
+{/if}
+{/block} {block name="script"}
+<script src="__PUBLIC__/js/fontsize.js"></script>
+<script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
+<script src="__PUBLIC__/jquery-weui/dist/js/swiper.min.js"></script>
 <script>
     $(function() {
 

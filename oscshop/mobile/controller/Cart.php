@@ -15,6 +15,7 @@
 namespace osc\mobile\controller;
 
 use osc\admin\model\duobaoRecord;
+use osc\admin\model\Member;
 use osc\mobile\service\OrderProcess;
 use osc\mobile\validate\Address;
 use \think\Db;
@@ -119,11 +120,11 @@ class Cart extends MobileBase
             session('jssdk_order', null);
         }
         $homeId = input('home_id');
-        $password = input('password');
+        $sign = input('sign');
         $homeInfo = HomeModel::home_info_by_gid('', $homeId, 1);
         $gid = $homeInfo['gid'];
-        if (!empty($homeInfo['password']) && $homeInfo['uid'] != $uid && $homeInfo['password'] != $password) {
-            $this->error('该房间访问需要密码！', url('mobile/goods/detail', array('id' => $gid)));
+        if (!empty($homeInfo['password']) && $homeInfo['uid'] != $uid && $homeInfo['sign'] != $sign) {
+            $this->error('你没有权限访问该房间！', url('mobile/goods/detail', array('id' => $gid)));
         }
         if (!$list = osc_goods()->get_goods_info($gid)) {
             $this->error('商品不存在！！');
@@ -461,15 +462,29 @@ class Cart extends MobileBase
 
     public function entering_room()
     {
+        if (in_wechat()) {
+            $wechat = wechat();
+            //调用微信收货地址接口，需要开通微信支付
+            $this->assign('signPackage', $wechat->getJsSign(request()->url(true)));
+            session('jssdk_order', null);
+        }
         $home_id = (int)input('param.home_id');
 //        $sign = (int)input('param.sign');
         $homeInfo = HomeModel::home_info_by_sign($home_id);
         if (empty($homeInfo)) {
             $this->error('您没有访问权限');
         }
+        if (!$list = osc_goods()->get_goods_info($homeInfo['gid'])) {
+            $this->error('商品不存在！！');
+        }
+        $list['goods']['image'] = resize($list['goods']['image'], 80, 80);
+        $homeUserInfo = Member::getMemberInfo($homeInfo['uid']);
         $duobaoList = duobaoRecord::getNumbers($home_id);
         $duobaoNumList = duobaoRecord::getDuobaoNum($home_id);
+        $this->assign('goods', $list['goods']);
+        $this->assign('homeUserInfo', $homeUserInfo);
         $this->assign('duobaoList', $duobaoList);
+        $this->assign('homeInfo', $homeInfo);
         $this->assign('duobaoNumList', $duobaoNumList);
         $this->assign('SEO', ['title' => '房间-' . config('SITE_TITLE')]);
         $this->assign('top_title', '私房');

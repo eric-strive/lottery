@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>经纪人</title>
+    <link rel="stylesheet" href="css/share.css">
+</head>
+<body>
+<div data-role="page" id="page_share" data-dom-cache="true">
+    <style>
+
+    </style>
+    <div class="share_con">
+        <div class="s_top_donghua">
+            <div class="zhuanpan1"><img src="img/share/bg1_03.png" alt=""></div>
+            <div class="zhuanpan2"><img src="img/share/bg2_03.png" alt=""></div>
+            <div class="wennzi"><img src="img/share/zt_03.png" alt=""></div>
+            <div class="yuanqiu preview-item shake shake-chunk shake-constant" ><img src="img/share/zt_0c3.png" alt=""></div>
+        </div>
+        <div class="h_yaq_gui">
+            <div class="s_header">
+                <img src="img/header.jpg" width="80" height="80" alt="">
+            </div>
+<!--             <div class="wdyq">我的邀请 <b>0</b>人</div> -->
+            <div class="liji_btn"><a class="fenxiangl" href="javascript:void(0)"><img src="img/share/button_07.png" alt=""></a></div>
+            <div class="g_z_jieshao">
+                <div class="hd">
+                    <span class="zuo"></span>
+                    <span class="you"></span>
+                </div>
+                <div class="con_tent">
+                    <h2>规则说明</h2>
+                    <div class="nrr">
+                        <div>1、好友充钻，即可获得 <b>10</b> 颗钻石</div>
+                        <div>2、好友竞猜，获得高达 <b>5%</b> 钻石奖励</div>
+                        <div>3、好友在您的邀请下注册成为新用户，ta即可获得 <b>10</b> 颗钻石</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="all_fot" class="all_fot"></div>
+    <style>
+
+    </style>
+    <div class="boxx">
+        <div class="fx_nr">
+            <div class="i">
+                <div class="picc" id="picc">
+                    <div class="imhgh"><img src="img/tcy.jpg" alt=""></div>
+                    <div id="erweiamma" class="erweiamma"></div>
+                    <a href="javascript:void(0)" class="closee"></a>
+                </div>
+            </div>
+            <!--<div class="fx_zt">-->
+                <!--点击这里即可分享好友或朋友圈哦！-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/jquery-2.0.3.min.js"></script>
+<script src="js/jquery.qrcode.min.js"></script>
+<script type="text/javascript" src="js/html2canvas.js"></script>
+<script>
+    $('.fenxiangl').on("click", function () {
+        saveImg();
+        $('.boxx').show();
+    });
+    $('.boxx .fx_nr a').on("click", function () {
+        $('.boxx').hide();
+    })
+    var videoName="全民竞猜";
+    var videoIntrodiction="30秒制胜，全民竞猜,不投资，也能赚一笔。";
+    var videoDownloadurl="";
+    var conver= 'http://img/quanminzhangdiejingcai.jpg';
+    var linkUrl = "http://www.aaa.com";
+    $('#erweiamma').qrcode({width: 85,height: 85,text: linkUrl});
+    function saveImg(){
+//    event.preventDefault();
+        html2canvas(document.getElementById("picc"), {
+            allowTaint: true,
+            taintTest: false,
+            onrendered: function(canvas) {
+                canvas.id = "mycanvas";
+                //生成base64图片数据
+                var dataUrl = canvas.toDataURL();
+                var newImg = document.createElement("img");
+                newImg.src =  dataUrl;
+                $('#picc .erweiamma').hide();
+                $('#picc .imhgh').empty().append(newImg);
+            }
+        });
+    }
+</script>
+</html>

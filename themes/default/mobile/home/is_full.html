@@ -1,9 +1,8 @@
 {volist name="numList" id="n"}
-<div class="clearfix lottery-list" data-id="" data-namezh="{:substr($n,2)}" data-nameen="avatar1">
+<div class="clearfix lottery-list" data-id="award-{$n}" data-namezh="{$n}" data-nameen="avatar1">
     <div class="f-l lottery-content">
         <div class="content-detail">
-            <b>抽奖号码：</b>
-            <span>{:substr($n,2)}</span>
+            <span>{$n}</span>
         </div>
     </div>
 </div>
