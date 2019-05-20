@@ -24,7 +24,8 @@
             padding-top: 45%;
             padding-bottom: 50%;
         }
-        .luck-lottery{
+
+        .luck-lottery {
             position: absolute;
             margin-top: 50%;
             display: none;
@@ -190,8 +191,6 @@
                     alert('订单创建失败！' + r.ret_msg);
                 }
             });
-
-
     }
 
     /**
@@ -201,7 +200,7 @@
      */
     function wepayCallback(res) {
         if (res.errMsg == "chooseWXPay:ok") {
-            location.href = "{:url('mobile/goods/luck/',array('id'=>$goods['goods_id']))}"+'&order_no='+order_no;
+            location.href = "{:url('mobile/goods/luck/',array('id'=>$goods['goods_id']))}" + '&order_no=' + order_no;
 
             $('#wechat-payment-btn').removeClass('disable').html('微信支付');
         } else {
@@ -404,7 +403,7 @@
     $(function () {
         var $isLottery = "{$isLottery}";
         var order_no = order_no;
-        if(order_no){
+        if (order_no) {
             $(".luck-lottery").show();
         }
         var is_win = 0
