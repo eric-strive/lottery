@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="text/javascript" src="__PUBLIC__/js/fontsize.js"></script>
-    <link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
-    <link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
+    <link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet" />
+    <link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet" />
     <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
     <link rel="stylesheet" href="__PUBLIC__/act/luck/css/base.css">
-    <link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
     <script src="__PUBLIC__/js/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
     <title>幸运购</title>
@@ -18,95 +17,100 @@
         body {
             background: #980202;
         }
-
+        
         .bg-info {
             background: url('__PUBLIC__/act/luck/images/bg.png') no-repeat;
             padding-top: 45%;
             padding-bottom: 50%;
         }
-
+        
         .luck-lottery {
             position: absolute;
             margin-top: 50%;
-            display: none;
+            z-index: 101;
         }
     </style>
 </head>
 
 <body>
-<div class="luck-con">
-    <div class="luck-lottery">
-        <div class="game-content">
-            <img src="__PUBLIC__/act/luck/images/2p.png">
-            <div class="game-goods-wrap">
-                <div class="game-goods-list">
-                    <div class="game-goods" style="background: #ffffff;">
-                        <div class="game-goods-box" id="game1">
-                            <ul class="game-goods-ul" style="">
+    <div class="luck-con">
+        <div class="luck-show none">
+            <div class="weui_mask weui_mask_visible"></div>
+            <div class="luck-lottery" style="">
+                <div class="game-content">
+                    <img src="__PUBLIC__/act/luck/images/2p.png">
+                    <div class="game-goods-wrap">
+                        <div class="game-goods-list">
+                            <div class="game-goods" style="background: #ffffff;">
+                                <div class="game-goods-box" id="game1">
+                                    <ul class="game-goods-ul" style="">
 
-                            </ul>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="game-goods" style="background: #ffffff;">
+                                <div class="game-goods-box" id="game2">
+                                    <ul class="game-goods-ul" style="">
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="game-goods" style="background: #ffffff;">
+                                <div class="game-goods-box" id="game3">
+                                    <ul class="game-goods-ul">
+
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="game-goods" style="background: #ffffff;">
-                        <div class="game-goods-box" id="game2">
-                            <ul class="game-goods-ul" style="">
-
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="game-goods" style="background: #ffffff;">
-                        <div class="game-goods-box" id="game3">
-                            <ul class="game-goods-ul">
-
-                            </ul>
-                        </div>
-                    </div>
+                    <a class="game-rule" href="javascript:void(0);" style="display: none;"></a>
+                    <!-- <span class="game-btn"></span> -->
+                    <a class="game-prize" href="javascript:void(0);"></a>
+                </div>
+                <div class="weui_opr_area" style="background: #980202;">
+                    <p class="weui_btn_area">
+                        <!-- href="{:url('mobile/goods/luck',array('id'=>$goods.goods_id))}" -->
+                        <a class="weui_btn weui_btn_primary" id="bug_again">再嗨一次</a>
+                    </p>
                 </div>
             </div>
-            <a class="game-rule" href="javascript:void(0);" style="display: none;"></a>
-            <span class="game-btn"></span>
-            <a class="game-prize" href="javascript:void(0);"></a>
-        </div>
-        <div class="weui_opr_area" style="background: #980202;">
-            <p class="weui_btn_area">
-                <a href="{:url('mobile/goods/luck',array('id'=>$goods.goods_id))}" class="weui_btn weui_btn_primary">再嗨一次</a>
-            </p>
-        </div>
-    </div>
-    <nav>
-        <a href="javascript:window.history.go(-1)" onclick="">返回</a>
-    </nav>
-    <div class="luck-cen">
-        <div class="flex-col-center luck-cen-gl">
-            <p>本次中奖概率</p>
-            <p id="percentage">0.10%</p>
-        </div>
-        <div class="flex-row-center luck-cen-btnBox">
-            <input type="button" att="1" value="1元嗨" class="selected">
-            <input type="button" att="3" value="x3倍">
-            <input type="button" att="5" value="x5倍">
-        </div>
-        <div class="flex-row luck-cen-bottom">
-            <img src="IMG_ROOT{$goods.image}" alt="">
-            <div class="flex-col-center">
-                <input type="hidden" id="pay_mount" value="1.01">
-                <input type="hidden" id="original-price" value="{$goods.price}">
-                <input type="hidden" id="subject-price" value="{$goods.name}">
-                <p class="prices">抽奖价:<span>￥<em id="pay_value">1</em></span></p>
-                <p class="original-price">￥{$goods.price}</p>
-            </div>
 
         </div>
+        <nav>
+            <a href="javascript:window.history.go(-1)" onclick="">返回</a>
+        </nav>
+        <div class="luck-cen">
+            <div class="flex-col-center luck-cen-gl">
+                <p>本次中奖概率</p>
+                <p id="percentage">0.10%</p>
+            </div>
+            <div class="flex-row-center luck-cen-btnBox">
+                <input type="button" att="1" value="1元嗨" class="selected">
+                <input type="button" att="3" value="x3倍">
+                <input type="button" att="5" value="x5倍">
+            </div>
+            <div class="flex-row luck-cen-bottom">
+                <img src="IMG_ROOT{$goods.image}" alt="">
+                <div class="flex-col-center">
+                    <input type="hidden" id="pay_mount" value="1.01">
+                    <input type="hidden" id="original-price" value="{$goods.price}">
+                    <input type="hidden" id="subject-price" value="{$goods.name}">
+                    <p class="prices">抽奖价:<span>￥<em id="pay_value">1</em></span></p>
+                    <p class="original-price">￥{$goods.price}</p>
+                </div>
+
+            </div>
+        </div>
+        <p class="luck-p">采用绝对公平公开的算法</p>
+        <input class="luck-btn" id="wechat-payment-btn" type="button" value="马上嗨一把">
     </div>
-    <p class="luck-p">采用绝对公平公开的算法</p>
-    <input class="luck-btn" id="wechat-payment-btn" type="button" value="马上嗨一把">
-</div>
 </body>
 <script>
-    $(function () {
+    $(function() {
         var num = randomShu();
         var originalPrice = $('#original-price').val();
-        $('.luck-cen-btnBox input').on('click', function () {
+        $('.luck-cen-btnBox input').on('click', function() {
             $(this).siblings().removeClass('selected');
             $(this).addClass('selected');
             var att = $(this).attr('att');
@@ -165,7 +169,7 @@
                 'gid': gid,
                 'attach': '2',
             },
-            function (r) {
+            function(r) {
                 if (r.error) {
                     $.toast(r.error, "forbidden");
                     return;
@@ -227,12 +231,11 @@
 </script>
 <script type="text/javascript" src="__PUBLIC__/act/luck/js/jquery.min.js"></script>
 <script type="text/javascript">
-
     $.extend({
-        luckGame: function (options) {
+        luckGame: function(options) {
             var defaults = {
                 'gameLen': '15',
-                'game_pagesize': 10,//生成多少圈同样的东西
+                'game_pagesize': 10, //生成多少圈同样的东西
                 'zj_arr': { //中奖数组，第一个表示是否中奖，第二个中奖号码
                     'is_win': 1,
                     'number': 17
@@ -255,7 +258,7 @@
                 game_init.push(Math.floor(Math.random() * gameLen));
             }
             createGame();
-            $(window).resize(function () {
+            $(window).resize(function() {
 
                 createGame();
             })
@@ -282,7 +285,11 @@
 
                 for (var j = 1; j <= settings.game_pagesize; j++) {
                     for (var i = 1; i <= 10; i++) {
-                        gameArr.push({'type': j, 'index': i, 'src': '__PUBLIC__/act/luck/images/' + i + '.jpg'});
+                        gameArr.push({
+                            'type': j,
+                            'index': i,
+                            'src': '__PUBLIC__/act/luck/images/' + i + '.jpg'
+                        });
                     }
                 }
 
@@ -296,7 +303,7 @@
                 for (var i = 0; i < arr.length; i++) {
                     html_str += '<li style="height:' + game_list_item_h + 'px" data-index="' + arr[i]['index'] + '" data-type="' + arr[i]['type'] + '"><img src="' + arr[i]['src'] + '"></li>';
                 }
-                $(".game-goods-ul").each(function (e) {
+                $(".game-goods-ul").each(function(e) {
                     $(this).empty().append(html_str);
                     game_list_h = $(this).height();
                     console.log('game_list_item_h', game_init);
@@ -312,78 +319,78 @@
             }
 
             function start() {
-                $(".game-btn").click(function () {
+                // $(".game-btn").click(function() {
 
-                    //如果中奖
-                    if (settings.zj_arr.is_win == 1) {
+                //如果中奖
+                if (settings.zj_arr.is_win == 1) {
 
-                        $(".game-goods-ul").each(function (e) {
+                    $(".game-goods-ul").each(function(e) {
 
-                            setTimeout(function () {
-                                y = (settings.zj_arr.number + settings.gameLen * (settings.game_pagesize - 1)) * game_list_item_h;
-                                $(".game-goods-ul").eq(e).css({
-                                    'transition-duration': '5000ms',
-                                    'transform': 'translate(0px, -' + y + 'px) translateZ(0px)'
-                                })
-                            }, e * 300);
-                            //判断最后面是否完毕
-                            $("#game3").find(".game-goods-ul").on("webkitTransitionEnd", function () {
-                                y = settings.zj_arr.number * game_list_item_h;
-                                $(".game-goods-ul").css({
-                                    'transition-duration': '0ms',
-                                    'transform': 'translate(0px, -' + y + 'px) translateZ(0px)'
-                                })
-                                $("#game3").find(".game-goods-ul").unbind("webkitTransitionEnd");
+                        setTimeout(function() {
+                            y = (settings.zj_arr.number + settings.gameLen * (settings.game_pagesize - 1)) * game_list_item_h;
+                            $(".game-goods-ul").eq(e).css({
+                                'transition-duration': '5000ms',
+                                'transform': 'translate(0px, -' + y + 'px) translateZ(0px)'
                             })
+                        }, e * 300);
+                        //判断最后面是否完毕
+                        $("#game3").find(".game-goods-ul").on("webkitTransitionEnd", function() {
+                            y = settings.zj_arr.number * game_list_item_h;
+                            $(".game-goods-ul").css({
+                                'transition-duration': '0ms',
+                                'transform': 'translate(0px, -' + y + 'px) translateZ(0px)'
+                            })
+                            $("#game3").find(".game-goods-ul").unbind("webkitTransitionEnd");
                         })
+                    })
 
-                    } else {
+                } else {
 
-                        numrand = randNum2();
-                        console.log(numrand);
-                        //不中奖的时候
-                        $(".game-goods-ul").each(function (e) {
-                            y2 = (numrand[0]) * game_list_item_h;
-                            y3 = (numrand[1]) * game_list_item_h;
-                            y4 = (numrand[2]) * game_list_item_h;
-                            setTimeout(function () {
-                                y = (numrand[e] + settings.gameLen * (settings.game_pagesize - 1)) * game_list_item_h;
-                                $(".game-goods-ul").eq(e).css({
-                                    'transition-duration': '5000ms',
-                                    'transform': 'translate(0px, -' + y + 'px) translateZ(0px)'
-                                })
-                            }, e * 300);
-                            //判断最后面是否完毕
-                            $("#game3").find(".game-goods-ul").on("webkitTransitionEnd", function () {
-
-                                $(".game-goods-ul").eq(2).css({
-                                    'transition-duration': '00ms',
-                                    'transform': 'translate(0px, -' + y4 + 'px) translateZ(0px)'
-                                })
-                                $("#game3").find(".game-goods-ul").unbind("webkitTransitionEnd");
+                    numrand = randNum2();
+                    console.log(numrand);
+                    //不中奖的时候
+                    $(".game-goods-ul").each(function(e) {
+                        y2 = (numrand[0]) * game_list_item_h;
+                        y3 = (numrand[1]) * game_list_item_h;
+                        y4 = (numrand[2]) * game_list_item_h;
+                        setTimeout(function() {
+                            y = (numrand[e] + settings.gameLen * (settings.game_pagesize - 1)) * game_list_item_h;
+                            $(".game-goods-ul").eq(e).css({
+                                'transition-duration': '5000ms',
+                                'transform': 'translate(0px, -' + y + 'px) translateZ(0px)'
                             })
-                            $("#game2").find(".game-goods-ul").on("webkitTransitionEnd", function () {
+                        }, e * 300);
+                        //判断最后面是否完毕
+                        $("#game3").find(".game-goods-ul").on("webkitTransitionEnd", function() {
 
-                                $(".game-goods-ul").eq(1).css({
-                                    'transition-duration': '00ms',
-                                    'transform': 'translate(0px, -' + y3 + 'px) translateZ(0px)'
-                                })
-                                $("#game2").find(".game-goods-ul").unbind("webkitTransitionEnd");
+                            $(".game-goods-ul").eq(2).css({
+                                'transition-duration': '00ms',
+                                'transform': 'translate(0px, -' + y4 + 'px) translateZ(0px)'
                             })
-                            $("#game1").find(".game-goods-ul").on("webkitTransitionEnd", function () {
-
-                                $(".game-goods-ul").eq(0).css({
-                                    'transition-duration': '00ms',
-                                    'transform': 'translate(0px, -' + y2 + 'px) translateZ(0px)'
-                                })
-                                $("#game1").find(".game-goods-ul").unbind("webkitTransitionEnd");
-                            })
+                            $("#game3").find(".game-goods-ul").unbind("webkitTransitionEnd");
                         })
+                        $("#game2").find(".game-goods-ul").on("webkitTransitionEnd", function() {
 
-                    }
+                            $(".game-goods-ul").eq(1).css({
+                                'transition-duration': '00ms',
+                                'transform': 'translate(0px, -' + y3 + 'px) translateZ(0px)'
+                            })
+                            $("#game2").find(".game-goods-ul").unbind("webkitTransitionEnd");
+                        })
+                        $("#game1").find(".game-goods-ul").on("webkitTransitionEnd", function() {
+
+                            $(".game-goods-ul").eq(0).css({
+                                'transition-duration': '00ms',
+                                'transform': 'translate(0px, -' + y2 + 'px) translateZ(0px)'
+                            })
+                            $("#game1").find(".game-goods-ul").unbind("webkitTransitionEnd");
+                        })
+                    })
+
+                }
 
 
-                })
+                // })
             }
 
             function randNum2() {
@@ -400,11 +407,11 @@
         }
     })
 
-    $(function () {
+    $(function() {
         var $isLottery = "{$isLottery}";
         var order_no = order_no;
         if (order_no) {
-            $(".luck-lottery").show();
+            $(".luck-show").show();
         }
         var is_win = 0
         if ($isLottery) {
@@ -417,14 +424,18 @@
         $.luckGame({
             'zj_arr': {
                 'is_win': is_win,
-                'number': 9//从0算起，就是10了
+                'number': 9 //从0算起，就是10了
             },
-            gameLen: gameLen,//产品抽奖数量，
+            gameLen: gameLen, //产品抽奖数量，
             game_pagesize: 10
         });
         $(".game-btn").click();
-    })
+        $('#bug_again').on('click', function() {
+            $(".luck-show").hide();
 
+        })
+    })
 </script>
 {/block}
+
 </html>

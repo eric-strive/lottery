@@ -685,3 +685,9 @@ nav a {
     background: none;
     color: #000;
 }
+
+.dataNums {
+    background: url(../../../act/luck/images/2p.png);
+    background-size: 100% 100%;
+    height: 300px;
+}
