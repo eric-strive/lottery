@@ -5,134 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab9aee13-d223-48e2-bcc2-f55b7279d7c3" name="默认" comment="提交代码">
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/css/animate.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/css/reset.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/css/share.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/html/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg-meinv-b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg-meinv.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg_banker_tip_back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg_black.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg_capital_list.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg_classical_banker_avatar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg_classical_banker_queue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg_classical_history_left.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg_classical_history_right.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg_classical_kline.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg_classical_settle_green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg_my_history_detail.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg_shop_new.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg_sign.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg_sunshine.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/bg_topup_qrcode.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/chongzhi.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/chongzhi2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/custom_service.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/czfx.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/duihuan.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/duihuanshangcheng.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/header.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/hongbao.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/icon_close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/icon_first_topup.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/icon_history_close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/icon_home_activity.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/icon_home_classical.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/icon_home_grab.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/icon_home_sim.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/icon_home_sports.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/icon_home_withdraw.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/icon_introduce_girl.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/icon_register_reward.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/icon_topup.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/icon_withdraw.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/img_gongzhonghao.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/jia.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/jingjiren.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/loading (1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/loading.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/loading.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/loadingProgressBack.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/loadingProgressBar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/lookWeixin.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/paihangbang.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/paihangbang2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/phone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/play/p1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/play/p2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/play/p3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/playyy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/querencz.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/share/bg1_03.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/share/bg2_03.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/share/button_07.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/share/by.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/share/fx_03.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/share/zt_03.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/share/zt_0c3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/tcy.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/tuichju.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/v/1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/v/2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/v/3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/v/4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/v/5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/v/6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/v/7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/v/8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/v/9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/zhuxiaozhanghu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/zuanshi.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/zuanshishangcheng.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/js/click.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/js/common.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/js/html2canvas.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/js/jquery-2.0.3.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/js/jquery.qrcode.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/js/layer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/js/saveImg.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/share.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/video/all_bg.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/video/btn_dialog.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/video/grab_bg.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/video/return.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/10.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/11.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/12.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/13.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/14.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/15.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/16.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/7.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/9.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/bg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/static/act/luck/images/bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/themes/default/mobile/cart/entering_room11.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/image/draw/award_1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/oscshop/mobile/controller/Cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/oscshop/mobile/controller/Cart.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/oscshop/mobile/controller/Goods.php" beforeDir="false" afterPath="$PROJECT_DIR$/oscshop/mobile/controller/Goods.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/image/draw/award_0.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/image/draw/award_0.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/static/js/draw/pc_draw.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/js/draw/pc_draw.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/num_move/js/num.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/num_move/js/num.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/goods/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/goods/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/goods/get_home_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/goods/get_home_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/goods/luck_success.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/goods/luck_success.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/home/is_full.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/home/is_full.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/index/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/public/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/public/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/public/footer-nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/public/footer-nav.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/public/top-nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/public/top-nav.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/user/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/user/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/default/mobile/goods/luck.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/goods/luck.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -148,31 +30,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" column="33" lean-forward="true" selection-start-line="3" selection-end-line="4" />
+            <state relative-caret-position="229">
+              <caret line="518" column="30" selection-start-line="518" selection-start-column="30" selection-end-line="518" selection-end-column="30" />
               <folding>
                 <element signature="e#4432#9004#0" />
                 <element signature="e#9380#9404#0" expanded="true" />
-                <element signature="e#12419#13733#0" />
-                <element signature="e#19942#22424#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/themes/default/mobile/public/base.html">
+        <entry file="file://$PROJECT_DIR$/public/static/num_move/js/num.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
-              <folding>
-                <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="159">
+              <caret line="33" column="29" lean-forward="true" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -187,10 +59,61 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Goods.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="152" column="26" selection-start-line="152" selection-start-column="26" selection-end-line="152" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/luck.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="672">
+              <caret line="203" selection-start-line="203" selection-end-line="203" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="215">
+              <caret line="394" column="1" lean-forward="true" selection-start-line="394" selection-start-column="1" selection-end-line="394" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/luck_success.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="14" column="2" lean-forward="true" selection-start-line="12" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
+              <folding>
+                <element signature="n#div#0;n#div#0;n#body#0;n#!!top" />
+                <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#script#1;n#body#0;n#!!top" />
+                <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="173" column="63" selection-start-line="173" selection-start-column="34" selection-end-line="173" selection-end-column="63" />
+            <state relative-caret-position="373">
+              <caret line="120" column="55" selection-start-line="120" selection-start-column="55" selection-end-line="120" selection-end-column="55" />
               <folding>
                 <element signature="e#1876#1882#0" expanded="true" />
                 <element signature="e#1882#1888#0" expanded="true" />
@@ -214,32 +137,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/luck.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="17" column="15" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="392" column="17" lean-forward="true" selection-start-line="392" selection-start-column="17" selection-end-line="392" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/static/js/draw/pc_draw.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="503" column="20" lean-forward="true" selection-start-line="503" selection-start-column="20" selection-end-line="503" selection-end-column="20" />
+            <state relative-caret-position="236">
+              <caret line="327" column="25" selection-start-line="327" selection-start-column="12" selection-end-line="327" selection-end-column="25" />
               <folding>
                 <element signature="e#6343#6694#0" />
                 <element signature="e#15029#16148#0" />
                 <element signature="e#16171#16465#0" />
+                <element signature="e#16492#18901#0" />
                 <element signature="e#18922#20896#0" />
                 <element signature="e#20916#21149#0" />
                 <element signature="e#21167#24581#0" />
@@ -263,12 +169,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>确定</find>
-      <find>click</find>
-      <find>clear-control</find>
-      <find>music-control</find>
-      <find>localStorage</find>
-      <find>spee</find>
       <find>justGo</find>
       <find>isLock</find>
       <find>stop_index</find>
@@ -289,10 +189,16 @@
       <find>null</find>
       <find>top</find>
       <find>play</find>
-      <find>s</find>
-      <find>num</find>
-      <find>luck-con</find>
       <find>mp3</find>
+      <find>num</find>
+      <find>lottery-wrap</find>
+      <find>s</find>
+      <find>leng</find>
+      <find>len</find>
+      <find>modal-content</find>
+      <find>luck-con</find>
+      <find>weui_btn_area</find>
+      <find>set_num</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -315,7 +221,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/themes/default/mobile/lottery_order/index.html" />
         <option value="$PROJECT_DIR$/themes/default/member/luck_buy/index.html" />
         <option value="$PROJECT_DIR$/oscshop/admin/model/Member.php" />
         <option value="$PROJECT_DIR$/oscshop/mobile/controller/LotteryOrder.php" />
@@ -345,14 +250,12 @@
         <option value="$PROJECT_DIR$/public/static/num_move/index.html" />
         <option value="$PROJECT_DIR$/public/static/num_move/css/globle.css" />
         <option value="$PROJECT_DIR$/public/static/act/luck/index.html" />
-        <option value="$PROJECT_DIR$/oscshop/mobile/controller/Goods.php" />
         <option value="$PROJECT_DIR$/themes/default/mobile/goods/luck_success.html" />
         <option value="$PROJECT_DIR$/themes/default/mobile/lottery_order/luck_list.html" />
         <option value="$USER_HOME$/Desktop/游戏/全面竞猜游戏/index.html" />
         <option value="$PROJECT_DIR$/themes/default/mobile/goods/get_home_list.html" />
         <option value="$PROJECT_DIR$/themes/default/mobile/public/footer-nav.html" />
         <option value="$PROJECT_DIR$/themes/default/mobile/public/top-nav.html" />
-        <option value="$PROJECT_DIR$/themes/default/mobile/goods/luck.html" />
         <option value="$PROJECT_DIR$/themes/default/mobile/user/index.html" />
         <option value="$PROJECT_DIR$/themes/default/mobile/goods/detail.html" />
         <option value="$PROJECT_DIR$/themes/default/mobile/cart/entering_room11.html" />
@@ -361,11 +264,14 @@
         <option value="$PROJECT_DIR$/oscshop/mobile/controller/Cart.php" />
         <option value="$PROJECT_DIR$/themes/default/mobile/public/base.html" />
         <option value="$PROJECT_DIR$/themes/default/mobile/home/is_full.html" />
-        <option value="$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html" />
+        <option value="$PROJECT_DIR$/public/static/view_res/mobile/css/cart.css" />
         <option value="$PROJECT_DIR$/public/static/js/draw/pc_draw.js" />
         <option value="$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html" />
-        <option value="$PROJECT_DIR$/public/static/view_res/mobile/css/cart.css" />
+        <option value="$PROJECT_DIR$/public/static/num_move/js/num.js" />
         <option value="$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css" />
+        <option value="$PROJECT_DIR$/oscshop/mobile/controller/Goods.php" />
+        <option value="$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html" />
+        <option value="$PROJECT_DIR$/themes/default/mobile/goods/luck.html" />
       </list>
     </option>
   </component>
@@ -455,6 +361,13 @@
             <path>
               <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
               <item name="lottery" type="462c0819:PsiDirectoryNode" />
+              <item name="oscshop" type="462c0819:PsiDirectoryNode" />
+              <item name="mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lottery" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -505,6 +418,14 @@
               <item name="default" type="462c0819:PsiDirectoryNode" />
               <item name="mobile" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lottery" type="462c0819:PsiDirectoryNode" />
+              <item name="themes" type="462c0819:PsiDirectoryNode" />
+              <item name="default" type="462c0819:PsiDirectoryNode" />
+              <item name="mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="goods" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -515,7 +436,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/themes/default/mobile/cart" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/static/image/draw" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -525,11 +446,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/static/image/draw" />
       <recent name="$PROJECT_DIR$/themes/default/mobile/cart" />
       <recent name="$PROJECT_DIR$/public/static/act" />
       <recent name="$PROJECT_DIR$/public/static/act/luck/images" />
       <recent name="$PROJECT_DIR$/public/static/image" />
-      <recent name="$PROJECT_DIR$/public/static/view_res/mobile/images/ucbag" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/static/act/luck/images" />
@@ -587,7 +508,7 @@
       <workItem from="1557673642160" duration="97000" />
       <workItem from="1557673771169" duration="7322000" />
       <workItem from="1557927570427" duration="8379000" />
-      <workItem from="1558137409974" duration="38803000" />
+      <workItem from="1558137409974" duration="45101000" />
     </task>
     <task id="LOCAL-00001" summary="项目提交">
       <created>1555080506808</created>
@@ -827,17 +748,24 @@
       <option name="project" value="LOCAL" />
       <updated>1557968576675</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="提交代码">
+      <created>1558227339297</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1558227339297</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="277935000" />
+    <option name="totallyTimeSpent" value="284233000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="52" y="23" width="1388" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25185734" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2511144" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -861,7 +789,7 @@
       <window_info anchor="right" id="Database" order="4" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25260028" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25185734" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -875,7 +803,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32893" />
       <window_info anchor="bottom" id="File Transfer" order="9" weight="0.2089172" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4996277" visible="true" weight="0.27261147" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4996277" weight="0.27261147" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5003723" side_tool="true" weight="0.28005284" />
       <window_info anchor="bottom" id="Messages" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -898,35 +826,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="提交代码" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/static/act/luck/images/3.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/static/act/luck/images/4.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/static/act/luck/images/5.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/static/act/luck/images/2p.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/themes/default/mobile/public/success.tpl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="30" selection-start-line="6" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/static/act/luck/images/bg.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/admin/model/Goods.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="326" column="49" selection-start-line="326" selection-start-column="41" selection-end-line="326" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Downloads/5cdf656182a64/index.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -934,19 +833,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
           <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/luck_success.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="250" column="23" selection-start-line="250" selection-start-column="23" selection-end-line="250" selection-end-column="23" />
-          <folding>
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -971,13 +857,6 @@
           <folding>
             <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Goods.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="158" column="31" selection-start-line="158" selection-start-column="31" selection-end-line="158" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -1169,19 +1048,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="33" lean-forward="true" selection-start-line="3" selection-end-line="4" />
-          <folding>
-            <element signature="e#4432#9004#0" />
-            <element signature="e#9380#9404#0" expanded="true" />
-            <element signature="e#12419#13733#0" />
-            <element signature="e#19942#22424#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
@@ -1233,21 +1099,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/themes/default/mobile/home/is_full.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/public/static/image/draw/spark1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/image/draw/spark3.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/image/draw/spark7.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/image/draw/spark9.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/image/draw/award_1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/image/draw/award_0.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/public/static/js/draw/pc_draw.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="503" column="20" lean-forward="true" selection-start-line="503" selection-start-column="20" selection-end-line="503" selection-end-column="20" />
+        <state relative-caret-position="236">
+          <caret line="327" column="25" selection-start-line="327" selection-start-column="12" selection-end-line="327" selection-end-column="25" />
           <folding>
             <element signature="e#6343#6694#0" />
             <element signature="e#15029#16148#0" />
             <element signature="e#16171#16465#0" />
+            <element signature="e#16492#18901#0" />
             <element signature="e#18922#20896#0" />
             <element signature="e#20916#21149#0" />
             <element signature="e#21167#24581#0" />
@@ -1257,31 +1135,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/static/view_res/mobile/css/draw.css">
+    <entry file="file://$PROJECT_DIR$/public/static/num_move/js/num.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="125" column="12" lean-forward="true" selection-start-line="125" selection-start-column="12" selection-end-line="125" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/static/view_res/mobile/css/cart.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="23" column="15" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/luck.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="17" column="15" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="20" />
+        <state relative-caret-position="159">
+          <caret line="33" column="29" lean-forward="true" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="173" column="63" selection-start-line="173" selection-start-column="34" selection-end-line="173" selection-end-column="63" />
+        <state relative-caret-position="373">
+          <caret line="120" column="55" selection-start-line="120" selection-start-column="55" selection-end-line="120" selection-end-column="55" />
           <folding>
             <element signature="e#1876#1882#0" expanded="true" />
             <element signature="e#1882#1888#0" expanded="true" />
@@ -1303,10 +1167,78 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/mobile/home/is_full.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/view_res/mobile/css/draw.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="121" column="23" lean-forward="true" selection-start-line="121" selection-start-column="23" selection-end-line="121" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/view_res/mobile/css/cart.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="392" column="17" lean-forward="true" selection-start-line="392" selection-start-column="17" selection-end-line="392" selection-end-column="17" />
+        <state relative-caret-position="215">
+          <caret line="394" column="1" lean-forward="true" selection-start-line="394" selection-start-column="1" selection-end-line="394" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Goods.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="152" column="26" selection-start-line="152" selection-start-column="26" selection-end-line="152" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="518" column="30" selection-start-line="518" selection-start-column="30" selection-end-line="518" selection-end-column="30" />
+          <folding>
+            <element signature="e#4432#9004#0" />
+            <element signature="e#9380#9404#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/luck_success.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="14" column="2" lean-forward="true" selection-start-line="12" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#body#0;n#!!top" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#script#1;n#body#0;n#!!top" />
+            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/luck.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="672">
+          <caret line="203" selection-start-line="203" selection-end-line="203" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

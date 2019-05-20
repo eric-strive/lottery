@@ -327,7 +327,6 @@ function stopLottery() {
         drawAward(award, lottery_name_zh, lottery_name_en);
         $(".modal-content #lottery-canvas").css("display", "block")
         // 停止动画
-        cancelFrame(timer);
         $("#lottery-main").hide();
     }, 2000)
     //自动关闭中奖提示框
@@ -347,7 +346,7 @@ function drawAward(award, name_zh, name_en, pic_format) {
         pic_format = 'png';
     }
     canvas.width = 300;
-    canvas.height = 500;
+    canvas.height = 200;
     var back_img = new Image();
     //		var avatar = new Image();
     //      avatar.src = './img/avatar/'+name_en+'.jpg';
@@ -380,7 +379,7 @@ function drawAward(award, name_zh, name_en, pic_format) {
 
         }
         //		=name_zh.substring(0,1)+" "+name_zh.substring(1,2)+" "+name_zh.substring(2,3)+" "+name_zh.substring(3,4);
-        context.fillText(name_str, 50, 325);
+        context.fillText(name_str, 50, 125);
         //		context.fillText(name_str, 155, 618);
         //          }
     };
@@ -551,7 +550,7 @@ function splode(x, y, z) {
     }
     d = Math.sqrt((x - playerX) * (x - playerX) + (y - playerY) * (y - playerY) + (z - playerZ) * (z - playerZ));
     pow.volume = 1.5 / (1 + d / 10);
-    pow.play();
+    // pow.play();
 }
 
 function doLogic() {

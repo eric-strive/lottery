@@ -133,9 +133,15 @@ class Goods extends MobileBase
      */
     function luck()
     {
-        $gid = (int)input('param.id');
-        if (!$list = osc_goods()->get_goods_info($gid)) {
+        $isLottery = false;
+        $gid = (int)input('id');
+        $order_no = (int)input('order_no');
+        $uid = user('uid');
+        if (empty($gid)) {
             $this->error('商品不存在！！');
+        }
+        if (empty($uid)) {
+            $this->error('请先登录！！', url('login/login'));
         }
         if (in_wechat()) {
             $wechat = wechat();
@@ -143,8 +149,24 @@ class Goods extends MobileBase
             $this->assign('signPackage', $wechat->getJsSign(request()->url(true)));
             session('jssdk_order', null);
         }
+        if ($order_no) {
+            $goodsInfo = GoodsModel::getGoodsInfo($gid);
+            $recordSum = LuckRecord::recordSum($gid, $uid);
+            if ($recordSum >= $goodsInfo['lotter_price']) {
+                //中奖了
+                LuckRecord::setLottery($order_no);
+                $isLottery = true;
+            }
+            $this->assign('goodsInfo', $goodsInfo);
+            $this->assign('isLottery', $isLottery);
+        }
+        if (!$list = osc_goods()->get_goods_info($gid)) {
+            $this->error('商品不存在！！');
+        }
         $list['goods']['image'] = resize($list['goods']['image'], 80, 80);
         $this->assign('goods', $list['goods']);
+        $this->assign('order_no', $order_no);
+        $this->assign('isLottery', $isLottery);
         return $this->fetch('luck');
     }
 

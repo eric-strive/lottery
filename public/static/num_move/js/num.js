@@ -4,7 +4,7 @@
     var defaults = {
         deVal: 0,       //传入值
         className:'dataNums',   //样式名称
-        digit:''    //默认显示几位数字
+        digit:'4'    //默认显示几位数字
     };
     function rollNumDaq(obj, options){
         this.obj = obj;
@@ -30,7 +30,7 @@
             var number = options.deVal;
             var $num_item = $('.' + options.className).find('.tt');
             var h = $('.dataBoc').height();
-            $num_item.css('transition','all 2s ease-in-out');
+            $num_item.css('transition','all 10s ease-in-out');
             var numberStr = number.toString();
             if(numberStr.length <= $num_item.length - 1){
                 var tempStr = '';
@@ -43,8 +43,9 @@
             var numberArr = numberStr.split('');
             $num_item.each(function(i, item) {
                 setTimeout(function(){
-                    $num_item.eq(i).css('top',-parseInt(numberArr[i])*h - h*10 + 'px');
-                },i*100)
+                    var ai = 3-i;
+                    $num_item.eq(ai).css('top',-parseInt(numberArr[ai])*h - h*10 + 'px');
+                },i*10000)
             });
         }
     }

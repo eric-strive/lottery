@@ -88,7 +88,7 @@
                     <div class="wrap-main">
                         <div class="lottery-wrap" id="lottery-wrap">
                             {volist name="duobaoNumList" id="n"}
-                            <div class="clearfix lottery-list" data-id="" data-namezh="{$n}" data-nameen="avatar1">
+                            <div class="clearfix lottery-list" data-id="100" data-namezh="{$n}" data-nameen="avatar1">
                                 <div class="f-l lottery-content">
                                     <div class="content-detail">
                                         <span>{$n}</span>
@@ -112,22 +112,11 @@
                 <div class="modal fade" id="lottery-result" role="dialog" aria-hidden="true">
                     <canvas id="canvas" style="margin-top:-100%"></canvas>
                     <div class="modal-dialog">
-                        <div class="modal-content" style="height: calc(100% - 40px);padding-top: 40px;">
+                        <div class="modal-content" style="height: calc(100% - 40px);padding-top: 70%;">
                             <canvas id="lottery-canvas"></canvas>
                         </div>
                     </div>
                 </div>
-                <!-- 中奖者数据展示模板 start -->
-                <script type="text/template" id="awardcon-tpl">
-                    <li class="clearfix win-li">
-                        <div class="avatar">
-                        </div>
-                        <div class="name">中奖名称</div>
-                        <a class="f-l delete" href="javascript:;">&times;</a>
-                    </li>
-                </script>
-                <!-- 中奖者数据展示模板 end -->
-
                 <!--音乐开关-->
                 <a id="music-control" class="animated infinite bounce" href="javascript:;" data-open="1"></a>
                 <!--清除数据开关-->
@@ -384,7 +373,7 @@
                     // //一进来就开始滚动抽奖
                     justGo(true);
                     startLottery()
-                    setTimeout(stopLottery,2000);
+                    setTimeout(stopLottery, 2000);
                     // //
                     // setTimeout(() => {
                     //     lottery_btn_fun();
@@ -399,7 +388,7 @@
             });
     }
 
-    setTimeout(checkLottery, 10000);
+    setTimeout(checkLottery, 1000);
     // setTimeout(stopLottery, 2000);
     // if (lottery_status > 0) {
     //     //这里不需要放烟花
