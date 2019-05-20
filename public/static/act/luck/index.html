@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no">
+
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/base.css">
+</head>
+<body>
+	<a class="game-header" href="javascript:void(0);" >
+	    <img src="images/1p.png">
+	</a>
+	<div class="game-content">
+	    <img src="images/2p.png">
+	    <div class="game-goods-wrap">
+	        <div class="game-goods-list">
+	            <div class="game-goods" style="background: #ffffff;">
+	                <div class="game-goods-box" id="game1">
+	                    <ul class="game-goods-ul" style="">
+	                        
+	                    </ul>
+	                </div>
+	            </div>
+	            <div class="game-goods" style="background: #ffffff;">
+	                <div class="game-goods-box" id="game2">
+	                    <ul class="game-goods-ul" style="">
+	                        
+	                    </ul>
+	                </div>
+	            </div>
+	            <div class="game-goods" style="background: #ffffff;">
+	                <div class="game-goods-box" id="game3">
+	                    <ul class="game-goods-ul">
+	                       
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <a class="game-rule" href="javascript:void(0);"></a>
+	    <span class="game-btn"></span>
+	    <a class="game-prize" href="javascript:void(0);"></a>
+	</div>
+	
+	<script type="text/javascript" src="__PUBLIC__/act/luck/js/jquery.min.js"></script>
+	<script type="text/javascript">
+	
+		$.extend({
+		    luckGame: function(options) {
+		    	var defaults = {
+		    	        'gameLen': '18',
+		    	        'game_pagesize':10,//生成多少圈同样的东西
+		    	        'zj_arr': { //中奖数组，第一个表示是否中奖，第二个中奖号码
+		    	        	'is_win':1,
+		    	        	'number':17
+		    	        }
+		    	    };
+		         var settings = $.extend(defaults, options);
+		         w_config={
+		         	'w':$(window).width(),
+		         	'h':$(window).height()
+		         }
+		         var gameArr=[];
+		         var gameLen=settings.gameLen;
+		         var game_list_h='';
+		         var game_init=[];
+		         var game_list_item_h=0;
+
+		          //每次进来随机3个数字，来启动当前的选择的状态
+		          for (var i = 0; i < 3; i++) {
+		          	
+		          	game_init.push(Math.floor(Math.random() * gameLen));
+		          }
+		          createGame();
+		          $(window).resize(function(){
+		         	
+		         	 createGame();
+		         })
+		          function createGame(){
+		          	getHeight();
+		          	setLi();
+		          	pushLi(gameArr);
+		          	start();
+		          }
+
+
+		          function getHeight(){
+		          	w_config={
+		          		'w':$(window).width(),
+		          		'h':$(window).height()
+		          	}
+		          	 game_list_item_h=(w_config.w*320/750*0.5*0.7).toFixed(2);
+		          }
+
+
+		          //设置奖品
+		          function setLi(){
+		          	
+		          	for (var j = 1; j <= settings.game_pagesize; j++) {
+		          		for (var i = 1; i <= gameLen; i++) {
+		          			gameArr.push({'type':j,'index':i,'src':'images/'+i+'.png'});
+		          		}
+		          	}
+
+		          	
+		          }
+		          //写入，初始化奖品的滚动
+		          function pushLi(arr){
+		          	console.log(game_list_item_h);
+		          	var html_str='';
+		          	for (var i = 0; i < arr.length; i++) {
+		          		html_str+='<li style="height:'+game_list_item_h+'px" data-index="'+arr[i]['index']+'" data-type="'+arr[i]['type']+'"><img src="'+arr[i]['src']+'"></li>';
+		          	}
+		          	$(".game-goods-ul").each(function(e){
+		          		$(this).empty().append(html_str);
+		          		game_list_h=$(this).height();
+		          		console.log('game_list_item_h',game_init);
+		          		y=game_list_item_h*game_init[e];
+		          		
+		          		$(this).css({
+		          			'transition-duration': '0ms',
+		          			'transform':'translate(0px, -'+y+'px) translateZ(0px)'
+		          		})
+		          	});
+		          	
+		          	
+		          }
+		          
+		          function start(){
+		          	$(".game-btn").click(function(){
+
+		          		//如果中奖
+		          		if(settings.zj_arr.is_win==1)
+		          		{
+		          			
+		          			$(".game-goods-ul").each(function(e){
+
+		          				setTimeout(function(){
+		          					y=(settings.zj_arr.number+settings.gameLen*(settings.game_pagesize-1))*game_list_item_h;
+		          					$(".game-goods-ul").eq(e).css({
+		          						'transition-duration': '5000ms',
+		          						'transform':'translate(0px, -'+y+'px) translateZ(0px)'
+		          					})
+		          				}, e*300);
+		          				//判断最后面是否完毕
+		          				$("#game3").find(".game-goods-ul").on("webkitTransitionEnd", function() {
+		          					y=settings.zj_arr.number*game_list_item_h;
+		          				    $(".game-goods-ul").css({
+		          				    	'transition-duration': '0ms',
+		          				    	'transform':'translate(0px, -'+y+'px) translateZ(0px)'
+		          				    })
+		          				    $("#game3").find(".game-goods-ul").unbind("webkitTransitionEnd");
+		          				})
+		          			})
+		          			
+		          		}else
+		          		{
+		          			
+		          			numrand=randNum2();
+		          			console.log(numrand);
+		          			//不中奖的时候
+		          			$(".game-goods-ul").each(function(e){
+		          				y2=(numrand[0])*game_list_item_h;
+		          				y3=(numrand[1])*game_list_item_h;
+		          				y4=(numrand[2])*game_list_item_h;
+		          				setTimeout(function(){
+		          					y=(numrand[e]+settings.gameLen*(settings.game_pagesize-1))*game_list_item_h;
+		          					$(".game-goods-ul").eq(e).css({
+		          						'transition-duration': '5000ms',
+		          						'transform':'translate(0px, -'+y+'px) translateZ(0px)'
+		          					})
+		          				}, e*300);
+		          				//判断最后面是否完毕
+		          				$("#game3").find(".game-goods-ul").on("webkitTransitionEnd", function() {
+		          					
+		          				    $(".game-goods-ul").eq(2).css({
+		          				    	'transition-duration': '00ms',
+		          				    	'transform':'translate(0px, -'+y4+'px) translateZ(0px)'
+		          				    })
+		          				    $("#game3").find(".game-goods-ul").unbind("webkitTransitionEnd");
+		          				})
+		          				$("#game2").find(".game-goods-ul").on("webkitTransitionEnd", function() {
+		          					
+		          				    $(".game-goods-ul").eq(1).css({
+		          				    	'transition-duration': '00ms',
+		          				    	'transform':'translate(0px, -'+y3+'px) translateZ(0px)'
+		          				    })
+		          				    $("#game2").find(".game-goods-ul").unbind("webkitTransitionEnd");
+		          				})
+		          				$("#game1").find(".game-goods-ul").on("webkitTransitionEnd", function() {
+		          					
+		          				    $(".game-goods-ul").eq(0).css({
+		          				    	'transition-duration': '00ms',
+		          				    	'transform':'translate(0px, -'+y2+'px) translateZ(0px)'
+		          				    })
+		          				    $("#game1").find(".game-goods-ul").unbind("webkitTransitionEnd");
+		          				})
+		          			})
+
+		          		}
+		          		
+		          		
+		          	})
+		          }
+		          function randNum2(){
+		          	a=Math.floor(Math.random() * gameLen);
+		          	b=Math.floor(Math.random() * gameLen);
+		          	c=Math.floor(Math.random() * gameLen);
+		          	arr=[];
+		          	if(a==b)
+		          	{
+		          		return randNum2();
+		          	}else
+		          	{
+		          		return arr=[a,b,c];
+		          	}
+		          }
+		    }
+		})
+		
+		$(function(){
+				 $.luckGame({
+				 	'zj_arr': {
+				 		'is_win':1,
+				 		'number':9//从0算起，就是10了
+				 	},
+				 	gameLen:10,//产品抽奖数量，
+				 	game_pagesize:6
+				 });
+				
+				
+		})
+		
+	</script>
+
+</body>
+</html>
