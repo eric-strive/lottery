@@ -48,8 +48,8 @@ class Home extends MobileBase
                 return ['error' => '提现金额不能是负数'];
             }
             $data['create_at'] = date('Y-m-s H:i:s');
-            $data['uid'] = UID;
-            $homeId = Db::name('home')->insert($data, false, true);
+            $data['uid']       = UID;
+            $homeId            = Db::name('home')->insert($data, false, true);
             if ($homeId) {
                 return ['success' => '开设成功', 'url' => '/mobile/goods/detail/home_id/' . $homeId];
             } else {
@@ -70,6 +70,7 @@ class Home extends MobileBase
 
     /**
      * 判断是否满房
+     *
      * @return array|false|\PDOStatement|string|\think\Model
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
@@ -77,15 +78,24 @@ class Home extends MobileBase
      */
     public function is_full()
     {
-        $homeId = input('home_id');
-        $homeInfo = HomeModel::getHomeInfo($homeId);
+        $homeId      = input('home_id');
+        $homeInfo    = HomeModel::getHomeInfo($homeId);
+        $remain      = $homeInfo['lottery_drifts'] - $homeInfo['goods_buy_num'];
+        $residueTime = 0;//剩余开奖时间，默认是10秒
+        if ($homeInfo['lottery_timestamp'] > 0) {
+            $residueTime = $homeInfo['lottery_timestamp'] + 10 - time();
+        }
         if ($homeInfo['status'] > HomeModel::ADD_NUM) {
-            $numList = duobaoRecord::getDuobaoNum($homeId);
+            $numList             = duobaoRecord::getDuobaoNum($homeId);
             $homeInfo['is_self'] = $homeInfo['lottery_uid'] == UID ? 1 : 0;
             $this->assign('numList', $numList);
-            $homeInfo['numHtml'] = $this->fetch('is_full');
+            $homeInfo['numHtml']     = $this->fetch('is_full');
+            $homeInfo['remain']      = $remain;
+            $homeInfo['residueTime'] = $residueTime;
+
             return $homeInfo;
         }
-        return array('status' => 0);
+
+        return ['status' => 0, 'remain' => $remain, 'residueTime' => $residueTime];
     }
 }

@@ -46,7 +46,7 @@ class Member
 
     public static function addBalanceRecord($data)
     {
-        Db::name('balance')->insert($data);
+        return Db::name('balance')->insert($data);
     }
 
     /**

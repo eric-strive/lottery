@@ -15,7 +15,9 @@
 namespace osc\mobile\controller;
 
 use osc\admin\model\duobaoRecord;
+use osc\admin\model\Goods as GoodsModel;
 use osc\admin\model\LuckRecord;
+use osc\admin\model\Member;
 use osc\admin\model\PayOrder;
 use osc\admin\service\GameHomeService;
 use osc\common\controller\Base;
@@ -35,24 +37,24 @@ class LotteryPayment extends Base
         if (request()->isPost()) {
             Db::startTrans();
             try {
-                $uid = user('uid');
-                $return['pay_total'] = input('pay_total', 0);
-                $return['subject'] = input('subject', 0);
-                $return['attach'] = input('attach', 0);
-                $return['goodsNum'] = input('goodsNum', 0);
+                $uid                    = user('uid');
+                $return['pay_total']    = input('pay_total', 0);
+                $return['subject']      = input('subject', 0);
+                $return['attach']       = input('attach', 0);
+                $return['goodsNum']     = input('goodsNum', 0);
                 $return['pay_order_no'] = build_order_no();
-                $homeId = input('home_id', 0);
-                $gid = input('gid', 0);
-                $orderData = array(
-                    'uid' => $uid,
-                    'gid' => $gid,
-                    'home_id' => $homeId,
+                $homeId                 = input('home_id', 0);
+                $gid                    = input('gid', 0);
+                $orderData              = [
+                    'uid'          => $uid,
+                    'gid'          => $gid,
+                    'home_id'      => $homeId,
                     'pay_order_no' => $return['pay_order_no'],
-                    'pay_amount' => input('pay_total'),
-                    'pay_type' => PayOrder::WEI_PAY,
-                    'order_type' => $return['attach'],
-                    'buy_num' => $return['goodsNum'],
-                );
+                    'pay_amount'   => input('pay_total'),
+                    'pay_type'     => PayOrder::WEI_PAY,
+                    'order_type'   => $return['attach'],
+                    'buy_num'      => $return['goodsNum'],
+                ];
                 //先生成订单
                 $a = PayOrder::addOrder($orderData);
                 if (!$a) {
@@ -73,7 +75,7 @@ class LotteryPayment extends Base
                         break;
                     case '3':
                         //开设房间
-//                        GameHomeService::set_game_home();
+                        //                        GameHomeService::set_game_home();
                         break;
                     case '4':
                         //开设房间
@@ -82,9 +84,11 @@ class LotteryPayment extends Base
                 }
                 $payResult = WeixinPay::getBizPackage($return);
                 Db::commit();
+
                 return $payResult;
             } catch (\Exception $e) {
                 Db::rollback();
+
                 return json(['ret_code' => 11, 'ret_msg' => $e->getMessage()]);
             }
 
@@ -97,15 +101,15 @@ class LotteryPayment extends Base
         $sourceStr = file_get_contents('php://input');
         // 读取数据
         $postObj = simplexml_load_string($sourceStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-        Db::name('test')->insert(array(
+        Db::name('test')->insert([
             'info' => json_encode($postObj),
-        ));
+        ]);
         Db::startTrans();
         try {
             if (wechat()->checkPaySign()) {
-//                $sourceStr = file_get_contents('php://input');
-//                // 读取数据
-//                $postObj = simplexml_load_string($sourceStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+                //                $sourceStr = file_get_contents('php://input');
+                //                // 读取数据
+                //                $postObj = simplexml_load_string($sourceStr, 'SimpleXMLElement', LIBXML_NOCDATA);
                 if (!$postObj) {
                     throw new Exception('出错');
                 } else {
@@ -118,15 +122,16 @@ class LotteryPayment extends Base
             }
         } catch (Exception $e) {
             Db::rollback();
-            Db::name('test')->insert(array(
+            Db::name('test')->insert([
                 'info' => json_encode($e->getMessage()),
-            ));
+            ]);
             echo "<xml><return_code><![CDATA[FAIL]]></return_code></xml>";
         }
     }
 
     /**
      * 取消或订单出错
+     *
      * @throws Exception
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
@@ -135,9 +140,9 @@ class LotteryPayment extends Base
      */
     public function cancel_order()
     {
-        $return['gid'] = input('gid');
+        $return['gid']      = input('gid');
         $return['order_no'] = input('order_no');
-        $return['status'] = input('status');
+        $return['status']   = input('status');
         PayOrder::editStatus($return['order_no'], $return['status']);
         //删除减去该用户购买的份额
         Home::changePortion(input('home_id'), input('goodsNum'), Home::REDUCE_NUM);
@@ -148,24 +153,25 @@ class LotteryPayment extends Base
         if (request()->isPost()) {
             Db::startTrans();
             try {
-                $uid = user('uid');
-                $return['pay_total'] = input('pay_total', 0);
-                $return['subject'] = input('subject', 0);
-                $return['attach'] = input('attach', 0);
-                $return['goodsNum'] = input('goodsNum', 0);
+                $isLottery              = false;
+                $uid                    = user('uid');
+                $return['pay_total']    = input('pay_total', 0);
+                $return['subject']      = input('subject', 0);
+                $return['attach']       = input('attach', 0);
+                $return['goodsNum']     = input('goodsNum', 0);
                 $return['pay_order_no'] = build_order_no();
-                $homeId = input('home_id', 0);
-                $gid = input('gid', 0);
-                $orderData = array(
-                    'uid' => $uid,
-                    'gid' => $gid,
-                    'home_id' => $homeId,
+                $homeId                 = input('home_id', 0);
+                $gid                    = input('gid', 0);
+                $orderData              = [
+                    'uid'          => $uid,
+                    'gid'          => $gid,
+                    'home_id'      => $homeId,
                     'pay_order_no' => $return['pay_order_no'],
-                    'pay_amount' => input('pay_total'),
-                    'pay_type' => PayOrder::JINDOU_PAY,
-                    'order_type' => $return['attach'],
-                    'buy_num' => $return['goodsNum'],
-                );
+                    'pay_amount'   => input('pay_total'),
+                    'pay_type'     => PayOrder::JINDOU_PAY,
+                    'order_type'   => $return['attach'],
+                    'buy_num'      => $return['goodsNum'],
+                ];
                 //先生成订单
                 $a = PayOrder::addOrder($orderData);
                 if (!$a) {
@@ -183,10 +189,28 @@ class LotteryPayment extends Base
                         //支付处理
                         WeixinPay::balancePay($return, $homeId, $uid);
                         break;
+                    case '2'://幸运购
+                        $userInfo = Member::getMemberInfo($uid, true);
+                        if ($userInfo['balance'] < $return['pay_total']) {
+                            throw new Exception('金豆不足，请先充值！');
+                        }
+                        LuckRecord::addLuckRecord($orderData);
+                        WeixinPay::luckBalancePay($return['pay_order_no'], $return['pay_total'], $uid);
+                        $goodsInfo = GoodsModel::getGoodsInfo($gid);
+                        $recordSum = LuckRecord::recordSum($gid, $uid);
+                        if ($recordSum >= $goodsInfo['lotter_price']) {
+                            //中奖了
+                            LuckRecord::setLottery($return['pay_order_no']);
+                            $isLottery = true;
+                        }
+                        break;
                 }
                 Db::commit();
+
+                return json(['ret_code' => 1, 'order_no' => $return['pay_order_no'], 'isLottery' => $isLottery]);
             } catch (\Exception $e) {
                 Db::rollback();
+
                 return json(['ret_code' => 11, 'ret_msg' => $e->getMessage()]);
             }
 

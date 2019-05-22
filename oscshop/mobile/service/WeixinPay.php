@@ -2,6 +2,7 @@
 
 namespace osc\mobile\service;
 
+use osc\admin\model\LuckRecord;
 use osc\admin\model\Member;
 use osc\admin\model\PayOrder;
 use think\Db;
@@ -11,14 +12,14 @@ use wechat\Curl;
 //微信支付处理
 class WeixinPay
 {
-//微信支付 package
+    //微信支付 package
     public static function getBizPackage($data)
     {
 
         $wx = wechat();
         // 订单总额
         $totalFee = 1;
-//        $totalFee = ($data['pay_total']) * 100;
+        //        $totalFee = ($data['pay_total']) * 100;
         // 随机字符串
         $nonceStr = $wx->generateNonceStr();
 
@@ -27,21 +28,21 @@ class WeixinPay
         // 时间戳
         $timeStamp = strval(time());
 
-        $pack = array(
-            'appid' => $config['appid'],
-            'body' => $data['subject'],
-            'mch_id' => $config['weixin_partner'],
-            'nonce_str' => $nonceStr,
-            'notify_url' => request()->domain() . url('lottery_payment/jsskd_notify'),
+        $pack = [
+            'appid'            => $config['appid'],
+            'body'             => $data['subject'],
+            'mch_id'           => $config['weixin_partner'],
+            'nonce_str'        => $nonceStr,
+            'notify_url'       => request()->domain() . url('lottery_payment/jsskd_notify'),
             'spbill_create_ip' => get_client_ip(),
-            'openid' => $wx->getOpenId(),
+            'openid'           => $wx->getOpenId(),
             // 外部订单号
-            'out_trade_no' => $data['pay_order_no'],
-            'timeStamp' => $timeStamp,
-            'total_fee' => $totalFee,
-            'attach' => isset($data['attach']) ? $data['attach'] : 'other',
-            'trade_type' => 'JSAPI'
-        );
+            'out_trade_no'     => $data['pay_order_no'],
+            'timeStamp'        => $timeStamp,
+            'total_fee'        => $totalFee,
+            'attach'           => isset($data['attach']) ? $data['attach'] : 'other',
+            'trade_type'       => 'JSAPI',
+        ];
 
         $pack['sign'] = $wx->paySign($pack);
 
@@ -54,21 +55,21 @@ class WeixinPay
         if (empty($postObj->prepay_id) || $postObj->return_code == "FAIL") {
             throw new Exception('创建支付失败');
         } else {
-            $packJs = array(
-                'appId' => $config['appid'],
+            $packJs = [
+                'appId'     => $config['appid'],
                 'timeStamp' => $timeStamp,
-                'nonceStr' => $nonceStr,
-                'package' => "prepay_id=" . $postObj->prepay_id,
-                'signType' => 'MD5'
-            );
+                'nonceStr'  => $nonceStr,
+                'package'   => "prepay_id=" . $postObj->prepay_id,
+                'signType'  => 'MD5',
+            ];
 
             $JsSign = $wx->paySign($packJs);
 
             $p['timestamp'] = $timeStamp;
-            $p['nonceStr'] = $nonceStr;
-            $p['package'] = "prepay_id=" . $postObj->prepay_id;
-            $p['signType'] = 'MD5';
-            $p['paySign'] = $JsSign;
+            $p['nonceStr']  = $nonceStr;
+            $p['package']   = "prepay_id=" . $postObj->prepay_id;
+            $p['signType']  = 'MD5';
+            $p['paySign']   = $JsSign;
 
             return json(['ret_code' => 0, 'bizPackage' => $p, 'out_trade_no' => $data['pay_order_no']]);
         }
@@ -76,14 +77,16 @@ class WeixinPay
 
     /**
      * 余额支付
+     *
      * @param $data
+     *
      * @throws Exception
      */
     public static function balancePay($data, $homeId, $uid)
     {
         $memberInfo = Member::getMemberInfo($uid, true);
-        $pay_total = $data['pay_total'];
-        $orderNo = $data['pay_order_no'];
+        $pay_total  = $data['pay_total'];
+        $orderNo    = $data['pay_order_no'];
         if ($pay_total > $memberInfo['balance']) {
             throw new Exception('余额不足!请充值。');
         }
@@ -91,18 +94,43 @@ class WeixinPay
         if ($s === false) {
             throw new Exception('订单出错');
         }
-        Member::addBalanceRecord(array(
-            'uid' => $uid,
-            'amount' => $pay_total,
+        Member::addBalanceRecord([
+            'uid'         => $uid,
+            'amount'      => $pay_total,
             'description' => '夺宝消费',
-            'prefix' => Member::REDUCE,
+            'prefix'      => Member::REDUCE,
             'create_time' => time(),
-            'home_id' => $homeId,
-            'type' => 1,
-            'order_no' => $orderNo,
-        ));
+            'home_id'     => $homeId,
+            'type'        => 1,
+            'order_no'    => $orderNo,
+        ]);
         $orderInfo = PayOrder::orderInfo($orderNo);
         OrderProcess::addNumber($orderInfo, $homeId);
+        PayOrder::editStatus($orderNo, PayOrder::STATUS_SUCCESS_PAY);
+    }
+
+    /**
+     * 余额支付幸运购
+     *
+     * @param $orderNo
+     * @param $pay_total
+     * @param $uid
+     *
+     * @throws \think\Exception
+     * @throws \think\exception\PDOException
+     */
+    public static function luckBalancePay($orderNo, $pay_total, $uid)
+    {
+        Member::addBalance($uid, $pay_total, Member::REDUCE);
+        Member::addBalanceRecord([
+            'uid'         => $uid,
+            'amount'      => $pay_total,
+            'description' => '用户幸运购',
+            'prefix'      => Member::REDUCE,
+            'create_time' => time(),
+            'type'        => 5,
+        ]);
+        LuckRecord::setStatus($orderNo);
         PayOrder::editStatus($orderNo, PayOrder::STATUS_SUCCESS_PAY);
     }
 }

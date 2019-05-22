@@ -38,6 +38,11 @@
             overflow: scroll;
             height: 300px;
         }
+
+        .meinv-left > ul > li > img, .meinv-right > ul > li > a > img {
+            width: 70%;
+            height: 80%;
+        }
     </style>
 </head>
 <body>
@@ -53,6 +58,11 @@
         <div class="hid_name">{$homeInfo.home_name} <i class="dj dj1"></i></div>
     </div>
     <div class="hea_min hea_min2 fl_r">
+        <div class="h_xzz" style="font-size: 20px;">
+            &nbsp;&nbsp;&nbsp;还剩
+            <span id="residue-sum">{$homeInfo.lottery_drifts-$homeInfo.goods_buy_num}</span>
+            份&nbsp;&nbsp;
+        </div>
         <div class="h_xzz">
             <i class="zsyc"></i>
             <span>&nbsp;&nbsp;&nbsp;房间号:{$homeInfo.home_num}</span>
@@ -74,7 +84,7 @@
                     <img att="{$duobaoList[$i]['dduonums']}" src="__PUBLIC__/act/guessing_game/img/header.jpg"
                          class="fui-btn user-info"/>
                     {/if}
-                    <span>份额：{$duobaoList[$i]['num']}</span>
+                    <span class="hid_name" style="color: red;font-size: 20px;">购{$duobaoList[$i]['num']}份</span>
                     {else/}
                     <img src="__PUBLIC__/act/guessing_game/img/header.jpg" class="fui-btn">
                     {/if}
@@ -139,7 +149,7 @@
                     <img att="{$duobaoList[$i]['dduonums']}" src="__PUBLIC__/act/guessing_game/img/header.jpg"
                          class="fui-btn user-info"/>
                     {/if}
-                    <span>份额：{$duobaoList[$i]['num']}</span>
+                    <span class="hid_name" style="color: red;font-size: 20px;">购{$duobaoList[$i]['num']}份</span>
                     {else/}
                     <img src="__PUBLIC__/act/guessing_game/img/header.jpg" class="fui-btn">
                     {/if}
@@ -159,7 +169,7 @@
             <li class="wid40">
                 <div class="btn butdonghua fui-btn">
                     <a class="jinruyouxi"
-                       href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id'],'sign'=>$homeInfo['sign']))}">
+                       href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id']))}&sign={$homeInfo['sign']}">
                         <img src="__PUBLIC__/act/guessing_game/img/icon_home_classical.png" alt="">
                     </a>
                 </div>
@@ -353,50 +363,57 @@
         $("#serviceView").removeClass('show').addClass('none');
     });
     //定时检查是否开奖
-    var setTime = 3000;
+    var setTime = 5000;
     var lottery_num = '{$homeInfo["lottery_num"]}';
     var home_id = '{$homeInfo["id"]}';
     var lottery_status = '{$homeInfo["status"]}';
 
-    function checkLottery() {
+    function checkLottery(isUrlVisit) {
         $.post("{:url('home/is_full')}", {
                 'home_id': home_id,
             },
             function (r) {
+                $("#residue-sum").html(r.remain)
                 // console.log('r', r);
                 if (r.status > 0) {
+                    var residueTime = r.residueTime;
                     //这里需要放烟花
                     // alert('开奖啦！中奖号码是' + r.lottery_num);
-                    $('#lottery-wrap').html(r.numHtml)
-                    $("#lottery-btn").attr('data-award', r.lottery_num);
-                    $('#yanhua').fadeIn();
-                    // //一进来就开始滚动抽奖
-                    justGo(true);
-                    startLottery()
-                    setTimeout(stopLottery, 2000);
-                    // //
-                    // setTimeout(() => {
-                    //     lottery_btn_fun();
-                    // }, 5000);
-                    if (r.is_self > 0) {
-                        // base_alert('恭喜你中奖了')
+                    if (!isUrlVisit || (residueTime > 0 && residueTime < 10)) {
+                        if (residueTime < 0) {
+                            drawResult(r);
+                        } else {
+                            setTimeout(function () {
+                                drawResult(r);
+                            }, residueTime);
+                        }
                     }
-                    return true;
+                    alert('已开奖');
+                    location.href = "/mobile";
                 } else {
-                    setTimeout(checkLottery, setTime);
+                    setTimeout(function () {
+                        checkLottery(false);
+                    }, setTime);
                 }
             });
     }
 
-    setTimeout(checkLottery, 1000);
-    // setTimeout(stopLottery, 2000);
-    // if (lottery_status > 0) {
-    //     //这里不需要放烟花
-    //     alert('已开奖，中奖号码是' + lottery_num);
-    //     // location.href = "/mobile";
-    // } else {
-    //     setTimeout(checkLottery, setTime);
-    // }
+    function drawResult() {
+        $('#lottery-wrap').html(r.numHtml)
+        $("#lottery-btn").attr('data-award', r.lottery_num);
+        $('#yanhua').fadeIn();
+        // //一进来就开始滚动抽奖
+        justGo(true);
+        startLottery()
+        setTimeout(stopLottery, 2000);
+        if (r.is_self > 0) {
+            // base_alert('恭喜你中奖了')
+        }
+    }
+
+    setTimeout(function () {
+        checkLottery(true)
+    }, 1000);
 </script>
 <script>
     '{if condition="in_wechat()"}'

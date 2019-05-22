@@ -50,9 +50,9 @@ class Goods extends MobileBase
         $this->assign('homeInfo', $homeInfo);
         $this->assign('percentage', duobaoRecord::get_periods($homeInfo));
         $this->assign('SEO', [
-            'title' => $list['goods']['name'] . '-' . config('SITE_TITLE'),
-            'keywords' => $list['goods']['meta_keyword'],
-            'description' => $list['goods']['meta_description']
+            'title'       => $list['goods']['name'] . '-' . config('SITE_TITLE'),
+            'keywords'    => $list['goods']['meta_keyword'],
+            'description' => $list['goods']['meta_description'],
         ]);
         $duobaoList = duobaoRecord::getNumbers($homeInfo['id']);
         osc_goods()->update_goods_viewed((int)input('param.id'));
@@ -99,7 +99,7 @@ class Goods extends MobileBase
 
         $goods_id = (int)input('post.id');
 
-        if (!Db::name('goods')->where(array('goods_id' => $goods_id, 'status' => 1))->find()) {
+        if (!Db::name('goods')->where(['goods_id' => $goods_id, 'status' => 1])->find()) {
             return ['error' => '产品不存在'];
         }
 
@@ -109,10 +109,12 @@ class Goods extends MobileBase
             return ['error' => '请先登录'];
         }
 
-        if (!Db::name('member_wishlist')->where(array('uid' => $uid, 'goods_id' => $goods_id))->find()) {
-            Db::name('member_wishlist')->insert(array(
-                'uid' => $uid, 'goods_id' => $goods_id, 'date_added' => date('Y-m-d H:i:s', time())
-            ));
+        if (!Db::name('member_wishlist')->where(['uid' => $uid, 'goods_id' => $goods_id])->find()) {
+            Db::name('member_wishlist')->insert([
+                'uid'        => $uid,
+                'goods_id'   => $goods_id,
+                'date_added' => date('Y-m-d H:i:s', time()),
+            ]);
             Db::name('member')->where('uid', $uid)->setInc('wish', 1);
         }
 
@@ -129,14 +131,16 @@ class Goods extends MobileBase
 
     /**
      * 幸运购页面
+     *
      * @return mixed
      */
     function luck()
     {
         $isLottery = false;
-        $gid = (int)input('id');
-        $order_no = (int)input('order_no');
-        $uid = user('uid');
+        $gid       = (int)input('id');
+        $order_no  = (int)input('order_no');
+        $set_up    = (int)input('set_up');
+        $uid       = user('uid');
         if (empty($gid)) {
             $this->error('商品不存在！！');
         }
@@ -149,6 +153,7 @@ class Goods extends MobileBase
             $this->assign('signPackage', $wechat->getJsSign(request()->url(true)));
             session('jssdk_order', null);
         }
+        $recordSum = 0;
         if ($order_no) {
             $goodsInfo = GoodsModel::getGoodsInfo($gid);
             $recordSum = LuckRecord::recordSum($gid, $uid);
@@ -158,28 +163,35 @@ class Goods extends MobileBase
                 $isLottery = true;
             }
             $this->assign('goodsInfo', $goodsInfo);
+            $this->assign('recordSum', $recordSum);
             $this->assign('isLottery', $isLottery);
         }
         if (!$list = osc_goods()->get_goods_info($gid)) {
             $this->error('商品不存在！！');
         }
+        $this->assign('recordSum', $recordSum);
         $list['goods']['image'] = resize($list['goods']['image'], 80, 80);
         $this->assign('goods', $list['goods']);
         $this->assign('order_no', $order_no);
         $this->assign('isLottery', $isLottery);
+        if ($set_up) {
+            return $this->fetch('set_home');
+        }
+
         return $this->fetch('luck');
     }
 
     /**
      * 抽奖成功
+     *
      * @return mixed
      */
     function luck_success()
     {
         $isLottery = false;
-        $gid = (int)input('id');
-        $order_no = (int)input('order_no');
-        $uid = user('uid');
+        $gid       = (int)input('id');
+        $order_no  = (int)input('order_no');
+        $uid       = user('uid');
         if (empty($gid)) {
             $this->error('商品不存在！！');
         }
@@ -196,6 +208,7 @@ class Goods extends MobileBase
         $this->assign('goodsInfo', $goodsInfo);
         $this->assign('isLottery', $isLottery);
         $this->assign('top_title', '抽奖');
+
         return $this->fetch('luck_success');
     }
 

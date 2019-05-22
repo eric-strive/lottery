@@ -39,10 +39,10 @@ class Cart extends MobileBase
 
         $cart = osc_cart();
         if ('points' == input('param.type')) {
-            $goods = $cart->get_all_goods($uid, 'points');
+            $goods    = $cart->get_all_goods($uid, 'points');
             $shipping = $cart->has_shipping($uid, 'points');
         } else {
-            $goods = $cart->get_all_goods($uid);
+            $goods    = $cart->get_all_goods($uid);
             $shipping = $cart->has_shipping($uid);
         }
 
@@ -54,7 +54,7 @@ class Cart extends MobileBase
 
         if (!empty($goods)) {
             foreach ($goods as $k => $v) {
-                $total_point += $v['total_pay_points'];
+                $total_point     += $v['total_pay_points'];
                 $total_all_price += $v['total'];
                 if ($v['shipping']) {
                     $weight += osc_weight()->convert($v['weight'], $v['weight_class_id'], config('weight_id'));
@@ -106,6 +106,7 @@ class Cart extends MobileBase
 
         $this->assign('SEO', ['title' => '购物车-' . config('SITE_TITLE')]);
         $this->assign('top_title', '购物车');
+
         return $this->fetch();
     }
 
@@ -119,12 +120,12 @@ class Cart extends MobileBase
             $this->assign('signPackage', $wechat->getJsSign(request()->url(true)));
             session('jssdk_order', null);
         }
-        $homeId = input('home_id');
-        $sign = input('sign');
+        $homeId   = input('home_id');
+        $sign     = input('sign');
         $homeInfo = HomeModel::home_info_by_gid('', $homeId, 1);
-        $gid = $homeInfo['gid'];
+        $gid      = $homeInfo['gid'];
         if (!empty($homeInfo['password']) && $homeInfo['uid'] != $uid && $homeInfo['sign'] != $sign) {
-            $this->error('你没有权限访问该房间！', url('mobile/goods/detail', array('id' => $gid)));
+            $this->error('你没有权限访问该房间！', url('mobile/goods/detail', ['id' => $gid]));
         }
         if (!$list = osc_goods()->get_goods_info($gid)) {
             $this->error('商品不存在！！');
@@ -147,6 +148,7 @@ class Cart extends MobileBase
 
         $this->assign('SEO', ['title' => '乐购宝-' . config('SITE_TITLE')]);
         $this->assign('top_title', '乐购宝');
+
         return $this->fetch();
     }
 
@@ -185,6 +187,7 @@ class Cart extends MobileBase
             osc_service('mobile', 'user')->set_cart_total($total);
 
             storage_user_action($uid, user('username'), config('FRONTEND_USER'), '加入商品到购物车');
+
             return ['success' => '加入成功', 'total' => $total];
         } else {
             return ['error' => '加入失败'];
@@ -213,8 +216,8 @@ class Cart extends MobileBase
 
         $city_id = (int)$d['city_id'];
 
-        $cart_data = Db::name('cart')->find($cart_id);
-        $param['option'] = json_decode($cart_data['goods_option'], true);
+        $cart_data         = Db::name('cart')->find($cart_id);
+        $param['option']   = json_decode($cart_data['goods_option'], true);
         $param['goods_id'] = $goods_id;
         $param['quantity'] = $quantity;
 
@@ -238,7 +241,8 @@ class Cart extends MobileBase
 
         //计算运费
         if ($city_id) {
-            $t = $t = osc_transport()->calc_transport(config('default_transport_id'), $return['weight'], $city_id);
+            $t         = $t = osc_transport()->calc_transport(config('default_transport_id'), $return['weight'],
+                $city_id);
             $transport = $t['price'];
         } else {
             $transport = 0;
@@ -246,15 +250,15 @@ class Cart extends MobileBase
 
         return [
             //运费
-            'transport' => $transport,
+            'transport'       => $transport,
             //数量
-            'success' => $return['total_quantity'],
+            'success'         => $return['total_quantity'],
             //商品单价
-            'price' => $return['goods_price'],
+            'price'           => $return['goods_price'],
             //所有商品总价
             'total_all_price' => $return['total_all_price'],
             //所有商品重量
-            'weight' => $return['weight'],
+            'weight'          => $return['weight'],
         ];
 
 
@@ -293,7 +297,7 @@ class Cart extends MobileBase
 
         if (!empty($goods)) {
             foreach ($goods as $k => $v) {
-                $total_point += $v['total_pay_points'];
+                $total_point     += $v['total_pay_points'];
                 $total_all_price += $v['total'];
                 if ($v['shipping']) {
                     $weight += osc_weight()->convert($v['weight'], $v['weight_class_id'], config('weight_id'));
@@ -304,7 +308,7 @@ class Cart extends MobileBase
         $city_id = (int)input('param.city_id');
 
         if ($city_id) {
-            $t = osc_transport()->calc_transport(config('default_transport_id'), $weight, $city_id);
+            $t         = osc_transport()->calc_transport(config('default_transport_id'), $weight, $city_id);
             $transport = $t['price'];
         } else {
             $transport = 0;
@@ -312,15 +316,15 @@ class Cart extends MobileBase
 
         return [
             //运费
-            'transport' => $transport,
+            'transport'        => $transport,
             //数量
-            'total_num' => $total,
+            'total_num'        => $total,
             //商品单价
             'total_pay_points' => $total_point,
             //所有商品总价
-            'total_all_price' => $total_all_price,
+            'total_all_price'  => $total_all_price,
             //所有商品重量
-            'weight' => $weight,
+            'weight'           => $weight,
         ];
 
     }
@@ -345,20 +349,22 @@ class Cart extends MobileBase
 
             $weight = $data['weight'];
 
-            $address['uid'] = user('uid');
-            $address['name'] = $data['name'];
+            $address['uid']       = user('uid');
+            $address['name']      = $data['name'];
             $address['telephone'] = $data['tel'];
-            $address['address'] = $data['address'];
+            $address['address']   = $data['address'];
 
             $address['province_id'] = $province_id;
-            $address['city_id'] = $city_id;
-            $address['country_id'] = $country_id;
+            $address['city_id']     = $city_id;
+            $address['country_id']  = $country_id;
 
             if ($data['type'] == 'add') {
-                $r = Db::name('address')->insert($address, false, true);
+                $r          = Db::name('address')->insert($address, false, true);
                 $address_id = $r;
             } elseif ($data['type'] == 'edit') {
-                $r = Db::name('address')->where('address_id', (int)$data['address_id'])->update($address, false, true);
+                $r          = Db::name('address')
+                    ->where('address_id', (int)$data['address_id'])
+                    ->update($address, false, true);
                 $address_id = (int)$data['address_id'];
             }
             storage_user_action(user('uid'), user('nickname'), config('FRONTEND_USER'), '更新了收货地址');
@@ -367,8 +373,12 @@ class Cart extends MobileBase
 
             if ($r) {
                 $transport = osc_transport()->calc_transport(config('default_transport_id'), $weight, $city_id);
+
                 return [
-                    'success' => '1', 'transport' => $transport, 'city_id' => $city_id, 'address_id' => $address_id
+                    'success'    => '1',
+                    'transport'  => $transport,
+                    'city_id'    => $city_id,
+                    'address_id' => $address_id,
                 ];
             } else {
                 return ['error' => '编辑失败'];
@@ -393,7 +403,7 @@ class Cart extends MobileBase
     function update_transport()
     {
         if (request()->isPost()) {
-            $weight = input('post.weight');
+            $weight  = input('post.weight');
             $city_id = input('post.city_id');
 
             Db::name('member')->where('uid', user('uid'))->update(['address_id' => (int)input('post.address_id')]);
@@ -422,14 +432,14 @@ class Cart extends MobileBase
 
         $uid = (int)user('uid');
 
-        $address['uid'] = $uid;
-        $address['name'] = $data['name'];
+        $address['uid']       = $uid;
+        $address['name']      = $data['name'];
         $address['telephone'] = $data['tel'];
-        $address['address'] = $data['address'];
+        $address['address']   = $data['address'];
 
         $address['province_id'] = $province_id;
-        $address['city_id'] = $city_id;
-        $address['country_id'] = $country_id;
+        $address['city_id']     = $city_id;
+        $address['country_id']  = $country_id;
 
         Db::name('address')->where('uid', $uid)->delete();
 
@@ -456,7 +466,8 @@ class Cart extends MobileBase
         return [
             'success' => '1',
             'address' => $address,
-            'area' => get_area_name($address['province_id']) . ' ' . get_area_name($address['city_id']) . ' ' . get_area_name($address['country_id'])
+            'area'    => get_area_name($address['province_id']) . ' ' . get_area_name($address['city_id']) . ' ' .
+                get_area_name($address['country_id']),
         ];
     }
 
@@ -469,7 +480,7 @@ class Cart extends MobileBase
             session('jssdk_order', null);
         }
         $home_id = (int)input('param.home_id');
-//        $sign = (int)input('param.sign');
+        //        $sign = (int)input('param.sign');
         $homeInfo = HomeModel::home_info_by_sign($home_id);
         if (empty($homeInfo)) {
             $this->error('您没有访问权限');
@@ -478,9 +489,9 @@ class Cart extends MobileBase
             $this->error('商品不存在！！');
         }
         $list['goods']['image'] = resize($list['goods']['image'], 80, 80);
-        $homeUserInfo = Member::getMemberInfo($homeInfo['uid']);
-        $duobaoList = duobaoRecord::getNumbers($home_id);
-        $duobaoNumList = duobaoRecord::getDuobaoNum($home_id);
+        $homeUserInfo           = Member::getMemberInfo($homeInfo['uid']);
+        $duobaoList             = duobaoRecord::getNumbers($home_id);
+        $duobaoNumList          = duobaoRecord::getDuobaoNum($home_id);
         $this->assign('goods', $list['goods']);
         $this->assign('homeUserInfo', $homeUserInfo);
         $this->assign('duobaoList', $duobaoList);
@@ -488,6 +499,7 @@ class Cart extends MobileBase
         $this->assign('duobaoNumList', $duobaoNumList);
         $this->assign('SEO', ['title' => '房间-' . config('SITE_TITLE')]);
         $this->assign('top_title', '私房');
+
         return $this->fetch();
     }
 
