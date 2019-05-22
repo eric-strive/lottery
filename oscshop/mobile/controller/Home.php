@@ -64,7 +64,7 @@ class Home extends MobileBase
      */
     public function home_list($gid)
     {
-        $homeList = Db::name('home')->where(['gid' => $gid])->order('status,create_at')->select();
+        $homeList = Db::name('home')->where(['gid' => $gid])->order('status,create_at desc')->select();
         $this->assign('home_list', $homeList);
     }
 
