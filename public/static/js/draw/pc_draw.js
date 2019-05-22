@@ -320,12 +320,12 @@ function stopLottery() {
 
     setTimeout(function () {
         $("#canvas").css("opacity", "0.7");
-        $(".modal-backdrop.in").css("opacity", "0.5");
+        // $(".modal-backdrop.in").css("opacity", "0.5");
         can_stop = true;
         clearTimeout(arguments.callee);
         //中奖信息
-        drawAward(award, lottery_name_zh, lottery_name_en);
-        $(".modal-content #lottery-canvas").css("display", "block")
+        // drawAward(award, lottery_name_zh, lottery_name_en);
+        // $(".modal-content #lottery-canvas").css("display", "block")
         // 停止动画
         $("#lottery-main").hide();
     }, 2000)
@@ -337,7 +337,38 @@ function stopLottery() {
         // window.external.callbackStopLottery();
     }, 10 * 1000)
 }
+function lottery_initvars() {
+    setTimeout(function () {
+        $('#lottery-result').modal('show');
+        $("#canvas").css("opacity", "0");
+        $(".modal-backdrop.in").css("opacity", "0");
+        var canvas = document.getElementById('canvas');
+        canvas.width = document.documentElement.clientWidth;
+        canvas.height = document.documentElement.clientHeight;
+        window.addEventListener("resize", () => {
+            canvas.width = canvas.clientWidth;
+            canvas.height = canvas.clientHeight;
+            cx = canvas.width / 2;
+            cy = canvas.height / 2;
+        });
+        //烟花
+        initVars();
+        frame();
 
+    }, 1 * 1000)
+
+    setTimeout(function () {
+        $("#canvas").css("opacity", "0.7");
+        // $(".modal-backdrop.in").css("opacity", "0.5");
+        can_stop = true;
+        clearTimeout(arguments.callee);
+        //中奖信息
+        // drawAward(award, lottery_name_zh, lottery_name_en);
+        // $(".modal-content #lottery-canvas").css("display", "block")
+        // 停止动画
+        $("#lottery-main").hide();
+    }, 2000)
+}
 // canvas 绘制中奖结果
 function drawAward(award, name_zh, name_en, pic_format) {
     var canvas = document.getElementById('lottery-canvas');
@@ -739,7 +770,7 @@ function substitute(str, o, regexp) {
 
 $(function () {
 
-    justGo(isMove);
+    // justGo(isMove);
 
     // 控制：显示/隐藏 抽奖名单和抽奖奖品显示
     if (local_handle.get("mingdan_toggle") == 1) {

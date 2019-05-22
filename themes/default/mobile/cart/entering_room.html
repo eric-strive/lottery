@@ -58,7 +58,7 @@
         <div class="hid_name">{$homeInfo.home_name} <i class="dj dj1"></i></div>
     </div>
     <div class="hea_min hea_min2 fl_r">
-        <div class="h_xzz" style="font-size: 20px;">
+        <div class="h_xzz" style="font-size: 18px;width:auto;float: left">
             &nbsp;&nbsp;&nbsp;还剩
             <span id="residue-sum">{$homeInfo.lottery_drifts-$homeInfo.goods_buy_num}</span>
             份&nbsp;&nbsp;
@@ -67,7 +67,7 @@
             <i class="zsyc"></i>
             <span>&nbsp;&nbsp;&nbsp;房间号:{$homeInfo.home_num}</span>
         </div>
-        <div class="tuichu"><i class="tcsde"></i></div>
+        <!--        <div class="tuichu"><i class="tcsde"></i></div>-->
     </div>
 </div>
 <div id="home">
@@ -94,27 +94,6 @@
         </div>
         <div class="bg-meinv fl">
             <div id="yanhua" class="none">
-                <div id="lottery-main" class="lottery-main">
-                    <div class="wrap-main">
-                        <div class="lottery-wrap" id="lottery-wrap">
-                            {volist name="duobaoNumList" id="n"}
-                            <div class="clearfix lottery-list" data-id="100" data-namezh="{$n}" data-nameen="avatar1">
-                                <div class="f-l lottery-content">
-                                    <div class="content-detail">
-                                        <span>{$n}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            {/volist}
-                        </div>
-                    </div>
-
-                    <!--抽奖按钮-->
-                    <div class="dashboard">
-                        <div class="btn btn-red-outline lottery-btn none" id="lottery-btn" data-award="111">点击开始</div>
-                    </div>
-                </div>
-
                 <!-- 中奖弹框 -->
                 <button class="close" id="modal-close" data-dismiss="modal" style="visibility: hidden;">
                     <span aria-hidden="true" class="btn_x">&times;</span>
@@ -399,18 +378,20 @@
     }
 
     function drawResult() {
-        $('#lottery-wrap').html(r.numHtml)
-        $("#lottery-btn").attr('data-award', r.lottery_num);
+        // $('#lottery-wrap').html(r.numHtml)
+        // $('#lottery-wrap').html(22)
+        // $("#lottery-btn").attr('data-award',111);
         $('#yanhua').fadeIn();
         // //一进来就开始滚动抽奖
-        justGo(true);
-        startLottery()
-        setTimeout(stopLottery, 2000);
-        if (r.is_self > 0) {
-            // base_alert('恭喜你中奖了')
-        }
+        // justGo(true);
+        // startLottery()
+        setTimeout(lottery_initvars, 2000);
+        // if (r.is_self > 0) {
+        //     // base_alert('恭喜你中奖了')
+        // }
     }
 
+    drawResult()
     setTimeout(function () {
         checkLottery(true)
     }, 1000);
