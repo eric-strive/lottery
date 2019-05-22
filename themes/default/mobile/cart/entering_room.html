@@ -5,10 +5,12 @@
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title></title>
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/reset.css"/>
+    <link href="__PUBLIC__/num_move/css/globle.css" type="text/css" rel="Stylesheet"/>
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/animate.min.css"/>
     <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
     <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/draw.css" type="text/css">
+    <script src="__PUBLIC__/num_move/js/num.js"></script>
     <style>
         #lottery-main {
             width: 50%;
@@ -39,7 +41,8 @@
             height: 300px;
         }
 
-        .meinv-left > ul > li > img, .meinv-right > ul > li > a > img {
+        .meinv-left > ul > li > img, .meinv-right > ul > li > a > img ,
+        .meinv-left>ul>li>img, .meinv-right>ul>li>img{
             width: 70%;
             height: 80%;
         }
@@ -58,19 +61,42 @@
         <div class="hid_name">{$homeInfo.home_name} <i class="dj dj1"></i></div>
     </div>
     <div class="hea_min hea_min2 fl_r">
-        <div class="h_xzz" style="font-size: 18px;width:auto;float: left">
-            &nbsp;&nbsp;&nbsp;还剩
-            <span id="residue-sum">{$homeInfo.lottery_drifts-$homeInfo.goods_buy_num}</span>
-            份&nbsp;&nbsp;
-        </div>
         <div class="h_xzz">
             <i class="zsyc"></i>
             <span>&nbsp;&nbsp;&nbsp;房间号:{$homeInfo.home_num}</span>
+        </div>
+        <div class="h_xzz" style="font-size: 16px;width:auto;float: left">
+            &nbsp;&nbsp;&nbsp;剩
+            <span id="residue-sum">{$homeInfo.lottery_drifts-$homeInfo.goods_buy_num}</span>
+            份&nbsp;&nbsp;
         </div>
         <!--        <div class="tuichu"><i class="tcsde"></i></div>-->
     </div>
 </div>
 <div id="home">
+    <div id="yanhua" class="none" style="position: absolute;margin-top: 100%;">
+        <!-- 中奖弹框 -->
+        <button class="close" id="modal-close" data-dismiss="modal" style="visibility: hidden;">
+            <span aria-hidden="true" class="btn_x">&times;</span>
+        </button>
+        <div class="modal fade" id="lottery-result" role="dialog" aria-hidden="true">
+            <canvas id="canvas" style="margin-top:-100%"></canvas>
+            <div class="modal-dialog">
+                <div class="modal-content" style="height: calc(100% - 40px);padding-top: 70%;">
+                    <canvas id="lottery-canvas"></canvas>
+                </div>
+            </div>
+        </div>
+        <!--音乐开关-->
+        <a id="music-control" class="animated infinite bounce" href="javascript:;" data-open="1"></a>
+        <!--清除数据开关-->
+        <a id="clear-control" href="javascript:;" data-open="1"></a>
+
+        <audio id="music" loop preload="auto" src="/public/static/js/draw/shiji.mp3">
+            你的浏览器不支持audio标签
+        </audio>
+    </div>
+
     <div class="meinv clearfix">
         <div class="meinv-left fl">
             <ul>
@@ -93,28 +119,6 @@
             </ul>
         </div>
         <div class="bg-meinv fl">
-            <div id="yanhua" class="none">
-                <!-- 中奖弹框 -->
-                <button class="close" id="modal-close" data-dismiss="modal" style="visibility: hidden;">
-                    <span aria-hidden="true" class="btn_x">&times;</span>
-                </button>
-                <div class="modal fade" id="lottery-result" role="dialog" aria-hidden="true">
-                    <canvas id="canvas" style="margin-top:-100%"></canvas>
-                    <div class="modal-dialog">
-                        <div class="modal-content" style="height: calc(100% - 40px);padding-top: 70%;">
-                            <canvas id="lottery-canvas"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <!--音乐开关-->
-                <a id="music-control" class="animated infinite bounce" href="javascript:;" data-open="1"></a>
-                <!--清除数据开关-->
-                <a id="clear-control" href="javascript:;" data-open="1"></a>
-
-                <audio id="music" loop preload="auto" src="/public/static/js/draw/shiji.mp3">
-                    你的浏览器不支持audio标签
-                </audio>
-            </div>
         </div>
         <div class="meinv-right fr">
             <ul>
@@ -237,6 +241,10 @@
             </div>
         </div>
     </div>
+</div>
+<div class="">
+    <div id="dataNums"></div>
+    <div id="dataNums2"></div>
 </div>
 </body>
 <script src="__PUBLIC__/act/guessing_game/js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
@@ -364,11 +372,12 @@
                         } else {
                             setTimeout(function () {
                                 drawResult(r);
-                            }, residueTime);
+                            }, residueTime * 1000);
                         }
+                    } else {
+                        alert('已开奖');
+                        location.href = "/mobile";
                     }
-                    alert('已开奖');
-                    location.href = "/mobile";
                 } else {
                     setTimeout(function () {
                         checkLottery(false);
@@ -377,7 +386,7 @@
             });
     }
 
-    function drawResult() {
+    function drawResult(r) {
         // $('#lottery-wrap').html(r.numHtml)
         // $('#lottery-wrap').html(22)
         // $("#lottery-btn").attr('data-award',111);
@@ -385,13 +394,18 @@
         // //一进来就开始滚动抽奖
         // justGo(true);
         // startLottery()
-        setTimeout(lottery_initvars, 2000);
+        set_num(r.lottery_num)
+        setTimeout(lottery_initvars, 40000);
         // if (r.is_self > 0) {
         //     // base_alert('恭喜你中奖了')
         // }
     }
+    function set_num(num) {
+        $("#dataNums").rollNumDaq({
+            deVal: num
+        });
+    }
 
-    drawResult()
     setTimeout(function () {
         checkLottery(true)
     }, 1000);
