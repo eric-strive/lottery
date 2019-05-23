@@ -41,8 +41,8 @@
             height: 300px;
         }
 
-        .meinv-left > ul > li > img, .meinv-right > ul > li > a > img ,
-        .meinv-left>ul>li>img, .meinv-right>ul>li>img{
+        .meinv-left > ul > li > img, .meinv-right > ul > li > a > img,
+        .meinv-left > ul > li > img, .meinv-right > ul > li > img {
             width: 70%;
             height: 80%;
         }
@@ -110,9 +110,12 @@
                     <img att="{$duobaoList[$i]['dduonums']}" src="__PUBLIC__/act/guessing_game/img/header.jpg"
                          class="fui-btn user-info"/>
                     {/if}
+                    <span style="">
+                    <img src="__PUBLIC__/image/jinbi/images/jb1.png" class="user-jinbi"/>
+                    <img src="__PUBLIC__/image/jinbi/images/jb2.png" class="user-jinbi"/>
+                    <img src="__PUBLIC__/image/jinbi/images/jb3.png" class="user-jinbi"/>
+                    </span>
                     <span class="hid_name" style="color: red;font-size: 20px;">购{$duobaoList[$i]['num']}份</span>
-                    {else/}
-                    <img src="__PUBLIC__/act/guessing_game/img/header.jpg" class="fui-btn">
                     {/if}
                 </li>
                 {/for}
@@ -122,7 +125,7 @@
         </div>
         <div class="meinv-right fr">
             <ul>
-                {for start='5' end='10' step='1' name='i'}
+                {for start='0' end='5' step='1' name='i'}
                 <li>
                     {if condition="isset($duobaoList[$i]['dduonums'])"}
                     {if condition="!empty($duobaoList[$i]['userpic'])"}
@@ -132,9 +135,12 @@
                     <img att="{$duobaoList[$i]['dduonums']}" src="__PUBLIC__/act/guessing_game/img/header.jpg"
                          class="fui-btn user-info"/>
                     {/if}
+                    <span style="">
+                    <img src="__PUBLIC__/image/jinbi/images/jb3.png" class="user-jinbi"/>
+                    <img src="__PUBLIC__/image/jinbi/images/jb4.png" class="user-jinbi"/>
+                    <img src="__PUBLIC__/image/jinbi/images/jb5.png" class="user-jinbi"/>
+                    </span>
                     <span class="hid_name" style="color: red;font-size: 20px;">购{$duobaoList[$i]['num']}份</span>
-                    {else/}
-                    <img src="__PUBLIC__/act/guessing_game/img/header.jpg" class="fui-btn">
                     {/if}
                 </li>
                 {/for}
@@ -159,7 +165,8 @@
             </li>
             <li>
                 <div>
-                    <a href="javascript:location.reload();">
+                    <!--                    location.reload();-->
+                    <a href="javascript:" id="test">
                         <img src="__PUBLIC__/act/guessing_game/img/paihangbang.png"/>
                     </a>
                 </div>
@@ -247,7 +254,8 @@
     <div id="dataNums2"></div>
 </div>
 </body>
-<script src="__PUBLIC__/act/guessing_game/js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PUBLIC__/js/jquery/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src='__PUBLIC__/js/jquery/jquery-ui.min.js'></script>
 <script src="__PUBLIC__/act/guessing_game/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script src="__PUBLIC__/act/guessing_game/js/click.js" type="text/javascript" charset="utf-8"></script>
 <script src="__PUBLIC__/js/draw/underscore.js"></script>
@@ -256,6 +264,7 @@
 <script src="__PUBLIC__/js/draw/pc_draw.js"></script>
 <script src="__PUBLIC__/num_move/js/num.js"></script>
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
 <script>
     $('.head_deloa .closeee').click(function () {
         $('.head_deloa').hide()
@@ -396,10 +405,12 @@
         // startLottery()
         set_num(r.lottery_num)
         setTimeout(lottery_initvars, 40000);
+        alert('恭喜中奖' + r.nickname)
         // if (r.is_self > 0) {
         //     // base_alert('恭喜你中奖了')
         // }
     }
+
     function set_num(num) {
         $("#dataNums").rollNumDaq({
             deVal: num
@@ -409,6 +420,44 @@
     setTimeout(function () {
         checkLottery(true)
     }, 1000);
+    $('#test').on('click', function () {
+        $(".user-jinbi").each(function () {
+            var cart = $('.hea_min1');
+            var imgtodrag = $(this);
+            if (imgtodrag) {
+                setTimeout(function () {
+                    animate_jinbi(imgtodrag,cart)
+                }, 600);
+
+            }
+        })
+    });
+    function animate_jinbi(imgtodrag,cart) {
+        var imgclone = imgtodrag.clone().offset({
+            top: imgtodrag.offset().top,
+            left: imgtodrag.offset().left
+        }).css({
+            'opacity': '0.5',
+            'position': 'absolute',
+            'height': '150px',
+            'width': '150px',
+            'z-index': '100'
+        }).appendTo($('body')).animate({
+            'top': cart.offset().top + 10,
+            'left': cart.offset().left + 10,
+            'width': 75,
+            'height': 75
+        }, 1000, 'easeInOutExpo');
+        setTimeout(function () {
+            cart.effect('shake', {times: 2}, 200);
+        }, 1500);
+        imgclone.animate({
+            'width': 0,
+            'height': 0
+        }, function () {
+            $(this).detach();
+        });
+    }
 </script>
 <script>
     '{if condition="in_wechat()"}'

@@ -9,6 +9,7 @@
 namespace osc\mobile\controller;
 
 use osc\admin\model\duobaoRecord;
+use osc\admin\model\Member;
 use think\Db;
 use osc\admin\model\Home as HomeModel;
 
@@ -88,10 +89,13 @@ class Home extends MobileBase
         if ($homeInfo['status'] > HomeModel::ADD_NUM) {
             $numList             = duobaoRecord::getDuobaoNum($homeId);
             $homeInfo['is_self'] = $homeInfo['lottery_uid'] == UID ? 1 : 0;
+            $userInfo            = Member::getMemberInfo($homeInfo['lottery_uid']);
             $this->assign('numList', $numList);
             $homeInfo['numHtml']     = $this->fetch('is_full');
             $homeInfo['remain']      = $remain;
             $homeInfo['residueTime'] = $residueTime;
+            $homeInfo['nickname']    = $userInfo['nickname'];
+            $homeInfo['userpic']    = $userInfo['userpic'];
 
             return $homeInfo;
         }

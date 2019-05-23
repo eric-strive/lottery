@@ -5,14 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab9aee13-d223-48e2-bcc2-f55b7279d7c3" name="默认" comment="提交代码">
-      <change afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/header.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/js/jquery/jquery-2.1.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/static/js/jquery/jquery-ui.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/static/act/guessing_game/img/header.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/act/guessing_game/img/header.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/static/num_move/css/globle.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/num_move/css/globle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oscshop/mobile/controller/Home.php" beforeDir="false" afterPath="$PROJECT_DIR$/oscshop/mobile/controller/Home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/act/luck/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/act/luck/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/act/luck/css/base.less" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/act/luck/css/base.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/act/luck/images/1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/act/luck/images/1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/act/luck/images/10.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/act/luck/images/10.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/act/luck/images/11.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/act/luck/images/11.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/act/luck/images/12.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/act/luck/images/12.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/act/luck/images/2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/act/luck/images/2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/act/luck/images/3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/act/luck/images/3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/act/luck/images/4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/act/luck/images/4.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/act/luck/images/5.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/act/luck/images/5.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/act/luck/images/6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/act/luck/images/6.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/act/luck/images/7.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/act/luck/images/7.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/act/luck/images/8.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/act/luck/images/8.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/act/luck/images/9.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/act/luck/images/9.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/public/top-nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/public/top-nav.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,30 +34,26 @@
   <component name="ComposerSettings" doNotAsk="true" executionDataType="PHAR" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="524" column="10" selection-start-line="524" selection-start-column="10" selection-end-line="524" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/detail.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5054">
-              <caret line="266" column="63" selection-start-line="266" selection-start-column="53" selection-end-line="266" selection-end-column="63" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/themes/default/mobile/public/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="568">
+            <state relative-caret-position="836">
               <caret line="45" column="18" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="23" />
               <folding>
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -63,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/themes/default/mobile/public/top-nav.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="13" column="27" lean-forward="true" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+            <state relative-caret-position="76">
+              <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -73,7 +80,7 @@
         <entry file="file://$PROJECT_DIR$/themes/default/mobile/lottery_order/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="29" lean-forward="true" selection-start-column="29" selection-end-column="29" />
+              <caret column="29" selection-start-column="29" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -81,56 +88,25 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="385" column="15" lean-forward="true" selection-start-line="385" selection-start-column="15" selection-end-line="385" selection-end-column="15" />
+            <state relative-caret-position="694">
+              <caret line="452" column="17" lean-forward="true" selection-start-line="452" selection-start-column="17" selection-end-line="452" selection-end-column="17" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#2415#2421#0" expanded="true" />
-                <element signature="e#2421#2427#0" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#button#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#2644#2651#1" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#li#0;n#ul#0;n#div#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#style#0;n#li#1;n#ul#0;n#div#1;n#div#2;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#11269#11614#0" />
+                <element signature="e#11653#11851#0" />
+                <element signature="e#11890#12230#0" />
+                <element signature="e#12280#12438#0" />
+                <element signature="e#12504#12545#0" />
+                <element signature="e#12595#12636#0" />
+                <element signature="e#12683#12845#0" />
+                <element signature="e#12886#12957#0" />
+                <element signature="e#13179#14277#0" />
+                <element signature="e#14306#14717#0" />
                 <element signature="n#script#10;n#html#0;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/static/num_move/css/globle.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="620" selection-start-line="620" selection-end-line="624" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/luck.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="405" column="35" selection-start-line="405" selection-start-column="35" selection-end-line="405" selection-end-column="35" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#script#2;n#html#0;n#!!top" />
-                <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -139,8 +115,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Home.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="78" column="29" selection-start-line="78" selection-start-column="29" selection-end-line="78" selection-end-column="29" />
+            <state relative-caret-position="434">
+              <caret line="96" column="31" selection-start-line="96" selection-start-column="23" selection-end-line="96" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -149,14 +125,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>balance-payment-btn</find>
-      <find>wepayCall</find>
-      <find>weui.</find>
-      <find>jindou-payment-btn</find>
-      <find>幸运</find>
-      <find>toast</find>
-      <find>debug</find>
-      <find>luck_lottery</find>
       <find>$gid</find>
       <find>balance_pay</find>
       <find>订单信息有误</find>
@@ -177,8 +145,16 @@
       <find>set_num</find>
       <find>.dataNums .dataOne</find>
       <find>flex-row-center</find>
+      <find>listTopArrow</find>
       <find>num_complement</find>
       <find>alert</find>
+      <find>.game-goods-ul li img</find>
+      <find>imgtodrag</find>
+      <find>fui-btn</find>
+      <find>hea_min1</find>
+      <find>easeInOutExpo</find>
+      <find>easing</find>
+      <find>user-info</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -201,8 +177,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/oscshop/admin/service/GameHomeService.php" />
-        <option value="$PROJECT_DIR$/oscshop/admin/model/GameHome.php" />
         <option value="$PROJECT_DIR$/oscshop/mobile/controller/Game.php" />
         <option value="$PROJECT_DIR$/oscshop/member/controller/MemberBackend.php" />
         <option value="$PROJECT_DIR$/themes/default/member/member_backend/info.html" />
@@ -245,13 +219,15 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/themes/default/mobile/goods/luck.html" />
         <option value="$PROJECT_DIR$/public/static/js/draw/pc_draw.js" />
-        <option value="$PROJECT_DIR$/oscshop/mobile/controller/Home.php" />
         <option value="$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css" />
         <option value="$PROJECT_DIR$/public/static/num_move/css/globle.css" />
         <option value="$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html" />
-        <option value="$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html" />
         <option value="$PROJECT_DIR$/themes/default/mobile/public/base.html" />
         <option value="$PROJECT_DIR$/themes/default/mobile/public/top-nav.html" />
+        <option value="$PROJECT_DIR$/public/static/act/luck/css/base.less" />
+        <option value="$PROJECT_DIR$/public/static/act/luck/css/base.css" />
+        <option value="$PROJECT_DIR$/oscshop/mobile/controller/Home.php" />
+        <option value="$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html" />
       </list>
     </option>
   </component>
@@ -284,7 +260,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -295,47 +270,56 @@
             <path>
               <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
               <item name="lottery" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lottery" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="default" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lottery" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="default" type="462c0819:PsiDirectoryNode" />
-              <item name="mobile" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lottery" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="default" type="462c0819:PsiDirectoryNode" />
-              <item name="mobile" type="462c0819:PsiDirectoryNode" />
-              <item name="lottery_order" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lottery" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="default" type="462c0819:PsiDirectoryNode" />
-              <item name="mobile" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lottery" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lottery" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="act" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lottery" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="image" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lottery" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="image" type="462c0819:PsiDirectoryNode" />
+              <item name="jinbi" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lottery" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="image" type="462c0819:PsiDirectoryNode" />
+              <item name="jinbi" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/static/act/guessing_game/img" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/static/js/jquery" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -344,19 +328,19 @@
     <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public/static/act/guessing_game/img" />
-      <recent name="$PROJECT_DIR$/public/static/act/luck/images" />
-      <recent name="$PROJECT_DIR$/public/static/act" />
-      <recent name="$PROJECT_DIR$/public/static" />
-      <recent name="$PROJECT_DIR$/public/static/image" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public/static/act/guessing_game/img" />
+      <recent name="$PROJECT_DIR$/public/static/js/jquery" />
       <recent name="$PROJECT_DIR$/public/static/act/luck/images" />
+      <recent name="$PROJECT_DIR$/public/static/act/guessing_game/img" />
       <recent name="$PROJECT_DIR$/public/static/image/draw" />
       <recent name="$PROJECT_DIR$/themes/default/mobile/cart" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/static/image" />
+      <recent name="$PROJECT_DIR$/public/static/jinbi" />
       <recent name="$PROJECT_DIR$/public/static/act" />
+      <recent name="$PROJECT_DIR$/public/static/act/luck/images" />
+      <recent name="$PROJECT_DIR$/public/static/act/guessing_game/img" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -411,7 +395,9 @@
       <workItem from="1558341064843" duration="2735000" />
       <workItem from="1558440216660" duration="11517000" />
       <workItem from="1558519884227" duration="1388000" />
-      <workItem from="1558521286817" duration="7702000" />
+      <workItem from="1558521286817" duration="8453000" />
+      <workItem from="1558539034906" duration="138000" />
+      <workItem from="1558539202466" duration="3944000" />
     </task>
     <task id="LOCAL-00001" summary="项目提交">
       <created>1555080506808</created>
@@ -707,17 +693,23 @@
       <option name="project" value="LOCAL" />
       <updated>1558533105780</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="提交代码">
+      <created>1558538274052</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1558538274052</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="307665000" />
+    <option name="totallyTimeSpent" value="312498000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="48" y="23" width="1392" height="877" extended-state="0" />
-    <editor active="true" />
+    <frame x="50" y="23" width="1390" height="877" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19185185" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20103857" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -738,7 +730,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="LuaJ" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Database" order="4" weight="0.32962963" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25185734" />
@@ -778,72 +770,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="提交代码" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/oscshop/admin/model/Member.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="46" column="27" selection-start-line="46" selection-start-column="27" selection-end-line="46" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/admin/model/LuckRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="145" column="27" selection-start-line="145" selection-start-column="27" selection-end-line="145" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/admin/model/Home.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="199" column="27" selection-start-line="199" selection-start-column="27" selection-end-line="199" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/mobile/service/WeixinPay.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2033">
-          <caret line="107" column="36" selection-start-line="107" selection-start-column="36" selection-end-line="107" selection-end-column="36" />
-          <folding>
-            <element signature="e#38#69#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/admin/model/duobaoRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2280">
-          <caret line="131" column="42" selection-start-line="131" selection-start-column="42" selection-end-line="131" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/mobile/service/OrderProcess.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2299">
-          <caret line="139" column="27" selection-start-line="139" selection-start-column="27" selection-end-line="139" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/LotteryPayment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="184" column="27" selection-start-line="184" selection-start-column="27" selection-end-line="184" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1230">
-          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/static/image/dialogq.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -913,9 +839,6 @@
     <entry file="file://$PROJECT_DIR$/public/static/act/luck/images/4.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/static/act/luck/images/1.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/static/act/luck/images/10.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -943,43 +866,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/luck.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="405" column="35" selection-start-line="405" selection-start-column="35" selection-end-line="405" selection-end-column="35" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#script#2;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Home.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="78" column="29" selection-start-line="78" selection-start-column="29" selection-end-line="78" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/static/num_move/js/num.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-56" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/static/act/guessing_game/img/heard.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/act/guessing_game/img/heard.png" />
     <entry file="file://$PROJECT_DIR$/public/static/act/guessing_game/img/header.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
+        <state relative-caret-position="9956">
           <caret line="524" column="10" selection-start-line="524" selection-start-column="10" selection-end-line="524" selection-end-column="10" />
         </state>
       </provider>
@@ -991,30 +889,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/themes/default/mobile/lottery_order/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="29" lean-forward="true" selection-start-column="29" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/static/num_move/css/globle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="620" selection-start-line="620" selection-end-line="624" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/themes/default/mobile/public/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
+        <state relative-caret-position="836">
           <caret line="45" column="18" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="23" />
           <folding>
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1027,28 +904,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/themes/default/mobile/public/top-nav.html">
+    <entry file="file://$PROJECT_DIR$/themes/default/mobile/lottery_order/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="27" lean-forward="true" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+        <state>
+          <caret column="29" selection-start-column="29" selection-end-column="29" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/num_move/css/globle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11780">
+          <caret line="620" column="13" selection-start-line="620" selection-start-column="1" selection-end-line="620" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/act/luck/images/1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/mobile/public/top-nav.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/act/luck/css/base.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="131" column="13" selection-start-line="131" selection-start-column="13" selection-end-line="131" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/act/luck/css/base.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="123" column="15" lean-forward="true" selection-start-line="123" selection-start-column="15" selection-end-line="123" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/luck.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="405" column="35" selection-start-line="405" selection-start-column="35" selection-end-line="405" selection-end-column="35" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#script#2;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="96" column="31" selection-start-line="96" selection-start-column="23" selection-end-line="96" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/act/fry/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="61" selection-start-line="61" selection-end-line="62" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/js/jquery/jquery-2.1.1.min.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/image/jinbi/images/kd1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/image/jinbi/images/kd2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/image/jinbi/images/jb2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/image/jinbi/images/jb3.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/image/jinbi/images/jb5.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="385" column="15" lean-forward="true" selection-start-line="385" selection-start-column="15" selection-end-line="385" selection-end-column="15" />
+        <state relative-caret-position="694">
+          <caret line="452" column="17" lean-forward="true" selection-start-line="452" selection-start-column="17" selection-end-line="452" selection-end-column="17" />
           <folding>
             <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#2415#2421#0" expanded="true" />
-            <element signature="e#2421#2427#0" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#2644#2651#1" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#li#0;n#ul#0;n#div#2;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" />
             <element signature="n#style#0;n#li#1;n#ul#0;n#div#1;n#div#2;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#11269#11614#0" />
+            <element signature="e#11653#11851#0" />
+            <element signature="e#11890#12230#0" />
+            <element signature="e#12280#12438#0" />
+            <element signature="e#12504#12545#0" />
+            <element signature="e#12595#12636#0" />
+            <element signature="e#12683#12845#0" />
+            <element signature="e#12886#12957#0" />
+            <element signature="e#13179#14277#0" />
+            <element signature="e#14306#14717#0" />
             <element signature="n#script#10;n#html#0;n#!!top" />
           </folding>
         </state>
