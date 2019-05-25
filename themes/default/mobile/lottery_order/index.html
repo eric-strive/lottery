@@ -11,17 +11,17 @@
 {block name="content"}
 <input type="hidden" value="{:input('param.status')}" id="status"/>
 
-<div class='clearfix' id='uc-order-sort-bar'>
-    <div class="uc-order-sort <?php if($status===''){echo 'hover';} ?>" data-status=""><b>全部</b></div>
-    <div class="uc-order-sort <?php if($status===0){echo 'hover';} ?>"
-         data-status="0"><b>待开奖</b></div>
-    <div class="uc-order-sort <?php if($status==1){echo 'hover';} ?>"
-         data-status="1"><b>已开奖</b></div>
-    <div class="uc-order-sort <?php if($status==3){echo 'hover';} ?>"
-         data-status="3"><b>待领取</b></div>
-    <div class="uc-order-sort <?php if($status==2){echo 'hover';} ?>"
-         data-status="2"><b>已完成</b></div>
-</div>
+<!--<div class='clearfix' id='uc-order-sort-bar'>-->
+<!--    <div class="uc-order-sort <?php if($status===''){echo 'hover';} ?>" data-status=""><b>全部</b></div>-->
+<!--    <div class="uc-order-sort <?php if($status===0){echo 'hover';} ?>"-->
+<!--         data-status="0"><b>待开奖</b></div>-->
+<!--    <div class="uc-order-sort <?php if($status==1){echo 'hover';} ?>"-->
+<!--         data-status="1"><b>已开奖</b></div>-->
+<!--    <div class="uc-order-sort <?php if($status==3){echo 'hover';} ?>"-->
+<!--         data-status="3"><b>待领取</b></div>-->
+<!--    <div class="uc-order-sort <?php if($status==2){echo 'hover';} ?>"-->
+<!--         data-status="2"><b>已完成</b></div>-->
+<!--</div>-->
 
 <div id="uc-orderlist"></div>
 <div id="list-loading" style="display: none;">

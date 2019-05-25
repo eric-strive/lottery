@@ -24,7 +24,7 @@
         {/if}
         <span class="uc-name">{$userinfo.nickname}</span>
     </div>
-    <div class="comspreadstat clearfix">
+    <div class="comspreadstat clearfix" >
         <span class="spread-item" onclick="location.href = '{:url(\'Points/points_list\')}';"><b>{$userinfo.points}</b>积分</span>
         <span class="spread-item"
               onclick="location.href = '{:url(\'User/wish_list\')}';"><b>{$userinfo.wish}</b>收藏</span>
@@ -34,28 +34,28 @@
     </div>
 </div>
 
-<div class="uc-section base_sound" onclick="location.href = '{:url(\'lottery_order/index\')}';"><i class='dingdan'></i>
-    <b>查看全部</b>我的订单
-</div>
+<!--<div class="uc-section base_sound" onclick="location.href = '{:url(\'lottery_order/index\')}';"><i class='dingdan'></i>-->
+<!--    <b>查看全部</b>我的订单-->
+<!--</div>-->
 
 <div class='uc-order-sec clearfix base_sound'>
     <a class='uc-order-btn fahuo'
        href="{:url('lottery_order/index',array('status'=>0))}"><i></i>待开奖
         <b class='prices'>{$not_complete|default='0'}</b></a>
-    <a class='uc-order-btn fukuan' href="{:url('lottery_order/index',array('status'=>1))}"><i></i>已开奖
-        <b class='prices'>{$lottery|default='0'}</b>
+<!--    <a class='uc-order-btn fukuan' href="{:url('lottery_order/index',array('status'=>1))}"><i></i>已开奖-->
+<!--        <b class='prices'>{$lottery|default='0'}</b>-->
     </a>
     <a class='uc-order-btn fahuo'
        href="{:url('lottery_order/index',array('status'=>3))}"><i></i>待领取
         <b class='prices'>{$not_get|default='0'}</b></a>
     </a>
-    <a class='uc-order-btn fukuan' href="{:url('lottery_order/index',array('status'=>2))}"><i></i>已完成
-        <b class='prices'>{$complete|default='0'}</b>
-    </a>
+<!--    <a class='uc-order-btn fukuan' href="{:url('lottery_order/index',array('status'=>2))}"><i></i>已完成-->
+<!--        <b class='prices'>{$complete|default='0'}</b>-->
+<!--    </a>-->
 </div>
-<div class="uc-section base_sound" onclick="location.href = '{:url(\'lottery_order/luck_list\')}';">
-    <i></i><b>查看记录</b>幸运购
-</div>
+<!--<div class="uc-section base_sound" onclick="location.href = '{:url(\'lottery_order/luck_list\')}';">-->
+<!--    <i></i><b>查看记录</b>幸运购-->
+<!--</div>-->
 <div class="uc-section base_sound" onclick="location.href = '{:url(\'user/wish_list\')}';">
     <i></i><b>我喜欢，我收藏</b>我的收藏
 </div>
@@ -67,9 +67,9 @@
     <i class='credit'></i><b>您有 {$userinfo.points-$userinfo.cash_points} 积分可兑换</b>积分兑换
 </div>
 {empty name="$userinfo['telephone']"}
-<div class="uc-section" onclick="location.href = '{:url(\'login/binding_phone\')}'">
-    <i class='infoedit'></i><b>绑定可账号密码登录</b>绑定手机号
-</div>
+<!--<div class="uc-section" onclick="location.href = '{:url(\'login/binding_phone\')}'">-->
+<!--    <i class='infoedit'></i><b>绑定可账号密码登录</b>绑定手机号-->
+<!--</div>-->
 {/empty}
 {if condition="$userinfo['is_agent'] EQ 1"}
 <div class="uc-section" onclick="location.href = '{:url(\'Agent/sub_agent\')}'">

@@ -120,7 +120,7 @@ class Home
     public static function getGidHomeNum($gid)
     {
         $home_num_id = Db::name('home')
-            ->where('gid', $gid)
+//            ->where('gid', $gid)
             ->order('id desc')->limit(1)
             ->value('home_num');
         return $home_num_id ? $home_num_id + 1 : 1;
@@ -344,6 +344,13 @@ class Home
             ->where('id', $home_id)
 //            ->where('sign', $sign)
             ->find();
+    }
+    public static function bug_record($homeId, $uid)
+    {
+        return Db::name('home_record')->where([
+            'home_id' => $homeId,
+            'uid'     => $uid,
+        ])->select();
     }
 }
 

@@ -643,11 +643,12 @@ header.bheader:after {
   padding-right: 2px;
 }
 .spread-item {
-  width: 25%;
+  width: 33%;
   display: inline-block;
   float: left;
   padding: 6px 0;
-  font-size: 12px;
+  font-size: 18px;
+  font-weight: bold;
   text-align: center;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   margin-left: -1px;

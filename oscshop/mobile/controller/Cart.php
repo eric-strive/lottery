@@ -16,7 +16,6 @@ namespace osc\mobile\controller;
 
 use osc\admin\model\duobaoRecord;
 use osc\admin\model\Member;
-use osc\mobile\service\OrderProcess;
 use osc\mobile\validate\Address;
 use \think\Db;
 use osc\admin\model\Home as HomeModel;
@@ -491,7 +490,10 @@ class Cart extends MobileBase
         $list['goods']['image'] = resize($list['goods']['image'], 80, 80);
         $homeUserInfo           = Member::getMemberInfo($homeInfo['uid']);
         $duobaoList             = duobaoRecord::getNumbers($home_id);
-        $duobaoNumList          = duobaoRecord::getDuobaoNum($home_id);
+        foreach ($duobaoList as $item) {
+            $duobaoList['bug_home_record'] = HomeModel::bug_record($home_id, $item['uid']);
+        }
+        $duobaoNumList = duobaoRecord::getDuobaoNum($home_id);
         $this->assign('goods', $list['goods']);
         $this->assign('homeUserInfo', $homeUserInfo);
         $this->assign('duobaoList', $duobaoList);
@@ -502,5 +504,6 @@ class Cart extends MobileBase
 
         return $this->fetch();
     }
+
 
 }

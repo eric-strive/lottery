@@ -2,62 +2,77 @@
 <html>
 
 <head>
-    <meta http-equiv=Content-Type content="text/html;charset=utf-8" />
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8"/>
     <title>{$SEO.title|default=''}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no"> {block name="jquery"}
+    <meta name="format-detection" content="telephone=no">
+    {block name="jquery"}
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1187301_i9qeaut0ppk.css">
     <script src="__PUBLIC__/js/jquery/jquery-1.10.2.min.js"></script>
     {/block} {block name="head"}{/block}
 </head>
 
 <body style="font-weight: bold">
-    {block name="header"}{/block}
-    <div class="weui_dialog weui_dialog_visible" id="base-dialog-weui" style="z-index: 5000;display: none;">
-        <div class="weui_dialog_hd" style="text-align:left;height:200px;background: url('__PUBLIC__/image/dialogq.jpg') no-repeat; background-size: 100% 100%;">
-            <p class="weui-prompt-text" id="base-dialog-info" style="color: white;margin: 12% 10% 0;
+{block name="header"}{/block}
+<div class="weui_dialog weui_dialog_visible" id="base-dialog-weui" style="z-index: 5000;display: none;">
+    <div class="weui_dialog_hd"
+         style="text-align:left;height:200px;background: url('__PUBLIC__/image/dialogq.jpg') no-repeat; background-size: 100% 100%;">
+        <p class="weui-prompt-text" id="base-dialog-info" style="color: white;margin: 12% 10% 0;
             text-align: center;font-size:18px">
 
-            </p>
-        </div>
-        <div class="weui_dialog_ft" style="font-size: 20px;margin-top: -10%;background: #352f69;color: white;border-radius: 5px;">
-            <a href="javascript:void(0)" style="color: white" class="base_sound weui_btn_dialog primary" id="base-dialog-submit">确定</a>
-        </div>
+        </p>
     </div>
-    {block name="content"}{/block} {block name="footer"}{/block}
+    <div class="weui_dialog_ft"
+         style="font-size: 20px;margin-top: -10%;background: #352f69;color: white;border-radius: 5px;">
+        <a href="javascript:void(0)" style="color: white" class="base_sound weui_btn_dialog primary"
+           id="base-dialog-submit">确定</a>
+    </div>
+</div>
+{block name="content"}{/block} {block name="footer"}{/block}
 </body>
 <script src="__PUBLIC__/act/guessing_game/js/common.js" type="text/javascript" charset="utf-8"></script>
 <script src="__PUBLIC__/act/guessing_game/js/click.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var _hmt = _hmt || [];
-    (function() {
+    (function () {
         var hm = document.createElement("script");
         hm.src = "//hm.baidu.com/hm.js?32e3cb4cf7e5c6772c4dc1f5d496b6af";
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
-    $("#base-dialog-submit").click(function() {
+    $("#base-dialog-submit").click(function () {
         $("#base-dialog-weui").hide();
     })
+    $("#base-dialog-weui").click(function () {
+        var u = $('#base-dialog-submit').attr('href');
+        if (u == 'javascript:void(0)') {
+            $("#base-dialog-weui").hide();
+        }
+    });
 
-    function base_alert(info,url) {
+    function base_alert(info, url) {
         $("#base-dialog-info").html(info);
         $("#base-dialog-weui").show();
-        if(url){
-            $('#base-dialog-submit').attr('href',url);
+        if (url) {
+            $('#base-dialog-submit').attr('href', url);
         }
     }
+
     function num_complement(num, length) {
-        return (num/Math.pow(10,length)).toFixed(length).substr(2);
+        return (num / Math.pow(10, length)).toFixed(length).substr(2);
     }
-    var sd=new FUI.soundComponent({src:'__PUBLIC__/act/guessing_game/video/dialog_tow.mp3',altSrc:'__PUBLIC__/act/guessing_game/video/dialog_tow.mp3'});
+
+    var sd = new FUI.soundComponent({
+        src: '__PUBLIC__/act/guessing_game/video/dialog_tow.mp3',
+        altSrc: '__PUBLIC__/act/guessing_game/video/dialog_tow.mp'
+    });
     $('.base_sound').click(function () {
         sd.play();
     });
-    $("#goods_list").delegate('.base_sound','click',function () {
+    $("#goods_list").delegate('.base_sound', 'click', function () {
         sd.play();
     })
 </script>
