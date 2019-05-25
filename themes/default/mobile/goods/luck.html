@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="text/javascript" src="__PUBLIC__/js/fontsize.js"></script>
-    <link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
-    <link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
+    <link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet" />
+    <link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet" />
     <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
     <link rel="stylesheet" href="__PUBLIC__/act/luck/css/base.css">
     <link rel="stylesheet" href="__PUBLIC__/layer/skin/default/layer.css">
@@ -20,13 +20,13 @@
         body {
             background: #980202;
         }
-
+        
         .bg-info {
             background: url('__PUBLIC__/act/luck/images/bg.png') no-repeat;
             padding-top: 45%;
             padding-bottom: 50%;
         }
-
+        
         .luck-lottery {
             position: absolute;
             margin-top: 50%;
@@ -36,10 +36,79 @@
 </head>
 
 <body>
-<div class="luck-con">
-    <div class="luck-show none">
-        <div class="weui_mask weui_mask_visible"></div>
-        <div class="luck-lottery" style="">
+    <div class="luck-con">
+        <!-- 弹窗 -->
+        <div class="luck-show none">
+            <div class="weui_mask weui_mask_visible"></div>
+            <div class="luck-lottery" style="">
+                <div class="game-content">
+                    <img src="__PUBLIC__/act/luck/images/2p.png">
+                    <div class="game-goods-wrap">
+                        <div class="game-goods-list">
+                            <div class="game-goods" style="background: #ffffff;">
+                                <div class="game-goods-box" id="game1">
+                                    <ul class="game-goods-ul" style="">
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="game-goods" style="background: #ffffff;">
+                                <div class="game-goods-box" id="game2">
+                                    <ul class="game-goods-ul" style="">
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="game-goods" style="background: #ffffff;">
+                                <div class="game-goods-box" id="game3">
+                                    <ul class="game-goods-ul">
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="game-rule" href="javascript:void(0);" style="display: none;"></a>
+                    <!-- <span class="game-btn"></span> -->
+                    <a class="game-prize" href="javascript:void(0);"></a>
+                </div>
+                <div class="weui_opr_area" style="background: #980202;">
+                    <p class="weui_btn_area">
+                        <!-- href="{:url('mobile/goods/luck',array('id'=>$goods.goods_id))}" -->
+                        <a class="weui_btn weui_btn_primary" id="bug_again">再嗨一次</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <nav>
+            <a href="javascript:window.history.go(-1)" onclick="">返回</a>
+        </nav>
+        <!-- <div class="luck-cen">
+
+            <div class="flex-col-center luck-cen-gl">
+            <p>本次中奖概率</p>
+            <p id="percentage">0.10%</p>
+        </div>
+        <div class="flex-row-center luck-cen-btnBox">
+            <input type="button" att="1" value="1元嗨" class="selected">
+            <input type="button" att="3" value="x3倍">
+            <input type="button" att="5" value="x5倍">
+        </div>
+        <div class="flex-row luck-cen-bottom">
+            <img src="IMG_ROOT{$goods.image}" alt="">
+            <div class="flex-col-center">
+                <input type="hidden" id="pay_mount" value="1.01">
+                <input type="hidden" id="original-price" value="{$goods.price}">
+                <input type="hidden" id="subject-price" value="{$goods.name}">
+                <p class="prices">抽奖价:<span>￥<em id="pay_value">1</em></span></p>
+                <p class="original-price">￥{$goods.price}</p>
+            </div>
+
+        </div>
+
+        </div> -->
+        <div style="margin-top:3rem;">
             <div class="game-content">
                 <img src="__PUBLIC__/act/luck/images/2p.png">
                 <div class="game-goods-wrap">
@@ -71,49 +140,25 @@
                 <!-- <span class="game-btn"></span> -->
                 <a class="game-prize" href="javascript:void(0);"></a>
             </div>
-            <div class="weui_opr_area" style="background: #980202;">
-                <p class="weui_btn_area">
-                    <!-- href="{:url('mobile/goods/luck',array('id'=>$goods.goods_id))}" -->
-                    <a class="weui_btn weui_btn_primary" id="bug_again">再嗨一次</a>
-                </p>
-            </div>
         </div>
-
-    </div>
-    <nav>
-        <a href="javascript:window.history.go(-1)" onclick="">返回</a>
-    </nav>
-    <div class="luck-cen">
-        <div class="flex-col-center luck-cen-gl">
-            <p>本次中奖概率</p>
-            <p id="percentage">0.10%</p>
-        </div>
+        <p class="luck-p">采用绝对公平公开的算法</p>
+        <input class="luck-btn" id="jindou-payment-btn" type="button" value="金豆支付">
+        <input class="luck-btn" id="wechat-payment-btn" type="button" value="微信支付">
         <div class="flex-row-center luck-cen-btnBox">
             <input type="button" att="1" value="1元嗨" class="selected">
             <input type="button" att="3" value="x3倍">
             <input type="button" att="5" value="x5倍">
         </div>
-        <div class="flex-row luck-cen-bottom">
-            <img src="IMG_ROOT{$goods.image}" alt="">
-            <div class="flex-col-center">
-                <input type="hidden" id="pay_mount" value="1.01">
-                <input type="hidden" id="original-price" value="{$goods.price}">
-                <input type="hidden" id="subject-price" value="{$goods.name}">
-                <p class="prices">抽奖价:<span>￥<em id="pay_value">1</em></span></p>
-                <p class="original-price">￥{$goods.price}</p>
-            </div>
-
+        <div class="flex-between bgpic">
+            <img src="/public/static/image/girl.png" alt="">
+            <img src="/public/static/image/girl2.png" alt="">
         </div>
     </div>
-    <p class="luck-p">采用绝对公平公开的算法</p>
-    <input class="luck-btn" id="jindou-payment-btn" type="button" value="金豆支付">
-    <input class="luck-btn" id="wechat-payment-btn" type="button" value="微信支付">
-</div>
 </body>
 {block name="script"}
 <script>
     //抽奖***********************************************************start
-    $(function () {
+    $(function() {
         var $isLottery = "{$isLottery}";
         var order_no = "{$order_no}";
         var recordSum = "{$recordSum}";
@@ -121,6 +166,7 @@
             $(".luck-show").show();
             luck_lottery($isLottery)
         }
+        luck_lottery('1234')
 
         function luck_lottery(isLottery) {
             var is_win = 0
@@ -141,7 +187,7 @@
                 game_pagesize: 10
             });
             $(".game-btn").click();
-            $('#bug_again').on('click', function () {
+            $('#bug_again').on('click', function() {
                 $(".luck-show").hide();
 
             })
@@ -150,7 +196,7 @@
         //抽奖*********************************************************end
         var num = randomShu();
         var originalPrice = $('#original-price').val();
-        $('.luck-cen-btnBox input').on('click', function () {
+        $('.luck-cen-btnBox input').on('click', function() {
             $(this).siblings().removeClass('selected');
             $(this).addClass('selected');
             var att = $(this).attr('att');
@@ -189,22 +235,21 @@
                     'attach': '2',
                     'gid': gid,
                 },
-                function (r) {
+                function(r) {
                     if (r.error) {
                         alert(r.error);
                         $('#balance-payment-btn').removeClass('disable').html('金豆支付');
                         return;
                     }
-                    if (r.ret_code === 0) {
-                    } else if (r.ret_code === 11) {
+                    if (r.ret_code === 0) {} else if (r.ret_code === 11) {
                         $('#balance-payment-btn').removeClass('disable').html('金豆支付');
                         alert(r.ret_msg);
                     } else if (r.ret_code === 3) {
                         layer.confirm('您的金豆不足，请使用微信支付或充值金豆！', {
                             btn: ['微信支付', '微信充值'] //按钮
-                        }, function () {
+                        }, function() {
                             $("#wechat-payment-btn").click();
-                        }, function () {
+                        }, function() {
                             location.href = '/mobile/user/recharge';
                         });
                     } else {
@@ -266,24 +311,24 @@
             'chooseWXPay'
         ]
     });
-    wx.ready(function () {
+    wx.ready(function() {
         wx.onMenuShareAppMessage({
             title: '好友邀请',
             desc: '老铁，快来嗨一把',
             link: "http://{$_SERVER['HTTP_HOST']}{:url('mobile/goods/luck',array('id'=>$goods['goods_id']))}",
             //&home_id=.$home_id.&sign=.$homeInfo[sign]
             imgUrl: "http://{$_SERVER['HTTP_HOST']}IMG_ROOT{$goods.image}",
-            trigger: function (res) {
+            trigger: function(res) {
                 // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
                 //                    alert('用户点击发送给朋友');
             },
-            success: function (res) {
+            success: function(res) {
                 //                    alert('已分享');
             },
-            cancel: function (res) {
+            cancel: function(res) {
                 //                    alert('已取消');
             },
-            fail: function (res) {
+            fail: function(res) {
                 alert(JSON.stringify(res));
             }
         });
@@ -295,32 +340,32 @@
             desc: '老铁，快来嗨一把',
             link: "http://{$_SERVER['HTTP_HOST']}{:url('mobile/goods/luck',array('id'=>$goods['goods_id']))}",
             imgUrl: "http://{$_SERVER['HTTP_HOST']}IMG_ROOT{$goods.image}",
-            trigger: function (res) {
+            trigger: function(res) {
                 // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
                 //                    alert('用户点击分享到朋友圈');
             },
-            success: function (res) {
+            success: function(res) {
                 //                    alert('已分享');
             },
-            cancel: function (res) {
+            cancel: function(res) {
                 //                    alert('已取消');
             },
-            fail: function (res) {
+            fail: function(res) {
                 alert(JSON.stringify(res));
             }
         });
         wx.hideMenuItems({
             menuList: [
-                "menuItem:exposeArticle",
-                "menuItem:share:qq",
-                "menuItem:copyUrl",
-                "menuItem:share:QZone",
-                "menuItem:originPage",
-                "menuItem:openWithQQBrowser",
-                "menuItem:openWithSafari",
-                "menuItem:share:email",
-                'menuItem:copyUrl' // 复制链接
-            ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+                    "menuItem:exposeArticle",
+                    "menuItem:share:qq",
+                    "menuItem:copyUrl",
+                    "menuItem:share:QZone",
+                    "menuItem:originPage",
+                    "menuItem:openWithQQBrowser",
+                    "menuItem:openWithSafari",
+                    "menuItem:share:email",
+                    'menuItem:copyUrl' // 复制链接
+                ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
         });
     });
     '{/if}'
@@ -348,7 +393,7 @@
                 'gid': gid,
                 'attach': '2',
             },
-            function (r) {
+            function(r) {
                 if (r.error) {
                     $.toast(r.error, "forbidden");
                     return;
@@ -411,7 +456,7 @@
 <script type="text/javascript" src="__PUBLIC__/act/luck/js/jquery.min.js"></script>
 <script type="text/javascript">
     $.extend({
-        luckGame: function (options) {
+        luckGame: function(options) {
             var defaults = {
                 'gameLen': '15',
                 'game_pagesize': 11, //生成多少圈同样的东西
@@ -437,7 +482,7 @@
                 game_init.push(Math.floor(Math.random() * gameLen));
             }
             createGame();
-            $(window).resize(function () {
+            $(window).resize(function() {
 
                 createGame();
             })
@@ -490,7 +535,7 @@
                         arr[i]['src'] +
                         '"></li>';
                 }
-                $(".game-goods-ul").each(function (e) {
+                $(".game-goods-ul").each(function(e) {
                     $(this).empty().append(html_str);
                     game_list_h = $(this).height();
                     console.log('game_list_item_h', game_init);
@@ -511,9 +556,9 @@
                 //如果中奖
                 if (settings.zj_arr.is_win == 1) {
 
-                    $(".game-goods-ul").each(function (e) {
+                    $(".game-goods-ul").each(function(e) {
 
-                        setTimeout(function () {
+                        setTimeout(function() {
                             y = (settings.zj_arr.number + settings.gameLen * (settings.game_pagesize - 1)) *
                                 game_list_item_h;
                             $(".game-goods-ul").eq(e).css({
@@ -522,7 +567,7 @@
                             })
                         }, e * 300);
                         //判断最后面是否完毕
-                        $("#game3").find(".game-goods-ul").on("webkitTransitionEnd", function () {
+                        $("#game3").find(".game-goods-ul").on("webkitTransitionEnd", function() {
                             y = settings.zj_arr.number * game_list_item_h;
                             $(".game-goods-ul").css({
                                 'transition-duration': '0ms',
@@ -537,11 +582,11 @@
                     numrand = randNum2();
                     console.log(numrand);
                     //不中奖的时候
-                    $(".game-goods-ul").each(function (e) {
+                    $(".game-goods-ul").each(function(e) {
                         y2 = (numrand[0]) * game_list_item_h;
                         y3 = (numrand[1]) * game_list_item_h;
                         y4 = (numrand[2]) * game_list_item_h;
-                        setTimeout(function () {
+                        setTimeout(function() {
                             y = (numrand[e] + settings.gameLen * (settings.game_pagesize - 1)) * game_list_item_h;
                             $(".game-goods-ul").eq(e).css({
                                 'transition-duration': '5000ms',
@@ -549,7 +594,7 @@
                             })
                         }, e * 300);
                         //判断最后面是否完毕
-                        $("#game3").find(".game-goods-ul").on("webkitTransitionEnd", function () {
+                        $("#game3").find(".game-goods-ul").on("webkitTransitionEnd", function() {
 
                             $(".game-goods-ul").eq(2).css({
                                 'transition-duration': '00ms',
@@ -557,7 +602,7 @@
                             })
                             $("#game3").find(".game-goods-ul").unbind("webkitTransitionEnd");
                         })
-                        $("#game2").find(".game-goods-ul").on("webkitTransitionEnd", function () {
+                        $("#game2").find(".game-goods-ul").on("webkitTransitionEnd", function() {
 
                             $(".game-goods-ul").eq(1).css({
                                 'transition-duration': '00ms',
@@ -565,7 +610,7 @@
                             })
                             $("#game2").find(".game-goods-ul").unbind("webkitTransitionEnd");
                         })
-                        $("#game1").find(".game-goods-ul").on("webkitTransitionEnd", function () {
+                        $("#game1").find(".game-goods-ul").on("webkitTransitionEnd", function() {
 
                             $(".game-goods-ul").eq(0).css({
                                 'transition-duration': '00ms',
