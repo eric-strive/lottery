@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ab9aee13-d223-48e2-bcc2-f55b7279d7c3" name="默认" comment="提交代码">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/oscshop/mobile/controller/Cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/oscshop/mobile/controller/Cart.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/goods/luck.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/goods/luck.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="233" column="41" selection-start-line="233" selection-end-line="234" />
+            <state relative-caret-position="234">
+              <caret line="256" column="13" selection-start-line="256" selection-start-column="13" selection-end-line="256" selection-end-column="13" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#button#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -71,11 +69,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/luck.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="138" column="86" selection-start-line="138" selection-start-column="86" selection-end-line="138" selection-end-column="86" />
+            <state relative-caret-position="275">
+              <caret line="143" column="35" selection-start-line="143" selection-start-column="35" selection-end-line="143" selection-end-column="35" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -193,9 +191,9 @@
         <option value="$PROJECT_DIR$/oscshop/admin/view/goods/index.html" />
         <option value="$PROJECT_DIR$/themes/default/mobile/goods/detail.html" />
         <option value="$PROJECT_DIR$/oscshop/admin/model/Home.php" />
-        <option value="$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html" />
         <option value="$PROJECT_DIR$/oscshop/mobile/controller/Cart.php" />
         <option value="$PROJECT_DIR$/themes/default/mobile/goods/luck.html" />
+        <option value="$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html" />
       </list>
     </option>
   </component>
@@ -374,14 +372,7 @@
       <workItem from="1558521286817" duration="8453000" />
       <workItem from="1558539034906" duration="138000" />
       <workItem from="1558539202466" duration="3944000" />
-      <workItem from="1558606215658" duration="19980000" />
-    </task>
-    <task id="LOCAL-00001" summary="项目提交">
-      <created>1555080506808</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1555080506808</updated>
+      <workItem from="1558606215658" duration="20262000" />
     </task>
     <task id="LOCAL-00002" summary="项目提交">
       <created>1555160613287</created>
@@ -712,11 +703,25 @@
       <option name="project" value="LOCAL" />
       <updated>1558773934827</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="提交代码">
+      <created>1558774652174</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1558774652174</updated>
+    </task>
+    <task id="LOCAL-00050" summary="提交代码">
+      <created>1558774724477</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1558774724478</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="332478000" />
+    <option name="totallyTimeSpent" value="332760000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="47" y="23" width="1392" height="877" extended-state="6" />
@@ -1020,19 +1025,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="233" column="41" selection-start-line="233" selection-end-line="234" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#div#1;n#div#2;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#script#11;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Cart.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
@@ -1045,8 +1037,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/luck.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="138" column="86" selection-start-line="138" selection-start-column="86" selection-end-line="138" selection-end-column="86" />
+        <state relative-caret-position="275">
+          <caret line="143" column="35" selection-start-line="143" selection-start-column="35" selection-end-line="143" selection-end-column="35" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1055,6 +1047,19 @@
             <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#script#2;n#html#0;n#!!top" />
             <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="256" column="13" selection-start-line="256" selection-start-column="13" selection-end-line="256" selection-end-column="13" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#1;n#ul#0;n#div#1;n#div#2;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#script#11;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
