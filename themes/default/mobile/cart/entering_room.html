@@ -62,15 +62,17 @@
             </div>
             <div class="hid_name">{$homeInfo.home_name} <i class="dj dj1"></i></div>
         </div>
+
         <div class="hea_min hea_min2 fl_r">
+            <div class="h_xzz" style="margin-right:0.8rem;font-size: 18px;font-weight:bold;width:auto;float: left;background:none;border:none;color:yellow">
+                &nbsp;&nbsp;剩
+                <span id="residue-sum">{$homeInfo.lottery_drifts-$homeInfo.goods_buy_num}</span> 份
+            </div>
             <div class="h_xzz">
                 <i class="zsyc"></i>
                 <span>&nbsp;&nbsp;&nbsp;房间号:{$homeInfo.home_num}</span>
             </div>
-            <div class="h_xzz" style="font-size: 16px;width:auto;float: left">
-                &nbsp;&nbsp;&nbsp;剩
-                <span id="residue-sum">{$homeInfo.lottery_drifts-$homeInfo.goods_buy_num}</span> 份&nbsp;&nbsp;
-            </div>
+
             <!--        <div class="tuichu"><i class="tcsde"></i></div>-->
         </div>
     </div>
@@ -240,19 +242,20 @@
     </div>
 
     <div class="">
-        <div id="dataNums"></div>
+        <div id="dataNums" class="flex-col-center">
+        </div>
         <div id="dataNums2"></div>
     </div>
 </body>
-<script src="__PUBLIC__/js/jquery/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/__PUBLIC__/js/jquery/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src='__PUBLIC__/js/jquery/jquery-ui.min.js'></script>
-<script src="__PUBLIC__/act/guessing_game/js/common.js" type="text/javascript" charset="utf-8"></script>
-<script src="__PUBLIC__/act/guessing_game/js/click.js" type="text/javascript" charset="utf-8"></script>
-<script src="__PUBLIC__/js/draw/underscore.js"></script>
-<script src="__PUBLIC__/js/draw/boot-modal.js"></script>
-<script src="__PUBLIC__/js/draw/snow-plugin.js"></script>
-<script src="__PUBLIC__/js/draw/pc_draw.js"></script>
-<script src="__PUBLIC__/num_move/js/num.js"></script>
+<script src="/__PUBLIC__/act/guessing_game/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="/__PUBLIC__/act/guessing_game/js/click.js" type="text/javascript" charset="utf-8"></script>
+<script src="/__PUBLIC__/js/draw/underscore.js"></script>
+<script src="/__PUBLIC__/js/draw/boot-modal.js"></script>
+<script src="/__PUBLIC__/js/draw/snow-plugin.js"></script>
+<script src="/__PUBLIC__/js/draw/pc_draw.js"></script>
+<script src="/__PUBLIC__/num_move/js/num.js"></script>
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
 <script>
