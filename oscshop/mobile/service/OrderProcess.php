@@ -28,7 +28,9 @@ class OrderProcess
 {
     /**
      * 支付回调
+     *
      * @param $returnData
+     *
      * @throws Exception
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
@@ -37,8 +39,8 @@ class OrderProcess
      */
     public static function pay_notify($postObj)
     {
-        $orderNo = $postObj->out_trade_no;
-        $cashFee = $postObj->cash_fee;
+        $orderNo   = $postObj->out_trade_no;
+        $cashFee   = $postObj->cash_fee;
         $orderInfo = PayOrder::orderInfo($orderNo);
         if (empty($orderInfo) || $orderInfo['status'] == PayOrder::STATUS_SUCCESS_PAY) {
             throw new Exception('出错');
@@ -58,15 +60,15 @@ class OrderProcess
             case '3':
                 $rechargeAmount = $cashFee;
                 Member::addBalance($orderInfo['uid'], $rechargeAmount);
-                Member::addBalanceRecord(array(
-                    'uid' => $orderInfo['uid'],
-                    'amount' => $rechargeAmount,
+                Member::addBalanceRecord([
+                    'uid'         => $orderInfo['uid'],
+                    'amount'      => $rechargeAmount,
                     'description' => '用户充值',
-                    'prefix' => 1,
+                    'prefix'      => 1,
                     'create_time' => time(),
-                    'type' => 3,
-                    'order_no' => $orderNo,
-                ));
+                    'type'        => 3,
+                    'order_no'    => $orderNo,
+                ]);
                 break;
         }
         self::addOtherInfo($orderInfo, $cashFee, $attach);
@@ -78,21 +80,22 @@ class OrderProcess
      * @param $cashFee
      * @param $orderNo
      * @param $attach
+     *
      * @throws Exception
      */
     public static function addOtherInfo($orderInfo, $cashFee, $attach)
     {
         $home_id = empty($orderInfo['home_id']) ? 0 : $orderInfo['home_id'];
-        $gid = empty($orderInfo['gid']) ? 0 : $orderInfo['gid'];
-        PayOrder::savePayInfo(array(
-            'uid' => $orderInfo['uid'],
-            'gid' => $gid,
-            'home_id' => $home_id,
-            'amount' => $cashFee,
+        $gid     = empty($orderInfo['gid']) ? 0 : $orderInfo['gid'];
+        PayOrder::savePayInfo([
+            'uid'      => $orderInfo['uid'],
+            'gid'      => $gid,
+            'home_id'  => $home_id,
+            'amount'   => $cashFee,
             'order_no' => $orderInfo['pay_order_no'],
             'pay_type' => 1,
             'pay_time' => date('Y-m-d H:i:s'),
-        ));
+        ]);
         switch ($attach) {
             case '1':
                 $description = sprintf('夺宝花费%s获得', $cashFee);
@@ -105,22 +108,24 @@ class OrderProcess
                 break;
         }
         Member::addPoints($orderInfo['uid'], $cashFee);
-        Member::addPointsRecord(array(
-            'uid' => $orderInfo['uid'],
-            'home_id' => $home_id,
-            'points' => $cashFee,
-            'order_no' => $orderInfo['pay_order_no'],
-            'prefix' => 1,
-            'type' => 1,
-            'creat_time' => time(),
+        Member::addPointsRecord([
+            'uid'         => $orderInfo['uid'],
+            'home_id'     => $home_id,
+            'points'      => $cashFee,
+            'order_no'    => $orderInfo['pay_order_no'],
+            'prefix'      => 1,
+            'type'        => 1,
+            'creat_time'  => time(),
             'description' => $description,
-        ));
+        ]);
     }
 
     /**
      * 新增多包数据
+     *
      * @param $orderInfo
      * @param $homeId
+     *
      * @throws Exception
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
@@ -134,27 +139,37 @@ class OrderProcess
         }
         $lastNum = duobaoRecord::getLastNum($homeId);
         $lastNum = empty($lastNum) ? 0 : intval($lastNum);
-        $buyNum = $orderInfo['buy_num'];
-        $sumNum = $lastNum + $buyNum;
+        $buyNum  = $orderInfo['buy_num'];
+        $sumNum  = $lastNum + $buyNum;
         if ($sumNum > $homeInfo['lottery_drifts'] || $sumNum > $homeInfo['goods_buy_num']) {
             throw new Exception('订单信息有误');
         }
-        $duobaoData = array();
-        $startNum = $lastNum + 1;
+        $duobaoData = [];
+        $startNum   = $lastNum + 1;
         for ($startNum; $startNum <= $sumNum; $startNum++) {
-            $duobaoData[] = array(
-                'dduonum' => $startNum,
-                'home_id' => $homeId,
-                'uid' => $orderInfo['uid'],
-                'gid' => $orderInfo['gid'],
+            $duobaoData[] = [
+                'dduonum'   => $startNum,
+                'home_id'   => $homeId,
+                'uid'       => $orderInfo['uid'],
+                'gid'       => $orderInfo['gid'],
                 'dlasttime' => date('Y-m-d H:i:s'),
-            );
+            ];
         }
         //批量保存
         $saveResult = duobaoRecord::batchData($duobaoData);
         if (!$saveResult) {
             throw new Exception('保存夺宝数据出错');
         }
+        //新增购买记录
+        Db::name('home_record')->insert([
+            'home_id'   => $homeId,
+            'uid'       => $orderInfo['uid'],
+            'gid'       => $orderInfo['gid'],
+            'pay_type'  => $orderInfo['pay_type'],
+            'home_name' => $homeInfo['home_name'],
+            'start_num' => $lastNum + 1,
+            'end_num'   => $startNum-1,
+        ]);
         //如果商品投满
         if (intval($sumNum) == intval($homeInfo['lottery_drifts'])) {
             self::homeFull($homeInfo);
@@ -163,7 +178,9 @@ class OrderProcess
 
     /**
      * 满房
+     *
      * @param $homeInfo
+     *
      * @throws Exception
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
@@ -174,10 +191,10 @@ class OrderProcess
     {
         //获取中奖号码
         $lottery_timestamp = time();
-        $lottery_drifts = $homeInfo['lottery_drifts'];
+        $lottery_drifts    = $homeInfo['lottery_drifts'];
         if ($homeInfo['lottery_num'] > 0) {
             $lottery_num = $homeInfo['lottery_num'];
-            $rand_num = re_arithmetic($lottery_timestamp, $lottery_num, $lottery_drifts);
+            $rand_num    = re_arithmetic($lottery_timestamp, $lottery_num, $lottery_drifts);
         } else {
             list($lottery_num, $rand_num) = arithmetic($lottery_timestamp, $lottery_drifts);
         }
@@ -190,11 +207,11 @@ class OrderProcess
             throw new Exception('数据修改出错');
         }
         if (empty($homeInfo['home_num'])) {
-            $data = array(
+            $data = [
                 'periods' => $homeInfo['goods_periods'],
-                'gid' => $homeInfo['gid'],
-            );
-            $a = Home::add_home($data);
+                'gid'     => $homeInfo['gid'],
+            ];
+            $a    = Home::add_home($data);
             if (!$a['home_id']) {
                 throw new Exception('开新房间出错');
             }

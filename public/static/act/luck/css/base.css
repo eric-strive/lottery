@@ -97,7 +97,7 @@ img {
   -o-transform: translateX(-100%);
 }
 .game-goods-box {
-  height: 70%;
+  height: 100%;
   position: absolute;
   top: 0;
   right: 0;

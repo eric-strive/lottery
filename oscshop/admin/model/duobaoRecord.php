@@ -66,7 +66,9 @@ class duobaoRecord
 
     /**
      * 获取该房间最后一次夺宝记录
-     * @param $home_id
+     *
+     * @param $homeId
+     *
      * @return mixed
      */
     public static function getLastNum($homeId)

@@ -145,7 +145,7 @@ class Home
             ))
             ->find();
         if (!empty($info)) {
-            return ['error' => '该商品您已经开过一个，请先投满！'];
+            return ['error' => '该商品您已经开过一个房间，请先投满！'];
         }
     }
 

@@ -123,8 +123,8 @@
         function luck_lottery(isLottery) {
             var is_win = 0
             if (isLottery) {
-                gameLen = 1;
                 is_win = 1;
+                gameLen = 10;
             } else {
                 is_win = 0;
                 gameLen = 10;
@@ -444,7 +444,7 @@
                     'w': $(window).width(),
                     'h': $(window).height()
                 }
-                game_list_item_h = (w_config.w * 320 / 750 * 0.5 * 0.7).toFixed(2);
+                game_list_item_h = (w_config.w * 460 / 750 * 0.5 * 0.7).toFixed(2);
             }
 
 

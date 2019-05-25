@@ -52,12 +52,12 @@ class LotteryOrder extends MobileBase
         if ($status === '') {
             $orders = HomeModel::HomeList(null,UID, $limit);
         } elseif ($status === HomeModel::NOT_GET) {
-            $orders = Db::name('home')->where(array('status' => HomeModel::LOTTERY, 'lottery_uid' => 2))->select();
+            $orders = Db::name('home')->where(array('status' => HomeModel::LOTTERY, 'lottery_uid' => UID))->select();
         } else {
             $orders = HomeModel::HomeList($status, UID,$limit);
         }
         $this->assign('order', $orders);
-        $this->assign('uid', 2);
+        $this->assign('uid', UID);
         exit($this->fetch());
 
     }
@@ -77,8 +77,8 @@ class LotteryOrder extends MobileBase
     {
         $luck_record_id = input('luck_record_id');
         $home_id = input('home_id');
-        if ($home_id) {
-            HomeModel::confirmGet($home_id, 2);
+        if ($home_id) {                                     
+            HomeModel::confirmGet($home_id, UID);
         } else {
             LuckRecord::setDraw($luck_record_id, UID);
         }
