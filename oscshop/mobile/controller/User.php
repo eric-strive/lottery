@@ -51,7 +51,7 @@ class User extends MobileBase
     function lottery_order_count($status)
     {
         if ($status == Home::NOT_GET) {
-            return count(Db::name('home')->where(array('status' => Home::LOTTERY, 'lottery_uid' => 2))->select());
+            return count(Db::name('home')->where(array('status' => Home::LOTTERY, 'lottery_uid' => UID))->select());
         }
         return count(Home::HomeList($status,UID));
     }
