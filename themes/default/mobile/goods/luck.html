@@ -37,6 +37,7 @@
 
 <body>
     <div class="luck-con">
+        <!-- 弹窗 -->
         <div class="luck-show none">
             <div class="weui_mask weui_mask_visible"></div>
             <div class="luck-lottery" style="">
@@ -107,10 +108,47 @@
         </div>
 
         </div> -->
+        <div style="margin-top:3rem;">
+            <div class="game-content">
+                <img src="__PUBLIC__/act/luck/images/2p.png">
+                <div class="game-goods-wrap">
+                    <div class="game-goods-list">
+                        <div class="game-goods" style="background: #ffffff;">
+                            <div class="game-goods-box" id="game1">
+                                <ul class="game-goods-ul" style="">
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="game-goods" style="background: #ffffff;">
+                            <div class="game-goods-box" id="game2">
+                                <ul class="game-goods-ul" style="">
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="game-goods" style="background: #ffffff;">
+                            <div class="game-goods-box" id="game3">
+                                <ul class="game-goods-ul">
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="game-rule" href="javascript:void(0);" style="display: none;"></a>
+                <!-- <span class="game-btn"></span> -->
+                <a class="game-prize" href="javascript:void(0);"></a>
+            </div>
+        </div>
         <p class="luck-p">采用绝对公平公开的算法</p>
         <input class="luck-btn" id="jindou-payment-btn" type="button" value="金豆支付">
         <input class="luck-btn" id="wechat-payment-btn" type="button" value="微信支付">
-
+        <div class="flex-row-center luck-cen-btnBox">
+            <input type="button" att="1" value="1元嗨" class="selected">
+            <input type="button" att="3" value="x3倍">
+            <input type="button" att="5" value="x5倍">
+        </div>
         <div class="flex-between bgpic">
             <img src="/public/static/image/girl.png" alt="">
             <img src="/public/static/image/girl2.png" alt="">
@@ -128,6 +166,7 @@
             $(".luck-show").show();
             luck_lottery($isLottery)
         }
+        luck_lottery('1234')
 
         function luck_lottery(isLottery) {
             var is_win = 0
