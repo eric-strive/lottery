@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title></title>
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/reset.css"/>
-    <link href="__PUBLIC__/num_move/css/globle.css" type="text/css" rel="Stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/reset.css" />
+    <link href="__PUBLIC__/num_move/css/globle.css" type="text/css" rel="Stylesheet" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/animate.min.css" />
     <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
     <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/draw.css" type="text/css">
     <script src="__PUBLIC__/num_move/js/num.js"></script>
@@ -18,7 +19,7 @@
             height: 60%;
             margin-top: -1rem;
         }
-
+        
         #lottery-main .content-detail {
             font-size: 36px;
             letter-spacing: 8px;
@@ -26,234 +27,222 @@
             font-weight: bold;
             height: 50%;
         }
-
+        
         #lottery-main .wrap-main {
             height: 100%;
         }
-
+        
         .fui-btn {
             border-radius: 100px;
         }
-
+        
         #i_tixian .shiyongjilu .tx_list {
             word-break: break-all;
             overflow: scroll;
             height: 300px;
         }
-
-        .meinv-left > ul > li > img, .meinv-right > ul > li > a > img,
-        .meinv-left > ul > li > img, .meinv-right > ul > li > img {
+        
+        .meinv-left>ul>li>img,
+        .meinv-right>ul>li>a>img,
+        .meinv-left>ul>li>img,
+        .meinv-right>ul>li>img {
             width: 70%;
             height: 80%;
         }
     </style>
 </head>
+
 <body>
-<div class="h_header">
-    <div class="hea_min hea_min1 fl_l fui-btn">
-        <div class="hid_img">
-            {if condition="!empty($homeUserInfo['userpic'])"}
-            <img src="{$homeUserInfo.userpic}" alt="">
-            {else/}
-            <img src="__PUBLIC__/act/guessing_game/img/header.jpg" alt="">
-            {/if}
+    <div class="h_header">
+        <div class="hea_min hea_min1 fl_l fui-btn">
+            <div class="hid_img">
+                {if condition="!empty($homeUserInfo['userpic'])"}
+                <img src="{$homeUserInfo.userpic}" alt=""> {else/}
+                <img src="__PUBLIC__/act/guessing_game/img/header.jpg" alt=""> {/if}
+            </div>
+            <div class="hid_name">{$homeInfo.home_name} <i class="dj dj1"></i></div>
         </div>
-        <div class="hid_name">{$homeInfo.home_name} <i class="dj dj1"></i></div>
+        <div class="hea_min hea_min2 fl_r">
+            <div class="h_xzz">
+                <i class="zsyc"></i>
+                <span>&nbsp;&nbsp;&nbsp;房间号:{$homeInfo.home_num}</span>
+            </div>
+            <div class="h_xzz" style="font-size: 16px;width:auto;float: left">
+                &nbsp;&nbsp;&nbsp;剩
+                <span id="residue-sum">{$homeInfo.lottery_drifts-$homeInfo.goods_buy_num}</span> 份&nbsp;&nbsp;
+            </div>
+            <!--        <div class="tuichu"><i class="tcsde"></i></div>-->
+        </div>
     </div>
-    <div class="hea_min hea_min2 fl_r">
-        <div class="h_xzz">
-            <i class="zsyc"></i>
-            <span>&nbsp;&nbsp;&nbsp;房间号:{$homeInfo.home_num}</span>
-        </div>
-        <div class="h_xzz" style="font-size: 16px;width:auto;float: left">
-            &nbsp;&nbsp;&nbsp;剩
-            <span id="residue-sum">{$homeInfo.lottery_drifts-$homeInfo.goods_buy_num}</span>
-            份&nbsp;&nbsp;
-        </div>
-        <!--        <div class="tuichu"><i class="tcsde"></i></div>-->
-    </div>
-</div>
-<div id="home">
-    <div id="yanhua" class="none" style="position: absolute;margin-top: 100%;">
-        <!-- 中奖弹框 -->
-        <button class="close" id="modal-close" data-dismiss="modal" style="visibility: hidden;">
+    <div id="home">
+        <div id="yanhua" class="none" style="position: absolute;margin-top: 100%;">
+            <!-- 中奖弹框 -->
+            <button class="close" id="modal-close" data-dismiss="modal" style="visibility: hidden;">
             <span aria-hidden="true" class="btn_x">&times;</span>
         </button>
-        <div class="modal fade" id="lottery-result" role="dialog" aria-hidden="true">
-            <canvas id="canvas" style="margin-top:-100%"></canvas>
-            <div class="modal-dialog">
-                <div class="modal-content" style="height: calc(100% - 40px);padding-top: 70%;">
-                    <canvas id="lottery-canvas"></canvas>
+            <div class="modal fade" id="lottery-result" role="dialog" aria-hidden="true">
+                <canvas id="canvas" style="margin-top:-100%"></canvas>
+                <div class="modal-dialog">
+                    <div class="modal-content" style="height: calc(100% - 40px);padding-top: 70%;">
+                        <canvas id="lottery-canvas"></canvas>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!--音乐开关-->
-        <a id="music-control" class="animated infinite bounce" href="javascript:;" data-open="1"></a>
-        <!--清除数据开关-->
-        <a id="clear-control" href="javascript:;" data-open="1"></a>
+            <!--音乐开关-->
+            <a id="music-control" class="animated infinite bounce" href="javascript:;" data-open="1"></a>
+            <!--清除数据开关-->
+            <a id="clear-control" href="javascript:;" data-open="1"></a>
 
-        <audio id="music" loop preload="auto" src="/public/static/js/draw/shiji.mp3">
+            <audio id="music" loop preload="auto" src="/public/static/js/draw/shiji.mp3">
             你的浏览器不支持audio标签
         </audio>
-    </div>
+        </div>
 
-    <div class="meinv clearfix">
-        <div class="meinv-left fl">
-            <ul>
-                {for start='0' end='5' step='1' name='i'}
-                <li>
-                    {if condition="isset($duobaoList[$i]['dduonums'])"}
-                    {if condition="!empty($duobaoList[$i]['userpic'])"}
-                    <img att="{$duobaoList[$i]['dduonums']}" src="{$duobaoList[$i]['userpic']}"
-                         alt="{$duobaoList[$i]['nickname']}" class="fui-btn user-info"/>
-                    {else/}
-                    <img att="{$duobaoList[$i]['dduonums']}" src="__PUBLIC__/act/guessing_game/img/header.jpg"
-                         class="fui-btn user-info"/>
-                    {/if}
-                    <span style="">
+        <div class="meinv clearfix">
+            <div class="meinv-left fl">
+                <ul>
+                    {for start='0' end='5' step='1' name='i'}
+                    <li>
+                        {if condition="isset($duobaoList[$i]['dduonums'])"} {if condition="!empty($duobaoList[$i]['userpic'])"}
+                        <img att="{$duobaoList[$i]['dduonums']}" src="{$duobaoList[$i]['userpic']}" alt="{$duobaoList[$i]['nickname']}" class="fui-btn user-info" /> {else/}
+                        <img att="{$duobaoList[$i]['dduonums']}" src="__PUBLIC__/act/guessing_game/img/header.jpg" class="fui-btn user-info" /> {/if}
+                        <span style="">
                     <img src="__PUBLIC__/image/jinbi/images/jb1.png" class="user-jinbi"/>
                     <img src="__PUBLIC__/image/jinbi/images/jb2.png" class="user-jinbi"/>
                     <img src="__PUBLIC__/image/jinbi/images/jb3.png" class="user-jinbi"/>
                     </span>
-                    <span class="hid_name" style="color: red;font-size: 20px;">购{$duobaoList[$i]['num']}份</span>
-                    {/if}
-                </li>
-                {/for}
-            </ul>
-        </div>
-        <div class="bg-meinv fl">
-        </div>
-        <div class="meinv-right fr">
-            <ul>
-                {for start='0' end='5' step='1' name='i'}
-                <li>
-                    {if condition="isset($duobaoList[$i]['dduonums'])"}
-                    {if condition="!empty($duobaoList[$i]['userpic'])"}
-                    <img att="{$duobaoList[$i]['dduonums']}" src="{$duobaoList[$i]['userpic']}"
-                         alt="{$duobaoList[$i]['nickname']}" class="fui-btn user-info"/>
-                    {else/}
-                    <img att="{$duobaoList[$i]['dduonums']}" src="__PUBLIC__/act/guessing_game/img/header.jpg"
-                         class="fui-btn user-info"/>
-                    {/if}
-                    <span style="">
+                        <span class="hid_name" style="color: red;font-size: 20px;">购{$duobaoList[$i]['num']}份</span> {/if}
+                    </li>
+                    {/for}
+                </ul>
+            </div>
+            <div class="bg-meinv fl">
+            </div>
+            <div class="meinv-right fr">
+                <ul>
+                    {for start='0' end='5' step='1' name='i'}
+                    <li>
+                        {if condition="isset($duobaoList[$i]['dduonums'])"} {if condition="!empty($duobaoList[$i]['userpic'])"}
+                        <img att="{$duobaoList[$i]['dduonums']}" src="{$duobaoList[$i]['userpic']}" alt="{$duobaoList[$i]['nickname']}" class="fui-btn user-info" /> {else/}
+                        <img att="{$duobaoList[$i]['dduonums']}" src="__PUBLIC__/act/guessing_game/img/header.jpg" class="fui-btn user-info" /> {/if}
+                        <span style="">
                     <img src="__PUBLIC__/image/jinbi/images/jb3.png" class="user-jinbi"/>
                     <img src="__PUBLIC__/image/jinbi/images/jb4.png" class="user-jinbi"/>
                     <img src="__PUBLIC__/image/jinbi/images/jb5.png" class="user-jinbi"/>
                     </span>
-                    <span class="hid_name" style="color: red;font-size: 20px;">购{$duobaoList[$i]['num']}份</span>
-                    {/if}
-                </li>
-                {/for}
-            </ul>
-        </div>
-    </div>
-    <div id="nav-bottom">
-        <ul class="clearfix">
-            <li>
-                <div>
-                    <a href="#"><img src="__PUBLIC__/act/guessing_game/img/jingjiren.png"></a>
-                </div>
-
-            </li>
-            <li class="wid40">
-                <div class="btn butdonghua fui-btn">
-                    <a class="jinruyouxi"
-                       href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id']))}&sign={$homeInfo['sign']}">
-                        <img src="__PUBLIC__/act/guessing_game/img/icon_home_classical.png" alt="">
-                    </a>
-                </div>
-            </li>
-            <li>
-                <div>
-                    <!--                    location.reload();-->
-                    <a href="javascript:" id="test">
-                        <img src="__PUBLIC__/act/guessing_game/img/paihangbang.png"/>
-                    </a>
-                </div>
-            </li>
-        </ul>
-    </div>
-</div>
-<div id="i_tixian" class="none">
-    <div class="i_header">
-        <h1>购买号码列表</h1>
-    </div>
-    <div class="ui-content">
-        <div class="shiyongjilu">
-            <div class="tx_list">
-
-            </div>
-        </div>
-    </div>
-    <div data-role="footer">
-        <h1>
-            <a class="guanbitanchuang" data-rel="back">关闭</a>
-        </h1>
-    </div>
-    <div>
-        <div class="close fui-btn" onclick="bounceInUp(this)"></div>
-    </div>
-</div>
-<div class="head_deloa">
-    <div class="head_content">
-        <div class="closeee fui-btn"></div>
-        <div class="dl_header">
-            <div class="eadimg fl_l">
-                {if condition="!empty($homeUserInfo['userpic'])"}
-                <img src="{$homeUserInfo.userpic}" alt="">
-                {else/}
-                <img src="__PUBLIC__/act/guessing_game/img/header.jpg" alt="">
-                {/if}
-            </div>
-            <div class="useinfo fl_l">
-                <div class="nammme">
-                    <div class="nana fl_l">{$homeUserInfo['nickname']}</div>
-                    <div class="phone fl_r"><i class="icophone"></i></div>
-                </div>
-                <div class="moneyy">
-                    <div class="h_xzz">
-                        <i class="zsyc"></i>
-                        <span>&nbsp;&nbsp;&nbsp;房间号:00234</span>
-                    </div>
-                </div>
-            </div>
-            <div class="setingg">
-                <!--                <div class="fl_l"><a href=""></a></div>-->
-                <div class="fl_l l">音乐</div>
-                <div class="yinyuekg">
-                    <i class="gdd"></i>
-                    <span class="kai">ON</span>
-                    <span class="guan">OFF</span>
-                </div>
-                <div class="fl_l l">音效</div>
-                <div class="yinxiao">
-                    <i class="gdd"></i>
-                    <span class="kai">ON</span>
-                    <span class="guan">OFF</span>
-                </div>
-            </div>
-        </div>
-        <div class="xianxixinxi">
-            <div class="hd_v">
-                <div class="ll">用户</div>
-                <div class="ll">份额</div>
-            </div>
-            <div class="listt">
-                <ul>
-                    {volist name="duobaoList" id="d"}
-                    <li><span>{$d.nickname}</span></li>
-                    <li style="text-align:center;"><span>{$d.num}</span></li>
-                    {/volist}
+                        <span class="hid_name" style="color: red;font-size: 20px;">购{$duobaoList[$i]['num']}份</span> {/if}
+                    </li>
+                    {/for}
                 </ul>
             </div>
         </div>
-    </div>
-</div>
+        <div id="nav-bottom">
+            <ul class="clearfix">
+                <li>
+                    <div class="relative">
+                        <a href="#"><img src="__PUBLIC__/image/room-btn1.png"></a>
+                        <p class="absolute room-p">邀请好友</p>
+                    </div>
 
-<div class="">
-    <div id="dataNums"></div>
-    <div id="dataNums2"></div>
-</div>
+                </li>
+                <li class="wid40">
+                    <div class="btn butdonghua fui-btn relative">
+                        <a class="jinruyouxi" href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id']))}&sign={$homeInfo['sign']}">
+                            <img src="__PUBLIC__/image/room-btn2.png" alt="">
+                        </a>
+                        <p class="absolute room-p">参与购买</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="relative">
+                        <!--                    location.reload();-->
+                        <a href="javascript:" id="test">
+                            <img src="__PUBLIC__/image/room-btn3.png" />
+                        </a>
+                        <p class="absolute room-p3">刷 新</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="i_tixian" class="none">
+        <div class="i_header">
+            <h1>购买号码列表</h1>
+        </div>
+        <div class="ui-content">
+            <div class="shiyongjilu">
+                <div class="tx_list">
+
+                </div>
+            </div>
+        </div>
+        <div data-role="footer">
+            <h1>
+                <a class="guanbitanchuang" data-rel="back">关闭</a>
+            </h1>
+        </div>
+        <div>
+            <div class="close fui-btn" onclick="bounceInUp(this)"></div>
+        </div>
+    </div>
+    <div class="head_deloa">
+        <div class="head_content">
+            <div class="closeee fui-btn"></div>
+            <div class="dl_header">
+                <div class="eadimg fl_l">
+                    {if condition="!empty($homeUserInfo['userpic'])"}
+                    <img src="{$homeUserInfo.userpic}" alt=""> {else/}
+                    <img src="__PUBLIC__/act/guessing_game/img/header.jpg" alt=""> {/if}
+                </div>
+                <div class="useinfo fl_l">
+                    <div class="nammme">
+                        <div class="nana fl_l">{$homeUserInfo['nickname']}</div>
+                        <div class="phone fl_r"><i class="icophone"></i></div>
+                    </div>
+                    <div class="moneyy">
+                        <div class="h_xzz">
+                            <i class="zsyc"></i>
+                            <span>&nbsp;&nbsp;&nbsp;房间号:00234</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="setingg">
+                    <!--                <div class="fl_l"><a href=""></a></div>-->
+                    <div class="fl_l l">音乐</div>
+                    <div class="yinyuekg">
+                        <i class="gdd"></i>
+                        <span class="kai">ON</span>
+                        <span class="guan">OFF</span>
+                    </div>
+                    <div class="fl_l l">音效</div>
+                    <div class="yinxiao">
+                        <i class="gdd"></i>
+                        <span class="kai">ON</span>
+                        <span class="guan">OFF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="xianxixinxi">
+                <div class="hd_v">
+                    <div class="ll">用户</div>
+                    <div class="ll">份额</div>
+                </div>
+                <div class="listt">
+                    <ul>
+                        {volist name="duobaoList" id="d"}
+                        <li><span>{$d.nickname}</span></li>
+                        <li style="text-align:center;"><span>{$d.num}</span></li>
+                        {/volist}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="">
+        <div id="dataNums"></div>
+        <div id="dataNums2"></div>
+    </div>
 </body>
 <script src="__PUBLIC__/js/jquery/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src='__PUBLIC__/js/jquery/jquery-ui.min.js'></script>
@@ -267,27 +256,27 @@
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
 <script>
-    $('.head_deloa .closeee').click(function () {
+    $('.head_deloa .closeee').click(function() {
         $('.head_deloa').hide()
     });
-    $('.h_header .hea_min1').click(function () {
+    $('.h_header .hea_min1').click(function() {
         $('.head_deloa').show()
     });
 
-    $('.chongzhi .closeee').click(function () {
+    $('.chongzhi .closeee').click(function() {
         $('.chongzhi').hide()
     });
-    $('.hd .buyao').click(function () {
+    $('.hd .buyao').click(function() {
         $('.chonzghi2').show();
         $('.chongzhi').hide()
     });
-    $('.chonzghi2 .closeee').click(function () {
+    $('.chonzghi2 .closeee').click(function() {
         $('.chonzghi2').hide()
     });
-    $('.playyy .closeee').click(function () {
+    $('.playyy .closeee').click(function() {
         $('.playyy').hide()
     });
-    $('.jinruyouxi').click(function () {
+    $('.jinruyouxi').click(function() {
         $('.playyy').show()
     });
 
@@ -305,12 +294,12 @@
         loop: true
     });
     if (!($('.yinyuekg').hasClass('o'))) {
-        $('.fui-btn').bind('click', function (e) {
+        $('.fui-btn').bind('click', function(e) {
             if (!($('.yinxiao').hasClass('o'))) {
                 sd.play();
             }
         });
-        $('.tuichu').bind('click', function (e) {
+        $('.tuichu').bind('click', function(e) {
             if (!($('.yinxiao').hasClass('o'))) {
                 returnz.play();
             }
@@ -318,7 +307,7 @@
         // all_bg.play();
     }
 
-    $('.yinyuekg').click(function () {
+    $('.yinyuekg').click(function() {
         if ($(this).hasClass('o')) {
             $(this).removeClass('o');
             all_bg.play();
@@ -327,36 +316,36 @@
             all_bg.stop();
         }
     });
-    $('.yinxiao').click(function () {
+    $('.yinxiao').click(function() {
         if ($(this).hasClass('o')) {
             $(this).removeClass('o');
-            $('.fui-btn').bind('click', function (e) {
+            $('.fui-btn').bind('click', function(e) {
                 sd.play();
             });
         } else {
             $(this).addClass('o');
-            $('.fui-btn').bind('click', function (e) {
+            $('.fui-btn').bind('click', function(e) {
                 sd.stop();
             });
         }
     });
-    $('.paihangbang .hd .l').click(function () {
+    $('.paihangbang .hd .l').click(function() {
         $(this).addClass('active').siblings().removeClass('active');
         $('.paihangbang .list .vc').eq($(this).index()).show().siblings().hide();
     }).eq(0).click();
-    $(".paihangbang .closeee").click(function () {
+    $(".paihangbang .closeee").click(function() {
         $(".paihangbang").hide();
     });
-    $('.quanminpaihangbang').click(function () {
+    $('.quanminpaihangbang').click(function() {
         $(".paihangbang").show();
     })
 
-    $('.user-info').on('click', function () {
+    $('.user-info').on('click', function() {
         var donum = $(this).attr('att');
         $("#i_tixian").find('.tx_list').html(donum);
         $("#i_tixian").removeClass('none').addClass('show');
     })
-    $('#hide').on('click', function () {
+    $('#hide').on('click', function() {
         $("#serviceView").removeClass('show').addClass('none');
     });
     //定时检查是否开奖
@@ -369,9 +358,9 @@
         $.post("{:url('home/is_full')}", {
                 'home_id': home_id,
             },
-            function (r) {
+            function(r) {
                 $("#residue-sum").html(r.remain)
-                // console.log('r', r);
+                    // console.log('r', r);
                 if (r.status > 0) {
                     var residueTime = r.residueTime;
                     //这里需要放烟花
@@ -380,7 +369,7 @@
                         if (residueTime < 0) {
                             drawResult(r);
                         } else {
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 drawResult(r);
                             }, residueTime * 1000);
                         }
@@ -389,7 +378,7 @@
                         location.href = "/mobile";
                     }
                 } else {
-                    setTimeout(function () {
+                    setTimeout(function() {
                         checkLottery(false);
                     }, setTime);
                 }
@@ -407,9 +396,9 @@
         set_num(r.lottery_num)
         setTimeout(lottery_initvars, 40000);
         alert('恭喜中奖' + r.nickname)
-        // if (r.is_self > 0) {
-        //     // base_alert('恭喜你中奖了')
-        // }
+            // if (r.is_self > 0) {
+            //     // base_alert('恭喜你中奖了')
+            // }
     }
 
     function set_num(num) {
@@ -417,22 +406,23 @@
             deVal: num
         });
     }
-    setTimeout(function () {
+    setTimeout(function() {
         checkLottery(true)
     }, 1000);
-    $('#test').on('click', function () {
-        $(".user-jinbi").each(function () {
+    $('#test').on('click', function() {
+        $(".user-jinbi").each(function() {
             var cart = $('.hea_min1');
             var imgtodrag = $(this);
             if (imgtodrag) {
-                setTimeout(function () {
-                    animate_jinbi(imgtodrag,cart)
+                setTimeout(function() {
+                    animate_jinbi(imgtodrag, cart)
                 }, 600);
 
             }
         })
     });
-    function animate_jinbi(imgToDrag,target) {
+
+    function animate_jinbi(imgToDrag, target) {
         var imgClone = imgToDrag.clone().offset({
             top: imgToDrag.offset().top,
             left: imgToDrag.offset().left
@@ -448,13 +438,15 @@
             'width': 75,
             'height': 75
         }, 1000, 'easeInOutExpo');
-        setTimeout(function () {
-            target.effect('shake', {times: 2}, 200);
+        setTimeout(function() {
+            target.effect('shake', {
+                times: 2
+            }, 200);
         }, 1500);
         imgClone.animate({
             'width': 0,
             'height': 0
-        }, function () {
+        }, function() {
             $(this).detach();
         });
     }
@@ -510,24 +502,24 @@
     '{/if}'
     // 2. 分享接口
     // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
-    wx.ready(function () {
+    wx.ready(function() {
         wx.onMenuShareAppMessage({
             title: '好友邀请',
             desc: '老铁，我已经把房开好了，来不来就看你了',
             link: "http://{$_SERVER['HTTP_HOST']}{:url('mobile/cart/entering_room&home_id='.$homeInfo['id'].'&sign='.$homeInfo['sign'])}",
             //&home_id=.$home_id.&sign=.$homeInfo[sign]
             imgUrl: "http://{$_SERVER['HTTP_HOST']}IMG_ROOT{$goods.image}",
-            trigger: function (res) {
+            trigger: function(res) {
                 // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
                 //                    alert('用户点击发送给朋友');
             },
-            success: function (res) {
+            success: function(res) {
                 //                    alert('已分享');
             },
-            cancel: function (res) {
+            cancel: function(res) {
                 //                    alert('已取消');
             },
-            fail: function (res) {
+            fail: function(res) {
                 alert(JSON.stringify(res));
             }
         });
@@ -539,36 +531,37 @@
             desc: '老铁，我已经把房开好了，来不来就看你了',
             link: "http://{$_SERVER['HTTP_HOST']}{:url('mobile/cart/entering_room&home_id='.$homeInfo['id'].'&sign='.$homeInfo['sign'])}",
             imgUrl: "http://{$_SERVER['HTTP_HOST']}IMG_ROOT{$goods.image}",
-            trigger: function (res) {
+            trigger: function(res) {
                 // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
                 //                    alert('用户点击分享到朋友圈');
             },
-            success: function (res) {
+            success: function(res) {
                 //                    alert('已分享');
             },
-            cancel: function (res) {
+            cancel: function(res) {
                 //                    alert('已取消');
             },
-            fail: function (res) {
+            fail: function(res) {
                 alert(JSON.stringify(res));
             }
         });
         wx.hideMenuItems({
             menuList: [
-                "menuItem:exposeArticle",
-                "menuItem:share:qq",
-                "menuItem:copyUrl",
-                "menuItem:share:QZone",
-                "menuItem:originPage",
-                "menuItem:openWithQQBrowser",
-                "menuItem:openWithSafari",
-                "menuItem:share:email",
-                'menuItem:copyUrl' // 复制链接
-            ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+                    "menuItem:exposeArticle",
+                    "menuItem:share:qq",
+                    "menuItem:copyUrl",
+                    "menuItem:share:QZone",
+                    "menuItem:originPage",
+                    "menuItem:openWithQQBrowser",
+                    "menuItem:openWithSafari",
+                    "menuItem:share:email",
+                    'menuItem:copyUrl' // 复制链接
+                ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
         });
     });
-    wx.error(function (res) {
+    wx.error(function(res) {
         alert(res.errMsg);
     });
 </script>
+
 </html>

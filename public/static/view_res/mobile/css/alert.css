@@ -695,6 +695,42 @@ nav a {
 }
 
 
+/* room */
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.room-p {
+    width: 80%;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: red;
+}
+
+.room-p3 {
+    width: 80%;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.weui_grid_icon2 {
+    width: 2.6rem;
+    height: 3.2rem;
+    margin: 0 auto;
+}
+
+
 /* icon */
 
 @font-face {
