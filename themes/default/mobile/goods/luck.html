@@ -134,9 +134,6 @@
                                 </ul>
                             </div>
                         </div>
-                        <input type="hidden" id="pay_mount" value="1.01">
-                        <input type="hidden" id="original-price" value="{$goods.price}">
-                        <input type="hidden" id="subject-price" value="{$goods.name}">
                     </div>
                 </div>
                 <a class="game-rule" href="javascript:void(0);" style="display: none;"></a>
@@ -151,6 +148,9 @@
             <input type="button" att="1" value="1元嗨" class="selected">
             <input type="button" att="3" value="x3倍">
             <input type="button" att="5" value="x5倍">
+            <input type="hidden" id="pay_mount" value="1.01">
+            <input type="hidden" id="original-price" value="{$goods.price}">
+            <input type="hidden" id="subject-price" value="{$goods.name}">
         </div>
         <div class="flex-between bgpic">
             <img src="/public/static/image/girl.png" alt="">
