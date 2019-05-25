@@ -490,8 +490,8 @@ class Cart extends MobileBase
         $list['goods']['image'] = resize($list['goods']['image'], 80, 80);
         $homeUserInfo           = Member::getMemberInfo($homeInfo['uid']);
         $duobaoList             = duobaoRecord::getNumbers($home_id);
-        foreach ($duobaoList as $item) {
-            $duobaoList['bug_home_record'] = HomeModel::bug_record($home_id, $item['uid']);
+        foreach ($duobaoList as $key => $item) {
+            $duobaoList[$key]['bug_home_record'] = HomeModel::bug_record($home_id, $item['uid']);
         }
         $duobaoNumList = duobaoRecord::getDuobaoNum($home_id);
         $this->assign('goods', $list['goods']);
