@@ -421,7 +421,11 @@
 
         if (res.errMsg == "chooseWXPay:ok") {
             setTimeout(function () {
-                location.href = "{:url('mobile/goods/detail',array('id'=>$goods['goods_id']))}";
+                if (home_name != 0) {
+                    location.href = "{:url('mobile/cart/entering_room',array('home_id'=>$homeInfo['id']))}&sign={$homeInfo['sign']}";
+                } else {
+                    location.href = "{:url('mobile/goods/detail',array('id'=>$goods['goods_id']))}";
+                }
             }, 1000);
             $('#wechat-payment-btn').removeClass('disable').html('微信支付');
         } else {
@@ -554,13 +558,13 @@
             });
     }
 
-    if (lottery_status > 0) {
-        //这里不需要放烟花
-        checkLottery()
-        // base_alert('已开奖，中奖号码是' + lottery_num, '/mobile');
-    } else {
-        setTimeout(checkLottery, setTime);
-    }
+    // if (lottery_status > 0) {
+    //     //这里不需要放烟花
+    //     checkLottery()
+    //     // base_alert('已开奖，中奖号码是' + lottery_num, '/mobile');
+    // } else {
+    //     setTimeout(checkLottery, setTime);
+    // }
 </script>
 
 <script>

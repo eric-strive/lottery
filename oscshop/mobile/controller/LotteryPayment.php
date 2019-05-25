@@ -192,7 +192,7 @@ class LotteryPayment extends Base
                     case '2'://幸运购
                         $userInfo = Member::getMemberInfo($uid, true);
                         if ($userInfo['balance'] < $return['pay_total']) {
-                            throw new Exception('金豆不足，请先充值！');
+                            return json(['ret_code' => 3, 'ret_msg' => '金豆不足，请先充值！']);
                         }
                         LuckRecord::addLuckRecord($orderData);
                         WeixinPay::luckBalancePay($return['pay_order_no'], $return['pay_total'], $uid);
