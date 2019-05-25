@@ -37,22 +37,7 @@
         <entry file="file://$PROJECT_DIR$/oscshop/admin/model/Home.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="198">
-              <caret line="344" column="36" lean-forward="true" selection-start-line="344" selection-start-column="36" selection-end-line="344" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="256" column="13" selection-start-line="256" selection-start-column="13" selection-end-line="256" selection-end-column="13" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#div#1;n#div#2;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#script#11;n#html#0;n#!!top" />
-              </folding>
+              <caret line="344" column="36" selection-start-line="344" selection-start-column="36" selection-end-line="344" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -60,10 +45,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Cart.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="505" column="5" lean-forward="true" selection-start-line="505" selection-start-column="5" selection-end-line="505" selection-end-column="5" />
+            <state relative-caret-position="151">
+              <caret line="493" column="46" selection-start-line="493" selection-start-column="31" selection-end-line="493" selection-end-column="46" />
               <folding>
                 <element signature="e#398#431#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="346">
+              <caret line="121" column="31" selection-start-line="118" selection-start-column="29" selection-end-line="121" selection-end-column="31" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#1;n#li#0;n#ul#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#li#1;n#ul#0;n#div#1;n#div#2;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#script#11;n#html#0;n#!!top" />
               </folding>
             </state>
           </provider>
@@ -118,9 +119,9 @@
       <find>base-dialog-submit</find>
       <find>add_home</find>
       <find>dialog</find>
-      <find>nickname</find>
       <find>pay_mount</find>
       <find>luck-cen-btnBox</find>
+      <find>nickname</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -372,21 +373,7 @@
       <workItem from="1558521286817" duration="8453000" />
       <workItem from="1558539034906" duration="138000" />
       <workItem from="1558539202466" duration="3944000" />
-      <workItem from="1558606215658" duration="20262000" />
-    </task>
-    <task id="LOCAL-00002" summary="项目提交">
-      <created>1555160613287</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1555160613287</updated>
-    </task>
-    <task id="LOCAL-00003" summary="项目提交">
-      <created>1555212003727</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1555212003727</updated>
+      <workItem from="1558606215658" duration="20694000" />
     </task>
     <task id="LOCAL-00004" summary="项目提交">
       <created>1555212514894</created>
@@ -717,11 +704,25 @@
       <option name="project" value="LOCAL" />
       <updated>1558774724478</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="提交代码">
+      <created>1558774939854</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1558774939854</updated>
+    </task>
+    <task id="LOCAL-00052" summary="提交代码">
+      <created>1558774946687</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1558774946687</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="332760000" />
+    <option name="totallyTimeSpent" value="333192000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="47" y="23" width="1392" height="877" extended-state="6" />
@@ -1021,17 +1022,7 @@
     <entry file="file://$PROJECT_DIR$/oscshop/admin/model/Home.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
-          <caret line="344" column="36" lean-forward="true" selection-start-line="344" selection-start-column="36" selection-end-line="344" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Cart.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="505" column="5" lean-forward="true" selection-start-line="505" selection-start-column="5" selection-end-line="505" selection-end-column="5" />
-          <folding>
-            <element signature="e#398#431#0#PHP" expanded="true" />
-          </folding>
+          <caret line="344" column="36" selection-start-line="344" selection-start-column="36" selection-end-line="344" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -1051,13 +1042,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Cart.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="493" column="46" selection-start-line="493" selection-start-column="31" selection-end-line="493" selection-end-column="46" />
+          <folding>
+            <element signature="e#398#431#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="256" column="13" selection-start-line="256" selection-start-column="13" selection-end-line="256" selection-end-column="13" />
+        <state relative-caret-position="346">
+          <caret line="121" column="31" selection-start-line="118" selection-start-column="29" selection-end-line="121" selection-end-column="31" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#li#0;n#ul#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#li#1;n#ul#0;n#div#1;n#div#2;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#script#11;n#html#0;n#!!top" />
           </folding>
