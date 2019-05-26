@@ -45,7 +45,8 @@ class OrderProcess
         if (empty($orderInfo) || $orderInfo['status'] == PayOrder::STATUS_SUCCESS_PAY) {
             throw new Exception('出错');
         }
-        $attach = isset($postObj->attach) ? $postObj->attach : '';
+        $rechargeAmount = $cashFee / 100;
+        $attach         = isset($postObj->attach) ? $postObj->attach : '';
         switch ($attach) {
             case '1':
                 $homeId = $orderInfo['home_id'];
@@ -58,7 +59,6 @@ class OrderProcess
                 LuckRecord::setStatus($orderNo);
                 break;
             case '3':
-                $rechargeAmount = $cashFee;
                 Member::addBalance($orderInfo['uid'], $rechargeAmount);
                 Member::addBalanceRecord([
                     'uid'         => $orderInfo['uid'],
@@ -71,7 +71,7 @@ class OrderProcess
                 ]);
                 break;
         }
-        self::addOtherInfo($orderInfo, $cashFee, $attach);
+        self::addOtherInfo($orderInfo, $rechargeAmount, $attach);
         PayOrder::editStatus($orderNo, PayOrder::STATUS_SUCCESS_PAY);
     }
 
@@ -81,6 +81,7 @@ class OrderProcess
      * @param $orderNo
      * @param $attach
      *
+     * @return bool
      * @throws Exception
      */
     public static function addOtherInfo($orderInfo, $cashFee, $attach)
@@ -168,7 +169,7 @@ class OrderProcess
             'pay_type'  => $orderInfo['pay_type'],
             'home_name' => $homeInfo['home_name'],
             'start_num' => $lastNum + 1,
-            'end_num'   => $startNum-1,
+            'end_num'   => $startNum - 1,
         ]);
         //如果商品投满
         if (intval($sumNum) == intval($homeInfo['lottery_drifts'])) {

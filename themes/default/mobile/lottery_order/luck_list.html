@@ -8,35 +8,34 @@
 {/block}
 
 {block name="content"}
-<div class="comspreadstat clearfix">
-    <span class="spread-item not_lottery" style="width:50%;">总记录<b>{$luck_list->count()|default='0'}</b></span>
-    <span class="spread-item lottery" style="width:50%;">中奖数<b>{$lotteryList->count()|default='0'}</b></span>
-</div>
+<!--<div class="comspreadstat clearfix">-->
+<!--    <span class="spread-item not_lottery" style="width:50%;">总记录<b>{$luck_list->count()|default='0'}</b></span>-->
+<!--    <span class="spread-item lottery" style="width:50%;">中奖数<b>{$lotteryList->count()|default='0'}</b></span>-->
+<!--</div>-->
+<style>
+    .confirm_get{
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 3px;
+    }
+</style>
 <header class="Thead">幸运购记录</header>
 <div id="ulist">
-    {volist name="luck_list" id="l" empty="暂无数据～"}
+    {volist name="lotteryList" id="l" empty="暂无数据～"}
     <section class="ulist clearfix">
         <div class="ucoi-con">
             <!-- 商品标题 -->
             <span class="title" style='height:42px;'>{$l.name}</span>
-            <span class="price">
-                <span class="dprice">&yen;{$l.amount}</span> x
-                <span class="dcount">{$l.order_no}</span>
-            </span>
+<!--            <span class="price">-->
+<!--                <span class="dprice">&nbsp;&nbsp;&nbsp;&nbsp;&yen;{$l.amount}</span>-->
+<!--            </span>-->
         </div>
         <div>
-            <span class="spec Elipsis">{$l.create_at}</span>
-            {if condition="$l.is_lottery EQ 0"}
-            <span>未中奖</span>
-            {else/}
-            <span>恭喜中奖</span>
-            {/if}
+            <span class="spec Elipsis">中奖时间：{$l.create_at}</span>
+            <a class="olbtn wepay confirm_get" style="color: red" att="{$l.luck_record_id}" href='javascript:void(0)'>确认领取</a>
         </div>
     </section>
     {/volist}
-    <div>
-        <span colspan="20" class="page">{$luck_list->render()}</span>
-    </div>
 </div>
 <div id="lottery" style='display: none;'>
     {volist name="lotteryList" id="l" empty="暂无数据～"}
@@ -47,7 +46,6 @@
             <span class="spec Elipsis"></span>
             <span class="price">
                 <span class="dprice">&yen;{$l.amount}</span>
-                <span class="dcount">{$l.order_no}</span>
                 <span class="dprice">{$l.create_at}</span>
             </span>
         </div>

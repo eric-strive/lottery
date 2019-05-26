@@ -37,9 +37,10 @@ class User extends MobileBase
     {
 
         $this->assign('not_complete', $this->lottery_order_count(Home::NOT_COMPLETE));
-        $this->assign('lottery', $this->lottery_order_count(Home::LOTTERY));
+        //        $this->assign('lottery', $this->lottery_order_count(Home::LOTTERY));
         $this->assign('not_get', $this->lottery_order_count(Home::NOT_GET));
-        $this->assign('complete', $this->lottery_order_count(Home::COMPLETE));
+        $this->assign('luck_not_get', $this->luck_order_count());
+        //        $this->assign('complete', $this->lottery_order_count(Home::COMPLETE));
         $this->assign('userinfo', Db::name('member')->where('uid', UID)->find());
         $this->assign('SEO', ['title' => config('SITE_TITLE')]);
 
@@ -51,9 +52,15 @@ class User extends MobileBase
     function lottery_order_count($status)
     {
         if ($status == Home::NOT_GET) {
-            return count(Db::name('home')->where(array('status' => Home::LOTTERY, 'lottery_uid' => UID))->select());
+            return count(Db::name('home')->where(['status' => Home::LOTTERY, 'lottery_uid' => UID])->select());
         }
-        return count(Home::HomeList($status,UID));
+
+        return count(Home::HomeList($status, UID));
+    }
+
+    function luck_order_count()
+    {
+        return count(Db::name('luck_record')->where(['is_lottery' => 1, 'is_draw' => 0, 'uid' => UID])->select());
     }
 
     function wish_list()
@@ -61,6 +68,7 @@ class User extends MobileBase
 
         $this->assign('top_title', '我的收藏');
         $this->assign('SEO', ['title' => '我的收藏-' . config('SITE_TITLE')]);
+
         return $this->fetch();
     }
 
@@ -73,7 +81,7 @@ class User extends MobileBase
 
         $list = Db::view('Goods', 'goods_id,image,price,name')
             ->view('MemberWishlist', 'uid', 'Goods.goods_id=MemberWishlist.goods_id')
-            ->where(array('MemberWishlist.uid' => UID))->limit($limit)->select();
+            ->where(['MemberWishlist.uid' => UID])->limit($limit)->select();
 
         if (isset($list) && is_array($list)) {
             foreach ($list as $k => $v) {
@@ -89,7 +97,7 @@ class User extends MobileBase
     {
 
         $goods_id = (int)input('param.id');
-        Db::name('member_wishlist')->where(array('uid' => UID, 'goods_id' => $goods_id))->delete();
+        Db::name('member_wishlist')->where(['uid' => UID, 'goods_id' => $goods_id])->delete();
         Db::name('member')->where('uid', UID)->setDec('wish', 1);
         storage_user_action(UID, user('nickname'), config('FRONTEND_USER'), '删除了收藏');
 
@@ -149,6 +157,7 @@ class User extends MobileBase
         }
         $this->assign('top_title', '金豆充值');
         $this->assign('SEO', ['title' => '金豆充值-' . config('SITE_TITLE')]);
+
         return $this->fetch();
     }
 }

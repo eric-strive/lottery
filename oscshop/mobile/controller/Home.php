@@ -84,7 +84,7 @@ class Home extends MobileBase
         $remain      = $homeInfo['lottery_drifts'] - $homeInfo['goods_buy_num'];
         $residueTime = 0;//剩余开奖时间，默认是10秒
         if ($homeInfo['lottery_timestamp'] > 0) {
-            $residueTime = $homeInfo['lottery_timestamp'] + 4 - time();
+            $residueTime = $homeInfo['lottery_timestamp'] + 7 - time();
         }
         if ($homeInfo['status'] > HomeModel::ADD_NUM) {
             $numList             = duobaoRecord::getDuobaoNum($homeId);

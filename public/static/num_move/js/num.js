@@ -30,7 +30,7 @@
             var number = options.deVal;
             var $num_item = $('.' + options.className).find('.tt');
             var h = $('.dataBoc').height();
-            $num_item.css('transition','all 8s ease-in-out');
+            $num_item.css('transition','all 9s ease-in-out');
             var numberStr = number.toString();
             if(numberStr.length <= $num_item.length - 1){
                 var tempStr = '';
@@ -45,7 +45,7 @@
                 setTimeout(function(){
                     var ai = 3-i;
                     $num_item.eq(ai).css('top',-parseInt(numberArr[ai])*h - h*10 + 'px');
-                },i*8000)
+                },i*9000)
             });
         }
     }

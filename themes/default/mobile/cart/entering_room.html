@@ -90,14 +90,14 @@
             font-size: 20px;
             position: relative;
             margin-top: -25%;
-            margin-left: -23%;
+            margin-left: -30%;
         }
 
         .right_hid_num {
             color: #f8f7ff;
             font-size: 16px;
             position: relative;
-            margin-left: 8%;
+            margin-left: -13%;
         }
 
         .left_hid_num {
@@ -138,7 +138,7 @@
             <span id="residue-sum">{$homeInfo.lottery_drifts-$homeInfo.goods_buy_num}</span> 份
         </div>
         <div class="h_xzz">
-            <span>&nbsp;&nbsp;&nbsp;{$homeInfo.home_num}号房</span>
+            <span>{$homeInfo.home_num}号房</span>
         </div>
 
         <!--        <div class="tuichu"><i class="tcsde"></i></div>-->
@@ -193,7 +193,7 @@
                     <div class="left_hid_name">{$duobaoList[$i]['num']}份</div>
                     {foreach $duobaoList[$i]['bug_home_record'] as $vo}
                     <div class="left_hid_num">
-                        {$vo['start_num']}-{$vo['end_num']}号
+                        {$vo['start_num']}-{$vo['end_num']}号中奖
                     </div>
                     {/foreach}
                     {/if}
@@ -222,7 +222,7 @@
                     <br>
                     {foreach $duobaoList[$i]['bug_home_record'] as $vo}
                     <div class="right_hid_num">
-                        {$vo['start_num']}-{$vo['end_num']}号
+                        {$vo['start_num']}-{$vo['end_num']}号中奖
                     </div>
                     {/foreach}
                     {/if}
@@ -235,8 +235,9 @@
         <ul class="clearfix">
             <li>
                 <div class="relative" style="margin-top: 40%">
-                    <a href="#"><img src="__PUBLIC__/image/room-btn1.png"></a>
-                    <p class="absolute room-p">邀请 好友</p>
+                    <a href="/mobile"><img style="width: 110%;margin-left: -10%;"
+                                           src="/public/static/image/icon/return2.png"></a>
+                    <p class="absolute room-p3" style="padding-right:10%">返 回</p>
                 </div>
 
             </li>
@@ -252,8 +253,8 @@
             <li>
                 <div class="relative" style="margin-top: 40%">
                     <a href="javascript:location.reload();" id="test">
-                        <img src="__PUBLIC__/image/room-btn3.png"/>
-                        <p class="absolute room-p3">刷 新</p>
+                        <img style="width: 110%" src="__PUBLIC__/image/room-btn3.png"/>
+                        <p style="margin-left: 10%;" class="absolute room-p3">刷 新</p>
                     </a>
                 </div>
             </li>
@@ -457,10 +458,11 @@
                 $("#residue-sum").html(r.remain)
                 // console.log('r', r);
                 if (r.status > 0) {
+                    $("#test").attr('href', 'javascript:void(0)');
                     var residueTime = r.residueTime;
                     //这里需要放烟花
                     // alert('开奖啦！中奖号码是' + r.lottery_num);
-                    if (!isUrlVisit || (residueTime > 0 && residueTime < 4)) {
+                    if (!isUrlVisit || residueTime > 0) {
                         if (residueTime < 0) {
                             drawResult(r);
                         } else {
@@ -469,7 +471,7 @@
                             }, residueTime * 1000);
                         }
                     } else {
-                        alert('已开奖,中奖号码是' + r.lottery_num);
+                        alert('购买已结束');
                         location.href = "/mobile";
                     }
                 } else {
@@ -557,8 +559,8 @@
         }).appendTo($('body')).animate({
             'top': target.offset().top + 30,
             'left': target.offset().left + 10,
-            'width': 75,
-            'height': 75
+            'width': 50,
+            'height': 50
         }, 1000, 'easeInOutExpo');
         // setTimeout(function () {
         //     target.effect('shake', {

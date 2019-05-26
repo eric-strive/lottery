@@ -2,13 +2,20 @@
     .bottom_nav > a {
         width: 33%;
     }
+
+    .base_sound .footer_nav_base {
+        font-size: 18px;
+        font-weight: bold;
+        height: 100%;
+    }
 </style>
-<footer id="footer" style="font-size: 16px;">
-    <div class="bottom_nav base_sound"><a class="nav_index {if condition=" isset($flag) AND ($flag eq 'index')"} hover{/if}"
+<footer id="footer">
+    <div class="bottom_nav base_sound">
+        <a class=" nav_index footer_nav_base {if condition=" isset($flag) AND ($flag eq 'index')"} hover{/if}"
         href="{:url('/mobile')}"><i></i>购物</a>
-        <a class="nav_search {if condition=" isset($flag) AND ($flag eq 'search')"} hover{/if}"
+        <a class="nav_search footer_nav_base{if condition=" isset($flag) AND ($flag eq 'search')"} hover{/if}"
         href="{:url('category/index')}"><i></i>搜索</a>
         <!--<a class="nav_shopcart" href="{:url('cart/index')}"><i></i>购物车</a>	-->
-        <a class="nav_me {if condition=" isset($flag) AND ($flag eq 'user')"} hover{/if}"
+        <a class="nav_me footer_nav_base{if condition=" isset($flag) AND ($flag eq 'user')"} hover{/if}"
         href="{:url('user/index')}"><i></i>个人中心</a></div>
 </footer>

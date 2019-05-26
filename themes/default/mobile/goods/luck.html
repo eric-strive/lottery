@@ -32,6 +32,9 @@
             margin-top: 50%;
             z-index: 101;
         }
+        .luck-cen-btnBox input{
+
+        }
     </style>
 </head>
 
@@ -108,7 +111,15 @@
     </div>
 
     </div> -->
-    <div style="margin-top:3rem;">
+    <div class="flex-row luck-cen-bottom">
+        <img src="IMG_ROOT{$goods.image}" alt="">
+<!--        <div class="flex-col-center">-->
+<!--            <p>本次中奖概率:<span id="percentage">0.10%<span/></p>-->
+<!--            <p class="prices">抽奖价:<span>￥<em id="pay_value">1</em>元</span></p>-->
+<!--            <p class="original-price">￥{$goods.price}</p>-->
+<!--        </div>-->
+    </div>
+    <div>
         <a class="game-header" href="javascript:void(0);">
             <img src="__PUBLIC__/act/luck/images/4p.png" style="margin-left: -3%;">
         </a>
@@ -156,7 +167,7 @@
            style="position: absolute;margin-top: 7rem;margin-left: 5.2rem;" type="button" value="金豆支付">
     <!--    <p class="luck-p">采用绝对公平公开的算法</p>-->
     <div class="flex-row-center luck-cen-btnBox">
-        <input type="button" att="1" value="1元嗨" class="selected base_sound">
+        <input type="button" att="1" value="x1倍" class="selected base_sound">
         <input type="button" att="3" value="x3倍" class="base_sound">
         <input type="button" att="5" value="x5倍" class="base_sound">
         <input type="hidden" id="pay_mount" value="1.01">
@@ -216,7 +227,8 @@
         });
 
         function randomShu() {
-            return (Math.random() * (0.6) + 0.8);
+            return 1;
+            // return (Math.random() * (0.6) + 0.8);
         }
 
         p(num);
@@ -242,7 +254,7 @@
             $('#balance-payment-btn').addClass('disable').html('支付发起中...');
 
             $.post("{:url('lottery_payment/balance_pay')}", {
-                    'pay_total': pay_mount,
+                    'pay_total': Math.round(pay_mount),
                     'subject': subject,
                     'attach': '2',
                     'gid': gid,
@@ -401,7 +413,7 @@
         $('#wechat-payment-btn').addClass('disable').html('支付发起中...');
 
         $.post("{:url('lottery_payment/weixin_pay')}", {
-                'pay_total': parseInt(pay_mount),
+                'pay_total': pay_mount,
                 'subject': subject,
                 'gid': gid,
                 'attach': '2',

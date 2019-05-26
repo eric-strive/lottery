@@ -471,13 +471,12 @@ nav a {
 .luck-cen-bottom {
     width: 80%;
     margin: 0 auto;
-    padding-top: 6%;
 }
 
 .luck-cen-bottom img {
-    width: 2.8rem;
-    height: 2.8rem;
-    margin: 0 10px;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: -10% 0 10px 32%;
 }
 
 .luck-cen-bottom .prices {

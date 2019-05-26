@@ -9,7 +9,8 @@
     <div class="close"></div>
 </div>
 
-<div class="uc-headwrap base_sound" style='font-weight: bold; background-image: url(__RES__/mobile/images/ucbag/bag5.jpg);'>
+<div class="uc-headwrap base_sound"
+     style='font-weight: bold; background-image: url(__RES__/mobile/images/ucbag/bag5.jpg);'>
     <div class="uc-head">
         {if condition="in_wechat()"}
         <a class="headwrap"><img src="{$userinfo.userpic}/0"/></a>
@@ -24,7 +25,7 @@
         {/if}
         <span class="uc-name">{$userinfo.nickname}</span>
     </div>
-    <div class="comspreadstat clearfix" >
+    <div class="comspreadstat clearfix">
         <span class="spread-item" onclick="location.href = '{:url(\'Points/points_list\')}';"><b>{$userinfo.points}</b>积分</span>
         <span class="spread-item"
               onclick="location.href = '{:url(\'User/wish_list\')}';"><b>{$userinfo.wish}</b>收藏</span>
@@ -40,18 +41,20 @@
 
 <div class='uc-order-sec clearfix base_sound'>
     <a class='uc-order-btn fahuo'
-       href="{:url('lottery_order/index',array('status'=>0))}"><i></i>待开奖
+       href="{:url('lottery_order/index',array('status'=>0))}"><i></i><span style="color: red">待开奖</span>
         <b class='prices'>{$not_complete|default='0'}</b></a>
-<!--    <a class='uc-order-btn fukuan' href="{:url('lottery_order/index',array('status'=>1))}"><i></i>已开奖-->
-<!--        <b class='prices'>{$lottery|default='0'}</b>-->
+    <!--    <a class='uc-order-btn fukuan' href="{:url('lottery_order/index',array('status'=>1))}"><i></i>已开奖-->
+    <!--        <b class='prices'>{$lottery|default='0'}</b>-->
     </a>
-    <a class='uc-order-btn fahuo'
-       href="{:url('lottery_order/index',array('status'=>3))}"><i></i>待领取
+    <a class='uc-order-btn fukuan' href="{:url('lottery_order/luck_list')}"><i></i>
+        幸运购待领取
+        <b class='prices'>{$luck_not_get|default='0'}</b>
+    </a>
+    <a class='uc-order-btn fahuo' href="{:url('lottery_order/index',array('status'=>3))}"><i></i>
+        <span style="color: red">对战模式待领取</span>
         <b class='prices'>{$not_get|default='0'}</b></a>
     </a>
-<!--    <a class='uc-order-btn fukuan' href="{:url('lottery_order/index',array('status'=>2))}"><i></i>已完成-->
-<!--        <b class='prices'>{$complete|default='0'}</b>-->
-<!--    </a>-->
+
 </div>
 <!--<div class="uc-section base_sound" onclick="location.href = '{:url(\'lottery_order/luck_list\')}';">-->
 <!--    <i></i><b>查看记录</b>幸运购-->

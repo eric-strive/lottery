@@ -7,16 +7,16 @@
         <p class="order_serial">房间名：{$orders.home_name}</p>
         <p class="order_serial">&nbsp;&nbsp;|&nbsp;&nbsp;房间号：0000{$orders.home_num}</p>
         {/if}
-        <p class="order_serial">&nbsp;&nbsp;|&nbsp;&nbsp;开奖时间：{$orders.lottery_at|default='未开奖'}</p>
+        <p class="order_serial">&nbsp;&nbsp;|&nbsp;&nbsp;中奖时间：{$orders.lottery_at|default='未开奖'}</p>
     </div>
     <div class="uc-summary clearfix" style='padding:8px 7px;text-align:right;'>
         <div class="sum">
             {if condition="$orders.lottery_timestamp gt 0"}
             中奖号码: <span class="dprice">{$orders.lottery_num}</span>
-            &nbsp;&nbsp;|&nbsp;&nbsp;中奖随机数: <span class="dprice">{$orders.lottery_rand}</span>
+<!--            &nbsp;&nbsp;|&nbsp;&nbsp;中奖随机数: <span class="dprice">{$orders.lottery_rand}</span>-->
             {/if}
         </div>
-        <a class="olbtn cancel" href="/mobile/goods/detail/id/{$orders.gid}">查看商品</a>
+        <a class="olbtn cancel" style="color: red" href="/mobile/goods/detail/id/{$orders.gid}">查看商品</a>
         {if condition="($orders.status eq 1) ANd ($orders.lottery_uid eq $uid)"}
         <a class="olbtn wepay wepay_button confirm_get" href="javascript:;" att="{$orders.id}">确认领取</a>
         {/if}

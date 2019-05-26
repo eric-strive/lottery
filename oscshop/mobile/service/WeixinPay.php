@@ -15,11 +15,9 @@ class WeixinPay
     //微信支付 package
     public static function getBizPackage($data)
     {
-
         $wx = wechat();
         // 订单总额
-        $totalFee = 1;
-        //        $totalFee = ($data['pay_total']) * 100;
+        $totalFee = ($data['pay_total']) * 100;
         // 随机字符串
         $nonceStr = $wx->generateNonceStr();
 

@@ -179,7 +179,10 @@ class LuckRecord
             $query->view('Member', 'nickname', 'Member.uid=LuckRecord.uid', 'left');
         }
         if ($isLottery !== null) {
-            $query->where('LuckRecord.is_lottery', $isLottery);
+            $query->where([
+                'LuckRecord.is_lottery' => $isLottery,
+                'LuckRecord.is_draw'    => 0,
+            ]);
         }
 
         return $query->order('LuckRecord.status asc LuckRecord.id asc')

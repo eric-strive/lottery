@@ -938,14 +938,15 @@ i.zuanshi {
     border-radius: 100px;
     position: relative;
     height: 22px;
-    width: 30%;
+    width: 35%;
     line-height: 20px;
-    color: #bf4515;
+    color: #f5f0ee;
     text-align: center;
     margin-top: 3px;
     border: 1px solid #4a32a0;
     float: left;
-    font-size: 0.8em;
+    font-size: 16px;
+    float:right;
 }
 
 .h_header .hea_min .h_xzz i.zsyc {
