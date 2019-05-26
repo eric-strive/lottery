@@ -31,10 +31,6 @@
             height: 100%;
         }
 
-        .fui-btn {
-            border-radius: 100px;
-        }
-
         #i_tixian .shiyongjilu .tx_list {
             word-break: break-all;
             overflow: scroll;
@@ -45,12 +41,85 @@
         .meinv-right > ul > li > a > img,
         .meinv-left > ul > li > img,
         .meinv-right > ul > li > img {
-            width: 70%;
+            width: 35%;
             height: 80%;
+        }
+
+        .lottety_nickname {
+            font-size: 30px;
+            font-weight: bold;
+            color: #f3641f;
+        }
+
+        .user-jinbi {
+            width: 1px;
+            position: absolute;
+            margin-top: -30px;
+        }
+
+        .hea_min1 {
+            width: 40%;
+        }
+
+        .fui-btn {
+            border-radius: 100px;
+        }
+
+        .fui-btn-left {
+            color: red;
+            font-size: 20px;
+            width: 40%;
+            float: left;
+        }
+
+        .meinv-left > ul > li, .meinv-right > ul > li {
+            width: 6.3rem;
+        }
+
+        .left_hid_name {
+            color: #f8f7ff;
+            font-size: 20px;
+            width: 50%;
+            float: left;
+            margin-top: 10%;
+            position: relative;
+        }
+
+        .right_hid_name {
+            color: #f8f7ff;
+            font-size: 20px;
+            position: relative;
+            margin-top: -25%;
+            margin-left: -23%;
+        }
+
+        .right_hid_num {
+            color: #f8f7ff;
+            font-size: 16px;
+            position: relative;
+            margin-left: 8%;
+        }
+
+        .left_hid_num {
+            color: #f8f7ff;
+            font-size: 16px;
+            float: left;
+            position: relative;
+            width: 100%;
+        }
+
+        .dio_nick_name {
+            width: 40%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .right-fui-btn {
+            margin-left: 10%;
         }
     </style>
 </head>
-
 <body>
 <div class="h_header">
     <div class="hea_min hea_min1 fl_l fui-btn">
@@ -59,22 +128,28 @@
             <img src="{$homeUserInfo.userpic}" alt=""> {else/}
             <img src="__PUBLIC__/act/guessing_game/img/header.jpg" alt=""> {/if}
         </div>
-        <div class="hid_name">{$homeInfo.home_name} <i class="dj dj1"></i></div>
+        <div class="hid_name"><span>{$homeInfo.home_name}</span></div>
     </div>
 
     <div class="hea_min hea_min2 fl_r">
         <div class="h_xzz"
-             style="margin-right:0.8rem;font-size: 18px;font-weight:bold;width:auto;float: left;background:none;border:none;color:yellow">
+             style="font-size: 22px;font-weight:bold;width:auto;float: left;background:none;border:none;color:yellow">
             &nbsp;&nbsp;剩
             <span id="residue-sum">{$homeInfo.lottery_drifts-$homeInfo.goods_buy_num}</span> 份
         </div>
         <div class="h_xzz">
-            <i class="zsyc"></i>
-            <span>&nbsp;&nbsp;&nbsp;房间号:{$homeInfo.home_num}</span>
+            <span>&nbsp;&nbsp;&nbsp;{$homeInfo.home_num}号房</span>
         </div>
 
         <!--        <div class="tuichu"><i class="tcsde"></i></div>-->
     </div>
+</div>
+<div id="div-lottery-main-user" style="position: absolute;margin: 20% 33%;width:auto;text-align:center;display:none; ">
+    <div class="lottety_nickname">恭喜中奖</div>
+    <img id="lottery-main-user" style="border-radius:100px;width: 90px;"
+         src="/public/static/act/guessing_game/img/share/zt_0c3.png"
+         alt="">
+    <div class="lottety_nickname" id="lottery_nickname"></div>
 </div>
 <div id="home">
     <div id="yanhua" class="none" style="position: absolute;margin-top: 100%;">
@@ -103,24 +178,25 @@
     <div class="meinv clearfix">
         <div class="meinv-left fl">
             <ul>
-                {for start='0' end='5' step='1' name='i'}
+                {for start='0' end='10' step='2' name='i'}
                 <li>
                     {if condition="isset($duobaoList[$i]['dduonums'])"} {if
                     condition="!empty($duobaoList[$i]['userpic'])"}
                     <img att="{$duobaoList[$i]['dduonums']}" src="{$duobaoList[$i]['userpic']}"
-                         alt="{$duobaoList[$i]['nickname']}" class="fui-btn user-info"/> {else/}
+                         alt="{$duobaoList[$i]['nickname']}" class="fui-btn fui-btn-left user-info"/> {else/}
                     <img att="{$duobaoList[$i]['dduonums']}" src="__PUBLIC__/act/guessing_game/img/header.jpg"
-                         class="fui-btn user-info"/> {/if}
+                         class="fui-btn fui-btn-left user-info"/> {/if}
                     <span style="">
-                    <img src="__PUBLIC__/image/jinbi/images/jb1.png" class="user-jinbi"/>
-                    <img src="__PUBLIC__/image/jinbi/images/jb2.png" class="user-jinbi"/>
+                    <img src="__PUBLIC__/image/jinbi/images/jb5.png" class="user-jinbi"/>
                     <img src="__PUBLIC__/image/jinbi/images/jb3.png" class="user-jinbi"/>
                     </span>
-<!--                    {foreach $duobaoList[$i]['bug_home_record'] as $vo}-->
-<!--                    <span class="hid_name"-->
-<!--                          style="color: red;font-size: 20px;">{$vo['start_num']}-{$vo['end_num']}号</span>-->
-<!--                    {/foreach}-->
-                    <span class="hid_name" style="color: red;font-size: 20px;">购{$duobaoList[$i]['num']}份</span> {/if}
+                    <div class="left_hid_name">{$duobaoList[$i]['num']}份</div>
+                    {foreach $duobaoList[$i]['bug_home_record'] as $vo}
+                    <div class="left_hid_num">
+                        {$vo['start_num']}-{$vo['end_num']}号
+                    </div>
+                    {/foreach}
+                    {/if}
                 </li>
                 {/for}
             </ul>
@@ -129,23 +205,26 @@
         </div>
         <div class="meinv-right fr">
             <ul>
-                {for start='0' end='5' step='1' name='i'}
+                {for start='1' end='10' step='2' name='i'}
                 <li>
                     {if condition="isset($duobaoList[$i]['dduonums'])"} {if
                     condition="!empty($duobaoList[$i]['userpic'])"}
                     <img att="{$duobaoList[$i]['dduonums']}" src="{$duobaoList[$i]['userpic']}"
-                         alt="{$duobaoList[$i]['nickname']}" class="fui-btn user-info"/> {else/}
+                         alt="{$duobaoList[$i]['nickname']}" class="fui-btn right-fui-btn user-info"/> {else/}
                     <img att="{$duobaoList[$i]['dduonums']}" src="__PUBLIC__/act/guessing_game/img/header.jpg"
-                         class="fui-btn user-info"/> {/if}
+                         class="fui-btn right-fui-btn user-info"/> {/if}
                     <span style="">
                     <img src="__PUBLIC__/image/jinbi/images/jb3.png" class="user-jinbi"/>
                     <img src="__PUBLIC__/image/jinbi/images/jb4.png" class="user-jinbi"/>
                     <img src="__PUBLIC__/image/jinbi/images/jb5.png" class="user-jinbi"/>
                     </span>
-                    <!--                        {foreach $duobaoList[$i]['bug_home_record'] as $vo}-->
-                    <!--                        <span class="hid_name" style="color: red;font-size: 20px;">{$vo['start_num']}-{$vo['end_num']}号</span>-->
-                    <!--                        {/foreach}-->
-                    <!--                        <span class="hid_name" style="color: red;font-size: 20px;">购{$duobaoList[$i]['num']}份</span>-->
+                    <div class="right_hid_name">{$duobaoList[$i]['num']}份</div>
+                    <br>
+                    {foreach $duobaoList[$i]['bug_home_record'] as $vo}
+                    <div class="right_hid_num">
+                        {$vo['start_num']}-{$vo['end_num']}号
+                    </div>
+                    {/foreach}
                     {/if}
                 </li>
                 {/for}
@@ -155,9 +234,9 @@
     <div id="nav-bottom">
         <ul class="clearfix">
             <li>
-                <div class="relative">
+                <div class="relative" style="margin-top: 40%">
                     <a href="#"><img src="__PUBLIC__/image/room-btn1.png"></a>
-                    <p class="absolute room-p">邀请好友</p>
+                    <p class="absolute room-p">邀请 好友</p>
                 </div>
 
             </li>
@@ -166,17 +245,16 @@
                     <a class="jinruyouxi"
                        href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id']))}&sign={$homeInfo['sign']}">
                         <img src="__PUBLIC__/image/room-btn2.png" alt="">
+                        <p class="absolute room-p">参与购买</p>
                     </a>
-                    <p class="absolute room-p">参与购买</p>
                 </div>
             </li>
             <li>
-                <div class="relative">
-                    <!--                    location.reload();-->
-                    <a href="javascript:" id="test">
+                <div class="relative" style="margin-top: 40%">
+                    <a href="javascript:location.reload();" id="test">
                         <img src="__PUBLIC__/image/room-btn3.png"/>
+                        <p class="absolute room-p3">刷 新</p>
                     </a>
-                    <p class="absolute room-p3">刷 新</p>
                 </div>
             </li>
         </ul>
@@ -247,7 +325,7 @@
             <div class="listt">
                 <ul>
                     {volist name="duobaoList" id="d"}
-                    <li><span>{$d.nickname}</span></li>
+                    <li class="dio_nick_name"><span>{$d.nickname}</span></li>
                     <li style="text-align:center;"><span>{$d.num}</span></li>
                     {/volist}
                 </ul>
@@ -256,9 +334,8 @@
     </div>
 </div>
 
-<div class="">
-    <div id="dataNums" class="flex-col-center">
-    </div>
+<div id="lottery-dataNums">
+    <div id="dataNums" class="flex-col-center"></div>
     <div id="dataNums2"></div>
 </div>
 </body>
@@ -383,7 +460,7 @@
                     var residueTime = r.residueTime;
                     //这里需要放烟花
                     // alert('开奖啦！中奖号码是' + r.lottery_num);
-                    if (!isUrlVisit || (residueTime > 0 && residueTime < 3)) {
+                    if (!isUrlVisit || (residueTime > 0 && residueTime < 4)) {
                         if (residueTime < 0) {
                             drawResult(r);
                         } else {
@@ -392,7 +469,7 @@
                             }, residueTime * 1000);
                         }
                     } else {
-                        alert('已开奖');
+                        alert('已开奖,中奖号码是' + r.lottery_num);
                         location.href = "/mobile";
                     }
                 } else {
@@ -412,8 +489,16 @@
         // justGo(true);
         // startLottery()
         set_num(r.lottery_num)
-        setTimeout(lottery_initvars, 40000);
-        alert('恭喜中奖' + r.nickname)
+        setTimeout(lottery_initvars, 30000);
+        setTimeout(function () {
+            $('#lottery-main-user').attr('src', r.userpic);
+            $('#lottery_nickname').html(r.nickname);
+            $("#lottery-dataNums").hide();
+            $('#div-lottery-main-user').show();
+            lottery_jinbi(0);
+        }, 32000);
+
+        // alert('恭喜中奖' + r.nickname)
         // if (r.is_self > 0) {
         //     // base_alert('恭喜你中奖了')
         // }
@@ -425,21 +510,39 @@
         });
     }
 
-    setTimeout(function () {
-        checkLottery(true)
-    }, 1000);
-    $('#test').on('click', function () {
+    function lottery_jinbi(i) {
+        i++;
         $(".user-jinbi").each(function () {
-            var cart = $('.hea_min1');
+            var cart = $('#lottery-main-user');
             var imgtodrag = $(this);
             if (imgtodrag) {
                 setTimeout(function () {
                     animate_jinbi(imgtodrag, cart)
                 }, 600);
-
             }
         })
-    });
+        if (i < 6) {
+            setTimeout(function () {
+                lottery_jinbi(i)
+            }, 300);
+        }
+    }
+
+    setTimeout(function () {
+        checkLottery(true)
+    }, 1000);
+    // $('#test').on('click', function () {
+    //     $(".user-jinbi").each(function () {
+    //         var cart = $('#lottery-main-user');
+    //         var imgtodrag = $(this);
+    //         if (imgtodrag) {
+    //             setTimeout(function () {
+    //                 animate_jinbi(imgtodrag, cart)
+    //             }, 600);
+    //
+    //         }
+    //     })
+    // });
 
     function animate_jinbi(imgToDrag, target) {
         var imgClone = imgToDrag.clone().offset({
@@ -448,20 +551,20 @@
         }).css({
             'opacity': '0.5',
             'position': 'absolute',
-            'height': '150px',
-            'width': '150px',
+            'height': '100px',
+            'width': '100px',
             'z-index': '100'
         }).appendTo($('body')).animate({
-            'top': target.offset().top + 10,
+            'top': target.offset().top + 30,
             'left': target.offset().left + 10,
             'width': 75,
             'height': 75
         }, 1000, 'easeInOutExpo');
-        setTimeout(function () {
-            target.effect('shake', {
-                times: 2
-            }, 200);
-        }, 1500);
+        // setTimeout(function () {
+        //     target.effect('shake', {
+        //         times: 2
+        //     }, 200);
+        // }, 1500);
         imgClone.animate({
             'width': 0,
             'height': 0

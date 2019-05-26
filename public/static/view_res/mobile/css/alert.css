@@ -440,16 +440,16 @@ nav a {
 }
 
 .luck-cen-btnBox {
-    margin: 10% 2%;
+    margin: 7% 0%;
     position: absolute;
     bottom: 0;
     width: 100%;
 }
 
 .luck-cen-btnBox input {
-    height: 3rem;
-    width: 3rem;
-    margin: 0 5%;
+    height: 2rem;
+    width: 2rem;
+    margin: 0 2%;
     background: #fff;
     border-radius: 50%;
     color: #FE2D48;
@@ -496,7 +496,7 @@ nav a {
     width: 40%;
     height: 2rem;
     margin: auto;
-    margin-top: 1rem;
+    margin-top: 2.2rem;
     margin-bottom: 2rem;
     border: 1px solid #fed459;
     display: block;
@@ -705,7 +705,7 @@ nav a {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 10rem;
+    height: 13rem;
     z-index: -1;
 }
 
@@ -724,7 +724,7 @@ nav a {
 #nav-bottom {
     position: absolute;
     top: inherit;
-    bottom: 5rem;
+    bottom: 1rem;
 }
 
 #nav-bottom ul li:first-child {
