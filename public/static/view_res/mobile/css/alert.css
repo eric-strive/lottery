@@ -119,7 +119,7 @@ input[type='button'] {
     margin-top: 4px;
 }
 
-.pregress+div p span {
+.pregress + div p span {
     color: #444;
     font-weight: 600;
 }
@@ -305,7 +305,7 @@ input[type=password] {
     width: 40%;
 }
 
-.priForm .box1>div p:nth-child(2) {
+.priForm .box1 > div p:nth-child(2) {
     width: 66%;
     text-align: left;
     white-space: nowrap;
@@ -398,7 +398,7 @@ input[type=password] {
     position: relative;
     width: 100%;
     height: 100%;
-    background: url('__PUBLIC__/act/luck/images/bg.png') no-repeat;
+    /*background: url("__PUBLIC__/act/luck/images/bg.png") no-repeat;*/
     background-size: 100% 100%;
     overflow: hidden;
 }
@@ -458,6 +458,8 @@ input[type=password] {
     color: #FE2D48;
     font-weight: bold;
     text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
 .luck-cen-btnBox .selected {
@@ -536,7 +538,7 @@ input[type=password] {
     background-size: 100% 100%;
 }
 
-.bottom_nav>a {
+.bottom_nav > a {
     height: 3rem;
 }
 
@@ -546,7 +548,7 @@ input[type=password] {
     margin: 0 auto;
 }
 
-.bottom_nav>a i {
+.bottom_nav > a i {
     background-size: 46px;
     -webkit-background-size: 161px 46px;
     width: 23px;
@@ -701,11 +703,12 @@ input[type=password] {
     /*background: url(../../../act/luck/images/2p.png);*/
     background: url(/public/static/image/draw/shan.gif);
     background-size: 100% 100%;
-    width: 90%;
-    height: 6rem;
-    padding-top: 8%;
-    left: 5%;
+    width: 60%;
+    height: 5rem;
+    padding-top: 5.5%;
+    left: 20%;
     transform: translate(0, -50%);
+    margin-top: 25%;
 }
 
 .bgpic {
@@ -713,7 +716,8 @@ input[type=password] {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 15rem;
+    height: 42%;
+    /*height: 15rem;*/
     z-index: 1;
 }
 
@@ -784,9 +788,7 @@ input[type=password] {
     font-family: "iconfont";
     src: url('iconfont.eot?t=1558750430512');
     /* IE9 */
-    src: url('iconfont.eot?t=1558750430512#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAJ0AAsAAAAABiwAAAIqAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCCcAo0UwE2AiQDCAsGAAQgBYRtBzEbegURBfTJfh7YbtHWxtHxqUYQ30jtXnIj6T3Hw7/7lff9ZGazmQVWUEJFDggUoqpFUK10VXXVgJJ1T+WvBYeaqrz/U8Nf6IAyLc9T35h5f8zkcl1KJSpgAesT947/Avogox5QrmtPmtQF1MWBFOBeGEVWJJE3jF3wAh8TqGatFNu6fccUmb0qEDfNlXNKISLLLF+EbsPBLF7rKM3L5h1eRd+Pv1ZFodFJ7KZDl7dftOkHZ0l60D5wMj30YDkX2DESViITxxozByTB2KRmsvkcqz74oW0DmziqWbC/zq4dANMwG/zgrRSggceaqGJi0hVEvb1cOnY5TtziSmOqbbxmcIlr169dFf3MJtA+SGvTQ4Hg/f9FP7zuX5HBp2+/g1D7IBvmo6ztDf6CdGBfNuS2tcmatHG4UffeUlW0cGDM96mGyVMWQjE5wddnJkNSLCQysxIdPWvQVWxEtcLO4z3jbkki92O5pwABGvFBY8gbJCO+RGZ+6JjyR9dIJFQnYvzCnsVxTWwlHBkXmN5g5hSla2cR1x9R3f1IeXnEXZF2E4cqL8v5A0akJbbsD1UzS5CUAnTgOfQ+wUrJ4sy5Zl7bopBNb8rnFDJhK4JGDC3A5A0YsySSwWgmKp8/QsqdN6KOnrrkFSI7Mz2o5MoBxEETB/U8yiu7B6XGmAQkkgSgA/OQ5yVgbZ5noRnL6QmpVatwBsmhmnx7Xfi7Y1DZxiacmUnf5THqu6myDA==') format('woff2'), url('iconfont.woff?t=1558750430512') format('woff'), url('iconfont.ttf?t=1558750430512') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-    url('iconfont.svg?t=1558750430512#iconfont') format('svg');
+    src: url('iconfont.eot?t=1558750430512#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAJ0AAsAAAAABiwAAAIqAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCCcAo0UwE2AiQDCAsGAAQgBYRtBzEbegURBfTJfh7YbtHWxtHxqUYQ30jtXnIj6T3Hw7/7lff9ZGazmQVWUEJFDggUoqpFUK10VXXVgJJ1T+WvBYeaqrz/U8Nf6IAyLc9T35h5f8zkcl1KJSpgAesT947/Avogox5QrmtPmtQF1MWBFOBeGEVWJJE3jF3wAh8TqGatFNu6fccUmb0qEDfNlXNKISLLLF+EbsPBLF7rKM3L5h1eRd+Pv1ZFodFJ7KZDl7dftOkHZ0l60D5wMj30YDkX2DESViITxxozByTB2KRmsvkcqz74oW0DmziqWbC/zq4dANMwG/zgrRSggceaqGJi0hVEvb1cOnY5TtziSmOqbbxmcIlr169dFf3MJtA+SGvTQ4Hg/f9FP7zuX5HBp2+/g1D7IBvmo6ztDf6CdGBfNuS2tcmatHG4UffeUlW0cGDM96mGyVMWQjE5wddnJkNSLCQysxIdPWvQVWxEtcLO4z3jbkki92O5pwABGvFBY8gbJCO+RGZ+6JjyR9dIJFQnYvzCnsVxTWwlHBkXmN5g5hSla2cR1x9R3f1IeXnEXZF2E4cqL8v5A0akJbbsD1UzS5CUAnTgOfQ+wUrJ4sy5Zl7bopBNb8rnFDJhK4JGDC3A5A0YsySSwWgmKp8/QsqdN6KOnrrkFSI7Mz2o5MoBxEETB/U8yiu7B6XGmAQkkgSgA/OQ5yVgbZ5noRnL6QmpVatwBsmhmnx7Xfi7Y1DZxiacmUnf5THqu6myDA==') format('woff2'), url('iconfont.woff?t=1558750430512') format('woff'), url('iconfont.ttf?t=1558750430512') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */ url('iconfont.svg?t=1558750430512#iconfont') format('svg');
     /* iOS 4.1- */
 }
 

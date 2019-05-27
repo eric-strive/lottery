@@ -161,14 +161,14 @@
         </div>
 
         <p class="weui_btn_area">
-            <a class="weui_btn weui_btn_primary base_sound" style="margin-top: 1rem" id="wechat-payment-btn">微信支付</a>
+            <a class="weui_btn weui_btn_primary base_sound" style="margin-top: 1rem;font-weight: bold;font-size: 20px;" id="wechat-payment-btn">微信支付</a>
         </p>
         <input class="luck-btn jindou-payment-btn base_sound" type="button" value="金豆支付" style="bottom:6rem;">
         <!--    <p class="luck-p">采用绝对公平公开的算法</p>-->
         <div class="flex-row-center luck-cen-btnBox">
-            <input type="button" att="1" value="x1倍" class="selected base_sound">
-            <input type="button" att="3" value="x3倍" class="base_sound">
-            <input type="button" att="5" value="x5倍" class="base_sound">
+            <input type="button" att="1" value="x1倍" class="input-button selected base_sound">
+            <input type="button" att="3" value="x3倍" class="input-button base_sound">
+            <input type="button" att="5" value="x5倍" class="input-button base_sound">
             <input type="hidden" id="pay_mount" value="1.01">
             <input type="hidden" id="original-price" value="{$goods.price}">
             <input type="hidden" id="subject-price" value="{$goods.name}">
@@ -180,7 +180,7 @@
     </div>
 </body>
 {block name="script"}
-<script>
+<script type="text/javascript">
     //抽奖***********************************************************start
     $(function() {
         var $isLottery = "{$isLottery}";
@@ -218,6 +218,7 @@
         //抽奖*********************************************************end
         var num = randomShu();
         var originalPrice = $('#original-price').val();
+
         $('.luck-cen-btnBox input').on('click', function() {
             $(this).siblings().removeClass('selected');
             $(this).addClass('selected');

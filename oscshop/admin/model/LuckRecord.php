@@ -172,6 +172,7 @@ class LuckRecord
     {
         $query = Db::view('LuckRecord', '*')
             ->view('Goods', 'name', 'LuckRecord.gid=Goods.goods_id')
+            ->view('GoodsImage', 'image', 'LuckRecord.gid=GoodsImage.goods_id')
             ->where('LuckRecord.status', self::STATUS_SUCCESS_PAY);
         if ($uid) {
             $query->where('LuckRecord.uid', $uid);
@@ -186,7 +187,7 @@ class LuckRecord
         }
 
         return $query->order('LuckRecord.status asc LuckRecord.id asc')
-            ->paginate($count, false);
+            ->select();
     }
 }
 

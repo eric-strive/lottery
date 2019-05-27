@@ -8,10 +8,7 @@
 {/block}
 
 {block name="content"}
-<!--<div class="comspreadstat clearfix">-->
-<!--    <span class="spread-item not_lottery" style="width:50%;">总记录<b>{$luck_list->count()|default='0'}</b></span>-->
-<!--    <span class="spread-item lottery" style="width:50%;">中奖数<b>{$lotteryList->count()|default='0'}</b></span>-->
-<!--</div>-->
+
 <style>
     .confirm_get{
         border: 1px solid #ccc;
@@ -23,15 +20,17 @@
 <div id="ulist">
     {volist name="lotteryList" id="l" empty="暂无数据～"}
     <section class="ulist clearfix">
+        <img src="IMG_ROOT{$l.image}">
+
         <div class="ucoi-con">
             <!-- 商品标题 -->
-            <span class="title" style='height:42px;'>{$l.name}</span>
-<!--            <span class="price">-->
+            <span class="spec Elipsis" >中奖时间：{$l.create_at}</span>
+            <!--            <span class="price">-->
 <!--                <span class="dprice">&nbsp;&nbsp;&nbsp;&nbsp;&yen;{$l.amount}</span>-->
 <!--            </span>-->
         </div>
-        <div>
-            <span class="spec Elipsis">中奖时间：{$l.create_at}</span>
+        <div style="margin-top:4%">
+            <span class="title" style='height:42px;'>{$l.name}</span>
             <a class="olbtn wepay confirm_get" style="color: red" att="{$l.luck_record_id}" href='javascript:void(0)'>确认领取</a>
         </div>
     </section>
@@ -59,9 +58,6 @@
         </div>
     </section>
     {/volist}
-    <div>
-        <span colspan="20" class="page">{$lotteryList->render()}</span>
-    </div>
 </div>
 {/block}
 {block name="script"}

@@ -40,21 +40,29 @@ class LotteryOrder extends MobileBase
         $this->assign('status', $status);
         $this->assign('top_title', '我的订单');
         $this->assign('SEO', ['title' => '我的订单-' . config('SITE_TITLE')]);
+
         return $this->fetch();
     }
 
     function ajax_order_list()
     {
-        $page = (int)input('param.page');//页码
+        $page   = (int)input('param.page');//页码
         $status = input('status') !== null ? (int)input('param.status', '') : '';
         //开始数字,数据量
         $limit = (8 * $page) . ",8";
         if ($status === '') {
-            $orders = HomeModel::HomeList(null,UID, $limit);
+            $orders = HomeModel::HomeList(null, UID, $limit);
         } elseif ($status === HomeModel::NOT_GET) {
-            $orders = Db::name('home')->where(array('status' => HomeModel::LOTTERY, 'lottery_uid' => UID))->select();
+            $orders = Db::name('home')
+                ->alias('h')
+                ->join('goods_image g', 'h.gid=g.goods_id')
+                ->where(['status' => HomeModel::LOTTERY, 'lottery_uid' => UID])
+                ->select();
         } else {
-            $orders = HomeModel::HomeList($status, UID,$limit);
+            $orders = HomeModel::HomeList($status, UID, $limit);
+        }
+        foreach ($orders as $k => $v) {
+            $orders[$k]['image'] = resize($v['image'], 80, 80);
         }
         $this->assign('order', $orders);
         $this->assign('uid', UID);
@@ -64,20 +72,24 @@ class LotteryOrder extends MobileBase
 
     public function luck_list()
     {
-        $lickList = LuckRecord::getRecord(UID);
+        //        $lickList = LuckRecord::getRecord(UID);
         $lotteryList = LuckRecord::getRecord(UID, LuckRecord::LOTTERY);
-        $this->assign('luck_list', $lickList);
+        foreach ($lotteryList as $k => $v) {
+            $lotteryList[$k]['image'] = resize($v['image'], 80, 80);
+        }
+        //        $this->assign('luck_list', $lickList);
         $this->assign('lotteryList', $lotteryList);
         $this->assign('SEO', ['title' => '幸运购记录-' . config('SITE_TITLE')]);
         $this->assign('top_title', '幸运购记录');
+
         return $this->fetch();
     }
 
     public static function confirm_get()
     {
         $luck_record_id = input('luck_record_id');
-        $home_id = input('home_id');
-        if ($home_id) {                                     
+        $home_id        = input('home_id');
+        if ($home_id) {
             HomeModel::confirmGet($home_id, UID);
         } else {
             LuckRecord::setDraw($luck_record_id, UID);

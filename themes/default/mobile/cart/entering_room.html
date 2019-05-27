@@ -193,7 +193,7 @@
                     <div class="left_hid_name">{$duobaoList[$i]['num']}份</div>
                     {foreach $duobaoList[$i]['bug_home_record'] as $vo}
                     <div class="left_hid_num">
-                        {$vo['start_num']}-{$vo['end_num']}号中奖
+                        {$vo['start_num']}-{$vo['end_num']}
                     </div>
                     {/foreach}
                     {/if}
@@ -222,7 +222,7 @@
                     <br>
                     {foreach $duobaoList[$i]['bug_home_record'] as $vo}
                     <div class="right_hid_num">
-                        {$vo['start_num']}-{$vo['end_num']}号中奖
+                        {$vo['start_num']}-{$vo['end_num']}
                     </div>
                     {/foreach}
                     {/if}
@@ -234,7 +234,7 @@
     <div id="nav-bottom">
         <ul class="clearfix">
             <li>
-                <div class="relative" style="margin-top: 40%">
+                <div class="jinruyouxi relative" style="margin-top: 40%">
                     <a href="/mobile"><img style="width: 110%;margin-left: -10%;"
                                            src="/public/static/image/icon/return2.png"></a>
                     <p class="absolute room-p3" style="padding-right:10%">返 回</p>
@@ -251,7 +251,7 @@
                 </div>
             </li>
             <li>
-                <div class="relative" style="margin-top: 40%">
+                <div class="jinruyouxi relative" style="margin-top: 40%">
                     <a href="javascript:location.reload();" id="test">
                         <img style="width: 110%" src="__PUBLIC__/image/room-btn3.png"/>
                         <p style="margin-left: 10%;" class="absolute room-p3">刷 新</p>
@@ -481,7 +481,7 @@
                 }
             });
     }
-
+    set_num(233)
     function drawResult(r) {
         // $('#lottery-wrap').html(r.numHtml)
         // $('#lottery-wrap').html(22)
