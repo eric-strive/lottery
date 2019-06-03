@@ -15,6 +15,7 @@
 namespace osc\mobile\service;
 
 use osc\admin\model\duobaoRecord;
+use osc\admin\model\GameHome;
 use osc\admin\model\Goods;
 use osc\admin\model\Home;
 use osc\admin\model\LuckRecord;
@@ -29,9 +30,9 @@ class OrderProcess
     /**
      * 支付回调
      *
-     * @param $returnData
+     * @param $postObj
      *
-     * @throws Exception
+     * @throws \think\Exception
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
      * @throws \think\exception\DbException
@@ -70,6 +71,30 @@ class OrderProcess
                     'order_no'    => $orderNo,
                 ]);
                 break;
+            case '4'://开始游戏房间
+                $s = GameHome::setHomeStatus($orderInfo['home_id']);
+
+                if ($s === false) {
+                    throw new Exception('修改房间状态出错');
+                }
+                $recordInfo = GameHome::getRecordInfo($orderInfo['home_id'], $orderInfo['uid']);
+                if (empty($recordInfo)) {
+                    GameHome::add_game_record([
+                        'uid'          => $orderInfo['uid'],
+                        'game_home_id' => $orderInfo['home_id'],
+                        'pay_amount'   => $rechargeAmount,
+                        'pay_status'   => 1,
+                        'grade'        => 0,
+                        'type'         => 1,
+                        'game_key'     => GameHome::GAME_FROG,
+                        'create_at'    => date('Y-m-d H:i:s'),
+                    ]);
+                }
+                break;
+            case '5'://进入游戏房间
+                GameHome::setRecordStatus($orderInfo['home_id'], $orderInfo['uid']);
+                GameHome::addParameter($orderInfo['home_id']);
+                break;
         }
         self::addOtherInfo($orderInfo, $rechargeAmount, $attach);
         PayOrder::editStatus($orderNo, PayOrder::STATUS_SUCCESS_PAY);
@@ -78,7 +103,6 @@ class OrderProcess
     /**
      * @param $orderInfo
      * @param $cashFee
-     * @param $orderNo
      * @param $attach
      *
      * @return bool
@@ -97,6 +121,7 @@ class OrderProcess
             'pay_type' => 1,
             'pay_time' => date('Y-m-d H:i:s'),
         ]);
+        $description = '未知';
         switch ($attach) {
             case '1':
                 $description = sprintf('夺宝花费%s获得', $cashFee);
@@ -106,6 +131,12 @@ class OrderProcess
                 break;
             case '3':
                 return true;
+            case '4':
+                $description = sprintf('开游戏房间花费%s获得', $cashFee);
+                break;
+            case '5':
+                $description = sprintf('参与游戏花费%s获得', $cashFee);
+                break;
                 break;
         }
         Member::addPoints($orderInfo['uid'], $cashFee);

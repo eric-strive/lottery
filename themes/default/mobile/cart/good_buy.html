@@ -504,11 +504,10 @@
                     return;
                 }
                 if (r.ret_code === 0) {
-                } else if (r.ret_code === 11) {
+                } else if (r.ret_code === 11 || r.ret_code === 3) {
                     $('#balance-payment-btn').removeClass('disable').html('金豆支付');
                     alert(r.ret_msg);
                 } else {
-                    $.toast('支付成功');
                     setTimeout(function () {
                         if (home_name != 0) {
                             location.href = "{:url('mobile/cart/entering_room',array('home_id'=>$homeInfo['id']))}&sign={$homeInfo['sign']}";
@@ -631,4 +630,4 @@
         alert(res.errMsg);
     });
 </script>
-{/block}5
+{/block}

@@ -8,13 +8,15 @@ use think\exception\ErrorException;
 
 class Member
 {
-    const ADD = 1;
+    const ADD    = 1;
     const REDUCE = 2;
 
     /**
      * 添加积分
+     *
      * @param $uid
      * @param $points
+     *
      * @throws Exception
      */
     public static function addPoints($uid, $points, $type = self::ADD)
@@ -51,6 +53,7 @@ class Member
 
     /**
      * @param $date
+     *
      * @return bool
      * @throws Exception
      */
@@ -62,15 +65,15 @@ class Member
         }
         $pointsType = $resultPoints > 0 ? self::ADD : self::REDUCE;
         self::addPoints($date['uid'], abs($resultPoints), $pointsType);
-        self::addPointsRecord(array(
-            'uid' => $date['uid'],
-            'points' => abs($resultPoints),
+        self::addPointsRecord([
+            'uid'         => $date['uid'],
+            'points'      => abs($resultPoints),
             'description' => '管理员后台充值',
-            'prefix' => $pointsType,
-            'creat_time' => time(),
-            'type' => 2,
-            'admin_id' => UID,
-        ));
+            'prefix'      => $pointsType,
+            'creat_time'  => time(),
+            'type'        => 2,
+            'admin_id'    => UID,
+        ]);
     }
 
     public static function balanceProcess($date)
@@ -81,31 +84,30 @@ class Member
         }
         $pointsType = $resultBalance > 0 ? self::ADD : self::REDUCE;
         self::addBalance($date['uid'], abs($resultBalance), $pointsType);
-        self::addBalanceRecord(array(
-            'uid' => $date['uid'],
-            'amount' => abs($resultBalance),
+        self::addBalanceRecord([
+            'uid'         => $date['uid'],
+            'amount'      => abs($resultBalance),
             'description' => '管理员后台充值',
-            'prefix' => $pointsType,
+            'prefix'      => $pointsType,
             'create_time' => time(),
-            'type' => 2,
-            'admin_id' => UID,
-        ));
+            'type'        => 2,
+            'admin_id'    => UID,
+        ]);
     }
 
-    public static function giveBalanceLuck($homeInfo)
+    public static function giveBalanceLuck($homeInfo, $return_venosa)
     {
-        $goodsInfo = Db::name('goods')->find($homeInfo['gid']);
-        if ($goodsInfo['return_venosa'] > 0) {
-            self::addBalance($homeInfo['lottery_uid'], $goodsInfo['return_venosa']);
-            self::addBalanceRecord(array(
-                'uid' => $homeInfo['lottery_uid'],
-                'amount' => $goodsInfo['return_venosa'],
+        if ($return_venosa > 0) {
+            self::addBalance($homeInfo['lottery_uid'], $return_venosa);
+            self::addBalanceRecord([
+                'uid'         => $homeInfo['lottery_uid'],
+                'amount'      => $return_venosa,
                 'description' => '用户夺宝获取返还金豆',
-                'prefix' => 1,
+                'prefix'      => 1,
                 'create_time' => time(),
-                'type' => 4,
-                'admin_id' => UID,
-            ));
+                'type'        => 4,
+                'admin_id'    => 1,
+            ]);
         }
     }
 

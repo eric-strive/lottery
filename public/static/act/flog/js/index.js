@@ -115,6 +115,12 @@ function play() {
   peep();
   peep();
   peep();
+  peep();
+  peep();
+  peep();
+  peep();
+  peep();
+  peep();
   startTimer();
 }
 
@@ -128,7 +134,7 @@ function win() {
   if (scores.length > 10) {
     scores.pop();
   }
-  saveScores();
+  saveGameScores(state.score);
   var best = scores[0] || 0;
   if (state.score > prevBest) {
     best = state.score;
@@ -332,7 +338,7 @@ function getRandomPath(lanes) {
 }
 
 function peep() {
-  const time = getRandomTime(600, 1200);
+  const time = getRandomTime(400, 1200);
   const path = getRandomPath(paths);
   path.classList.add('is-active');
   setTimeout(function() {

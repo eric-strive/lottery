@@ -156,11 +156,17 @@ class Goods extends MobileBase
         $recordSum = 0;
         if ($order_no) {
             $goodsInfo = GoodsModel::getGoodsInfo($gid);
-            $recordSum = LuckRecord::recordSum($gid, $uid);
-            if ($recordSum >= $goodsInfo['lotter_price']) {
-                //中奖了
-                LuckRecord::setLottery($order_no);
-                $isLottery = true;
+            Db::startTrans();
+            try {
+                $recordSum = LuckRecord::recordSum($gid, $uid);
+                if ($recordSum >= $goodsInfo['lotter_price']) {
+                    //中奖了
+                    LuckRecord::setLottery($order_no);
+                    $isLottery = true;
+                }
+                Db::commit();
+            } catch (\Exception $e) {
+                Db::rollback();
             }
             $this->assign('goodsInfo', $goodsInfo);
             $this->assign('recordSum', $recordSum);
@@ -188,28 +194,28 @@ class Goods extends MobileBase
      */
     function luck_success()
     {
-        $isLottery = false;
-        $gid       = (int)input('id');
-        $order_no  = (int)input('order_no');
-        $uid       = user('uid');
-        if (empty($gid)) {
-            $this->error('商品不存在！！');
-        }
-        if (empty($uid)) {
-            $this->error('请先登录！！', url('login/login'));
-        }
-        $goodsInfo = GoodsModel::getGoodsInfo($gid);
-        $recordSum = LuckRecord::recordSum($gid, $uid);
-        if ($recordSum >= $goodsInfo['lotter_price']) {
-            //中奖了
-            LuckRecord::setLottery($order_no);
-            $isLottery = true;
-        }
-        $this->assign('goodsInfo', $goodsInfo);
-        $this->assign('isLottery', $isLottery);
-        $this->assign('top_title', '抽奖');
-
-        return $this->fetch('luck_success');
+//        $isLottery = false;
+//        $gid       = (int)input('id');
+//        $order_no  = (int)input('order_no');
+//        $uid       = user('uid');
+//        if (empty($gid)) {
+//            $this->error('商品不存在！！');
+//        }
+//        if (empty($uid)) {
+//            $this->error('请先登录！！', url('login/login'));
+//        }
+//        $goodsInfo = GoodsModel::getGoodsInfo($gid);
+//        $recordSum = LuckRecord::recordSum($gid, $uid);
+//        if ($recordSum >= $goodsInfo['lotter_price']) {
+//            //中奖了
+//            LuckRecord::setLottery($order_no);
+//            $isLottery = true;
+//        }
+//        $this->assign('goodsInfo', $goodsInfo);
+//        $this->assign('isLottery', $isLottery);
+//        $this->assign('top_title', '抽奖');
+//
+//        return $this->fetch('luck_success');
     }
 
 

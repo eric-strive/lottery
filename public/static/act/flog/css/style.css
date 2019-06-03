@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" >
 
-<head>
-  <meta charset="UTF-8">
-  <title>青蛙抓害虫</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0">
-
-
-  
-      <style>
-      /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
-      @keyframes squiggly {
+/* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+@keyframes squiggly {
   0% {
     filter: url("#squiggly-0");
   }
@@ -24,6 +14,7 @@
     filter: url("#squiggly-4");
   }
 }
+
 html,
 body {
   width: 100%;
@@ -37,8 +28,9 @@ body {
 body {
   font-family: arial;
 }
+
 body.dark {
-  color: #fff;
+  /*color: #fff;*/
 }
 
 .card {
@@ -63,8 +55,6 @@ body.dark {
   text-shadow: none !important;
   background: #fff;
   transition: all 0.2s;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  border-radius: 4px;
   color: #000;
 }
 
@@ -73,19 +63,20 @@ body.dark {
   font-weight: bold;
   text-transform: uppercase;
 }
+
 .checkbox input {
   display: none;
 }
+
 .checkbox span {
   display: block;
-  padding: 1em;
-  background: #fff;
-  border: 1px solid #bbb;
-  border-radius: 4px;
+  margin-top: 35%;
+  font-size: 20px;
   color: #000;
   transition: all 0.2s;
   cursor: pointer;
 }
+
 .checkbox input:checked + span {
   border-color: #000;
 }
@@ -106,23 +97,28 @@ body.dark {
   font-size: 1.5rem;
   letter-spacing: 1px;
 }
+
 .dark .game .hud {
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 -1px 0 rgba(0, 0, 0, 0.1), 1px 0 0 rgba(0, 0, 0, 0.1), -1px 0 0 rgba(0, 0, 0, 0.1), 1px 1px 0 rgba(0, 0, 0, 0.1), -1px -1px 0 rgba(0, 0, 0, 0.1), -1px 1px 0 rgba(0, 0, 0, 0.1), 1px -1px 0 rgba(0, 0, 0, 0.1);
 }
+
 .game .hud .label {
   display: block;
   font-size: 0.6em;
   font-weight: normal;
   text-transform: uppercase;
 }
+
 .game .hud .value {
   font-size: 2em;
   font-weight: bold;
   line-height: 1;
 }
+
 .game .time {
   float: left;
 }
+
 .game .score {
   float: right;
 }
@@ -130,27 +126,33 @@ body.dark {
 .dark .win {
   text-shadow: 0 1px 0 black, 0 -1px 0 black, 1px 0 0 black, -1px 0 0 black, 1px 1px 0 black, -1px -1px 0 black, -1px 1px 0 black, 1px -1px 0 black;
 }
+
 .win .score {
   float: left;
 }
+
 .win .best {
   float: right;
 }
+
 .win .label {
   display: block;
   font-size: 0.6em;
   font-weight: normal;
   text-transform: uppercase;
 }
+
 .win .value {
   font-size: 2em;
   font-weight: bold;
   line-height: 1;
 }
+
 .win .highscore {
   display: block;
   clear: both;
 }
+
 .win .highscore.is-hidden {
   display: none;
 }
@@ -171,16 +173,19 @@ body.dark {
   transform: translateY(-1em);
   transition: all 0.2s 0.1s;
 }
+
 .screen.is-active {
   visibility: visible;
   opacity: 1;
   transform: translateY(0);
 }
+
 .screen.game {
   padding-left: 0;
   padding-right: 0;
   background: none;
 }
+
 .screen h1 {
   text-transform: uppercase;
 }
@@ -195,15 +200,19 @@ body.dark {
   background: #fff;
   cursor: pointer;
 }
+
 .outlines .sky {
   background: #fff;
 }
+
 .light .sky {
   background: #aedef7;
 }
+
 .dark .sky {
   background: #002;
 }
+
 .sky:before {
   position: fixed;
   top: 0;
@@ -215,6 +224,7 @@ body.dark {
   content: '';
   transition: all 0.2s;
 }
+
 .dark .sky:before {
   opacity: 0.3;
 }
@@ -237,6 +247,7 @@ body.dark {
     border-right-color: rgba(255, 255, 255, 0);
   }
 }
+
 .stars {
   position: fixed;
   left: 2em;
@@ -253,10 +264,12 @@ body.dark {
   will-change: opacity;
   animation: twinkle 6s infinite alternate;
 }
+
 .dark .stars {
   opacity: 1;
   transform: translateY(0);
 }
+
 .stars:before, .stars:after {
   position: fixed;
   top: 6em;
@@ -269,9 +282,11 @@ body.dark {
   content: '';
   will-change: opacity;
 }
+
 .stars:before {
   animation: twinkle 3s infinite alternate-reverse;
 }
+
 .stars:after {
   top: 0.5em;
   left: 3em;
@@ -294,6 +309,7 @@ body.dark {
   box-shadow: 0 0 4em #fff, 0 0 12em #fff, 0 0 0 6em rgba(211, 230, 235, 0.025), 0 0 0 12em rgba(211, 230, 235, 0.025), 0 0 0 18em rgba(211, 230, 235, 0.025);
   opacity: 0;
 }
+
 .moon:before, .moon:after {
   position: absolute;
   top: 20%;
@@ -306,6 +322,7 @@ body.dark {
   content: '';
   opacity: 0.1;
 }
+
 .moon:after {
   top: auto;
   left: auto;
@@ -315,6 +332,7 @@ body.dark {
   height: 50%;
   opacity: 0.1;
 }
+
 .dark .moon {
   transform: translateY(0);
   opacity: 1;
@@ -323,6 +341,7 @@ body.dark {
 .mountains {
   opacity: 0.3;
 }
+
 .dark .mountains {
   opacity: 0.9;
 }
@@ -337,12 +356,15 @@ body.dark {
   border-radius: 0 100% 0 0;
   transition: all 0.5s ease-in-out;
 }
+
 .light .mountain {
   background: #a4c18b;
 }
+
 .dark .mountain {
   background: #0a0a2a;
 }
+
 .mountain--2 {
   left: auto;
   right: -10%;
@@ -360,9 +382,11 @@ body.dark {
   background: #fff;
   transition: all 0.5s ease-in-out;
 }
+
 .light .grass {
   background: #a7cc67;
 }
+
 .dark .grass {
   background: #0f0f2f;
 }
@@ -377,9 +401,11 @@ body.dark {
   transition: all 0.5s ease-in-out;
   background: #fff;
 }
+
 .light .water {
   background: #5f96d5;
 }
+
 .dark .water {
   background: #0f0f2f;
 }
@@ -396,12 +422,15 @@ body.dark {
   transform: scale(0.2, 0.2);
   transform-origin: 50% 100%;
 }
+
 .light .tree {
   background: #6f4817;
 }
+
 .dark .tree {
   background: #0a0a2a;
 }
+
 .tree:before, .tree:after {
   position: absolute;
   left: 50%;
@@ -417,23 +446,28 @@ body.dark {
   border-bottom-color: #fff;
   content: '';
 }
+
 .light .tree:before, .light .tree:after {
   border-bottom-color: #2d5e3b;
 }
+
 .dark .tree:before, .dark .tree:after {
   border-bottom-color: #0a0a2a;
 }
+
 .tree:after {
   width: 0;
   bottom: 9em;
   border-width: 0 3em 6em;
 }
+
 .tree--2 {
   left: auto;
   right: 1.5em;
   top: -5.9em;
   transform: scale(0.2, 0.2);
 }
+
 .tree--3 {
   top: -5.5em;
   right: 47%;
@@ -441,7 +475,7 @@ body.dark {
 }
 
 .lily {
-  @extends .shadow;
+@extends . shadow;
   position: fixed;
   z-index: 3;
   left: 50%;
@@ -454,12 +488,15 @@ body.dark {
   border-bottom: 0;
   border-radius: 50% 50% 0 0 / 100% 100% 0 0;
 }
+
 .light .lily {
   background: #777;
 }
+
 .dark .lily {
   background: #223;
 }
+
 .lily--2 {
   left: -9em;
   bottom: 5em;
@@ -468,6 +505,7 @@ body.dark {
   opacity: 0.6;
   transform: scale(0.5, 0.3);
 }
+
 .lily--3 {
   right: -7em;
   left: auto;
@@ -488,6 +526,7 @@ body.dark {
   width: 100%;
   overflow: hidden;
 }
+
 .flies .path {
   flex: 1 1 50%;
   padding: 1em 0;
@@ -495,18 +534,23 @@ body.dark {
   transition: transform 0.2s;
   will-change: transform;
 }
+
 .flies .path:nth-child(odd) {
   transform: translateX(-100%);
 }
+
 .flies .path:nth-child(even) {
   transform: translateX(100%);
 }
+
 .flies .path.is-active:nth-child(odd) {
-  transform: translateX(-20%);
+  transform: translateX(10%);
 }
+
 .flies .path.is-active:nth-child(even) {
-  transform: translateX(20%);
+  transform: translateX(-10%);
 }
+
 .flies .path.is-hidden {
   visibility: hidden;
 }
@@ -532,6 +576,7 @@ body.dark {
   will-change: transform;
   transform: translateY(50%);
 }
+
 .fly:before, .fly:after {
   position: absolute;
   z-index: -1;
@@ -544,18 +589,21 @@ body.dark {
   will-change: transform;
   content: '';
 }
+
 .fly:before {
   right: 60%;
   transform: rotate(15deg);
   transform-origin: 100% 50%;
   animation: flapLeft 0.08s infinite;
 }
+
 .fly:after {
   left: 60%;
   transform: rotate(-15deg);
   transform-origin: 0% 50%;
   animation: flapRight 0.08s infinite;
 }
+
 .fly--dead {
   animation: none;
 }
@@ -568,6 +616,7 @@ body.dark {
     transform: translateX(30em);
   }
 }
+
 @keyframes flapLeft {
   from {
     transform: rotate(-15deg);
@@ -576,6 +625,7 @@ body.dark {
     transform: rotate(25deg);
   }
 }
+
 @keyframes flapRight {
   from {
     transform: rotate(25deg);
@@ -584,9 +634,10 @@ body.dark {
     transform: rotate(-15deg);
   }
 }
+
 @keyframes float {
   0% {
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(-30%) translateY(0);
   }
   50% {
     transform: translateX(-50%) translateY(0.2em);
@@ -595,15 +646,18 @@ body.dark {
     transform: translateX(-50%) translateY(0);
   }
 }
+
 .player {
-  z-index: 99999;
+  z-index: 1;
   position: absolute;
   left: 50%;
-  bottom: 2em;
+  top:19em;
+  /*bottom: 2em;*/
   display: inline-block;
   font-size: 0.9rem;
   transform: translateX(-50%);
 }
+
 .player .body {
   position: relative;
   width: 6.5em;
@@ -615,15 +669,19 @@ body.dark {
   border: 1px solid black;
   will-change: transform;
 }
+
 .light .player .body {
   background: #9fb761;
 }
+
 .dark .player .body {
   background: #7f9761;
 }
+
 .player.is-active .body {
   animation: body 0.25s;
 }
+
 .player .belly {
   position: absolute;
   z-index: 1;
@@ -636,12 +694,15 @@ body.dark {
   border-bottom: 1px solid #000;
   border-radius: 0 0 50% 50% / 0 0 1em 1em;
 }
+
 .light .player .belly {
   background: #f8efdf;
 }
+
 .dark .player .belly {
   background: #f8efdf;
 }
+
 .player .crown {
   display: none;
   z-index: -10;
@@ -654,6 +715,7 @@ body.dark {
   border-color: transparent gold gold;
   transform: translateX(-50%);
 }
+
 .player .crown:before {
   position: absolute;
   bottom: 0;
@@ -663,6 +725,7 @@ body.dark {
   border-color: gold transparent;
   content: '';
 }
+
 .player .arms {
   position: absolute;
   z-index: 2;
@@ -671,6 +734,7 @@ body.dark {
   bottom: -0.5em;
   will-change: transform;
 }
+
 .player .arms .arm {
   position: absolute;
   bottom: 0em;
@@ -679,12 +743,15 @@ body.dark {
   background: #fff;
   border: 1px solid black;
 }
+
 .light .player .arms .arm {
   background: #9fb761;
 }
+
 .dark .player .arms .arm {
   background: #7f9761;
 }
+
 .player .arms .arm:before {
   position: absolute;
   top: -2.5em;
@@ -695,12 +762,15 @@ body.dark {
   border-bottom: none;
   content: '';
 }
+
 .light .player .arms .arm:before {
   background: #9fb761;
 }
+
 .dark .player .arms .arm:before {
   background: #7f9761;
 }
+
 .player .arms .arm .hand {
   position: absolute;
   bottom: -0.25em;
@@ -711,12 +781,15 @@ body.dark {
   border: 1px solid black;
   border-radius: 50% 50% 0 0 / 100% 100% 0 0 !important;
 }
+
 .light .player .arms .arm .hand {
   background: #9fb761;
 }
+
 .dark .player .arms .arm .hand {
   background: #7f9761;
 }
+
 .player .arms .arm .hand .toe {
   position: absolute;
   bottom: -0.25em;
@@ -726,62 +799,76 @@ body.dark {
   border: 1px solid black;
   border-radius: 50%;
 }
+
 .light .player .arms .arm .hand .toe {
   background: #9fb761;
 }
+
 .dark .player .arms .arm .hand .toe {
   background: #7f9761;
 }
+
 .player .arms .arm .hand .toe:first-child {
   left: -0.25em;
 }
+
 .player .arms .arm .hand .toe:nth-child(2n) {
   z-index: 2;
   left: 50%;
   transform: translateX(-50%);
 }
+
 .player .arms .arm .hand .toe:last-child {
   right: -0.25em;
 }
+
 .player .arms .arm--left {
   left: -1em;
   margin-left: -2px;
   border-radius: 0 100% 0 70%;
 }
+
 .player .arms .arm--left:before {
   left: -1px;
   border-right: none;
   border-radius: 100% 0 0 0;
 }
+
 .player .arms .arm--left .hand {
   left: 0.5em;
   border-left: 0;
   border-radius: 0 100% 0 0;
 }
+
 .player .arms .arm--right {
   right: -1em;
   margin-right: -2px;
   border-radius: 100% 0 70% 0;
 }
+
 .player .arms .arm--right:before {
   right: -1px;
   border-left: none;
   border-radius: 0 100% 0 0;
 }
+
 .player .arms .arm--right .hand {
   right: 0.5em;
   border-right: 0;
   border-radius: 100% 0 0 0;
 }
+
 .player.is-active .arms {
   animation: arms 0.25s;
 }
+
 .player .legs {
   position: absolute;
   left: 0;
   right: 0;
   bottom: -0.5em;
 }
+
 .player .legs .leg {
   position: absolute;
   z-index: -1;
@@ -795,26 +882,33 @@ body.dark {
   border: 1px solid black;
   will-change: transform;
 }
+
 .light .player .legs .leg {
   background: #718644;
 }
+
 .dark .player .legs .leg {
   background: #516644;
 }
+
 .player .legs .leg--left {
   left: -2.5em;
   border-radius: 25% 75% 25% 75%;
 }
+
 .player .legs .leg--right {
   right: -2.5em;
   border-radius: 75% 25% 75% 25%;
 }
+
 .player.is-active .leg--left {
   animation: leftLeg 0.25s;
 }
+
 .player.is-active .leg--right {
   animation: rightLeg 0.25s;
 }
+
 .player .eyes {
   position: absolute;
   z-index: -5;
@@ -822,6 +916,7 @@ body.dark {
   left: 0em;
   right: 0em;
 }
+
 .player .eyes .eye {
   position: absolute;
   top: 0em;
@@ -833,12 +928,15 @@ body.dark {
   border-radius: 50%;
   overflow: hidden;
 }
+
 .player .eyes .eye--left {
   left: -0em;
 }
+
 .player .eyes .eye--right {
   right: -0em;
 }
+
 .player .eyes .eye:before, .player .eyes .eye:after {
   position: absolute;
   z-index: 6;
@@ -852,22 +950,28 @@ body.dark {
   content: '';
   will-change: transform;
 }
+
 .light .player .eyes .eye:before, .light .player .eyes .eye:after {
   background: #718644;
 }
+
 .dark .player .eyes .eye:before, .dark .player .eyes .eye:after {
   background: #516644;
 }
+
 .player .eyes .eye:before {
   bottom: 100%;
   margin-bottom: 1px;
 }
+
 .player .eyes .eye:after {
   top: 100%;
 }
+
 .player .eyes .eye:hover:after {
   transform: translateY(-98%);
 }
+
 .player .eyes .pupil {
   position: absolute;
   top: 50%;
@@ -882,6 +986,7 @@ body.dark {
   will-change: transform;
   overflow: hidden;
 }
+
 .player .mouth {
   position: absolute;
   z-index: 6;
@@ -895,6 +1000,7 @@ body.dark {
   border-top: 0;
   border-bottom: 0;
 }
+
 .player .mouth:before {
   position: absolute;
   top: 1em;
@@ -905,12 +1011,15 @@ body.dark {
   background: #fff;
   content: '';
 }
+
 .light .player .mouth:before {
   background: #c8725b;
 }
+
 .dark .player .mouth:before {
   background: #a8525b;
 }
+
 .player .mouth .top-lip {
   position: absolute;
   left: -0.25em;
@@ -920,12 +1029,15 @@ body.dark {
   background: #fff;
   border-bottom: 1px solid #000;
 }
+
 .light .player .mouth .top-lip {
   background: #9fb761;
 }
+
 .dark .player .mouth .top-lip {
   background: #7f9761;
 }
+
 .player .mouth .bottom-lip {
   position: absolute;
   z-index: 10;
@@ -943,12 +1055,15 @@ body.dark {
   border-radius: 0;
   content: '';
 }
+
 .light .player .mouth .bottom-lip {
   background: #f8efdf;
 }
+
 .dark .player .mouth .bottom-lip {
   background: #f8efdf;
 }
+
 .player .mouth .bottom-lip:after {
   display: none;
   position: absolute;
@@ -960,6 +1075,7 @@ body.dark {
   opacity: 0.1;
   content: '';
 }
+
 .player .tongue {
   pointer-events: none;
   position: absolute;
@@ -974,6 +1090,7 @@ body.dark {
   transform-origin: 50% 100%;
   will-change: transform;
 }
+
 .player .tongue-inner {
   position: absolute;
   left: 1em;
@@ -991,12 +1108,15 @@ body.dark {
   content: '';
   will-change: transform;
 }
+
 .light .player .tongue-inner {
   background: #c8725b;
 }
+
 .dark .player .tongue-inner {
   background: #a8525b;
 }
+
 .player .tongue-inner:before {
   position: absolute;
   top: -0.5em;
@@ -1011,46 +1131,59 @@ body.dark {
   border-bottom: none;
   content: '';
 }
+
 .light .player .tongue-inner:before {
   background: #c8725b;
 }
+
 .dark .player .tongue-inner:before {
   background: #a8525b;
 }
+
 .player .tongue .fly {
   visibility: hidden;
   margin-top: -1em;
   font-size: 1.1rem;
 }
+
 .player .tongue .fly.is-active {
   animation: dead-fly 0.25s;
 }
+
 .player .tongue .fly.is-active2 {
   animation: dead-fly2 0.25s;
 }
+
 .player .tongue .fly:before, .player .tongue .fly:after {
   top: 0em;
 }
+
 .player.is-shooting-down .eyes {
   z-index: 8;
 }
+
 .player.is-shooting-down .mouth {
   z-index: 6;
 }
+
 .player.is-shooting-down .tongue {
   z-index: 6;
   bottom: 1.5em;
 }
+
 .player.is-shooting-down .top-lip {
   z-index: 8;
   height: 1em;
 }
+
 .player.is-shooting-down .bottom-lip {
   z-index: 4;
 }
+
 .player.is-active .tongue-inner {
   animation: shoot 0.25s;
 }
+
 .player.is-active .mouth .bottom-lip {
   animation: mouth 0.25s;
 }
@@ -1072,6 +1205,7 @@ body.dark {
     visibility: hidden;
   }
 }
+
 @keyframes dead-fly2 {
   0% {
     visibility: hidden;
@@ -1089,6 +1223,7 @@ body.dark {
     visibility: hidden;
   }
 }
+
 @keyframes shoot {
   0% {
     transform: translateY(105%);
@@ -1100,6 +1235,7 @@ body.dark {
     transform: translateY(105%);
   }
 }
+
 @keyframes body {
   0% {
     transform: translateY(0);
@@ -1111,6 +1247,7 @@ body.dark {
     transform: translateY(0);
   }
 }
+
 @keyframes leftLeg {
   0% {
     transform: rotate(0);
@@ -1122,6 +1259,7 @@ body.dark {
     transform: rotate(0);
   }
 }
+
 @keyframes rightLeg {
   0% {
     transform: rotate(0);
@@ -1133,6 +1271,7 @@ body.dark {
     transform: rotate(0);
   }
 }
+
 @keyframes arms {
   0% {
     transform: translateY(0);
@@ -1144,6 +1283,7 @@ body.dark {
     transform: translateY(0);
   }
 }
+
 @keyframes mouth {
   0% {
     transform: translateY(0);
@@ -1155,198 +1295,134 @@ body.dark {
     transform: translateY(0);
   }
 }
+#openDoor{
+  width: 60%;
+  height: 2rem;
+  background: url(../../../image/icon/cancel.png) no-repeat;
+  background-size: 100% 100%;
+}
+#play-btn{
+  width: 60%;
+  height: 2rem;
+  background: url(../image/play.jpg) no-repeat;
+  background-size: 100% 100%;
+}
+#entry-home{
+  width: 60%;
+  height: 2rem;
+  background: url(../../../image/icon/submit.png) no-repeat;
+  background-size: 100% 100%;
+}
+#btn-music{
+  width: 40%;
+  height: 2rem;
+  background: url(../image/music.png) no-repeat;
+  background-size: 100% 100%;
+}
+#btn-day,#btn-night{
+  background: url(../image/day.png) no-repeat;
+  background-size: 100% 100%;
+  width: 3rem;
+  height: 3rem;
+}
 
-    </style>
+.flex-between {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
 
-    <script src="js/prefixfree.min.js"></script>
+.flex-row-end {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
 
-</head>
+.flex-col {
+  display: flex;
+  flex-flow: column nowrap;
+}
 
-<body>
+.flex-col-center {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
 
-  <div class="environment">
-  <div class="sky"></div>
-  <div class="stars"></div>
-  <div class="sun"></div>
-  <div class="moon"></div> 
-  <div class="mountains">
-    <div class="mountain">
-      <div class="trees">
-        <div class="tree"></div>
-        <div class="tree tree--2"></div>
-        <div class="tree tree--3"></div>
-        <div class="tree tree--4"></div>
-      </div>
-    </div>
-    <div class="mountain mountain--2"></div> 
-  </div>
-  <div class="water"></div>
-  <div class="lily lilly-1"></div>
-</div>
+.flex-row {
+  display: flex;
+  flex-flow: row nowrap;
+}
 
-<div class="player">
-  
-  <div class="legs">
-    <div class="leg leg--left">
-    </div>
-    <div class="leg leg--right">
-    </div>
-  </div>
-  
-  <div class="body">
-    <div class="crown"></div>
-    <div class="belly"></div>
-    <div class="arms">
-      <div class="arm arm--left">
-        <div class="hand">
-          <div class="toe"></div>
-          <div class="toe"></div>
-          <div class="toe"></div>
-        </div>
-      </div>
-      <div class="arm arm--right">
-        <div class="hand">
-          <div class="toe"></div>
-          <div class="toe"></div>
-          <div class="toe"></div>
-        </div>
-      </div>
-    </div>
-    <div class="mouth">
-      <div class="top-lip"></div>
-      <div class="bottom-lip"></div>
-      <div class="tongue">
-        <div class="tongue-inner">
-          <div class="fly is-dead"></div>
-        </div>
-      </div>
-    </div>
-    <div class="eyes">
-      <div class="eye eye--left">
-        <div class="pupil"></div>
-      </div>
-      <div class="eye eye--right">
-        <div class="pupil"></div>
-      </div>
-    </div>
-  </div>
-</div>
+.flex-row-center {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
 
-<div class="screen menu">
-  <h1>喂青蛙</h1>
-  <a href="#" class="btn play" onClick="play()">
-    <span class="text">开始</span>
-    <br>
-    <span>最好: <span class="js-best">0</span></span>
-  </a>
-  <a href="#" class="btn" onClick="settings()">设置</a>
-</div>
+/* 私房弹窗 */
 
-<div class="screen game">
-  <div class="hud">
-    <div class="time">
-      <span class="label">时间</span>
-      <span class="value js-time">30</span>
-    </div>
+.priForm {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  text-align: center;
+  background: #fff;
+  z-index: 101;
+  overflow-y: scroll;
+  color: #000;
+}
 
-    <div class="score">
-      <span class="label">分数</span>
-      <span class="value js-score">0</span>
-    </div>
-  </div>
-  
-  <div class="flies">
-    <div class="path">
-      <div class="target">
-        <div class="fly"></div>
-      </div>
-    </div>
-    <div class="path">
-      <div class="target">
-        <div class="fly"></div>
-      </div>
-    </div>
-    <div class="path">
-      <div class="target">
-        <div class="fly"></div>
-      </div>
-    </div>
-    <div class="path">
-      <div class="target">
-        <div class="fly"></div>
-      </div>
-    </div>
-    <div class="path">
-      <div class="target">
-        <div class="fly"></div>
-      </div>
-    </div>
-    <div class="path">
-      <div class="target">
-        <div class="fly"></div>
-      </div>
-    </div>
-  </div>
- 
-  
-</div>
+.priForm .box1 {
+  width: 60%;
+}
 
-<div class="screen win">
-  <h1>完成</h1> 
-  <div class="card">
-    <h3 class="highscore js-highscore is-hidden">新高分！</h3>
-    
-    <div class="score">
-      <span class="label">分数</span>
-      <span class="value js-score">30</span>
-    </div>
+.priForm .box2 {
+  width: 40%;
+}
 
-    <div class="best">
-      <span class="label">最好</span>
-      <span class="value js-best">0</span>
-    </div>
-    
-  </div>
-  <a href="#" class="btn" onClick="play()">再玩一次</a>
-  <a href="#" class="btn btn--clear" onClick="menu()">返回菜单</a>
-</div>
+.priForm .box1 > div p:nth-child(2) {
+  width: 66%;
+  text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
-<div class="screen settings">
-  <h1>设置</h1>
-  
-  <div class="card">
-    <label class="checkbox">
-      <input type="radio" name="theme" value="light" checked onClick="toggleTheme(this.value)">
-      <span>白天时间</span>
-    </label>
-    <label class="checkbox">
-      <input type="radio" name="theme" value="dark" onClick="toggleTheme(this.value)">
-      <span>晚上时间</span>
-    </label>
-  </div>
-  
-  <a href="#" class="btn js-toggle-music" onClick="toggleMusic()">打开音乐</a>
-  
-  <a href="#" class="btn" onClick="menu()">返回</a>
-</div>
-<div class="screen scoreboard">
-  <h1>记分牌</h1>
-  <div class="card">
-    <ol class="scoreboard-list js-scoreboard"></ol>
-  </div>
-  
-  <a href="#" class="btn" onClick="menu()">返回</a>
-</div>
+.priForm input[type='button'],
+.jionBtn {
+  width: 3.6rem;
+  height: 1.5rem;
+  /* padding: 4px 8px; */
+  line-height: 1.4rem;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 5px;
+  background: url('../../../image/icon/comeIn.png') no-repeat;
+  background-size: 100% 100%;
+  text-align: center;
+}
+.priForm input[type='password'] {
+  width: 76%;
+  padding: 4px 0;
+  border: 1px solid #e5e5e5;
+  color: #000;
+  text-align: center;
+}
 
-<audio id="music" src="https://www.dl-sounds.com/wp-content/uploads/edd/2015/09/Ducky-Duck-preview.mp3"></audio>
-  
-  
+.priForm .margin {
+  margin: 4px 0;
+}
 
-<script  src="js/index.js"></script>
+.priForm .border2 {
+  padding: 14px 10px 18px;
+  border: 1px solid #999;
+}
 
-
-
-
-</body>
-
-</html>
+.overhidden {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

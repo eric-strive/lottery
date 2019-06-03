@@ -90,14 +90,14 @@
             font-size: 20px;
             position: relative;
             margin-top: -25%;
-            margin-left: -30%;
+            right: 12%;
         }
 
         .right_hid_num {
             color: #f8f7ff;
             font-size: 16px;
             position: relative;
-            margin-left: -13%;
+            right: -15%;
         }
 
         .left_hid_num {
@@ -481,7 +481,6 @@
                 }
             });
     }
-    set_num(233)
     function drawResult(r) {
         // $('#lottery-wrap').html(r.numHtml)
         // $('#lottery-wrap').html(22)
@@ -491,14 +490,14 @@
         // justGo(true);
         // startLottery()
         set_num(r.lottery_num)
-        setTimeout(lottery_initvars, 30000);
+        setTimeout(lottery_initvars, 36000);
         setTimeout(function () {
             $('#lottery-main-user').attr('src', r.userpic);
             $('#lottery_nickname').html(r.nickname);
             $("#lottery-dataNums").hide();
             $('#div-lottery-main-user').show();
             lottery_jinbi(0);
-        }, 32000);
+        }, 36000);
 
         // alert('恭喜中奖' + r.nickname)
         // if (r.is_self > 0) {

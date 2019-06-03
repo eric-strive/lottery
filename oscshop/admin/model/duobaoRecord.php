@@ -128,7 +128,7 @@ class duobaoRecord
         $list = Db::name('duobao_record')
             ->field('group_concat(dduonum) as dduonums,count(dduonum) as num,dlasttime,uid')
             ->where('home_id', $homeId)
-            ->order('dduonum')
+            ->order('num desc')
             ->group('uid')
             ->select();
         foreach ($list as $key => $item) {

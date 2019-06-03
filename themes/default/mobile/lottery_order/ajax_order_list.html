@@ -1,5 +1,5 @@
 {volist name="order" id="orders"}
-<div class="uc-orderitem" style="font-weight: bold;">
+<div class="uc-orderitem" style="font-weight: bold;height: 4.5rem;">
     <img style="width: 20%;" src="IMG_ROOT{$orders.image}">
     <div class="uc-seral clearfix" style="width: 75%;float: right;">
         {if condition="$orders.home_num eq 0"}
@@ -13,7 +13,7 @@
     <div class="uc-summary clearfix" style='padding: 8px 7px;
     text-align: right;
     width: 90%;
-    float: left;'>
+    float: left;margin-top: -1rem'>
         <div class="sum">
             {if condition="$orders.lottery_timestamp gt 0"}
             中奖号码: <span class="dprice">{$orders.lottery_num}</span>

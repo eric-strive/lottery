@@ -42,13 +42,13 @@
         // init list
         loadOrderList(currentOrderpage);
         // onscroll bottom
-        $(window).scroll(function () {
-            totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()) + 150;
-            if ($(document).height() <= totalheight && !orderLoading) {
-                //加载数据
-                loadOrderList(++currentOrderpage);
-            }
-        });
+        // $(window).scroll(function () {
+        //     totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop()) + 150;
+        //     if ($(document).height() <= totalheight && !orderLoading) {
+        //         //加载数据
+        //         loadOrderList(++currentOrderpage);
+        //     }
+        // });
     }
     $('.uc-order-sort').unbind('click').click(function () {
         currentOrderpage = -1;

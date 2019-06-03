@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>青蛙抓害虫</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <script src="__PUBLIC__/js/jquery/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
+    <link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
+    <link rel="stylesheet" href="__PUBLIC__/act/flog/css/style.css">
+    <link rel="stylesheet" href="__PUBLIC__/layer/skin/default/layer.css">
+
+    <script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+    <script src="__PUBLIC__/act/flog/js/prefixfree.min.js"></script>
+
+</head>
+
+<body>
+<div class="showOpenDoor" style="display: none">
+    <div class="weui_mask weui_mask_visible"></div>
+    <div class="weui_dialog weui_dialog_visible" style="top: 10%">
+        <div class="weui_dialog_hd">
+            <strong class="weui_dialog_title">开设房间</strong>
+        </div>
+        <div class="weui_dialog_bd">
+            <p class="weui-prompt-text">请为房间起名和设置密码</p>
+            <input type="text" class="weui_input weui-prompt-input" id="home_name" name="home_name" value=""
+                   placeholder="输入房间名">
+            <input type="password" class="weui_input weui-prompt-input" id="password" name="password" value=""
+                   placeholder="输入密码">
+            <input type="number" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                   onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength=1
+                   class="weui_input weui-prompt-input"
+                   id="number_people" name="number_people" value="" placeholder="容纳人数，2～10之间">
+            <input type="number" class="weui_input weui-prompt-input" id="pay_amount" name="pay_amount" value=""
+                   placeholder="输入对战金额，最小5元">
+        </div>
+        <div class="weui_dialog_ft" style="font-size: 14px;">
+            <a href="javascript:;" class="base_sound weui_btn_dialog default cancel" id="cancel">取消</a>
+            <a href="javascript:;" class="base_sound weui_btn_dialog primary submit" id="submit">确认支付</a>
+        </div>
+    </div>
+</div>
+<div class="showEnterDoor" style="display: none">
+    <div class="weui_mask weui_mask_visible"></div>
+    <div class="weui_dialog weui_dialog_visible" style="top: 10%">
+        <div class="weui_dialog_hd">
+            <strong class="weui_dialog_title">进入房间</strong>
+        </div>
+        <div class="weui_dialog_bd" id="showEnterDoor"></div>
+        <div class="weui_dialog_ft" style="font-size: 14px;">
+            <a href="javascript:;" class="base_sound weui_btn_dialog primary submit" id="cancel-enter">取消</a>
+        </div>
+    </div>
+</div>
+<div class="environment">
+    <div class="sky"></div>
+    <div class="stars"></div>
+    <div class="sun"></div>
+    <div class="moon"></div>
+    <div class="mountains">
+        <div class="mountain">
+            <div class="trees">
+                <div class="tree"></div>
+                <div class="tree tree--2"></div>
+                <div class="tree tree--3"></div>
+                <div class="tree tree--4"></div>
+            </div>
+        </div>
+        <div class="mountain mountain--2"></div>
+    </div>
+    <div class="water"></div>
+    <div class="lily lilly-1"></div>
+</div>
+
+<div class="player">
+
+    <div class="legs">
+        <div class="leg leg--left">
+        </div>
+        <div class="leg leg--right">
+        </div>
+    </div>
+
+    <div class="body">
+        <div class="crown"></div>
+        <div class="belly"></div>
+        <div class="arms">
+            <div class="arm arm--left">
+                <div class="hand">
+                    <div class="toe"></div>
+                    <div class="toe"></div>
+                    <div class="toe"></div>
+                </div>
+            </div>
+            <div class="arm arm--right">
+                <div class="hand">
+                    <div class="toe"></div>
+                    <div class="toe"></div>
+                    <div class="toe"></div>
+                </div>
+            </div>
+        </div>
+        <div class="mouth">
+            <div class="top-lip"></div>
+            <div class="bottom-lip"></div>
+            <div class="tongue">
+                <div class="tongue-inner">
+                    <div class="fly is-dead"></div>
+                </div>
+            </div>
+        </div>
+        <div class="eyes">
+            <div class="eye eye--left">
+                <div class="pupil"></div>
+            </div>
+            <div class="eye eye--right">
+                <div class="pupil"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="screen menu">
+    <h1>喂青蛙</h1>
+    <a href="#" class="btn play" id="play-btn" onClick="play()">
+        <span class="text">试玩</span>
+        <!--        <span>最好: <span class="js-best">0</span></span>-->
+    </a>
+    <a href="javascript:void(0)" class="btn play" id="openDoor">
+        <span>开设房间</span>
+    </a>
+    <a href="#" class="btn play" id="entry-home">
+        <span>进入房间</span>
+    </a>
+    <a href="#" class="btn js-toggle-music" id="btn-music" onClick="toggleMusic()">音乐开关</a>
+    <label class="checkbox">
+        <a href="#" class="btn play" id="btn-day">
+            <input type="radio" name="theme" value="light" checked onClick="toggleTheme(this.value)">
+            <span>白天</span>
+        </a>
+    </label>
+    <label class="checkbox">
+        <a href="#" class="btn play" id="btn-night">
+            <input type="radio" name="theme" value="dark" onClick="toggleTheme(this.value)">
+            <span>晚上</span>
+        </a>
+    </label>
+    <!--    <a href="#" class="btn" onClick="settings()">设置</a>-->
+</div>
+
+<div class="screen game">
+    <div class="hud">
+        <div class="time">
+            <span class="label">时间</span>
+            <span class="value js-time">30</span>
+        </div>
+
+        <div class="score">
+            <span class="label">分数</span>
+            <span class="value js-score">0</span>
+        </div>
+    </div>
+
+    <div class="flies">
+        <div class="path">
+            <div class="target">
+                <div class="fly"></div>
+            </div>
+        </div>
+        <div class="path">
+            <div class="target">
+                <div class="fly"></div>
+            </div>
+        </div>
+        <div class="path">
+            <div class="target">
+                <div class="fly"></div>
+            </div>
+        </div>
+        <div class="path">
+            <div class="target">
+                <div class="fly"></div>
+            </div>
+        </div>
+        <div class="path">
+            <div class="target">
+                <div class="fly"></div>
+            </div>
+        </div>
+        <div class="path">
+            <div class="target">
+                <div class="fly"></div>
+            </div>
+        </div>
+        <div class="path">
+            <div class="target">
+                <div class="fly"></div>
+            </div>
+        </div>
+        <div class="path">
+            <div class="target">
+                <div class="fly"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="screen win">
+    <h1>完成</h1>
+    <div class="card">
+        <h3 class="highscore js-highscore is-hidden">新高分！</h3>
+
+        <div class="score">
+            <span class="label">分数</span>
+            <span class="value js-score">30</span>
+        </div>
+
+        <div class="best">
+            <span class="label">最好</span>
+            <span class="value js-best">0</span>
+        </div>
+
+    </div>
+    <a href="#" class="btn" onClick="play()">再玩一次</a>
+    <a href="#" class="btn btn--clear" onClick="menu()">返回菜单</a>
+</div>
+
+<div class="screen settings">
+    <h1>设置</h1>
+
+    <div class="card">
+        <label class="checkbox">
+            <input type="radio" name="theme" value="light" checked onClick="toggleTheme(this.value)">
+            <span>白天时间</span>
+        </label>
+        <label class="checkbox">
+            <input type="radio" name="theme" value="dark" onClick="toggleTheme(this.value)">
+            <span>晚上时间</span>
+        </label>
+    </div>
+
+    <a href="#" class="btn js-toggle-music" onClick="toggleMusic()">打开音乐</a>
+
+    <a href="#" class="btn" onClick="menu()">返回</a>
+</div>
+<div class="screen scoreboard">
+    <h1>记分牌</h1>
+    <div class="card">
+        <ol class="scoreboard-list js-scoreboard"></ol>
+    </div>
+
+    <a href="#" class="btn" onClick="menu()">返回</a>
+</div>
+
+<audio id="music" src="https://www.dl-sounds.com/wp-content/uploads/edd/2015/09/Ducky-Duck-preview.mp3"></audio>
+<script src="__PUBLIC__/act/flog/js/index.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    '{if condition="in_wechat()"}'
+    wx.config({
+        debug: false,
+        appId: '{$signPackage.appId}',
+        timestamp: '{$signPackage.timestamp}',
+        nonceStr: '{$signPackage.nonceStr}',
+        signature: '{$signPackage.signature}',
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'onMenuShareQZone',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard',
+            'chooseWXPay'
+        ]
+    });
+    '{/if}'
+</script>
+<script>
+    // 2. 分享接口
+    // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
+    wx.ready(function () {
+        wx.hideMenuItems({
+            menuList: [
+                "menuItem:exposeArticle",
+                "menuItem:share:qq",
+                "menuItem:copyUrl",
+                "menuItem:share:QZone",
+                "menuItem:originPage",
+                "menuItem:openWithQQBrowser",
+                "menuItem:openWithSafari",
+                "menuItem:share:email",
+                'menuItem:copyUrl' // 复制链接
+            ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+        });
+    });
+    wx.error(function (res) {
+        alert(res.errMsg);
+    });
+</script>
+<script>
+    let _isError = false;
+    let home_id = 0;
+    $(document).on('click', '#openDoor', function () {
+        $(".showOpenDoor").fadeIn();
+    });
+    $("#cancel").on("click", function () {
+        $(".showOpenDoor").fadeOut();
+        $("#id").val(null);
+        $("#password").val(null);
+    })
+    $("#submit").on("click", function () {
+        if (_isError) {
+            return false;
+        }
+        _isError = true;
+        let home_name = $("#home_name").val();
+        let password = $("#password").val();
+        let number_people = $("#number_people").val();
+        let pay_amount = $("#pay_amount").val();
+        if (number_people < 2 || number_people > 10) {
+            _isError = false;
+            layer.msg('设置的人数必须在2-10之间');
+            return false;
+        }
+        if (pay_amount < 0.1) {
+            _isError = false;
+            layer.msg('金额最小5元');
+            return false;
+        }
+        if (!home_name || !password) {
+            _isError = false;
+            layer.msg('请设置房间名和密码~');
+            return false;
+        } else {
+            balancePay(pay_amount, number_people, home_name, password);
+        }
+    })
+
+    function balancePay(pay_amount, number_people, home_name, password) {
+        $.post(
+            '{:url("lottery_payment/balance_pay")}',
+            {
+                'pay_total': pay_amount,
+                'subject': '开游戏',
+                'attach': '4',
+                'game_home_number_people': number_people,
+                'game_home_name': home_name,
+                'game_home_password': password,
+            },
+            function (d) {
+                if (d.ret_code == 11) {
+                    _isError = false;
+                    layer.msg(d.error);
+                } else if (d.ret_code === 3) {
+                    layer.confirm('您的金豆不足，请使用微信支付或充值金豆！', {
+                        btn: ['微信支付', '微信充值'] //按钮
+                    }, function () {
+                        wepayCall(pay_amount, number_people, home_name, password);
+                    }, function () {
+                        location.href = '/mobile/user/recharge';
+                    });
+                } else {
+                    layer.msg('开设成功');
+                    location.href = '/mobile/game/index?home_id=' + d.homeId;
+                }
+            }
+        );
+    }
+
+    /**
+     * 发起微信支付
+     * @returns {undefined}
+     */
+    function wepayCall(pay_amount, number_people, home_name, password) {
+        $.post("{:url('lottery_payment/weixin_pay')}", {
+                'pay_total': pay_amount,
+                'game_home_number_people': number_people,
+                'game_home_name': home_name,
+                'game_home_password': password,
+                'subject': '开游戏',
+                'attach': '4',
+            },
+            function (r) {
+                if (r.error) {
+                    $.toast(r.error, "forbidden");
+                    return;
+                }
+                if (r.ret_code === 0) {
+                    if (r.bizPackage.package !== 'prepay_id=') {
+                        // 支付操作成功
+                        r.bizPackage.success = wepayCallback;
+                        // 支付操作取消
+                        r.bizPackage.cancel = wepayCancel;
+                        // 支付操作出错
+                        r.bizPackage.fail = wepayError;
+                        wx.chooseWXPay(r.bizPackage);
+                        // 按钮恢复
+                    } else {
+                        wepayError();
+                    }
+                } else if (r.ret_code === 11) {
+                    alert('订单创建失败！' + r.ret_msg);
+                }
+            });
+    }
+
+    /**
+     * 微信支付失败
+     */
+    function wepayError() {
+        // 按钮恢复
+
+        alert('失败')
+    }
+
+    /**
+     * 微信支付手动取消
+     */
+    function wepayCancel() {
+        // 按钮恢复
+        alert('微信支付手动取消')
+    }
+
+    /**
+     * 微信支付回调
+     * @param {type} res
+     * @returns {undefined}
+     */
+    function wepayCallback(res) {
+        if (res.errMsg == "chooseWXPay:ok") {
+            setTimeout(function () {
+                location.href = '/mobile/game/index/&home_id=house-owner';
+            }, 1000);
+        } else {
+            alert(res.errMsg);
+        }
+
+    }
+
+    function saveGameScores(score) {
+        $.post("{:url('game/add_game_record')}", {
+                'home_id': 1,
+                'grade': score,
+            },
+            function (r) {
+
+            });
+    }
+
+    $("#cancel-enter").click(function () {
+        $('.showEnterDoor').hide();
+    })
+    $("#entry-home").click(function () {
+        $.post(
+            '{:url("game/get_home_list")}', {},
+            function (d) {
+                $("#showEnterDoor").html(d);
+                $(".showEnterDoor").show();
+                if (d.error) {
+                    _isError = false;
+                    base_alert(d.error);
+                } else {
+                    // location.href = '/mobile/cart/good_buy/home_id/' + d.home_id;
+                }
+            }
+        );
+    })
+    //进入房间
+    $(document).on('click', '.join_home', function () {
+        var parentObj = $(this).parent().parent().parent();
+        var input_password = parentObj.find('.input_password').val();
+        var real_password = parentObj.find('.real_password').val();
+        var home_id = parentObj.find('.home_id').val();
+        if (input_password == '') {
+            layer.msg('密码不能为空');
+            return false;
+        }
+        if (input_password != real_password) {
+            layer.msg('密码错误');
+            return false;
+        }
+        location.href = '/mobile/game/index/&home_id=' + home_id;
+    })
+</script>
+</body>
+</html>

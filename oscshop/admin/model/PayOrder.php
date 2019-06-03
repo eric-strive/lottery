@@ -39,9 +39,11 @@ class PayOrder
 
     /**
      * 新增订单
+     *
      * @param $orderInfo
+     *
      * @return int|string
-     * @throws ErrorException
+     * @throws ErrorException*@throws \think\Exception
      */
     public static function addOrder($orderInfo)
     {

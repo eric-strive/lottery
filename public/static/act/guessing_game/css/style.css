@@ -946,7 +946,7 @@ i.zuanshi {
     border: 1px solid #4a32a0;
     float: left;
     font-size: 16px;
-    float:right;
+    float: right;
 }
 
 .h_header .hea_min .h_xzz i.zsyc {
@@ -1282,6 +1282,8 @@ i.zuanshi {
 }
 
 .head_deloa .head_content .xianxixinxi .listt {
+    height: 4.5rem;
+    overflow: scroll;
 }
 
 .head_deloa .head_content .xianxixinxi .listt li {

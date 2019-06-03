@@ -727,6 +727,7 @@ input[type=password] {
 
 #home {
     height: 100%;
+    overflow: hidden;
 }
 
 #nav-bottom {

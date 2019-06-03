@@ -69,7 +69,7 @@ class WeixinPay
             $p['signType']  = 'MD5';
             $p['paySign']   = $JsSign;
 
-            return json(['ret_code' => 0, 'bizPackage' => $p, 'out_trade_no' => $data['pay_order_no']]);
+            return ['ret_code' => 0, 'bizPackage' => $p, 'out_trade_no' => $data['pay_order_no']];
         }
     }
 
@@ -130,6 +130,11 @@ class WeixinPay
         ]);
         LuckRecord::setStatus($orderNo);
         PayOrder::editStatus($orderNo, PayOrder::STATUS_SUCCESS_PAY);
+    }
+
+    public static function gamePay()
+    {
+
     }
 }
 

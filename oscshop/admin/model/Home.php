@@ -21,18 +21,18 @@ use think\exception\ErrorException;
 class Home
 {
 
-    const ADD_NUM = 0;
+    const ADD_NUM    = 0;
     const REDUCE_NUM = 1;
 
     const NOT_COMPLETE = 0;//未完成
-    const LOTTERY = 1;//已开奖
-    const COMPLETE = 2;//完成
-    const NOT_GET = 3;//未领取
+    const LOTTERY      = 1;//已开奖
+    const COMPLETE     = 2;//完成
+    const NOT_GET      = 3;//未领取
 
     public function validate($data)
     {
 
-        $error = array();
+        $error = [];
         if (empty($data['name'])) {
             $error['error'] = '产品名称必填';
         } elseif (!isset($data['goods_category'])) {
@@ -60,9 +60,9 @@ class Home
 
     }
 
-    public function get_home_list($params = array())
+    public function get_home_list($params = [])
     {
-        $where = array();
+        $where = [];
         if (isset($params['uid']) && !empty($params['uid'])) {
             $where['g.uid'] = $params['uid'];
         }
@@ -72,6 +72,7 @@ class Home
         if (isset($params['type']) && !empty($params['type'])) {
             $where['g.type'] = $params['type'];
         }
+
         return Db::name('home')->where($where)
             ->alias('h')
             ->field('h.* , g.name,g.price as goods_price')
@@ -82,54 +83,58 @@ class Home
 
     public static function add_home($data)
     {
-        $home_name = isset($data['home_name']) ? $data['home_name'] : 0;
-        $password = isset($data['password']) ? $data['password'] : 0;
-        $periods = isset($data['periods']) ? $data['periods'] : 0;
-        $gid = $data['gid'];
-        $uid = isset($data['uid']) ? $data['uid'] : 0;
-        $type = 0;
+        $home_name   = isset($data['home_name']) ? $data['home_name'] : 0;
+        $password    = isset($data['password']) ? $data['password'] : 0;
+        $periods     = isset($data['periods']) ? $data['periods'] : 0;
+        $gid         = $data['gid'];
+        $uid         = isset($data['uid']) ? $data['uid'] : 0;
+        $type        = 0;
         $home_num_id = 0;
-        $goodInfo = Goods::getGoodsInfo($gid);
+        $goodInfo    = Goods::getGoodsInfo($gid);
         if (!empty($home_name) && !empty($password)) {
             $getUserHome = self::getUserHome($uid, $gid);
             if (!empty($getUserHome)) {
                 return $getUserHome;
             }
             $home_num_id = self::getGidHomeNum($gid);
-            $type = 1;
+            $type        = 1;
         } else {
             $periods = $periods + 1;
             Goods::setPeriods($gid, $periods);
         }
         $homeInfo = [
-            'uid' => $uid,
-            'gid' => $gid,
-            'goods_price' => $goodInfo['price'],
+            'uid'            => $uid,
+            'gid'            => $gid,
+            'goods_price'    => $goodInfo['price'],
             'lottery_drifts' => $goodInfo['price'] / $goodInfo['doubao_price'],
-            'goods_periods' => $periods,
-            'home_num' => $home_num_id,
-            'home_name' => $home_name,
-            'password' => $password,
-            'type' => $type,
-            'sign' => build_order_no(),
+            'goods_periods'  => $periods,
+            'home_num'       => $home_num_id,
+            'home_name'      => $home_name,
+            'password'       => $password,
+            'type'           => $type,
+            'sign'           => build_order_no(),
         ];
         $insertId = Db::name('home')->insert($homeInfo, false, true);
+
         return ['home_id' => $insertId];
     }
 
     public static function getGidHomeNum($gid)
     {
         $home_num_id = Db::name('home')
-//            ->where('gid', $gid)
+            //            ->where('gid', $gid)
             ->order('id desc')->limit(1)
             ->value('home_num');
+
         return $home_num_id ? $home_num_id + 1 : 1;
     }
 
     /**
      * 判断用户是否有私开房间
+     *
      * @param $uid
      * @param $gid
+     *
      * @return array
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
@@ -138,11 +143,11 @@ class Home
     public static function getUserHome($uid, $gid)
     {
         $info = Db::name('home')
-            ->where(array(
-                'gid' => $gid,
-                'uid' => $uid,
+            ->where([
+                'gid'    => $gid,
+                'uid'    => $uid,
                 'status' => self::NOT_COMPLETE,
-            ))
+            ])
             ->find();
         if (!empty($info)) {
             return ['error' => '该商品您已经开过一个房间，请先投满！'];
@@ -159,6 +164,7 @@ class Home
             if (empty($d)) {
                 throw new ErrorException('房间不存在');
             }
+
             return $d;
         } else {
             return Db::name('home')
@@ -170,9 +176,11 @@ class Home
 
     /**
      * 判断金额是否正确
+     *
      * @param $gid
      * @param $payTotal
      * @param $goodsNum
+     *
      * @return bool
      */
     public static function buyGoodsCheck($gid, $payTotal, $goodsNum)
@@ -183,14 +191,17 @@ class Home
         if (intval($payTotal) != intval($goodsNum * $goodsOneAmount)) {
             return false;
         }
+
         return true;
     }
 
     /**
      * 新增或减少份额
-     * @param $homeId
-     * @param $goodsNum
+     *
+     * @param     $homeId
+     * @param     $goodsNum
      * @param int $changeType
+     *
      * @return int|true
      * @throws Exception
      * @throws \think\db\exception\DataNotFoundException
@@ -205,18 +216,22 @@ class Home
             if (intval($remain) < intval($goodsNum)) {
                 throw new Exception('商品剩余份额不足！');
             }
+
             return Db::name('home')->where('id=' . $homeId)->setInc('goods_buy_num', $goodsNum);
         } else {
             if (intval($homeInfo['goods_buy_num']) < intval($goodsNum)) {
                 throw new Exception('处理份额出错！');
             }
+
             return Db::name('home')->where('id=' . $homeId)->setDec('goods_buy_num', $goodsNum);
         }
     }
 
     /**
      * 获取私房信息
+     *
      * @param $homeId
+     *
      * @return array|false|\PDOStatement|string|\think\Model
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
@@ -232,11 +247,13 @@ class Home
 
     /**
      * 满房
+     *
      * @param $homeId
      * @param $uid
      * @param $lottery_num
      * @param $rand_num
      * @param $lottery_timestamp
+     *
      * @return int|string
      * @throws Exception
      * @throws \think\exception\PDOException
@@ -245,19 +262,21 @@ class Home
     {
         $return = Db::name('home')
             ->where('id', $homeId)
-            ->update(array(
-                'lottery_uid' => $uid,
-                'lottery_num' => $lottery_num,
-                'lottery_rand' => $rand_num,
+            ->update([
+                'lottery_uid'       => $uid,
+                'lottery_num'       => $lottery_num,
+                'lottery_rand'      => $rand_num,
                 'lottery_timestamp' => $lottery_timestamp,
-                'lottery_at' => date('Y-m-d H:i:s'),
-                'status' => 1,
-            ));
+                'lottery_at'        => date('Y-m-d H:i:s'),
+                'status'            => 1,
+            ]);
+
         return $return;
     }
 
     /**
      * @param $gid
+     *
      * @return false|\PDOStatement|string|\think\Collection
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
@@ -266,25 +285,47 @@ class Home
     public static function getHomeListByGid($gid)
     {
         return Db::name('home')
-            ->where(array(
-                'home_num' => array('<>', 0),
-                'gid' => $gid,
-                'status' => self::NOT_COMPLETE
-            ))->select();
+            ->where([
+                'home_num' => ['<>', 0],
+                'gid'      => $gid,
+                'status'   => self::NOT_COMPLETE,
+            ])->select();
     }
 
     public static function getHomeList()
     {
         return Db::view('Home', '*')
             ->view('Goods', 'name', 'Home.gid=Goods.goods_id')
+            ->view('GoodsImage', 'image', 'Home.gid=GoodsImage.goods_id')
             ->view('Member', 'nickname', 'Member.uid=Home.lottery_uid', 'left')
             ->order('Home.status asc Home.id asc')
             ->paginate(20, false);
     }
 
     /**
-     * @param $uid
+     * 需要确认的房间
+     *
+     * @return \think\Paginator
+     * @throws \think\exception\DbException
+     */
+    public static function getHomeConfirmList()
+    {
+        return Db::view('Home', '*')
+            ->view('Goods', 'return_venosa', 'Home.gid=Goods.goods_id')
+            ->view('GoodsImage', 'image', 'Home.gid=GoodsImage.goods_id')
+            ->view('Member', 'nickname', 'Member.uid=Home.lottery_uid', 'left')
+            ->where([
+                'Home.status'           => 2,
+                'Home.is_admin_confirm' => 0,
+            ])
+            ->order('Home.status asc Home.id asc')
+            ->paginate(20, false);
+    }
+
+    /**
+     * @param     $uid
      * @param int $status
+     *
      * @return false|\PDOStatement|string|\think\Collection
      * @throws \think\db\exception\DataNotFoundException
      * @throws \think\db\exception\ModelNotFoundException
@@ -293,10 +334,10 @@ class Home
     public static function getHomeListByUid($uid, $status = self::NOT_COMPLETE)
     {
         return Db::name('home')
-            ->where(array(
-                'uid' => $uid,
-                'status' => $status
-            ))->select();
+            ->where([
+                'uid'    => $uid,
+                'status' => $status,
+            ])->select();
     }
 
     public static function HomeList($status = null, $uid, $limit = null)
@@ -305,9 +346,11 @@ class Home
         if ($status !== null) {
             $where['h.status'] = $status;
         }
+
         return Db::name('home')
             ->alias('h')
             ->join('duobao_record dr', 'h.id=dr.home_id')
+            ->join('goods_image g', 'h.gid=g.goods_id')
             ->where($where)
             ->group('dr.home_id')
             ->limit($limit)
@@ -317,34 +360,46 @@ class Home
     /**
      * @param $id
      * @param $uid
+     *
      * @return int|string
      * @throws Exception
      * @throws \think\exception\PDOException
      */
     public static function confirmGet($id, $uid)
     {
-        $confirm = Db::name('home')
-            ->where(array(
-                'id' => $id,
+        Db::name('home')
+            ->where([
+                'id'          => $id,
                 'lottery_uid' => $uid,
-            ))
-            ->update(array(
-                'status' => self::COMPLETE,
+            ])
+            ->update([
+                'status'     => self::COMPLETE,
                 'confirm_at' => date('Y-m-d H:i:s'),
-            ));
-        if ($confirm) {
-            //送金豆给用户
-            $homeInfo = self::getHomeInfo($id);
-            Member::giveBalanceLuck($homeInfo);
-        }
+            ]);
     }
+
+    public static function retrunJindou($homeId, $return_venosa)
+    {
+        Db::name('home')
+            ->where([
+                'id'          => $homeId,
+            ])
+            ->update([
+                'is_admin_confirm' => 1,
+                'confirm_at'       => date('Y-m-d H:i:s'),
+            ]);
+        $homeInfo = self::getHomeInfo($homeId);
+        Member::giveBalanceLuck($homeInfo,$return_venosa);
+    }
+
     public static function home_info_by_sign($home_id)
     {
         return Db::name('home')
             ->where('id', $home_id)
-//            ->where('sign', $sign)
+            //            ->where('sign', $sign)
             ->find();
     }
+
     public static function bug_record($homeId, $uid)
     {
         return Db::name('home_record')->where([

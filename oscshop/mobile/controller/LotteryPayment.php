@@ -55,11 +55,6 @@ class LotteryPayment extends Base
                     'order_type'   => $return['attach'],
                     'buy_num'      => $return['goodsNum'],
                 ];
-                //先生成订单
-                $a = PayOrder::addOrder($orderData);
-                if (!$a) {
-                    throw new Exception('创建订单失败');
-                }
                 //数据基础检验
                 switch ($return['attach']) {
                     case '1':
@@ -79,13 +74,23 @@ class LotteryPayment extends Base
                         break;
                     case '4':
                         //开设房间
-                        GameHomeService::set_game_home();
+                        $orderData['home_id'] = GameHomeService::set_game_home(0);
+                        break;
+                    case '5':
+                        //参与青蛙游戏
+                        GameHomeService::participateGame(input('post.'));
                         break;
                 }
-                $payResult = WeixinPay::getBizPackage($return);
+                //先生成订单
+                $a = PayOrder::addOrder($orderData);
+                if (!$a) {
+                    throw new Exception('创建订单失败');
+                }
+                $payResult            = WeixinPay::getBizPackage($return);
+                $payResult['home_id'] = $homeId;
                 Db::commit();
 
-                return $payResult;
+                return json($payResult);
             } catch (\Exception $e) {
                 Db::rollback();
 
@@ -123,7 +128,7 @@ class LotteryPayment extends Base
         } catch (Exception $e) {
             Db::rollback();
             Db::name('test')->insert([
-                'info' => json_encode($e->getMessage()),
+                'info' => json_encode($e->getMessage() . $e->getFile() . $e->getLine()),
             ]);
             echo "<xml><return_code><![CDATA[FAIL]]></return_code></xml>";
         }
@@ -177,6 +182,10 @@ class LotteryPayment extends Base
                 if (!$a) {
                     throw new Exception('创建订单失败');
                 }
+                $userInfo = Member::getMemberInfo($uid, true);
+                if ($userInfo['balance'] < $return['pay_total']) {
+                    return json(['ret_code' => 3, 'ret_msg' => '金豆不足，请先充值！']);
+                }
                 //数据基础检验
                 switch ($return['attach']) {
                     case '1':
@@ -190,24 +199,34 @@ class LotteryPayment extends Base
                         WeixinPay::balancePay($return, $homeId, $uid);
                         break;
                     case '2'://幸运购
-                        $userInfo = Member::getMemberInfo($uid, true);
-                        if ($userInfo['balance'] < $return['pay_total']) {
-                            return json(['ret_code' => 3, 'ret_msg' => '金豆不足，请先充值！']);
-                        }
                         LuckRecord::addLuckRecord($orderData);
                         WeixinPay::luckBalancePay($return['pay_order_no'], $return['pay_total'], $uid);
                         $goodsInfo = GoodsModel::getGoodsInfo($gid);
+
                         $recordSum = LuckRecord::recordSum($gid, $uid);
                         if ($recordSum >= $goodsInfo['lotter_price']) {
                             //中奖了
                             LuckRecord::setLottery($return['pay_order_no']);
                             $isLottery = true;
                         }
+                    case '4':
+                        $homeId = GameHomeService::set_game_home();
+                        GameHomeService::subBalance($orderData);
+                        break;
+                    case '5':
+                        //参与青蛙游戏
+                        GameHomeService::participateGame(input('post.'), 1);
+                        GameHomeService::subBalance($orderData);
                         break;
                 }
                 Db::commit();
 
-                return json(['ret_code' => 1, 'order_no' => $return['pay_order_no'], 'isLottery' => $isLottery]);
+                return json([
+                    'ret_code'  => 1,
+                    'homeId'    => $homeId,
+                    'order_no'  => $return['pay_order_no'],
+                    'isLottery' => $isLottery,
+                ]);
             } catch (\Exception $e) {
                 Db::rollback();
 

@@ -71,10 +71,11 @@ class LuckRecord
         return Db::name('luck_record')
             ->where([
                 'gid'        => $gid,
-                'uid'        => $uid,
+                //                'uid'        => $uid,
                 'is_process' => self::STATUS_NOT_PAY,
                 'status'     => self::STATUS_SUCCESS_PAY,
             ])
+            ->lock(true)
             ->sum('amount');
     }
 
@@ -157,7 +158,7 @@ class LuckRecord
                 ->where([
                     'luck_record_id' => ['<=', $luckInfo["luck_record_id"]],
                     'gid'            => $luckInfo['gid'],
-                    'uid'            => $luckInfo['uid'],
+                    //                    'uid'            => $luckInfo['uid'],
                 ])
                 ->update([
                     'is_process' => 1,
@@ -186,8 +187,13 @@ class LuckRecord
             ]);
         }
 
-        return $query->order('LuckRecord.status asc LuckRecord.id asc')
-            ->select();
+        if ($uid) {
+            return $query->order('LuckRecord.status asc,LuckRecord.luck_record_id desc')
+                ->select();
+        }
+
+        return $query->order('LuckRecord.status asc,LuckRecord.luck_record_id desc')
+            ->paginate($count, false);
     }
 }
 
