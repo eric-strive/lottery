@@ -103,19 +103,17 @@ class LuckRecord
 
     /**
      * @param     $id
-     * @param     $uid
      * @param int $status
      *
      * @return int|string
      * @throws Exception
      * @throws \think\exception\PDOException
      */
-    public static function setDraw($id, $uid, $status = self::LOTTERY)
+    public static function setDraw($id, $status = self::LOTTERY)
     {
         return Db::name('luck_record')
             ->where([
                 'luck_record_id' => $id,
-                'uid'            => $uid,
             ])
             ->update([
                 'is_draw'   => $status,
@@ -169,30 +167,35 @@ class LuckRecord
         });
     }
 
-    public static function getRecord($uid = null, $isLottery = null, $count = 20)
+    public static function getRecord($uid = null, $isLottery = null, $is_draw = null, $count = 20)
     {
         $query = Db::view('LuckRecord', '*')
             ->view('Goods', 'name', 'LuckRecord.gid=Goods.goods_id')
             ->view('GoodsImage', 'image', 'LuckRecord.gid=GoodsImage.goods_id')
             ->where('LuckRecord.status', self::STATUS_SUCCESS_PAY);
-        if ($uid) {
-            $query->where('LuckRecord.uid', $uid);
+        if ($uid && $uid !== true) {
+            $query->where('LuckRecord.uid', $uid)
+                ->view('Member', 'nickname', 'Member.uid=LuckRecord.uid', 'left');
         } else {
             $query->view('Member', 'nickname', 'Member.uid=LuckRecord.uid', 'left');
         }
         if ($isLottery !== null) {
             $query->where([
                 'LuckRecord.is_lottery' => $isLottery,
-                'LuckRecord.is_draw'    => 0,
+            ]);
+        }
+        if ($is_draw !== null) {
+            $query->where([
+                'LuckRecord.is_draw' => $is_draw,
             ]);
         }
 
         if ($uid) {
-            return $query->order('LuckRecord.status asc,LuckRecord.luck_record_id desc')
+            return $query->order('LuckRecord.status asc,LuckRecord.is_draw asc,LuckRecord.luck_record_id desc')
                 ->select();
         }
 
-        return $query->order('LuckRecord.status asc,LuckRecord.luck_record_id desc')
+        return $query->order('LuckRecord.status asc,LuckRecord.is_draw asc,LuckRecord.luck_record_id desc')
             ->paginate($count, false);
     }
 }

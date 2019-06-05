@@ -2,6 +2,8 @@
 
 namespace osc\member\controller;
 
+use osc\admin\model\Home as HomeModel;
+use osc\admin\model\LuckRecord;
 use think\Controller;
 use think\Db;
 use osc\admin\model\Home;
@@ -96,6 +98,31 @@ class Goods extends controller
         storage_user_action(1, session('user_auth.username'), config('BACKEND_USER'), '手机更新幸运购');
 
         return true;
+    }
+
+    /**
+     * 幸运购确认领取
+     *
+     * @return mixed
+     */
+    public function luck_list()
+    {
+        $this->assign('list', LuckRecord::getRecord(null, 1));
+        $this->assign('empty', '<tr><td colspan="20">没有数据~</td></tr>');
+        $this->assign('title', '幸运购确认领取');
+
+        return $this->fetch();
+    }
+
+    public function confirm_get()
+    {
+        $luck_record_id = input('luck_record_id');
+        $home_id        = input('home_id');
+        if ($home_id) {
+            HomeModel::confirmGet($home_id);
+        } else {
+            LuckRecord::setDraw($luck_record_id);
+        }
     }
 }
 

@@ -10,6 +10,8 @@ namespace osc\mobile\controller;
 
 use osc\admin\model\GameHome;
 use osc\admin\model\Member;
+use osc\admin\service\GameHomeService;
+use osc\common\service\templateNews;
 use think\Db;
 
 class Game extends MobileBase
@@ -27,7 +29,30 @@ class Game extends MobileBase
             }
         }
     }
-
+    /**
+     * 发送模版消息，不同的模版需要的参数不一样
+     */
+    public function send_msg()
+    {
+        $tem = new templateNews(config('appid'), config('appsecret'));
+        $wechat = wechat();
+        $tempKey = 'OPENTM207225527';
+        $color = "#000";
+        $time = date("Y-m-d H:i:s");
+        $dataArr = array(
+            'openid' => 'oSu0X1iN7a_ukYPMXVXdQAS8lbFo',
+            'href' => 'http://mfs99.cn',
+            'first' => '您好，您有新的订单啦。',
+            'keyword1' => '2343',
+            'keyword2' => '23423',
+            'keyword3' => '3rwewefe',
+            'remark' => '您可以点击进入个人中心，感谢您的使用。'
+        );
+        $we = $tem->sendTempMsg($tempKey, $dataArr, '', $color);
+        dump($we);
+        $a = $wechat->sendTemplateMessage($we);
+        dump($a);
+    }
     public function index()
     {
         if (in_wechat()) {
@@ -58,13 +83,8 @@ class Game extends MobileBase
         if (empty($homeInfo)) {
             $this->error('您没有访问权限');
         }
-        if ($homeInfo['game_home_status'] == 3) {
-            $this->error('游戏已结束!');
-        }
-        if (!empty($homeInfo['start_at']) && (strtotime($homeInfo['start_at']) + 50) < time()) {
-            GameHome::
-            $this->error('活动还未开始或已结束');
-        }
+        $this->gameCheck($homeInfo);
+
         $homeUserInfo = Member::getMemberInfo($homeInfo['game_home_uid']);
 
         $record = GameHome::get_home_record($homeInfo['game_home_id']);
@@ -139,9 +159,9 @@ class Game extends MobileBase
         $homeInfo['remain'] = $remain;
         $residueTime        = 0;//剩余开奖时间，默认是10秒
         //是否满房
-        if ($remain > 0) {
-            return ['status' => 0, 'remain' => $remain, 'residueTime' => $residueTime];
-        }
+//        if ($remain > 0) {
+//            return ['status' => 0, 'remain' => $remain, 'residueTime' => $residueTime];
+//        }
 
         //是否已完成
         if ($homeInfo['game_home_status'] == 3) {
@@ -157,6 +177,9 @@ class Game extends MobileBase
         if ($homeInfo['game_home_status'] == 2) {
             $residueTime             = strtotime($homeInfo['start_at']) + 10 - time();
             $homeInfo['residueTime'] = $residueTime;
+            if (!empty($homeInfo['start_at']) && (strtotime($homeInfo['start_at']) + 60) < time()) {
+                GameHomeService::homeIsFull($homeInfo['game_home_id'], true);
+            }
 
             return $homeInfo;
         }
@@ -197,21 +220,42 @@ class Game extends MobileBase
         if (empty($recordInfo) || $recordInfo['pay_status'] != 1 || $recordInfo['is_affirm'] != 1) {
             $this->error('您无权访问');
         }
-        if (empty($homeInfo['start_at']) || (strtotime($homeInfo['start_at']) + 50) < time()) {
-            $this->error('游戏已结束');
-        }
-        $this->fetch();
+        $this->gameCheck($homeInfo);
+
+        return $this->fetch();
     }
 
     public function game_prepare()
     {
         $record_id = input('record_id');
+        $home_id = input('home_id');
+        $homeInfo           = GameHome::getHomeInfo($home_id);
+        $prepareNum = GameHome::getPrepareNum($home_id);
+        if ($prepareNum >= $homeInfo['game_home_number_people']) {
+            GameHome::setStartTime($home_id);
+        }
         if (empty($record_id)) {
             return ['error' => '数据出错'];
         }
         $s = GameHome::prepare($record_id, UID);
         if (empty($s)) {
             return ['error' => '数据出错!'];
+        }
+    }
+
+    /**
+     * 游戏检测
+     *
+     * @param $homeInfo
+     */
+    public function gameCheck($homeInfo)
+    {
+        if ($homeInfo['game_home_status'] == 3) {
+            $this->error('游戏已结束!');
+        }
+        if (!empty($homeInfo['start_at']) && (strtotime($homeInfo['start_at']) + 60) < time()) {
+            GameHomeService::homeIsFull($homeInfo['game_home_id'], true);
+            $this->error('活动还未开始或已结束');
         }
     }
 }

@@ -92,7 +92,7 @@ class OrderProcess
                 }
                 break;
             case '5'://进入游戏房间
-                GameHome::setRecordStatus($orderInfo['home_id'], $orderInfo['uid']);
+                GameHome::setRecordStatus($orderInfo['record_id']);
                 GameHome::addParameter($orderInfo['home_id']);
                 break;
         }

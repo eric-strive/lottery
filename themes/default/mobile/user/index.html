@@ -26,7 +26,7 @@
         <span class="uc-name">{$userinfo.nickname}</span>
     </div>
     <div class="comspreadstat clearfix">
-        <span class="spread-item" onclick="location.href = '{:url(\'Points/points_list\')}';"><b>{$userinfo.points}</b>积分</span>
+<!--        <span class="spread-item" onclick="location.href = '{:url(\'Points/points_list\')}';"><b>{$userinfo.points}</b>积分</span>-->
         <span class="spread-item"
               onclick="location.href = '{:url(\'User/wish_list\')}';"><b>{$userinfo.wish}</b>收藏</span>
         <span class="spread-item"
@@ -66,9 +66,9 @@
 <div class="uc-section base_sound" onclick="location.href = '{:url(\'/mobile/user/recharge/1\')}'">
     <i class='credit'></i><b>您有 {$userinfo.balance}金豆</b>金豆充值
 </div>
-<div class="uc-section base_sound" onclick="location.href = '{:url(\'Points/points_list\')}'">
-    <i class='credit'></i><b>您有 {$userinfo.points-$userinfo.cash_points} 积分可兑换</b>积分兑换
-</div>
+<!--<div class="uc-section base_sound" onclick="location.href = '{:url(\'Points/points_list\')}'">-->
+<!--    <i class='credit'></i><b>您有 {$userinfo.points-$userinfo.cash_points} 积分可兑换</b>积分兑换-->
+<!--</div>-->
 {empty name="$userinfo['telephone']"}
 <!--<div class="uc-section" onclick="location.href = '{:url(\'login/binding_phone\')}'">-->
 <!--    <i class='infoedit'></i><b>绑定可账号密码登录</b>绑定手机号-->

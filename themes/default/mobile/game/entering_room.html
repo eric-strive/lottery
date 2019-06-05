@@ -188,7 +188,8 @@
         <ul class="clearfix">
             <li>
                 <div class="jinruyouxi relative" style="margin-top: 40%">
-                    <a href="/mobile"><img style="width: 110%;margin-left: -10%;" src="/public/static/image/icon/return2.png"></a>
+                    <a href="/mobile"><img style="width: 110%;margin-left: -10%;"
+                                           src="/public/static/image/icon/return2.png"></a>
                     <p class="absolute room-p3" style="padding-right:10%">返 回</p>
                 </div>
 
@@ -333,7 +334,7 @@
         wx.onMenuShareAppMessage({
             title: '好友邀请',
             desc: '老铁，我已经把房开好了，来不来就看你了',
-            link: "http://{$_SERVER['HTTP_HOST']}{:url('mobile/index/entering_room&home_id='.$homeInfo['game_home_id'].'&sign='.$homeInfo['sign'])}",
+            link: "http://{$_SERVER['HTTP_HOST']}{:url('/mobile/game/index/&home_id='.$homeInfo['game_home_id'])}",
             //&home_id=.$home_id.&sign=.$homeInfo[sign]
             imgUrl: "",
             trigger: function (res) {
@@ -356,7 +357,7 @@
         wx.onMenuShareTimeline({
             title: '好友邀请',
             desc: '老铁，我已经把房开好了，来不来就看你了',
-            link: "http://{$_SERVER['HTTP_HOST']}{:url('mobile/index/entering_room&home_id='.$homeInfo['game_home_id'].'&sign='.$homeInfo['sign'])}",
+            link: "http://{$_SERVER['HTTP_HOST']}{:url('/mobile/game/index/&home_id='.$homeInfo['game_home_id'])}",
             imgUrl: "",
             trigger: function (res) {
                 // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
@@ -495,10 +496,10 @@
                     //这里需要放烟花
                     if (!isUrlVisit || residueTime > 0) {
                         if (residueTime < 0) {
-                            location.href = '/mobile/game/start_game/home_id/'+r.game_home_id;
+                            location.href = '/mobile/game/start_game/home_id/' + r.game_home_id;
                         } else {
                             setTimeout(function () {
-                                location.href = '/mobile/game/start_game/home_id/'+r.game_home_id;
+                                location.href = '/mobile/game/start_game/home_id/' + r.game_home_id;
                             }, residueTime * 1000);
                         }
                     } else {
@@ -597,9 +598,11 @@
                     layer.confirm('您的金豆不足，请使用微信支付或充值金豆！', {
                         btn: ['微信支付', '微信充值'] //按钮
                     }, function () {
+                        layer.closeAll();
                         wepayCall(pay_mount, subject, home_id);
                     }, function () {
-                        location.href = '/mobile/user/recharge';
+                        layer.closeAll();
+                        location.href = '/mobile/user/recharge/';
                     });
                 } else {
                     layer.msg('支付成功', {icon: 1})
@@ -682,6 +685,7 @@
         var record_id = $(this).attr('att');
         $.post("{:url('game/game_prepare')}", {
                 'record_id': record_id,
+                'home_id': home_id,
             },
             function (r) {
                 if (r.error) {

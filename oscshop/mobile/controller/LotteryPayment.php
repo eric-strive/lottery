@@ -48,6 +48,7 @@ class LotteryPayment extends Base
                 $orderData              = [
                     'uid'          => $uid,
                     'gid'          => $gid,
+                    'record_id'    => 0,
                     'home_id'      => $homeId,
                     'pay_order_no' => $return['pay_order_no'],
                     'pay_amount'   => input('pay_total'),
@@ -78,9 +79,11 @@ class LotteryPayment extends Base
                         break;
                     case '5':
                         //参与青蛙游戏
-                        GameHomeService::participateGame(input('post.'));
+                        $record_id              = GameHomeService::participateGame(input('post.'));
+                        $orderData['record_id'] = $record_id;
                         break;
                 }
+
                 //先生成订单
                 $a = PayOrder::addOrder($orderData);
                 if (!$a) {
@@ -94,7 +97,7 @@ class LotteryPayment extends Base
             } catch (\Exception $e) {
                 Db::rollback();
 
-                return json(['ret_code' => 11, 'ret_msg' => $e->getMessage()]);
+                return json(['ret_code' => 11, 'ret_msg' => $e->getMessage().$e->getLine().$e->getFile()]);
             }
 
         }
@@ -209,6 +212,7 @@ class LotteryPayment extends Base
                             LuckRecord::setLottery($return['pay_order_no']);
                             $isLottery = true;
                         }
+                        break;
                     case '4':
                         $homeId = GameHomeService::set_game_home();
                         GameHomeService::subBalance($orderData);

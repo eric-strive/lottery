@@ -2,6 +2,7 @@
 
 namespace osc\admin\model;
 
+use osc\admin\service\GameHomeService;
 use think\Db;
 use think\Exception;
 use think\exception\ErrorException;
@@ -238,7 +239,7 @@ class GameHome
      *
      * @return int
      */
-    public static function setHomeStatus($homeId,$status = 1)
+    public static function setHomeStatus($homeId, $status = 1)
     {
         return Db::name('game_home')
             ->where([
@@ -246,12 +247,11 @@ class GameHome
             ])->setField('game_home_status', $status);
     }
 
-    public static function setRecordStatus($homeId, $userId, $status = 1)
+    public static function setRecordStatus($record_id, $status = 1)
     {
         return Db::name('game_record')
             ->where([
-                'game_home_id' => $homeId,
-                'uid'          => $userId,
+                'game_record_id' => $record_id,
             ])->setField('pay_status', $status);
     }
 
@@ -267,6 +267,7 @@ class GameHome
             ->find();
     }
 
+    //获取游戏记录
     public static function get_home_record($home_id, $key = self::GAME_FROG)
     {
         return Db::name('game_record')
@@ -282,6 +283,7 @@ class GameHome
             ->select();
     }
 
+    //准备
     public static function prepare($record_id, $uid)
     {
         return Db::name('game_record')
@@ -291,11 +293,20 @@ class GameHome
             ])->setField('is_affirm', 1);
     }
 
+    //新增人
     public static function addParameter($homeId)
     {
         return Db::name('game_home')->where(['game_home_id' => $homeId])->setInc('game_home_parameter');
     }
 
+    /**
+     * 准备人数
+     *
+     * @param $homeId
+     *
+     * @return int|string
+     * @throws \think\Exception
+     */
     public static function getPrepareNum($homeId)
     {
         return Db::name('game_home')

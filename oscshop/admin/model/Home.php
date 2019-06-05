@@ -115,6 +115,7 @@ class Home
             'sign'           => build_order_no(),
         ];
         $insertId = Db::name('home')->insert($homeInfo, false, true);
+        Db::name('home')->where(['id' => $insertId])->setField('home_num', $insertId);
 
         return ['home_id' => $insertId];
     }
@@ -298,7 +299,7 @@ class Home
             ->view('Goods', 'name', 'Home.gid=Goods.goods_id')
             ->view('GoodsImage', 'image', 'Home.gid=GoodsImage.goods_id')
             ->view('Member', 'nickname', 'Member.uid=Home.lottery_uid', 'left')
-            ->order('Home.status asc Home.id asc')
+            ->order('Home.status asc,Home.id desc')
             ->paginate(20, false);
     }
 
@@ -318,7 +319,7 @@ class Home
                 'Home.status'           => 2,
                 'Home.is_admin_confirm' => 0,
             ])
-            ->order('Home.status asc Home.id asc')
+            ->order('Home.status asc,Home.id desc')
             ->paginate(20, false);
     }
 
@@ -365,12 +366,12 @@ class Home
      * @throws Exception
      * @throws \think\exception\PDOException
      */
-    public static function confirmGet($id, $uid)
+    public static function confirmGet($id, $uid=null)
     {
         Db::name('home')
             ->where([
                 'id'          => $id,
-                'lottery_uid' => $uid,
+//                'lottery_uid' => $uid,
             ])
             ->update([
                 'status'     => self::COMPLETE,
@@ -382,14 +383,14 @@ class Home
     {
         Db::name('home')
             ->where([
-                'id'          => $homeId,
+                'id' => $homeId,
             ])
             ->update([
                 'is_admin_confirm' => 1,
                 'confirm_at'       => date('Y-m-d H:i:s'),
             ]);
         $homeInfo = self::getHomeInfo($homeId);
-        Member::giveBalanceLuck($homeInfo,$return_venosa);
+        Member::giveBalanceLuck($homeInfo, $return_venosa);
     }
 
     public static function home_info_by_sign($home_id)

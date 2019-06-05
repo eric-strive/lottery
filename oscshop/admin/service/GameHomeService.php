@@ -10,29 +10,6 @@ use think\Exception;
 //游戏房间
 class GameHomeService
 {
-    function homeIsFull($homeId)
-    {
-        $homeCompanyNum = GameHome::getCompanyNum($homeId);
-        $homeInfo       = GameHome::getHomeInfo($homeId, true);
-        if ($homeInfo['game_home_number_people'] == $homeCompanyNum) {
-            //已完成
-            $getMax = GameHome::getCompanyMax($homeId);
-            GameHome::confirmWin($homeId, $getMax['uid']);
-            //用户新增金豆
-            $amount = $homeInfo['game_home_number_people'] * $homeInfo['pay_amount'];
-            Member::addBalance($getMax['uid'], $amount);
-            Member::addBalanceRecord([
-                'uid'         => $getMax['uid'],
-                'amount'      => $homeId,
-                'home_id'     => $amount,
-                'description' => '用户玩游戏获取',
-                'prefix'      => 1,
-                'create_time' => time(),
-                'type'        => 5,
-            ]);
-        }
-    }
-
     /**
      * 开设房间
      *
@@ -162,15 +139,59 @@ class GameHomeService
         try {
             $homeInfo = GameHome::getHomeInfo($homeId, true);
             if ($homeInfo['game_home_status'] !== 3) {
-                GameHome::setHomeStatus($homeId, 3);
+                //分配奖品
+                $amount    = $homeInfo['game_home_parameter'] * $homeInfo['pay_amount'];
+                $maxRecord = GameHome::get_home_max_record($homeId);
+                $maxRecord = GameHome::confirmWin($homeId, $maxRecord['uid']);
+
             }
-            //
             Db::commit();
         } catch (Exception $e) {
             Db::rollback();
         }
 
     }
+
+    /**
+     * 满房处理
+     *
+     * @param $homeId
+     * @param $isTimeOut
+     *
+     * @return string
+     */
+    public static function homeIsFull($homeId, $isTimeOut)
+    {
+        Db::startTrans();
+        try {
+            $homeCompanyNum = GameHome::getCompanyNum($homeId);
+            $homeInfo       = GameHome::getHomeInfo($homeId, true);
+            if ($homeInfo['game_home_status'] === 3) {
+                return '';
+            }
+            if ($isTimeOut || ($homeInfo['game_home_number_people'] == $homeCompanyNum)) {
+                //已完成
+                $getMax = GameHome::getCompanyMax($homeId);
+                GameHome::confirmWin($homeId, $getMax['uid']);
+                //用户新增金豆
+                $amount = $homeInfo['game_home_number_people'] * $homeInfo['pay_amount'];
+                Member::addBalance($getMax['uid'], $amount);
+                Member::addBalanceRecord([
+                    'uid'         => $getMax['uid'],
+                    'amount'      => $homeId,
+                    'home_id'     => $amount,
+                    'description' => '用户玩游戏获取',
+                    'prefix'      => 1,
+                    'create_time' => time(),
+                    'type'        => 5,
+                ]);
+            }
+            Db::commit();
+        } catch (Exception $e) {
+            Db::rollback();
+        }
+    }
+
 }
 
 ?>

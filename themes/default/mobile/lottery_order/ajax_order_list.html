@@ -1,27 +1,44 @@
 {volist name="order" id="orders"}
-<div class="uc-orderitem" style="font-weight: bold;height: 4.5rem;">
-    <img style="width: 20%;" src="IMG_ROOT{$orders.image}">
-    <div class="uc-seral clearfix" style="width: 75%;float: right;">
-        {if condition="$orders.home_num eq 0"}
-        <p class="order_serial">期数：0000{$orders.goods_periods}</p>
+<style>
+    .clearfix .order_serial{
+        font-size: 18px;
+        width: 90%;
+    }
+    .clearfix .sum{
+        font-size: 18px;
+    }
+    .uc-seral,.uc-summary{
+        border: none;
+    }
+    .uc-summary .olbtn{
+        font-size: 18px;
+        padding: 5px;
+    }
+</style>
+<div class="uc-orderitem" style="font-weight: bold;height: 6.5rem;">
+    <img style="width: 30%;" src="IMG_ROOT{$orders.image}">
+    <div class="uc-seral clearfix" style="width: 65%;float: right;">
+        <p class="order_serial"><span class="dprice">{$orders.nickname}</span></p>
+        {if condition="$orders.home_num eq 0"}x
+        <p class="order_serial">期数：<span class="dprice">{$orders.goods_periods}</span></p>
         {else/}
-        <p class="order_serial">房间名：{$orders.home_name}</p>
-        <p class="order_serial">&nbsp;&nbsp;|&nbsp;&nbsp;房间号：0000{$orders.home_num}</p>
+        <p class="order_serial">房名：<span class="dprice">{$orders.home_name}</span></p>
+        <p class="order_serial">房号：<span class="dprice">{$orders.home_num}</span></p>
         {/if}
-        <p class="order_serial">&nbsp;&nbsp;|&nbsp;&nbsp;中奖时间：{$orders.lottery_at|default='未开奖'}</p>
+        <p class="order_serial">时间：{:substr($orders.lottery_at,10)}</p>
     </div>
     <div class="uc-summary clearfix" style='padding: 8px 7px;
     text-align: right;
     width: 90%;
-    float: left;margin-top: -1rem'>
+    float: left;margin-top: -0.5rem'>
         <div class="sum">
             {if condition="$orders.lottery_timestamp gt 0"}
             中奖号码: <span class="dprice">{$orders.lottery_num}</span>
-<!--            &nbsp;&nbsp;|&nbsp;&nbsp;中奖随机数: <span class="dprice">{$orders.lottery_rand}</span>-->
+            <!--            &nbsp;&nbsp;|&nbsp;&nbsp;中奖随机数: <span class="dprice">{$orders.lottery_rand}</span>-->
             {/if}
         </div>
         <a class="olbtn cancel" style="color: red" href="/mobile/goods/detail/id/{$orders.gid}">查看商品</a>
-        {if condition="($orders.status eq 1) ANd ($orders.lottery_uid eq $uid)"}
+        {if condition="($orders.status eq 1) ANd ($all)"}
         <a class="olbtn wepay wepay_button confirm_get" href="javascript:;" att="{$orders.id}">确认领取</a>
         {/if}
     </div>
