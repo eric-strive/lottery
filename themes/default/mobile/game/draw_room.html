@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/reset.css"/>
+    <link href="__PUBLIC__/num_move/css/globle.css" type="text/css" rel="Stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/animate.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/draw.css" type="text/css">
+    <style>
+        .meinv-left > ul > li > img,
+        .meinv-right > ul > li > a > img,
+        .meinv-left > ul > li > img,
+        .meinv-right > ul > li > img {
+            width: 35%;
+            height: 80%;
+        }
+
+        .lottety_nickname {
+            font-size: 30px;
+            font-weight: bold;
+            color: #f3641f;
+        }
+
+        .user-jinbi {
+            width: 1px;
+            position: absolute;
+            margin-top: -30px;
+        }
+
+        .hea_min1 {
+            width: 40%;
+        }
+
+        .fui-btn {
+            border-radius: 100px;
+        }
+
+        .fui-btn-left {
+            color: red;
+            font-size: 20px;
+            width: 40%;
+            float: left;
+        }
+
+        .meinv-left > ul > li, .meinv-right > ul > li {
+            width: 6.3rem;
+        }
+
+        .dio_nick_name {
+            width: 40%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .right-fui-btn {
+            margin-left: 10%;
+        }
+
+        .button-prepare {
+            color: #fff;
+            position: relative;
+            right: 10%;
+            font-size: 16px;
+            width: 70%;
+            background: darkseagreen;
+        }
+
+        #game_home {
+            width: 100%;
+            height: 28.4rem;
+            background: url(__PUBLIC__/act/guessing_game/img/game_bg.jpg);
+            background-size: 100%;
+        }
+
+        .left_hid_name {
+            color: red;
+            font-size: 20px;
+            width: 50%;
+            float: left;
+            margin-top: 10%;
+            position: relative;
+        }
+
+        .right_hid_name {
+            color: red;
+            font-size: 20px;
+            position: relative;
+            margin-top: -25%;
+            right: 15%;
+        }
+    </style>
+</head>
+<body>
+<div id="div-lottery-main-user" style="position: absolute;margin: 20% 33%;width:auto;text-align:center;display:none; ">
+    <div class="lottety_nickname">恭喜中奖</div>
+    <img id="lottery-main-user" style="border-radius:100px;width: 90px;"
+         src="/public/static/act/guessing_game/img/share/zt_0c3.png"
+         alt="">
+    <div class="lottety_nickname" id="lottery_nickname"></div>
+</div>
+<div id="game_home">
+
+    <div class="meinv clearfix">
+        <div class="meinv-left fl">
+            <ul>
+                {for start='0' end='10' step='2' name='i'}
+                <li>
+                    {if condition="isset($record[$i]['game_home_id'])"}
+                    {if condition="!empty($record[$i]['userpic'])"}
+                    <img att="{$record[$i]['game_record_id']}" src="{$record[$i]['userpic']}"
+                         alt="{$record[$i]['nickname']}" class="fui-btn fui-btn-left user-info"/> {else/}
+                    <img att="{$record[$i]['game_record_id']}" src="__PUBLIC__/act/guessing_game/img/header.jpg"
+                         class="fui-btn fui-btn-left user-info"/>
+                    {/if}
+                    <span style="">
+                    <img src="__PUBLIC__/image/jinbi/images/jb5.png" class="user-jinbi"/>
+                    <img src="__PUBLIC__/image/jinbi/images/jb3.png" class="user-jinbi"/>
+                    </span>
+                    <div class="left_hid_name">{$record[$i]['grade']}分</div>
+                    {/if}
+                </li>
+                {/for}
+            </ul>
+        </div>
+        <div class="bg-meinv fl" style="background: none">
+        </div>
+        <div class="meinv-right fr">
+            <ul>
+                {for start='1' end='10' step='2' name='i'}
+                <li>
+                    {if condition="isset($record[$i]['game_record_id'])"} {if
+                    condition="!empty($record[$i]['userpic'])"}
+                    <img att="{$record[$i]['game_record_id']}" src="{$record[$i]['userpic']}"
+                         alt="{$record[$i]['nickname']}" class="fui-btn right-fui-btn user-info"/> {else/}
+                    <img att="{$record[$i]['game_record_id']}" src="__PUBLIC__/act/guessing_game/img/header.jpg"
+                         class="fui-btn right-fui-btn user-info"/> {/if}
+                    <span style="">
+                    <img src="__PUBLIC__/image/jinbi/images/jb3.png" class="user-jinbi"/>
+                    <img src="__PUBLIC__/image/jinbi/images/jb4.png" class="user-jinbi"/>
+                    <img src="__PUBLIC__/image/jinbi/images/jb5.png" class="user-jinbi"/>
+                    </span>
+                    <div class="right_hid_name">{$record[$i]['grade']}分</div>
+                    {/if}
+                </li>
+                {/for}
+            </ul>
+        </div>
+    </div>
+    <div id="nav-bottom">
+        <ul class="clearfix">
+            <li></li>
+            <li class="wid40">
+                <div class="btn butdonghua fui-btn relative">
+                    <a href="javascript:location.reload();">
+                        <img src="__PUBLIC__/image/room-btn2.png" alt="">
+                        <p class="absolute room-p">刷 新</p>
+                    </a>
+                </div>
+            </li>
+            <li></li>
+        </ul>
+    </div>
+</div>
+</body>
+<script src="__PUBLIC__/js/jquery/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src='__PUBLIC__/js/jquery/jquery-ui.min.js'></script>
+<script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+<script src="__PUBLIC__/act/guessing_game/js/common.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PUBLIC__/act/guessing_game/js/click.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PUBLIC__/js/draw/underscore.js"></script>
+<script src="__PUBLIC__/js/draw/boot-modal.js"></script>
+<script src="__PUBLIC__/js/draw/snow-plugin.js"></script>
+<script src="__PUBLIC__/js/draw/pc_draw.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    '{if condition="in_wechat()"}'
+    wx.config({
+        debug: false,
+        appId: '{$signPackage.appId}',
+        timestamp: '{$signPackage.timestamp}',
+        nonceStr: '{$signPackage.nonceStr}',
+        signature: '{$signPackage.signature}',
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'onMenuShareQZone',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard',
+            'chooseWXPay'
+        ]
+    });
+    '{/if}'
+    wx.error(function (res) {
+        alert(res.errMsg);
+    });
+</script>
+<script>
+    $('.head_deloa .closeee').click(function () {
+        $('.head_deloa').hide()
+    });
+    $('.h_header .hea_min1').click(function () {
+        $('.head_deloa').show()
+    });
+
+    $('.chongzhi .closeee').click(function () {
+        $('.chongzhi').hide()
+    });
+    $('.hd .buyao').click(function () {
+        $('.chonzghi2').show();
+        $('.chongzhi').hide()
+    });
+    $('.chonzghi2 .closeee').click(function () {
+        $('.chonzghi2').hide()
+    });
+    $('.playyy .closeee').click(function () {
+        $('.playyy').hide()
+    });
+    $('.jinruyouxi').click(function () {
+        $('.playyy').show()
+    });
+
+    var sd = new FUI.soundComponent({
+        src: '__PUBLIC__/act/guessing_game/video//dialog_tow.mp3',
+        altSrc: '__PUBLIC__/act/guessing_game/video/dialog_tow.mp'
+    });
+    var returnz = new FUI.soundComponent({
+        src: '__PUBLIC__/act/guessing_game/video//return.mp3',
+        altSrc: '__PUBLIC__/act/guessing_game/video//return.mp'
+    });
+    var all_bg = new FUI.soundComponent({
+        src: '__PUBLIC__/act/guessing_game/video//all_bg.mp3',
+        altSrc: '__PUBLIC__/act/guessing_game/video//all_bg.mp',
+        loop: true
+    });
+    if (!($('.yinyuekg').hasClass('o'))) {
+        $('.fui-btn').bind('click', function (e) {
+            if (!($('.yinxiao').hasClass('o'))) {
+                sd.play();
+            }
+        });
+        $('.tuichu').bind('click', function (e) {
+            if (!($('.yinxiao').hasClass('o'))) {
+                returnz.play();
+            }
+        });
+    }
+
+    $('.yinyuekg').click(function () {
+        if ($(this).hasClass('o')) {
+            $(this).removeClass('o');
+            all_bg.play();
+        } else {
+            $(this).addClass('o');
+            all_bg.stop();
+        }
+    });
+    $('.yinxiao').click(function () {
+        if ($(this).hasClass('o')) {
+            $(this).removeClass('o');
+            $('.fui-btn').bind('click', function (e) {
+                sd.play();
+            });
+        } else {
+            $(this).addClass('o');
+            $('.fui-btn').bind('click', function (e) {
+                sd.stop();
+            });
+        }
+    });
+    $('.paihangbang .hd .l').click(function () {
+        $(this).addClass('active').siblings().removeClass('active');
+        $('.paihangbang .list .vc').eq($(this).index()).show().siblings().hide();
+    }).eq(0).click();
+    $(".paihangbang .closeee").click(function () {
+        $(".paihangbang").hide();
+    });
+    $('.quanminpaihangbang').click(function () {
+        $(".paihangbang").show();
+    })
+
+    $('#hide').on('click', function () {
+        $("#serviceView").removeClass('show').addClass('none');
+    });
+    //定时检查是否开奖
+    var setTime = 10000;
+    var home_id = '{$homeInfo["game_home_id"]}';
+    var game_home_status = '{$homeInfo["game_home_status"]}';
+
+    function checkLottery(isUrlVisit) {
+        $.post("{:url('game/is_full')}", {
+                'home_id': home_id,
+            },
+            function (r) {
+                $("#residue-sum").html(r.remain)
+                if (r.game_home_status == 3) {
+                    $("#test").attr('href', 'javascript:void(0)');
+                    var residueTime = r.residueTime;
+                    //这里需要放烟花
+                    if (!isUrlVisit || residueTime > 0) {
+                        if (residueTime < 0) {
+                            drawResult(r)
+                        } else {
+                            setTimeout(function () {
+                                drawResult(r)
+                            }, residueTime * 1000);
+                        }
+                    } else {
+                        alert('游戏已结束');
+                        // location.href = "/mobile";
+                    }
+                } else {
+                    setTimeout(function () {
+                        checkLottery(false);
+                    }, setTime);
+                }
+            });
+    }
+
+    function drawResult(r) {
+        lottery_initvars();
+        $('#lottery-main-user').attr('src', r.userpic);
+        $('#lottery_nickname').html(r.nickname);
+        $("#lottery-dataNums").hide();
+        $('#div-lottery-main-user').show();
+        lottery_jinbi(0);
+    }
+
+    function lottery_jinbi(i) {
+        i++;
+        $(".user-jinbi").each(function () {
+            var cart = $('#lottery-main-user');
+            var imgtodrag = $(this);
+            if (imgtodrag) {
+                setTimeout(function () {
+                    animate_jinbi(imgtodrag, cart)
+                }, 600);
+            }
+        })
+        if (i < 6) {
+            setTimeout(function () {
+                lottery_jinbi(i)
+            }, 300);
+        }
+    }
+
+    setTimeout(function () {
+        checkLottery(true)
+    }, 1000);
+
+    function animate_jinbi(imgToDrag, target) {
+        var imgClone = imgToDrag.clone().offset({
+            top: imgToDrag.offset().top,
+            left: imgToDrag.offset().left
+        }).css({
+            'opacity': '0.5',
+            'position': 'absolute',
+            'height': '100px',
+            'width': '100px',
+            'z-index': '100'
+        }).appendTo($('body')).animate({
+            'top': target.offset().top + 30,
+            'left': target.offset().left + 10,
+            'width': 50,
+            'height': 50
+        }, 1000, 'easeInOutExpo');
+        imgClone.animate({
+            'width': 0,
+            'height': 0
+        }, function () {
+            $(this).detach();
+        });
+    }
+</script>
+</html>

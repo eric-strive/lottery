@@ -86,11 +86,11 @@
     </div>
 </div>
 
-<div class="screen menu">
+<div class="screen menu" style="display: none">
     <h1>喂青蛙</h1>
-    <a href="#" class="btn play" onClick="play()">
+    <a href="#" class="btn play" onClick="">
         <span class="text">开始</span>
-        <!--        <span>最好: <span class="js-best">0</span></span>-->
+        <span>最好: <span class="js-best">0</span></span>
     </a>
 </div>
 
@@ -155,19 +155,18 @@
     <div class="card">
         <h3 class="highscore js-highscore is-hidden">新高分！</h3>
 
-        <div class="score">
+        <div class="score" style="float:none;font-size: 20px;">
             <span class="label">分数</span>
             <span class="value js-score">30</span>
         </div>
 
-        <div class="best">
+        <div class="best" style="display: none;">
             <span class="label">最好</span>
             <span class="value js-best">0</span>
         </div>
 
     </div>
-    <a href="#" class="btn" onClick="play()">再玩一次</a>
-    <a href="#" class="btn btn--clear" onClick="menu()">返回菜单</a>
+    <a href="/mobile" class="btn btn--clear" onClick="menu()">确定</a>
 </div>
 
 <div class="screen settings">
@@ -271,6 +270,20 @@
     wx.error(function (res) {
         alert(res.errMsg);
     });
+    var home_id = '{$recordInfo.game_home_id}';
+    var game_record_id = '{$recordInfo.game_record_id}';
+    setTimeout(play, 1000);
+
+    function saveGameScores(score) {
+        $.post("{:url('game/set_grade')}", {
+                'home_id': home_id,
+                'game_record_id': game_record_id,
+                'grade': score,
+            },
+            function (r) {
+                location.href = '/mobile/game/draw_room/home_id/' + home_id;
+            });
+    }
 </script>
 </body>
 </html>

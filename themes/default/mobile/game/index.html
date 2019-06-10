@@ -364,6 +364,7 @@
             layer.msg('请设置房间名和密码~');
             return false;
         } else {
+            _isError = false;
             balancePay(pay_amount, number_people, home_name, password);
         }
     })

@@ -368,7 +368,7 @@ class Home
      */
     public static function confirmGet($id, $uid=null)
     {
-        Db::name('home')
+        return Db::name('home')
             ->where([
                 'id'          => $id,
 //                'lottery_uid' => $uid,
@@ -390,7 +390,7 @@ class Home
                 'confirm_at'       => date('Y-m-d H:i:s'),
             ]);
         $homeInfo = self::getHomeInfo($homeId);
-        Member::giveBalanceLuck($homeInfo, $return_venosa);
+        Member::giveBalanceLuck($homeInfo['lottery_uid'], $return_venosa);
     }
 
     public static function home_info_by_sign($home_id)

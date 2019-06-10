@@ -170,7 +170,7 @@ class LuckRecord
     public static function getRecord($uid = null, $isLottery = null, $is_draw = null, $count = 20)
     {
         $query = Db::view('LuckRecord', '*')
-            ->view('Goods', 'name', 'LuckRecord.gid=Goods.goods_id')
+            ->view('Goods', 'name,return_venosa', 'LuckRecord.gid=Goods.goods_id')
             ->view('GoodsImage', 'image', 'LuckRecord.gid=GoodsImage.goods_id')
             ->where('LuckRecord.status', self::STATUS_SUCCESS_PAY);
         if ($uid && $uid !== true) {

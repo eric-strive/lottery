@@ -114,7 +114,7 @@ class GameHomeService
             throw new Exception('房间已满!');
         }
         $info = GameHome::getRecordInfo($homeId, $uid);
-        if ($info['pay_status'] == 1) {
+        if (!empty($info)) {
             throw new Exception('您已支付!');
         }
         if ($status == 1) {
@@ -178,8 +178,8 @@ class GameHomeService
                 Member::addBalance($getMax['uid'], $amount);
                 Member::addBalanceRecord([
                     'uid'         => $getMax['uid'],
-                    'amount'      => $homeId,
-                    'home_id'     => $amount,
+                    'amount'      => $amount,
+                    'home_id'     => $homeId,
                     'description' => '用户玩游戏获取',
                     'prefix'      => 1,
                     'create_time' => time(),

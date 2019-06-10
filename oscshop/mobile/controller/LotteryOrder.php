@@ -16,6 +16,7 @@ namespace osc\mobile\controller;
 
 use osc\admin\model\LuckRecord;
 use osc\admin\model\Home as HomeModel;
+use osc\admin\model\Member;
 use think\Db;
 
 class LotteryOrder extends MobileBase
@@ -67,12 +68,14 @@ class LotteryOrder extends MobileBase
             $orders = HomeModel::HomeList(null, UID, $limit);
         } elseif ($status === HomeModel::NOT_GET) {
             if ($all) {
-                $where = ['status' => HomeModel::LOTTERY];
+                $where = ['h.status' => HomeModel::LOTTERY];
             } else {
-                $where = ['status' => HomeModel::LOTTERY, 'lottery_uid' => UID];
+                $where = ['h.status' => HomeModel::LOTTERY, 'lottery_uid' => UID];
             }
             $orders = Db::name('home')
                 ->alias('h')
+                ->field('h.*,m.*,gi.image,g.return_venosa')
+                ->join('goods g', 'h.gid=g.goods_id')
                 ->join('goods_image gi', 'h.gid=gi.goods_id')
                 ->join('member m', 'h.lottery_uid=m.uid')
                 ->where($where)
@@ -122,11 +125,22 @@ class LotteryOrder extends MobileBase
     public static function confirm_get()
     {
         $luck_record_id = input('luck_record_id');
+        $return_venosa  = input('return_venosa', 0);
         $home_id        = input('home_id');
         if ($home_id) {
-            HomeModel::confirmGet($home_id);
+            $homeInfo = HomeModel::getHomeInfo($home_id, true);
+            if ($homeInfo['status'] !== HomeModel::COMPLETE) {
+                HomeModel::confirmGet($home_id);
+                Member::giveBalanceLuck($homeInfo['lottery_uid'], $return_venosa);
+            }
         } else {
-            LuckRecord::setDraw($luck_record_id);
+            $luckInfo = Db::name('luck_record')
+                ->where(['luck_record_id' => $luck_record_id])
+                ->find();
+            if ($luckInfo['is_draw'] !== 1) {
+                LuckRecord::setDraw($luck_record_id);
+                Member::giveBalanceLuck($luckInfo['uid'], $return_venosa);
+            }
         }
     }
 }

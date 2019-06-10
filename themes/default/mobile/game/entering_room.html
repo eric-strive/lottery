@@ -69,6 +69,22 @@
             width: 70%;
             background: darkseagreen;
         }
+
+        #game_home {
+            width: 100%;
+            height: 28.4rem;
+            background: url(__PUBLIC__/act/guessing_game/img/graw_bg.png);
+            background-size: 100%;
+        }
+
+        .start_game {
+            width: 10rem;
+            background-size: 100%;
+            margin-top: 10rem;
+            margin-left: 5rem;
+            height: 3rem;
+            position: absolute;
+        }
     </style>
 </head>
 <body>
@@ -94,6 +110,13 @@
 
         <!--        <div class="tuichu"><i class="tcsde"></i></div>-->
     </div>
+    <div class="hea_min hea_min2 fl_r">
+        <div class="h_xzz" style="width: 12rem;margin-left: 10%;font-size: 20px;">
+            <span>支付<strong style="color: red">{:intval($homeInfo.pay_amount)}</strong>枚金币就可以开始对战</span>
+        </div>
+
+        <!--        <div class="tuichu"><i class="tcsde"></i></div>-->
+    </div>
 </div>
 <div id="div-lottery-main-user" style="position: absolute;margin: 20% 33%;width:auto;text-align:center;display:none; ">
     <div class="lottety_nickname">恭喜中奖</div>
@@ -102,7 +125,7 @@
          alt="">
     <div class="lottety_nickname" id="lottery_nickname"></div>
 </div>
-<div id="home">
+<div id="game_home">
     <!--    <div id="yanhua" class="none" style="position: absolute;margin-top: 100%;">-->
     <!--        &lt;!&ndash; 中奖弹框 &ndash;&gt;-->
     <!--        <button class="close" id="modal-close" data-dismiss="modal" style="visibility: hidden;">-->
@@ -142,11 +165,7 @@
                     <img src="__PUBLIC__/image/jinbi/images/jb5.png" class="user-jinbi"/>
                     <img src="__PUBLIC__/image/jinbi/images/jb3.png" class="user-jinbi"/>
                     </span>
-                    {if condition="$record[$i]['is_affirm'] eq 0"}
-                    {if condition="$record[$i]['uid'] eq $uid"}
-                    <button class="button-prepare" att="{$record[$i]['game_record_id']}">准备</button>
-                    {/if}
-                    {else/}
+                    {if condition="$record[$i]['is_affirm'] eq 1"}
                     <button class="button-prepare">小手</button>
                     {/if}
                     {/if}
@@ -154,8 +173,16 @@
                 {/for}
             </ul>
         </div>
-        <div class="bg-meinv fl">
+        {notempty name="userRecord"}
+        {eq name="userRecord.is_affirm" value="0"}
+        <div class="fl start_game" att="{$userRecord.game_record_id}">
+            <a style="font-weight:bold;text-align:center;color:red"
+               class="weui_btn weui_btn_primary payment ">
+                开始对战
+            </a>
         </div>
+        {/eq}
+        {/notempty}
         <div class="meinv-right fr">
             <ul>
                 {for start='1' end='10' step='2' name='i'}
@@ -171,11 +198,7 @@
                     <img src="__PUBLIC__/image/jinbi/images/jb4.png" class="user-jinbi"/>
                     <img src="__PUBLIC__/image/jinbi/images/jb5.png" class="user-jinbi"/>
                     </span>
-                    {if condition="$record[$i]['is_affirm'] eq 0"}
-                    {if condition="$record[$i]['uid'] eq $uid"}
-                    <button class="button-prepare" att="{$record[$i]['game_record_id']}">准备</button>
-                    {/if}
-                    {else/}
+                    {if condition="$record[$i]['is_affirm'] eq 1"}
                     <button class="button-prepare">小手</button>
                     {/if}
                     {/if}
@@ -482,6 +505,7 @@
     var setTime = 10000;
     var home_id = '{$homeInfo["game_home_id"]}';
     var game_home_status = '{$homeInfo["game_home_status"]}';
+    var pay_status = '{$userRecord.pay_status}';
 
     function checkLottery(isUrlVisit) {
         $.post("{:url('game/is_full')}", {
@@ -489,21 +513,22 @@
             },
             function (r) {
                 $("#residue-sum").html(r.remain)
-                // console.log('r', r);
-                if (r.status > 0) {
+                if (r.game_home_status > 1) {
                     $("#test").attr('href', 'javascript:void(0)');
                     var residueTime = r.residueTime;
+
                     //这里需要放烟花
                     if (!isUrlVisit || residueTime > 0) {
                         if (residueTime < 0) {
                             location.href = '/mobile/game/start_game/home_id/' + r.game_home_id;
                         } else {
+                            alert('游戏即将开始，请勿点击页面！');
                             setTimeout(function () {
                                 location.href = '/mobile/game/start_game/home_id/' + r.game_home_id;
                             }, residueTime * 1000);
                         }
                     } else {
-                        // alert('购买已结束');
+                        alert('游戏已结束');
                         // location.href = "/mobile";
                     }
                 } else {
@@ -514,59 +539,10 @@
             });
     }
 
-    function drawResult(r) {
-        lottery_initvars();
-        $('#lottery-main-user').attr('src', r.userpic);
-        $('#lottery_nickname').html(r.nickname);
-        $("#lottery-dataNums").hide();
-        $('#div-lottery-main-user').show();
-        lottery_jinbi(0);
-    }
-
-    function lottery_jinbi(i) {
-        i++;
-        $(".user-jinbi").each(function () {
-            var cart = $('#lottery-main-user');
-            var imgtodrag = $(this);
-            if (imgtodrag) {
-                setTimeout(function () {
-                    animate_jinbi(imgtodrag, cart)
-                }, 600);
-            }
-        })
-        if (i < 6) {
-            setTimeout(function () {
-                lottery_jinbi(i)
-            }, 300);
-        }
-    }
-
-    setTimeout(function () {
-        checkLottery(true)
-    }, 1000);
-
-    function animate_jinbi(imgToDrag, target) {
-        var imgClone = imgToDrag.clone().offset({
-            top: imgToDrag.offset().top,
-            left: imgToDrag.offset().left
-        }).css({
-            'opacity': '0.5',
-            'position': 'absolute',
-            'height': '100px',
-            'width': '100px',
-            'z-index': '100'
-        }).appendTo($('body')).animate({
-            'top': target.offset().top + 30,
-            'left': target.offset().left + 10,
-            'width': 50,
-            'height': 50
-        }, 1000, 'easeInOutExpo');
-        imgClone.animate({
-            'width': 0,
-            'height': 0
-        }, function () {
-            $(this).detach();
-        });
+    if (pay_status == 1) {
+        setTimeout(function () {
+            checkLottery(true)
+        }, 1000);
     }
 
     $('#balance-payment-btn').click(balancePayCall);
@@ -681,7 +657,7 @@
         $('#wechat-payment-btn').removeClass('disable').html('微信支付');
     }
 
-    $(".button-prepare").click(function () {
+    $(".start_game").click(function () {
         var record_id = $(this).attr('att');
         $.post("{:url('game/game_prepare')}", {
                 'record_id': record_id,

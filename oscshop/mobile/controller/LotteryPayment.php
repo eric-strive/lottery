@@ -97,7 +97,7 @@ class LotteryPayment extends Base
             } catch (\Exception $e) {
                 Db::rollback();
 
-                return json(['ret_code' => 11, 'ret_msg' => $e->getMessage().$e->getLine().$e->getFile()]);
+                return json(['ret_code' => 11, 'ret_msg' => $e->getMessage()]);
             }
 
         }

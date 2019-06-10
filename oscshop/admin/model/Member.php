@@ -95,12 +95,12 @@ class Member
         ]);
     }
 
-    public static function giveBalanceLuck($homeInfo, $return_venosa)
+    public static function giveBalanceLuck($uid, $return_venosa)
     {
         if ($return_venosa > 0) {
-            self::addBalance($homeInfo['lottery_uid'], $return_venosa);
+            self::addBalance($uid, $return_venosa);
             self::addBalanceRecord([
-                'uid'         => $homeInfo['lottery_uid'],
+                'uid'         => $uid,
                 'amount'      => $return_venosa,
                 'description' => '用户夺宝获取返还金豆',
                 'prefix'      => 1,

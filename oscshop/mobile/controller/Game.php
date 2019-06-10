@@ -29,30 +29,32 @@ class Game extends MobileBase
             }
         }
     }
+
     /**
      * 发送模版消息，不同的模版需要的参数不一样
      */
     public function send_msg()
     {
-        $tem = new templateNews(config('appid'), config('appsecret'));
-        $wechat = wechat();
+        $tem     = new templateNews(config('appid'), config('appsecret'));
+        $wechat  = wechat();
         $tempKey = 'OPENTM207225527';
-        $color = "#000";
-        $time = date("Y-m-d H:i:s");
-        $dataArr = array(
-            'openid' => 'oSu0X1iN7a_ukYPMXVXdQAS8lbFo',
-            'href' => 'http://mfs99.cn',
-            'first' => '您好，您有新的订单啦。',
+        $color   = "#000";
+        $time    = date("Y-m-d H:i:s");
+        $dataArr = [
+            'openid'   => 'oSu0X1iN7a_ukYPMXVXdQAS8lbFo',
+            'href'     => 'http://mfs99.cn',
+            'first'    => '您好，您有新的订单啦。',
             'keyword1' => '2343',
             'keyword2' => '23423',
             'keyword3' => '3rwewefe',
-            'remark' => '您可以点击进入个人中心，感谢您的使用。'
-        );
-        $we = $tem->sendTempMsg($tempKey, $dataArr, '', $color);
+            'remark'   => '您可以点击进入个人中心，感谢您的使用。',
+        ];
+        $we      = $tem->sendTempMsg($tempKey, $dataArr, '', $color);
         dump($we);
         $a = $wechat->sendTemplateMessage($we);
         dump($a);
     }
+
     public function index()
     {
         if (in_wechat()) {
@@ -84,11 +86,12 @@ class Game extends MobileBase
             $this->error('您没有访问权限');
         }
         $this->gameCheck($homeInfo);
-
+        $userRecord   = GameHome::getRecordInfo($homeInfo['game_home_id'], UID);
         $homeUserInfo = Member::getMemberInfo($homeInfo['game_home_uid']);
 
         $record = GameHome::get_home_record($homeInfo['game_home_id']);
         $this->assign('homeUserInfo', $homeUserInfo);
+        $this->assign('userRecord', $userRecord);
         $this->assign('uid', UID);
         $this->assign('record', $record);
         $this->assign('homeInfo', $homeInfo);
@@ -96,6 +99,36 @@ class Game extends MobileBase
         $this->assign('top_title', '房间');
 
         return $this->fetch('entering_room');
+    }
+
+    public function draw_room()
+    {
+        if (in_wechat()) {
+            $wechat = wechat();
+            //调用微信收货地址接口，需要开通微信支付
+            $this->assign('signPackage', $wechat->getJsSign(request()->url(true)));
+            session('jssdk_order', null);
+        }
+        $home_id  = (int)input('param.home_id');
+        $homeInfo = GameHome::getHomeInfo($home_id);
+        if (empty($homeInfo)) {
+            $this->error('您没有访问权限');
+        }
+        if ($homeInfo['game_home_status'] < 2) {
+            $this->error('您没有访问权限');
+        }
+        $this->gameCheck($homeInfo);
+        $userRecord = GameHome::getRecordInfo($homeInfo['game_home_id'], UID);
+
+        $record = GameHome::get_home_record($homeInfo['game_home_id']);
+        $this->assign('userRecord', $userRecord);
+        $this->assign('uid', UID);
+        $this->assign('record', $record);
+        $this->assign('homeInfo', $homeInfo);
+        $this->assign('SEO', ['title' => '房间-' . config('SITE_TITLE')]);
+        $this->assign('top_title', '房间');
+
+        return $this->fetch('draw_room');
     }
 
     /**
@@ -111,6 +144,20 @@ class Game extends MobileBase
             'game_key'  => GameHome::GAME_FROG,
             'create_at' => date('Y-m-d H:i:s'),
         ]);
+    }
+
+    //更新游戏分数
+    public function set_grade()
+    {
+        $data = input('post.');
+        GameHome::update_game_grade([
+            'uid'            => UID,
+            'game_record_id' => $data['game_record_id'],
+            'pay_status'     => 1,
+        ], $data['grade']);
+        $homeId = $data['home_id'];
+        //判断以及处理满房
+        GameHomeService::homeIsFull($homeId, false);
     }
 
     /**
@@ -130,7 +177,7 @@ class Game extends MobileBase
      */
     public function get_home_list()
     {
-        $where['game_home_status'] = ['<>', 0];
+        $where['game_home_status'] = ['=', 1];
         $homeList                  = Db::name('game_home')
             ->where($where)
             ->order('game_home_status,create_at')
@@ -159,9 +206,9 @@ class Game extends MobileBase
         $homeInfo['remain'] = $remain;
         $residueTime        = 0;//剩余开奖时间，默认是10秒
         //是否满房
-//        if ($remain > 0) {
-//            return ['status' => 0, 'remain' => $remain, 'residueTime' => $residueTime];
-//        }
+        if ($remain > 0) {
+            return ['game_home_status' => 0, 'remain' => $remain, 'residueTime' => $residueTime];
+        }
 
         //是否已完成
         if ($homeInfo['game_home_status'] == 3) {
@@ -169,6 +216,9 @@ class Game extends MobileBase
             $homeInfo['nickname'] = $userInfo['nickname'];
             $homeInfo['userpic']  = $userInfo['userpic'];
             $homeInfo['is_self']  = $homeInfo['game_home_win_uid'] == UID ? 1 : 0;
+
+            $residueTime             = strtotime($homeInfo['lottery_at']) + 10 - time();
+            $homeInfo['residueTime'] = $residueTime;
 
             return $homeInfo;
         }
@@ -187,7 +237,8 @@ class Game extends MobileBase
         //没进入就设置准备
         $prepareNum = GameHome::getPrepareNum($homeId);
         if ($prepareNum >= $homeInfo['game_home_number_people']) {
-            $homeInfo['residueTime'] = 10;
+            $homeInfo['residueTime']      = 10;
+            $homeInfo['game_home_status'] = 2;
             GameHome::setStartTime($homeId);
         }
 
@@ -221,15 +272,17 @@ class Game extends MobileBase
             $this->error('您无权访问');
         }
         $this->gameCheck($homeInfo);
+        //        $this->assign('homeInfo', $homeInfo);
+        $this->assign('recordInfo', $recordInfo);
 
         return $this->fetch();
     }
 
     public function game_prepare()
     {
-        $record_id = input('record_id');
-        $home_id = input('home_id');
-        $homeInfo           = GameHome::getHomeInfo($home_id);
+        $record_id  = input('record_id');
+        $home_id    = input('home_id');
+        $homeInfo   = GameHome::getHomeInfo($home_id);
         $prepareNum = GameHome::getPrepareNum($home_id);
         if ($prepareNum >= $homeInfo['game_home_number_people']) {
             GameHome::setStartTime($home_id);
@@ -251,9 +304,9 @@ class Game extends MobileBase
     public function gameCheck($homeInfo)
     {
         if ($homeInfo['game_home_status'] == 3) {
-            $this->error('游戏已结束!');
+            //            $this->error('游戏已结束!');
         }
-        if (!empty($homeInfo['start_at']) && (strtotime($homeInfo['start_at']) + 60) < time()) {
+        if (!empty($homeInfo['start_at']) && (strtotime($homeInfo['start_at']) + 60000000) < time()) {
             GameHomeService::homeIsFull($homeInfo['game_home_id'], true);
             $this->error('活动还未开始或已结束');
         }

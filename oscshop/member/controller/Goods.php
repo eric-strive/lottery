@@ -124,6 +124,40 @@ class Goods extends controller
             LuckRecord::setDraw($luck_record_id);
         }
     }
+
+    public function account_info()
+    {
+        $startDate = date('Y-m-d');
+        $endDate   = date('Y-m-d', time() + 86400);
+        dump($startDate);
+        dump($endDate);
+        //微信价值
+        $payTatol = Db::name('pay_order')
+            ->where('create_at', '>=', $startDate)
+            ->where('create_at', '<', $endDate)
+            ->where('pay_type', '=', 1)
+            ->where('status', '=', 1)
+            ->sum('pay_amount');
+        //总领取商品价值
+        $homeTatol     = Db::name('home')
+            ->where('lottery_at', '>=', $startDate)
+            ->where('lottery_at', '<', $endDate)
+            ->where('status', '=', 1)
+            ->sum('goods_price');
+        $luckTatol     = Db::view('LuckRecord')
+            ->view('Goods', 'price', 'LuckRecord.gid=Goods.goods_id')
+            ->where('create_at', '>=', $startDate)
+            ->where('create_at', '<', $endDate)
+            ->where('LuckRecord.status', '=', 1)
+            ->sum('price');
+        $receiverTatol = $homeTatol + $luckTatol;
+        //平台的金豆总数
+        $balanceTatol = Db::name('member')->sum('balance');
+        dump($payTatol);
+        dump($receiverTatol);
+        dump($balanceTatol);
+        exit;
+    }
 }
 
 ?>

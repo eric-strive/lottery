@@ -1,21 +1,24 @@
 {volist name="order" id="orders"}
 <style>
-    .clearfix .order_serial{
+    .clearfix .order_serial {
         font-size: 18px;
         width: 90%;
     }
-    .clearfix .sum{
+
+    .clearfix .sum {
         font-size: 18px;
     }
-    .uc-seral,.uc-summary{
+
+    .uc-seral, .uc-summary {
         border: none;
     }
-    .uc-summary .olbtn{
+
+    .uc-summary .olbtn {
         font-size: 18px;
         padding: 5px;
     }
 </style>
-<div class="uc-orderitem" style="font-weight: bold;height: 6.5rem;">
+<div class="uc-orderitem" style="font-weight: bold;height: 7.5rem;">
     <img style="width: 30%;" src="IMG_ROOT{$orders.image}">
     <div class="uc-seral clearfix" style="width: 65%;float: right;">
         <p class="order_serial"><span class="dprice">{$orders.nickname}</span></p>
@@ -37,9 +40,15 @@
             <!--            &nbsp;&nbsp;|&nbsp;&nbsp;中奖随机数: <span class="dprice">{$orders.lottery_rand}</span>-->
             {/if}
         </div>
-        <a class="olbtn cancel" style="color: red" href="/mobile/goods/detail/id/{$orders.gid}">查看商品</a>
         {if condition="($orders.status eq 1) ANd ($all)"}
-        <a class="olbtn wepay wepay_button confirm_get" href="javascript:;" att="{$orders.id}">确认领取</a>
+        <span>
+            <input type="text" class="return_venosa" value="{$orders.return_venosa}"
+                   style="width: 4rem;height: 1.3rem;margin-left: 6rem;">
+        </span>
+        <a style="margin-top: -1.2rem" class="olbtn wepay wepay_button confirm_get" href="javascript:;"
+           att="{$orders.id}">确认领取</a>
+        {else/}
+        <a class="olbtn cancel" style="color: red" href="/mobile/goods/detail/id/{$orders.gid}">查看商品</a>
         {/if}
     </div>
 </div>
@@ -48,9 +57,11 @@
 <script>
     $(".confirm_get").click(function () {
         if (confirm('你确认已领取吗?')) {
+            var return_venosa = $(this).parent().find('.return_venosa').val();
             var home_id = $(this).attr('att');
             $.post('{:url("lottery_order/confirm_get")}', {
                 home_id: home_id,
+                return_venosa: return_venosa,
             }, function (d) {
                 if (d.error) {
                     $.toast(d.error, "forbidden");

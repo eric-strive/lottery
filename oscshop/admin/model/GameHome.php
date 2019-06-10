@@ -53,6 +53,16 @@ class GameHome
             ->insert($gameRecord, false, true);
     }
 
+    //更新游戏状态
+    public static function update_game_grade($data, $grade)
+    {
+        return Db::name('game_record')->where($data)
+            ->update([
+                'grade'       => $grade,
+                'game_status' => 1,
+            ]);
+    }
+
     /**
      * 新增或减少份额
      *
@@ -226,6 +236,7 @@ class GameHome
             ->where([
                 'game_home_id' => $homeId,
                 'uid'          => $userId,
+                'pay_status'   => 1,
             ])
             ->find();
     }
@@ -309,9 +320,19 @@ class GameHome
      */
     public static function getPrepareNum($homeId)
     {
-        return Db::name('game_home')
+        return Db::name('game_record')
             ->where([
                 'game_home_id' => $homeId,
+                'is_affirm'    => 1,
+            ])->count();
+    }
+
+    public static function getCompleteNum($homeId)
+    {
+        return Db::name('game_record')
+            ->where([
+                'game_home_id' => $homeId,
+                'game_status'  => 1,
             ])->count();
     }
 }

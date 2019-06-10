@@ -51,7 +51,12 @@
         </div>
 
         <div style="margin-top:4%;font-size: 18px;">
-            <span class="title" style='height:42px;'><strong style="color: red">&nbsp;&nbsp;【{$l.name}】</strong></span>
+            <span style="position: absolute;left: 0;">送</span>
+            <span class="title" style='height:42px;'>
+                <input type="text" class="return_venosa" value="{$l.return_venosa}"
+                       style="position: absolute;width: 2.5rem;height: 1.3rem;left: 1rem">
+                <span style="margin-left: -1rem;">金豆</span>
+                <strong style="color: red">&nbsp;&nbsp;【{$l.name}】</strong></span>
             <a class="olbtn wepay confirm_get" style="color: red" att="{$l.luck_record_id}" href='javascript:void(0)'>确认领取</a>
         </div>
     </section>
@@ -93,16 +98,22 @@
     })
     $(".confirm_get").click(function () {
         if (confirm('你确认已领取吗?')) {
+            var return_venosa = $(this).parent().find('.return_venosa').val();
             var luck_record_id = $(this).attr('att');
             $.post('{:url("lottery_order/confirm_get")}', {
-                luck_record_id: luck_record_id
-            }, function (d) {
-                if (d.error) {
-                    $.toast(d.error, "forbidden");
-                    return;
+                    luck_record_id: luck_record_id,
+                    return_venosa: return_venosa
+                },
+
+                function (d) {
+                    if (d.error) {
+                        $.toast(d.error, "forbidden");
+                        return;
+                    }
+                    window.location.reload();
                 }
-                window.location.reload();
-            });
+            )
+            ;
         }
     })
 </script>
