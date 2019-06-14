@@ -153,20 +153,23 @@ class GameHome
      * @param $homeId
      * @param $winUid
      *
+     * @param $grade
+     *
      * @return int|string
-     * @throws Exception
+     * @throws \think\Exception
      * @throws \think\exception\PDOException
      */
-    public static function confirmWin($homeId, $winUid)
+    public static function confirmWin($homeId, $winUid, $grade)
     {
         return Db::name('game_home')
             ->where([
                 'game_home_id' => $homeId,
             ])
             ->update([
-                'game_home_win_uid' => $winUid,
-                'game_home_status'  => 3,
-                'lottery_at'        => date('Y-m-d H:i:s'),
+                'game_home_win_grade' => $grade,
+                'game_home_win_uid'   => $winUid,
+                'game_home_status'    => 3,
+                'lottery_at'          => date('Y-m-d H:i:s'),
             ]);
     }
 

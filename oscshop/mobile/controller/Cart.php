@@ -129,7 +129,7 @@ class Cart extends MobileBase
         if (!$list = osc_goods()->get_goods_info($gid)) {
             $this->error('商品不存在！！');
         }
-        $list['goods']['image'] = resize($list['goods']['image'], 80, 80);
+        $list['goods']['image'] = resize($list['goods']['image'], 230, 230);
         if ($homeInfo['status'] != 0) {
             $this->assign('lottery_num', $homeInfo['lottery_num']);
         } else {

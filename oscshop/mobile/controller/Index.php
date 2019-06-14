@@ -49,7 +49,7 @@ class Index extends MobileBase
 
         if (isset($list) && is_array($list)) {
             foreach ($list as $k => $v) {
-                $list[$k]['image'] = resize($v['image'], 250, 250);
+                $list[$k]['image'] = resize($v['image'], 400, 400);
                 $list[$k]['schedule'] = duobaoRecord::get_duobao_num($v['periods'], $v['goods_id']);
             }
         }

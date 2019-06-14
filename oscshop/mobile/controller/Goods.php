@@ -124,6 +124,7 @@ class Goods extends MobileBase
      */
     function luck()
     {
+        echo build_order_no();exit;
         $isLottery = false;
         $gid       = (int)input('id');
         $order_no  = (int)input('order_no');
@@ -146,6 +147,10 @@ class Goods extends MobileBase
             $goodsInfo = GoodsModel::getGoodsInfo($gid);
             Db::startTrans();
             try {
+//                $recordInfo = LuckRecord::luckInfo($order_no);
+//                if($recordInfo['status']==1){
+//
+//                }
                 $recordSum = LuckRecord::recordSum($gid, $uid);
                 if ($recordSum >= $goodsInfo['lotter_price']) {
                     //中奖了
@@ -164,7 +169,7 @@ class Goods extends MobileBase
             $this->error('商品不存在！！');
         }
         $this->assign('recordSum', $recordSum);
-        $list['goods']['image'] = resize($list['goods']['image'], 80, 80);
+        $list['goods']['image'] = resize($list['goods']['image'], 230, 230);
         $this->assign('goods', $list['goods']);
         $this->assign('order_no', $order_no);
         $this->assign('isLottery', $isLottery);

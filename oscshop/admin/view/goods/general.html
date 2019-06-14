@@ -60,31 +60,6 @@
                                        value="{$goods.name}" name="name">
                             </div>
                         </div>
-
-                        <div class="form-group required"  style="color: #747909">
-                            <label class="col-sm-2 control-label" for="input-meta-title2">商品型号：</label>
-                            <div class="col-sm-10">
-                                <input id="input-meta-title2" class="form-control" type="text" placeholder="商品型号"
-                                       value="{$goods.model}" name="model">
-                            </div>
-                        </div>
-
-                        <div class="form-group required"  style="color: #ccc">
-                            <label class="col-sm-2 control-label" for="input-meta-title2">库存单位：</label>
-                            <div class="col-sm-10">
-                                <input id="input-meta-title2" class="form-control" type="text" placeholder="库存单位"
-                                       value="{$goods.sku}" name="sku">
-                            </div>
-                        </div>
-
-                        <div class="form-group required"  style="color: pink">
-                            <label class="col-sm-2 control-label" for="input-meta-title2">生产地：</label>
-                            <div class="col-sm-10">
-                                <input id="input-meta-title2" class="form-control" type="text" placeholder="商品位置"
-                                       value="{$goods.location}" name="location">
-                            </div>
-                        </div>
-
                         <div class="form-group required"  style="color: #124457">
                             <label class="col-sm-2 control-label" for="input-meta-title2">销售价格：</label>
                             <div class="col-sm-10">
@@ -113,6 +88,13 @@
                                        value="{$goods.return_venosa}" name="return_venosa">
                             </div>
                         </div>
+                        <div class="form-group required">
+                            <label class="col-sm-2 control-label" for="input-meta-title2">排序：</label>
+                            <div class="col-sm-10">
+                                <input id="input-meta-title2" class="form-control" type="text" placeholder="排序"
+                                       value="{$goods.sort_order}" name="sort_order">
+                            </div>
+                        </div>
                         <div class="form-group required"  style="color: rgba(28,10,15,0.92)">
                             <label class="col-sm-2 control-label" for="input-meta-title2">商品数量：</label>
                             <div class="col-sm-10">
@@ -133,6 +115,29 @@
                             <div class="col-sm-10">
                                 <input id="input-meta-title2" class="form-control" type="text" placeholder="兑换所需积分"
                                        value="{$goods.pay_points}" name="pay_points">
+                            </div>
+                        </div>
+                        <div class="form-group required"  style="color: #747909">
+                            <label class="col-sm-2 control-label" for="input-meta-title2">商品型号：</label>
+                            <div class="col-sm-10">
+                                <input id="input-meta-title2" class="form-control" type="text" placeholder="商品型号"
+                                       value="{$goods.model}" name="model">
+                            </div>
+                        </div>
+
+                        <div class="form-group required"  style="color: #ccc">
+                            <label class="col-sm-2 control-label" for="input-meta-title2">库存单位：</label>
+                            <div class="col-sm-10">
+                                <input id="input-meta-title2" class="form-control" type="text" placeholder="库存单位"
+                                       value="{$goods.sku}" name="sku">
+                            </div>
+                        </div>
+
+                        <div class="form-group required"  style="color: pink">
+                            <label class="col-sm-2 control-label" for="input-meta-title2">生产地：</label>
+                            <div class="col-sm-10">
+                                <input id="input-meta-title2" class="form-control" type="text" placeholder="商品位置"
+                                       value="{$goods.location}" name="location">
                             </div>
                         </div>
 
@@ -225,14 +230,6 @@
                         <!--<input type="radio" value="2" name="status">停用</label>-->
                         <!--</div>-->
                         <!--</div>-->
-
-                        <div class="form-group required">
-                            <label class="col-sm-2 control-label" for="input-meta-title2">排序：</label>
-                            <div class="col-sm-10">
-                                <input id="input-meta-title2" class="form-control" type="text" placeholder="排序"
-                                       value="{$goods.sort_order}" name="sort_order">
-                            </div>
-                        </div>
 
                     </div>
                     <!-- 基本信息 END -->

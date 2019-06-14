@@ -79,6 +79,13 @@ class LuckRecord
             ->sum('amount');
     }
 
+    public static function luckInfo($order_no){
+        return Db::name('luck_record')
+            ->where([
+                'order_no' => $order_no,
+            ])
+            ->find();
+    }
     /**
      * 修改状态
      *

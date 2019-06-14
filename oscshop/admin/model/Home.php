@@ -287,18 +287,24 @@ class Home
     {
         return Db::name('home')
             ->where([
-                'home_num' => ['<>', 0],
+                'password' => ['<>', 0],
                 'gid'      => $gid,
                 'status'   => self::NOT_COMPLETE,
             ])->select();
     }
 
-    public static function getHomeList()
+    public static function getHomeList($is_home = false)
     {
+        $where = [];
+        if ($is_home) {
+            $where['Home.password'] = ['<>', 0];
+        }
+
         return Db::view('Home', '*')
             ->view('Goods', 'name', 'Home.gid=Goods.goods_id')
             ->view('GoodsImage', 'image', 'Home.gid=GoodsImage.goods_id')
             ->view('Member', 'nickname', 'Member.uid=Home.lottery_uid', 'left')
+            ->where($where)
             ->order('Home.status asc,Home.id desc')
             ->paginate(20, false);
     }
@@ -366,12 +372,12 @@ class Home
      * @throws Exception
      * @throws \think\exception\PDOException
      */
-    public static function confirmGet($id, $uid=null)
+    public static function confirmGet($id, $uid = null)
     {
         return Db::name('home')
             ->where([
-                'id'          => $id,
-//                'lottery_uid' => $uid,
+                'id' => $id,
+                //                'lottery_uid' => $uid,
             ])
             ->update([
                 'status'     => self::COMPLETE,
@@ -401,12 +407,21 @@ class Home
             ->find();
     }
 
+    //获取用户购买记录
     public static function bug_record($homeId, $uid)
     {
         return Db::name('home_record')->where([
             'home_id' => $homeId,
             'uid'     => $uid,
         ])->select();
+    }
+
+    //更新房间购买份额
+    public static function editNum($homeId, $goodsNum)
+    {
+        return Db::name('home')->where('id=' . $homeId)
+            ->update(['goods_buy_num' => $goodsNum]);
+
     }
 }
 

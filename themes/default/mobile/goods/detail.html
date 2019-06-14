@@ -31,7 +31,7 @@
     <div class="swiper-wrapper">
         <!-- Slides -->
         {volist name="image" id="image"}
-        <div class="swiper-slide"><img src="IMG_ROOT{$image.image|resize=400,400}"/></div>
+        <div class="swiper-slide"><img src="IMG_ROOT{$image.image|resize=480,480}"/></div>
         {/volist}
     </div>
     <!-- If we need pagination -->
@@ -265,7 +265,7 @@
 {else/}
 <div id="appCartWrap" class="clearfix flex-row-end">
 
-    <a href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id']))}" id="buy-button"
+    <a style="display: none;" href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id']))}" id="buy-button"
        class="flex-row-center base_sound" data-add="0">参与公众抽奖</a>
     <a id="addcart-button" data-add="1" href="{:url('goods/luck',array('id'=>$goods['goods_id']))}"
        class="flex-row-end base_sound" data-add="0">幸运购</a>

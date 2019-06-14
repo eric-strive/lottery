@@ -2,6 +2,7 @@
 
 namespace osc\member\controller;
 
+use osc\admin\model\duobaoRecord;
 use osc\admin\model\Home as HomeModel;
 use osc\admin\model\LuckRecord;
 use think\Controller;
@@ -42,12 +43,40 @@ class Goods extends controller
     //房间列表
     public function home_list()
     {
-        $this->assign('list', Home::getHomeList());
+        $this->assign('list', Home::getHomeList(true));
         $this->assign('title', '私人房管理');
         $this->assign('empty', '<tr><td colspan="20">没有数据~</td></tr>');
 
         return $this->fetch();
 
+    }
+
+    //房间列表
+    public function home_deal()
+    {
+        $this->assign('list', Home::getHomeList(true));
+        $this->assign('title', '异常处理');
+        $this->assign('empty', '<tr><td colspan="20">没有数据~</td></tr>');
+
+        return $this->fetch();
+
+    }
+
+    /**
+     * 错误房间处理
+     *
+     * @return bool
+     */
+    function home_error_deal()
+    {
+        $data   = input('post.');
+        $homeId = $data['home_id'];
+        $maxNum = duobaoRecord::getLastNum($homeId);
+        if ($maxNum > 0) {
+            Home::editNum($homeId, $maxNum);
+        }
+
+        return true;
     }
 
     function update_luck()
@@ -129,33 +158,128 @@ class Goods extends controller
     {
         $startDate = date('Y-m-d');
         $endDate   = date('Y-m-d', time() + 86400);
-        dump($startDate);
-        dump($endDate);
         //微信价值
-        $payTatol = Db::name('pay_order')
+        $payTotal = Db::name('pay_order')
             ->where('create_at', '>=', $startDate)
             ->where('create_at', '<', $endDate)
             ->where('pay_type', '=', 1)
             ->where('status', '=', 1)
             ->sum('pay_amount');
+        $homePayTotal = Db::name('pay_order')
+            ->where('create_at', '>=', $startDate)
+            ->where('create_at', '<', $endDate)
+            ->where('pay_type', '=', 1)
+            ->where('order_type', '=', 1)
+            ->where('status', '=', 1)
+            ->sum('pay_amount');
+        $luckPayTotal = Db::name('pay_order')
+            ->where('create_at', '>=', $startDate)
+            ->where('create_at', '<', $endDate)
+            ->where('pay_type', '=', 1)
+            ->where('order_type', '=', 2)
+            ->where('status', '=', 1)
+            ->sum('pay_amount');
+        $balancePayTotal = Db::name('pay_order')
+            ->where('create_at', '>=', $startDate)
+            ->where('create_at', '<', $endDate)
+            ->where('pay_type', '=', 1)
+            ->where('order_type', '=', 3)
+            ->where('status', '=', 1)
+            ->sum('pay_amount');
+        $gamePayTotal = Db::name('pay_order')
+            ->where('create_at', '>=', $startDate)
+            ->where('create_at', '<', $endDate)
+            ->where('pay_type', '=', 1)
+            ->where('order_type', '=', 4)
+            ->where('status', '=', 1)
+            ->sum('pay_amount');
+        //花费的金豆
+        $homeJindouTotal = Db::name('pay_order')
+            ->where('create_at', '>=', $startDate)
+            ->where('create_at', '<', $endDate)
+            ->where('pay_type', '=', 2)
+            ->where('order_type', '=', 1)
+            ->where('status', '=', 1)
+            ->sum('pay_amount');
+        $luckJindouTotal = Db::name('pay_order')
+            ->where('create_at', '>=', $startDate)
+            ->where('create_at', '<', $endDate)
+            ->where('pay_type', '=', 2)
+            ->where('order_type', '=', 2)
+            ->where('status', '=', 1)
+            ->sum('pay_amount');
+        $gameJindouTotal = Db::name('pay_order')
+            ->where('create_at', '>=', $startDate)
+            ->where('create_at', '<', $endDate)
+            ->where('pay_type', '=', 2)
+            ->where('order_type', 'in', '4,5')
+            ->where('status', '=', 1)
+            ->sum('pay_amount');
+        $jindouTotal = Db::name('pay_order')
+            ->where('create_at', '>=', $startDate)
+            ->where('create_at', '<', $endDate)
+            ->where('pay_type', '=', 2)
+            ->where('status', '=', 1)
+            ->sum('pay_amount');
+
         //总领取商品价值
-        $homeTatol     = Db::name('home')
+        $homeTotal     = Db::name('home')
             ->where('lottery_at', '>=', $startDate)
             ->where('lottery_at', '<', $endDate)
-            ->where('status', '=', 1)
+            ->where('status', '=', 2)
             ->sum('goods_price');
-        $luckTatol     = Db::view('LuckRecord')
+        $luckTotal     = Db::view('LuckRecord')
             ->view('Goods', 'price', 'LuckRecord.gid=Goods.goods_id')
             ->where('create_at', '>=', $startDate)
             ->where('create_at', '<', $endDate)
-            ->where('LuckRecord.status', '=', 1)
+            ->where('LuckRecord.is_draw', '=', 1)
             ->sum('price');
-        $receiverTatol = $homeTatol + $luckTatol;
+        $receiverTotal = $homeTotal + $luckTotal;
         //平台的金豆总数
-        $balanceTatol = Db::name('member')->sum('balance');
-        dump($payTatol);
-        dump($receiverTatol);
-        dump($balanceTatol);
+        $balanceTotal = Db::name('member')->sum('balance');
+
+        //用户花费的金豆
+        $spendBalanceTotal     = Db::name('balance')
+            ->where('create_time', '>=', strtotime($startDate))
+            ->where('create_time', '<', strtotime($endDate))
+            ->where('prefix', '=', 2)
+            ->sum('amount');
+        $addBalanceTotal     = Db::name('balance')
+            ->where('create_time', '>=', strtotime($startDate))
+            ->where('create_time', '<', strtotime($endDate))
+            ->where('prefix', '=', 1)
+            ->sum('amount');
+
+        $this->assign('startDate', $startDate);
+        $this->assign('payTotal', $payTotal);
+        $this->assign('homePayTotal', $homePayTotal);
+        $this->assign('luckPayTotal', $luckPayTotal);
+        $this->assign('gamePayTotal', $gamePayTotal);
+        $this->assign('balancePayTotal', $balancePayTotal);
+        $this->assign('payTotal', $payTotal);
+
+        $this->assign('jindouTotal', $jindouTotal);
+        $this->assign('homeJindouTotal', $homeJindouTotal);
+        $this->assign('luckJindouTotal', $luckJindouTotal);
+        $this->assign('gameJindouTotal', $gameJindouTotal);
+
+        $this->assign('receiverTotal', $receiverTotal);
+        $this->assign('homeTotal', $homeTotal);
+        $this->assign('luckTotal', $luckTotal);
+
+        $this->assign('balanceTotal', $balanceTotal);
+        $this->assign('spendBalanceTotal', $spendBalanceTotal);
+        $this->assign('addBalanceTotal', $addBalanceTotal);
+
+        $this->assign('title', '系统对账');
+
+        return $this->fetch();
+
+        dump('时间：' . $startDate);
+        dump('微信总收款：' . $payTatol . '元');
+        dump('花费的金豆总额：' . $jindouTatol . '元');
+        dump('领取的总价值：' . $receiverTatol . '元');
+        dump('用户总余额：' . $balanceTatol . '元');
         exit;
     }
 }

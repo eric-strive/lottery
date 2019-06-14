@@ -86,11 +86,9 @@
     </div>
 </div>
 
-<div class="screen menu" style="display: none">
-    <h1>喂青蛙</h1>
+<div class="screen menu" style="">
     <a href="#" class="btn play" onClick="">
-        <span class="text">开始</span>
-        <span>最好: <span class="js-best">0</span></span>
+        <span><span class="js-best-s">4</span>秒后开始</span>
     </a>
 </div>
 
@@ -253,26 +251,22 @@
     // 2. 分享接口
     // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
     wx.ready(function () {
-        wx.hideMenuItems({
-            menuList: [
-                "menuItem:exposeArticle",
-                "menuItem:share:qq",
-                "menuItem:copyUrl",
-                "menuItem:share:QZone",
-                "menuItem:originPage",
-                "menuItem:openWithQQBrowser",
-                "menuItem:openWithSafari",
-                "menuItem:share:email",
-                'menuItem:copyUrl' // 复制链接
-            ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
-        });
+        wx.hideOptionMenu();
     });
     wx.error(function (res) {
         alert(res.errMsg);
     });
     var home_id = '{$recordInfo.game_home_id}';
     var game_record_id = '{$recordInfo.game_record_id}';
-    setTimeout(play, 1000);
+    var i = 4;
+    setInterval(function () {
+        $(".js-best-s").html(i)
+        i--
+    }, 1000)
+    setTimeout(function () {
+        $('.menu').hide();
+        play();
+    }, 5000);
 
     function saveGameScores(score) {
         $.post("{:url('game/set_grade')}", {

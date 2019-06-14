@@ -84,7 +84,7 @@ class LotteryOrder extends MobileBase
             $orders = HomeModel::HomeList($status, UID, $limit);
         }
         foreach ($orders as $k => $v) {
-            $orders[$k]['image'] = resize($v['image'], 80, 80);
+            $orders[$k]['image'] = resize($v['image'], 230, 230);
         }
         $this->assign('all', $all);
         $this->assign('order', $orders);
@@ -98,7 +98,7 @@ class LotteryOrder extends MobileBase
         //        $lickList = LuckRecord::getRecord(UID);
         $lotteryList = LuckRecord::getRecord(UID, LuckRecord::LOTTERY, 0);
         foreach ($lotteryList as $k => $v) {
-            $lotteryList[$k]['image'] = resize($v['image'], 80, 80);
+            $lotteryList[$k]['image'] = resize($v['image'], 230, 230);
         }
         //        $this->assign('luck_list', $lickList);
         $this->assign('lotteryList', $lotteryList);
@@ -112,7 +112,7 @@ class LotteryOrder extends MobileBase
     {
         $lotteryList = LuckRecord::getRecord(true, LuckRecord::LOTTERY, 0);
         foreach ($lotteryList as $k => $v) {
-            $lotteryList[$k]['image'] = resize($v['image'], 80, 80);
+            $lotteryList[$k]['image'] = resize($v['image'], 230, 230);
         }
         //        $this->assign('luck_list', $lickList);
         $this->assign('lotteryList', $lotteryList);

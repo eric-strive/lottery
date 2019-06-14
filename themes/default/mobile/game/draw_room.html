@@ -342,7 +342,7 @@
                         }
                     } else {
                         alert('游戏已结束');
-                        // location.href = "/mobile";
+                        location.href = "/mobile";
                     }
                 } else {
                     setTimeout(function () {
@@ -355,7 +355,7 @@
     function drawResult(r) {
         lottery_initvars();
         $('#lottery-main-user').attr('src', r.userpic);
-        $('#lottery_nickname').html(r.nickname);
+        $('#lottery_nickname').html(r.nickname+'【'+r.game_home_win_grade+'分】');
         $("#lottery-dataNums").hide();
         $('#div-lottery-main-user').show();
         lottery_jinbi(0);

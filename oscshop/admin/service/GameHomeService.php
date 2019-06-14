@@ -4,6 +4,7 @@ namespace osc\admin\service;
 
 use osc\admin\model\GameHome;
 use osc\admin\model\Member;
+use osc\admin\model\PayOrder;
 use think\Db;
 use think\Exception;
 
@@ -95,6 +96,7 @@ class GameHomeService
                 'create_time' => time(),
                 'type'        => 6,
             ]);
+            PayOrder::editStatus($return['pay_order_no'], PayOrder::STATUS_SUCCESS_PAY);
         }
     }
 
@@ -142,7 +144,7 @@ class GameHomeService
                 //分配奖品
                 $amount    = $homeInfo['game_home_parameter'] * $homeInfo['pay_amount'];
                 $maxRecord = GameHome::get_home_max_record($homeId);
-                $maxRecord = GameHome::confirmWin($homeId, $maxRecord['uid']);
+                $maxRecord = GameHome::confirmWin($homeId, $maxRecord['uid'], $maxRecord['grade']);
 
             }
             Db::commit();
@@ -172,7 +174,7 @@ class GameHomeService
             if ($isTimeOut || ($homeInfo['game_home_number_people'] == $homeCompanyNum)) {
                 //已完成
                 $getMax = GameHome::getCompanyMax($homeId);
-                GameHome::confirmWin($homeId, $getMax['uid']);
+                GameHome::confirmWin($homeId, $getMax['uid'], $getMax['grade']);
                 //用户新增金豆
                 $amount = $homeInfo['game_home_number_people'] * $homeInfo['pay_amount'];
                 Member::addBalance($getMax['uid'], $amount);
