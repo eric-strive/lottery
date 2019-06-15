@@ -25,17 +25,16 @@
             <strong class="weui_dialog_title">开设房间</strong>
         </div>
         <div class="weui_dialog_bd">
-            <p class="weui-prompt-text">请为房间起名和设置密码</p>
             <input type="text" class="weui_input weui-prompt-input" id="home_name" name="home_name" value=""
-                   placeholder="输入房间名">
+                   placeholder="请为房间起名">
             <input type="password" class="weui_input weui-prompt-input" id="password" name="password" value=""
-                   placeholder="输入密码">
+                   placeholder="设置密码">
             <input type="number" onkeyup="this.value=this.value.replace(/\D/g,'')"
                    onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength=1
                    class="weui_input weui-prompt-input"
-                   id="number_people" name="number_people" value="" placeholder="容纳人数，2～10之间">
+                   id="number_people" name="number_people" value="" placeholder="设定房间人数，2-10人之间">
             <input type="number" class="weui_input weui-prompt-input" id="pay_amount" name="pay_amount" value=""
-                   placeholder="输入对战金额，最小5元">
+                   placeholder="房间对战金额5元起">
         </div>
         <div class="weui_dialog_ft" style="font-size: 14px;">
             <a href="javascript:;" class="base_sound weui_btn_dialog default cancel" id="cancel">取消</a>
@@ -152,7 +151,7 @@
 </div>
 
 <div class="screen game">
-    <div class="hud">
+    <div class="hud" style="color:red">
         <div class="time">
             <span class="label">时间</span>
             <span class="value js-time">30</span>
@@ -207,23 +206,23 @@
         </div>
     </div>
 </div>
-<div class="screen win">
+<div class="screen win" >
     <h1>完成</h1>
-    <div class="card">
+    <div class="card" style="color:red">
         <h3 class="highscore js-highscore is-hidden">新高分！</h3>
 
         <div class="score">
-            <span class="label">分数</span>
+            <span class="label">本局试玩得分</span>
             <span class="value js-score">30</span>
         </div>
 
         <div class="best">
-            <span class="label">最近最好</span>
+            <span class="label">本人最高记录</span>
             <span class="value js-best">0</span>
         </div>
 
     </div>
-    <a href="#" class="btn" onClick="play()">再玩一次</a>
+    <a href="#" class="btn" onClick="play()" style="margin-top: 95%">再玩一次</a>
     <a href="#" class="btn btn--clear" onClick="menu()">返回菜单</a>
 </div>
 
@@ -311,19 +310,7 @@
     // 2. 分享接口
     // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
     wx.ready(function () {
-        wx.hideMenuItems({
-            menuList: [
-                "menuItem:exposeArticle",
-                "menuItem:share:qq",
-                "menuItem:copyUrl",
-                "menuItem:share:QZone",
-                "menuItem:originPage",
-                "menuItem:openWithQQBrowser",
-                "menuItem:openWithSafari",
-                "menuItem:share:email",
-                'menuItem:copyUrl' // 复制链接
-            ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
-        });
+        wx.hideOptionMenu();
     });
     wx.error(function (res) {
         alert(res.errMsg);
@@ -354,7 +341,7 @@
             layer.msg('设置的人数必须在2-10之间');
             return false;
         }
-        if (pay_amount < 0.1) {
+        if (pay_amount < 1) {
             _isError = false;
             layer.msg('金额最小5元');
             return false;
@@ -476,7 +463,7 @@
                 'grade': score,
             },
             function (r) {
-
+                $('.js-best').html(r.grade);
             });
     }
 

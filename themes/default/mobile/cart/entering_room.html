@@ -144,7 +144,7 @@
         <!--        <div class="tuichu"><i class="tcsde"></i></div>-->
     </div>
 </div>
-<div id="div-lottery-main-user" style="position: absolute;margin: 20% 33%;width:auto;text-align:center;display:none; ">
+<div id="div-lottery-main-user" style="position: absolute;margin: 50% 33%;width:auto;text-align:center;display: none;">
     <div class="lottety_nickname">恭喜中奖</div>
     <img id="lottery-main-user" style="border-radius:100px;width: 90px;"
          src="/public/static/act/guessing_game/img/share/zt_0c3.png"
@@ -628,7 +628,7 @@
     wx.ready(function () {
         wx.onMenuShareAppMessage({
             title: '好友邀请',
-            desc: '老铁，我已经把房开好了，来不来就看你了',
+            desc: '老铁，我已经把房开好了',
             link: "http://{$_SERVER['HTTP_HOST']}{:url('mobile/cart/entering_room&home_id='.$homeInfo['id'].'&sign='.$homeInfo['sign'])}",
             //&home_id=.$home_id.&sign=.$homeInfo[sign]
             imgUrl: "http://{$_SERVER['HTTP_HOST']}IMG_ROOT{$goods.image}",
@@ -651,7 +651,7 @@
         //            document.querySelector('#juantuijian').onclick = function () {
         wx.onMenuShareTimeline({
             title: '好友邀请',
-            desc: '老铁，我已经把房开好了，来不来就看你了',
+            desc: '老铁，我已经把房开好了',
             link: "http://{$_SERVER['HTTP_HOST']}{:url('mobile/cart/entering_room&home_id='.$homeInfo['id'].'&sign='.$homeInfo['sign'])}",
             imgUrl: "http://{$_SERVER['HTTP_HOST']}IMG_ROOT{$goods.image}",
             trigger: function (res) {

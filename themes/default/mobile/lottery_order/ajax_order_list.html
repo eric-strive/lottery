@@ -21,14 +21,18 @@
 <div class="uc-orderitem" style="font-weight: bold;height: 7.5rem;">
     <img style="width: 30%;" src="IMG_ROOT{$orders.image}">
     <div class="uc-seral clearfix" style="width: 65%;float: right;">
-        <p class="order_serial"><span class="dprice">{$orders.nickname}</span></p>
+        <p class="order_serial"><span class="dprice">{$orders.nickname|default='未开奖'}</span></p>
         {if condition="$orders.home_num eq 0"}x
         <p class="order_serial">期数：<span class="dprice">{$orders.goods_periods}</span></p>
         {else/}
         <p class="order_serial">房名：<span class="dprice">{$orders.home_name}</span></p>
         <p class="order_serial">房号：<span class="dprice">{$orders.home_num}</span></p>
         {/if}
+        {empty name="$orders.lottery_at"}
+        <p class="order_serial">已购买份额：{$orders.goods_buy_num}</p>
+        {else/}
         <p class="order_serial">时间：{:substr($orders.lottery_at,10)}</p>
+        {/empty}
     </div>
     <div class="uc-summary clearfix" style='padding: 8px 7px;
     text-align: right;

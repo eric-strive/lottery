@@ -352,10 +352,10 @@
     wx.ready(function () {
         wx.onMenuShareAppMessage({
             title: '好友邀请',
-            desc: '老铁，我已经把房开好了，来不来就看你了',
+            desc: '老铁，我已经把房开好了',
             link: "http://{$_SERVER['HTTP_HOST']}{:url('/mobile/game/index/&home_id='.$homeInfo['game_home_id'])}",
             //&home_id=.$home_id.&sign=.$homeInfo[sign]
-            imgUrl: "",
+            imgUrl: "http://{$_SERVER['HTTP_HOST']}/public/static/act/flog/image/flog.png",
             trigger: function (res) {
                 // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
                 //                    alert('用户点击发送给朋友');
@@ -375,9 +375,9 @@
         //            document.querySelector('#juantuijian').onclick = function () {
         wx.onMenuShareTimeline({
             title: '好友邀请',
-            desc: '老铁，我已经把房开好了，来不来就看你了',
+            desc: '老铁，我已经把房开好了',
             link: "http://{$_SERVER['HTTP_HOST']}{:url('/mobile/game/index/&home_id='.$homeInfo['game_home_id'])}",
-            imgUrl: "",
+            imgUrl: "http://{$_SERVER['HTTP_HOST']}/public/static/act/flog/image/flog.png",
             trigger: function (res) {
                 // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
                 //                    alert('用户点击分享到朋友圈');
@@ -528,7 +528,7 @@
                         }
                     } else {
                         alert('游戏已结束');
-                        // location.href = "/mobile";
+                        location.href = "/mobile";
                     }
                 } else {
                     setTimeout(function () {

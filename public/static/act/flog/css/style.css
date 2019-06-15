@@ -566,11 +566,11 @@ body.dark {
 }
 
 .flies .path.is-active:nth-child(odd) {
-    transform: translateX(10%);
+    transform: translateX(-20%);
 }
 
 .flies .path.is-active:nth-child(even) {
-    transform: translateX(-10%);
+    transform: translateX(20%);
 }
 
 .flies .path.is-hidden {
@@ -711,7 +711,7 @@ body.dark {
     left: 50%;
     height: 50%;
     bottom: -0.5em;
-    left: 0.25em;
+    left: 0.15em;
     right: 0.25em;
     background: #fff;
     border-bottom: 1px solid #000;

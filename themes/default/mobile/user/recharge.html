@@ -55,7 +55,9 @@
      * 发起微信支付
      */
     $('#wechat-payment-btn').click(wepayCall);
-
+    wx.ready(function () {
+        wx.hideOptionMenu();
+    });
     var order_no = '';
     $(".mon").click(function () {
         var money = $(this).attr('att');

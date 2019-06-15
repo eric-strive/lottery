@@ -138,12 +138,14 @@ class Game extends MobileBase
     {
         $data = input('post.');
         GameHome::add_game_record([
-            'uid'       => UID,
-            'grade'     => $data['grade'],
-            'type'      => 0,
-            'game_key'  => GameHome::GAME_FROG,
-            'create_at' => date('Y-m-d H:i:s'),
+            'uid'         => UID,
+            'grade'       => $data['grade'],
+            'type'        => 0,
+            'game_key'    => GameHome::GAME_FROG,
+            'game_status' => 1,
+            'create_at'   => date('Y-m-d H:i:s'),
         ]);
+        return GameHome::get_max_record(UID);
     }
 
     //更新游戏分数

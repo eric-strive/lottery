@@ -124,10 +124,9 @@ class Goods extends MobileBase
      */
     function luck()
     {
-        echo build_order_no();exit;
         $isLottery = false;
         $gid       = (int)input('id');
-        $order_no  = (int)input('order_no');
+        $order_no  = input('order_no');
         $set_up    = (int)input('set_up');
         $uid       = user('uid');
         if (empty($gid)) {
@@ -189,7 +188,7 @@ class Goods extends MobileBase
     {
 //        $isLottery = false;
 //        $gid       = (int)input('id');
-//        $order_no  = (int)input('order_no');
+//        $order_no  = input('order_no');
 //        $uid       = user('uid');
 //        if (empty($gid)) {
 //            $this->error('商品不存在！！');

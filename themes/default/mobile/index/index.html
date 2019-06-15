@@ -104,18 +104,20 @@
     <@each list as value i@>
         <div class="flex-col hplist">
             <a class="base_sound" href="/mobile/goods/detail/id/<@value.goods_id@>">
+<!--            <img src="http://www.mfs99.cn/public/uploads/cache/images/osc2/new1pic/21271560083304_.pic-400x400.jpg"/>-->
             <img src="/<@value.image@>"/>
-            <!-- <p><@value.name@></p> -->
+<!--             <p><@value.name@></p>-->
+            <i><@value.name@></i>
             <i>&yen;<@value.price@></i>
             <div class="flex-col con">
-                <div class="p">购买进度
-                    <@value.schedule@>
-                </div>
-                <div class="weui_progress">
-                    <div class="weui_progress_bar">
-                        <div class="weui_progress_inner_bar js_progress" style="width: <@value.schedule@>;"></div>
-                    </div>
-                </div>
+<!--                <div class="p">购买进度-->
+<!--                    <@value.schedule@>-->
+<!--                </div>-->
+<!--                <div class="weui_progress">-->
+<!--                    <div class="weui_progress_bar">-->
+<!--                        <div class="weui_progress_inner_bar js_progress" style="width: <@value.schedule@>;"></div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </a>
             <div class="flex-between">
@@ -143,6 +145,7 @@
     });
 
     wx.ready(function() {
+        wx.hideOptionMenu();
 
         var is_agent = '<?php echo user("is_agent"); ?>';
         var site_url = '<?php echo request()->domain(); ?>';
