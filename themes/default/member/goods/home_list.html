@@ -1,6 +1,10 @@
 {extend name="./oscshop/admin/view/public/base_mobile.html" /}
 {block name="content"}
-
+<style>
+    .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th{
+        padding:0px;
+    }
+</style>
 <div class="row">
     <div class="col-xs-12">
         <div class="table-responsive">
@@ -9,6 +13,7 @@
                 <tr>
                     <th>图片</th>
                     <th>房间名</th>
+                    <th>价格</th>
                     <th>中奖号码</th>
                     <th>房间号</th>
                     <th>操作</th>
@@ -27,11 +32,14 @@
                     <td style="color: red">
                         {$v.home_name}
                     </td>
+                    <td style="color: red">
+                        {:intval($v.price)}
+                    </td>
                     <td>
                         <input name="lottery_num" style="width: 6rem;" type="text" size="2" class="lottery_num"
                                home_id='{$v.id}' value="{$v.lottery_num}"/>
                     </td>
-                    <td>
+                    <td style="width: 10px;">
                         {$v.home_num}
                     </td>
                     <td>

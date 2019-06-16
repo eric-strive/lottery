@@ -18,7 +18,8 @@ class LuckBuy extends AdminBase
 
     public function index()
     {
-        $this->assign('list', LuckRecord::getRecord());
+        $list = LuckRecord::getRecord();
+        $this->assign('list', $list);
         $this->assign('empty', '<tr><td colspan="20">没有数据~</td></tr>');
 
         return $this->fetch();

@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title></title>
+    <link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
+    <link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
+
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/reset.css"/>
     <link href="__PUBLIC__/num_move/css/globle.css" type="text/css" rel="Stylesheet"/>
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/style.css"/>
@@ -334,11 +337,34 @@
         </div>
     </div>
 </div>
-
+<div class="lottery-show" style="display: none">
+    <div class="weui_mask weui_mask_visible"></div>
+    <div class="weui_dialog weui_dialog_visible">
+        <div class="weui_dialog_hd">
+            <strong class="weui_dialog_title" style="font-size: 20px;color: red;">恭喜中奖</strong>
+        </div>
+        <div class="weui_dialog_bd">
+            <img id="lottery-pic" style="float: left;margin-left: 3%" width="40%" src="IMG_ROOT{$goods.image}" alt="">
+            <img width="40%" style="float: right;margin-right: 3%" src="IMG_ROOT{$goods.image}" alt="">
+        </div>
+        <div style="width: 100%;float: left;text-align: left;font-size: 18px;">
+            <p style="padding: 10px;">
+                &nbsp;&nbsp;&nbsp;&nbsp;该局已开奖，中奖号码是
+                <span id="lottery-num-show" style="color: red;">112</span>,
+                中奖用户昵称【<span id="lottery-nickname-show" style="color: red;"></span>】,
+                对此有任何疑问请联系客服！感谢您的参与。</p>
+        </div>
+        <div class="weui_dialog_ft"
+             style="color:#fff;font-size: 20px;font-weight: bold;background: #0bb20c;border-radius: 5px;width: 100%">
+            <a href="/mobile" class="base_sound weui_btn_dialog" id="lottery-show" style="color: #fff">确定</a>
+        </div>
+    </div>
+</div>
 <div id="lottery-dataNums">
     <div id="dataNums" class="flex-col-center"></div>
     <div id="dataNums2"></div>
 </div>
+
 </body>
 <script src="__PUBLIC__/js/jquery/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src='__PUBLIC__/js/jquery/jquery-ui.min.js'></script>
@@ -455,9 +481,13 @@
                 'home_id': home_id,
             },
             function (r) {
-                $("#residue-sum").html(r.remain)
+                if (r.status > 0 || r.remain != 0) {
+                    $("#residue-sum").html(r.remain);
+                }
+
                 // console.log('r', r);
                 if (r.status > 0) {
+                    $("#residue-sum").html(r.remain);
                     $("#test").attr('href', 'javascript:void(0)');
                     var residueTime = r.residueTime;
                     //这里需要放烟花
@@ -471,16 +501,39 @@
                             }, residueTime * 1000);
                         }
                     } else {
-                        alert('购买已结束');
-                        location.href = "/mobile";
+                        // alert(residueTime);
+                        if (residueTime < -60) {
+                            $("#lottery-num-show").html(r.lottery_num);
+                            $("#lottery-nickname-show").html(r.nickname);
+                            $("#lottery-pic").attr('src', r.userpic);
+                            $('.lottery-show').show();
+                        } else {
+                            alert('购买已结束,开奖中...');
+                            location.href = "/mobile";
+                        }
                     }
                 } else {
+                    if (r.remain == 0) {
+                        errorDeal(home_id);
+                    }
                     setTimeout(function () {
                         checkLottery(false);
                     }, setTime);
                 }
             });
     }
+
+    function errorDeal(home_id) {
+        setTimeout(function () {
+            $.post("{:url('/member/goods/home_error_deal')}", {
+                    'home_id': home_id,
+                },
+                function (r) {
+
+                });
+        }, 10000);
+    }
+
     function drawResult(r) {
         // $('#lottery-wrap').html(r.numHtml)
         // $('#lottery-wrap').html(22)

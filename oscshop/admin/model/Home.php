@@ -301,7 +301,7 @@ class Home
         }
 
         return Db::view('Home', '*')
-            ->view('Goods', 'name', 'Home.gid=Goods.goods_id')
+            ->view('Goods', 'name,price', 'Home.gid=Goods.goods_id')
             ->view('GoodsImage', 'image', 'Home.gid=GoodsImage.goods_id')
             ->view('Member', 'nickname', 'Member.uid=Home.lottery_uid', 'left')
             ->where($where)
@@ -353,13 +353,20 @@ class Home
         if ($status !== null) {
             $where['h.status'] = $status;
         }
+        if ($status != '0') {
+            $where['h.lottery_timestamp'] = ['>', time() - 86400];
+            $where['h.lottery_timestamp'] = ['<', time() - 40];
+        }
 
         return Db::name('home')
             ->alias('h')
             ->join('duobao_record dr', 'h.id=dr.home_id')
-            ->join('goods_image g', 'h.gid=g.goods_id')
+            ->join('goods_image gi', 'h.gid=gi.goods_id')
+            ->join('goods g', 'h.gid=g.goods_id')
+            ->join('member m', 'h.lottery_uid=m.uid', 'left')
             ->where($where)
             ->group('dr.home_id')
+            ->order('h.lottery_timestamp desc')
             ->limit($limit)
             ->select();
     }

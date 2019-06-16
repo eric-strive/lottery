@@ -66,11 +66,18 @@ class LotteryOrder extends MobileBase
         $limit = (8 * $page) . ",8";
         if ($status === '') {
             $orders = HomeModel::HomeList(null, UID, $limit);
+        } elseif ($status === 2) {
+            $orders = HomeModel::HomeList('2,3', UID, 10);
         } elseif ($status === HomeModel::NOT_GET) {
+            $showTime = time() - 45;
             if ($all) {
-                $where = ['h.status' => HomeModel::LOTTERY];
+                $where = ['h.status' => HomeModel::LOTTERY, 'h.lottery_timestamp' => ['<', $showTime],];
             } else {
-                $where = ['h.status' => HomeModel::LOTTERY, 'lottery_uid' => UID];
+                $where = [
+                    'h.status'            => HomeModel::LOTTERY,
+                    'h.lottery_timestamp' => ['<', $showTime],
+                    'lottery_uid'         => UID,
+                ];
             }
             $orders = Db::name('home')
                 ->alias('h')

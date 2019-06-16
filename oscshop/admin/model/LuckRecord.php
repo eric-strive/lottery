@@ -79,13 +79,15 @@ class LuckRecord
             ->sum('amount');
     }
 
-    public static function luckInfo($order_no){
+    public static function luckInfo($order_no)
+    {
         return Db::name('luck_record')
             ->where([
                 'order_no' => $order_no,
             ])
             ->find();
     }
+
     /**
      * 修改状态
      *
@@ -176,8 +178,10 @@ class LuckRecord
 
     public static function getRecord($uid = null, $isLottery = null, $is_draw = null, $count = 20)
     {
+        $data = input('get.');
+
         $query = Db::view('LuckRecord', '*')
-            ->view('Goods', 'name,return_venosa', 'LuckRecord.gid=Goods.goods_id')
+            ->view('Goods', 'name,return_venosa,price', 'LuckRecord.gid=Goods.goods_id')
             ->view('GoodsImage', 'image', 'LuckRecord.gid=GoodsImage.goods_id')
             ->where('LuckRecord.status', self::STATUS_SUCCESS_PAY);
         if ($uid && $uid !== true) {
@@ -185,6 +189,21 @@ class LuckRecord
                 ->view('Member', 'nickname', 'Member.uid=LuckRecord.uid', 'left');
         } else {
             $query->view('Member', 'nickname', 'Member.uid=LuckRecord.uid', 'left');
+        }
+        if (isset($data['is_lottery'])) {
+            $query->where([
+                'LuckRecord.is_lottery' => $data['is_lottery'] - 1,
+            ]);
+        }
+        if (isset($data['is_draw'])) {
+            $query->where([
+                'LuckRecord.is_draw' => $data['is_draw'] - 1,
+            ]);
+        }
+        if (isset($data['nickname'])) {
+            $query->where([
+                'nickname' => ['like', '%' . $data['nickname'] . '%'],
+            ]);
         }
         if ($isLottery !== null) {
             $query->where([
@@ -201,7 +220,6 @@ class LuckRecord
             return $query->order('LuckRecord.status asc,LuckRecord.is_draw asc,LuckRecord.luck_record_id desc')
                 ->select();
         }
-
         return $query->order('LuckRecord.status asc,LuckRecord.is_draw asc,LuckRecord.luck_record_id desc')
             ->paginate($count, false);
     }

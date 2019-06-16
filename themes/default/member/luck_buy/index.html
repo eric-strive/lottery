@@ -2,11 +2,24 @@
 {block name="content"}
 <table class="table table-striped table-bordered table-hover search-form">
     <thead>
-    <!--<th><input name="order_num" type="text" placeholder="输入房间名" value="{:input('param.order_num')}"/></th>-->
-    <!--<th><input name="user_name" type="text" placeholder="输入会员名" value="{:input('param.user_name')}"/></th>-->
-    <!--<th>-->
-    <!--<a class="btn btn-primary" href="javascript:;" id="search" url="{:url('OrderBackend/index')}">查询</a>-->
-    <!--</th>-->
+    <th><input name="nickname" type="text" placeholder="用户名" value="{:input('param.nickname')}"/></th>
+    <th>
+        <select name="is_lottery">
+            <option value="">全部状态</option>
+            <option {if condition="input('is_lottery') eq 1"} selected="selected"{/if}value="1">未中奖</option>
+            <option {if condition="input('is_lottery') eq 2"} selected="selected"{/if} value="2">中奖</option>
+        </select>
+    </th>
+    <th>
+        <select name="is_draw">
+            <option value="">是否领取</option>
+            <option {if condition="input('is_draw') eq 1"} selected="selected"{/if}value="1">未领取</option>
+            <option {if condition="input('is_draw') eq 2"} selected="selected"{/if} value="2">已领取</option>
+        </select>
+    </th>
+    <th>
+    <a class="btn btn-primary" href="javascript:;" id="search" url="{:url('LuckBuy/index')}">查询</a>
+    </th>
     </thead>
 </table>
 
@@ -19,11 +32,12 @@
                     <th>操作</th>
                     <th>用户</th>
                     <th>商品</th>
+                    <th>价格</th>
                     <th>幸运购金额</th>
                     <th>是否中奖</th>
                     <th>是否领取</th>
                     <th>ID</th>
-                    <th>订单号</th>
+                    <th>时间</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -38,6 +52,7 @@
                     </td>
                     <td>{$v.nickname}</td>
                     <td>{$v.name}</td>
+                    <td>{$v.price}</td>
                     <td>{$v.amount}</td>
                     <td>
                         {if condition="$v['is_lottery'] EQ '0'"}
@@ -54,7 +69,7 @@
                         {/if}
                     </td>
                     <td>{$v.luck_record_id}</td>
-                    <td>{$v.order_no}</td>
+                    <td>{$v.create_at}</td>
                     <td>
                         <a class="btn btn-xs btn-info"
                            href='{:url("LuckBuy/edit",array("id"=>$v["luck_record_id"]))}'>

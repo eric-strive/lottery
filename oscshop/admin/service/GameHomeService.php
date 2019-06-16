@@ -185,7 +185,7 @@ class GameHomeService
                     'description' => '用户玩游戏获取',
                     'prefix'      => 1,
                     'create_time' => time(),
-                    'type'        => 5,
+                    'type'        => 7,
                 ]);
             }
             Db::commit();

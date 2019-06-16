@@ -75,7 +75,7 @@
         #game_home {
             width: 100%;
             height: 28.4rem;
-            background: url(__PUBLIC__/act/flog/image/bg.png);
+            background: url(__PUBLIC__/act/flog/image/bg.jpg);
             background-size: 100%;
             overflow: hidden;
         }
@@ -166,7 +166,7 @@
                     <img src="__PUBLIC__/image/jinbi/images/jb5.png" class="user-jinbi"/>
                     <img src="__PUBLIC__/image/jinbi/images/jb3.png" class="user-jinbi"/>
                     </span> {if condition="$record[$i]['is_affirm'] eq 1"}
-                    <span class="icon iconfont icon-mobile" style="color:#059ce8;font-size:28px;"></span>
+                    <span class="icon" style="color:red;font-size:28px;">✌️</span>
                     <!-- <button class="button-prepare">小手</button> -->
                     {/if} {/if}
                 </li>
@@ -195,9 +195,8 @@
                     <img src="__PUBLIC__/image/jinbi/images/jb4.png" class="user-jinbi"/>
                     <img src="__PUBLIC__/image/jinbi/images/jb5.png" class="user-jinbi"/>
                     </span> {if condition="$record[$i]['is_affirm'] eq 1"}
-                    <span class="icon iconfont icon-mobile" style="color:#059ce8;font-size:28px;bottom: 1.7rem;
-   right: 0.6rem;
-    position: relative;"></span>
+                    <span class="" style="color:red;font-size:28px;bottom: 1.7rem;right: 0.6rem;
+    position: relative;">✌️</span>
                     {/if} {/if}
                 </li>
                 {/for}
