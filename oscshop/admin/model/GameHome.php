@@ -130,6 +130,19 @@ class GameHome
             ->paginate(20, false);
     }
 
+    public static function getHomeRecordList()
+    {
+        return Db::view('GameRecord', '*')
+            ->view('GameHome', 'game_home_id,game_home_name', 'GameRecord.game_home_id=GameHome.game_home_id')
+            ->view('Member', 'nickname', 'Member.uid=GameRecord.uid', 'left')
+            ->where([
+                'GameRecord.game_status'    => 0,
+                'GameRecord.pay_status'     => 1,
+                'GameHome.game_home_status' => ['in', '1,2'],
+            ])
+            ->order('GameRecord.create_at desc')
+            ->paginate(20, false);
+    }
 
     public static function HomeList($status = null, $uid, $limit = null)
     {
@@ -159,17 +172,19 @@ class GameHome
      * @throws \think\Exception
      * @throws \think\exception\PDOException
      */
-    public static function confirmWin($homeId, $winUid, $grade)
+    public static function confirmWin($homeId, $winUid, $grade, $winNum, $winAmount)
     {
         return Db::name('game_home')
             ->where([
                 'game_home_id' => $homeId,
             ])
             ->update([
-                'game_home_win_grade' => $grade,
-                'game_home_win_uid'   => $winUid,
-                'game_home_status'    => 3,
-                'lottery_at'          => date('Y-m-d H:i:s'),
+                'game_home_win_amount' => $winAmount,
+                'game_home_win_num'    => $winNum,
+                'game_home_win_grade'  => $grade,
+                'game_home_win_uid'    => $winUid,
+                'game_home_status'     => 3,
+                'lottery_at'           => date('Y-m-d H:i:s'),
             ]);
     }
 
@@ -231,6 +246,43 @@ class GameHome
             ])
             ->order('grade desc')
             ->find();
+    }
+
+    /**
+     * 获取房间所有最高分
+     *
+     * @param $homeId
+     * @param $maxGrade
+     *
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getMaxList($homeId, $maxGrade)
+    {
+        return Db::name('game_record')
+            ->where([
+                'grade'        => $maxGrade,
+                'game_home_id' => $homeId,
+                'game_status'  => 1,
+            ])
+            ->order('grade desc')
+            ->select();
+    }
+
+    public static function getMaxWin($homeId, $maxGrade)
+    {
+        return Db::name('game_record')
+            ->where([
+                'grade'        => $maxGrade,
+                'game_home_id' => $homeId,
+                'game_status'  => 1,
+            ])
+            ->update([
+                'is_lottery' => 1,
+                'lottery_at' => date('Y-m-d H:i:s'),
+            ]);
     }
 
     public static function getRecordInfo($homeId, $userId)

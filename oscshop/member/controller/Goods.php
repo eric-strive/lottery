@@ -3,6 +3,7 @@
 namespace osc\member\controller;
 
 use osc\admin\model\duobaoRecord;
+use osc\admin\model\GameHome;
 use osc\admin\model\Home as HomeModel;
 use osc\admin\model\LuckRecord;
 use think\Controller;
@@ -49,6 +50,28 @@ class Goods extends controller
 
         return $this->fetch();
 
+    }
+
+    //游戏房间列表
+    public function game_home_list()
+    {
+        $this->assign('list', GameHome::getHomeRecordList());
+        $this->assign('title', '私人房管理');
+        $this->assign('empty', '<tr><td colspan="20">没有数据~</td></tr>');
+
+        return $this->fetch();
+
+    }
+
+    //更新游戏分数
+    function update_game_grade()
+    {
+        $data = input('post.');
+        GameHome::update_game_grade([
+            'game_record_id' => $data['game_record_id'],
+        ], $data['grade']);
+
+        return true;
     }
 
     //房间列表
@@ -159,20 +182,20 @@ class Goods extends controller
         $startDate = date('Y-m-d');
         $endDate   = date('Y-m-d', time() + 86400);
         //微信价值
-        $payTotal = Db::name('pay_order')
+        $payTotal        = Db::name('pay_order')
             ->where('create_at', '>=', $startDate)
             ->where('create_at', '<', $endDate)
             ->where('pay_type', '=', 1)
             ->where('status', '=', 1)
             ->sum('pay_amount');
-        $homePayTotal = Db::name('pay_order')
+        $homePayTotal    = Db::name('pay_order')
             ->where('create_at', '>=', $startDate)
             ->where('create_at', '<', $endDate)
             ->where('pay_type', '=', 1)
             ->where('order_type', '=', 1)
             ->where('status', '=', 1)
             ->sum('pay_amount');
-        $luckPayTotal = Db::name('pay_order')
+        $luckPayTotal    = Db::name('pay_order')
             ->where('create_at', '>=', $startDate)
             ->where('create_at', '<', $endDate)
             ->where('pay_type', '=', 1)
@@ -186,7 +209,7 @@ class Goods extends controller
             ->where('order_type', '=', 3)
             ->where('status', '=', 1)
             ->sum('pay_amount');
-        $gamePayTotal = Db::name('pay_order')
+        $gamePayTotal    = Db::name('pay_order')
             ->where('create_at', '>=', $startDate)
             ->where('create_at', '<', $endDate)
             ->where('pay_type', '=', 1)
@@ -215,7 +238,7 @@ class Goods extends controller
             ->where('order_type', 'in', '4,5')
             ->where('status', '=', 1)
             ->sum('pay_amount');
-        $jindouTotal = Db::name('pay_order')
+        $jindouTotal     = Db::name('pay_order')
             ->where('create_at', '>=', $startDate)
             ->where('create_at', '<', $endDate)
             ->where('pay_type', '=', 2)
@@ -239,12 +262,12 @@ class Goods extends controller
         $balanceTotal = Db::name('member')->sum('balance');
 
         //用户花费的金豆
-        $spendBalanceTotal     = Db::name('balance')
+        $spendBalanceTotal = Db::name('balance')
             ->where('create_time', '>=', strtotime($startDate))
             ->where('create_time', '<', strtotime($endDate))
             ->where('prefix', '=', 2)
             ->sum('amount');
-        $addBalanceTotal     = Db::name('balance')
+        $addBalanceTotal   = Db::name('balance')
             ->where('create_time', '>=', strtotime($startDate))
             ->where('create_time', '<', strtotime($endDate))
             ->where('prefix', '=', 1)

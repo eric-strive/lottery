@@ -44,12 +44,20 @@
             <!--            &nbsp;&nbsp;|&nbsp;&nbsp;中奖随机数: <span class="dprice">{$orders.lottery_rand}</span>-->
             {/if}
         </div>
-        {if condition="($orders.status eq 1) ANd ($all)"}
+        {if condition="($orders.status eq 1) and ($all==1)"}
         <span>
             <input type="text" class="return_venosa" value="{$orders.return_venosa}"
                    style="width: 4rem;height: 1.3rem;margin-left: 6rem;">
         </span>
         <a style="margin-top: -1.2rem" class="olbtn wepay wepay_button confirm_get" href="javascript:;"
+           att="{$orders.id}">确认领取</a>
+        {elseif condition="($orders.status eq 1) and ($all==2)"}
+        <span>
+            <input type="hidden" class="return_venosa" value="{$orders.return_venosa}">
+            <strong style="width: 1rem;height: 1.3rem;color: blue">送出金豆
+                ：<em style="color: red;font-size: 18px;">{$orders.return_venosa}</em></strong>
+        </span>
+        <a style="" class="olbtn wepay wepay_button confirm_get" href="javascript:;"
            att="{$orders.id}">确认领取</a>
         {else/}
         <a class="olbtn cancel" style="color: red" href="/mobile/goods/detail/id/{$orders.gid}">查看商品</a>

@@ -75,9 +75,9 @@ body.dark {
 
 .checkbox span {
     display: block;
-    line-height: 3rem;
+    line-height: 4rem;
     /* margin-top: 35%; */
-    font-size: 20px;
+    font-size: 26px;
     color: #000;
     transition: all 0.2s;
     cursor: pointer;
@@ -1355,8 +1355,8 @@ body.dark {
 #btn-music,
 #play-btn,
 #openDoor {
-    width: 60%;
-    font-size: 1.6em;
+    width: 80%;
+    font-size: 2em;
     color: #fff;
 }
 
@@ -1364,8 +1364,9 @@ body.dark {
 #btn-night {
     background: url(../image/day.png) no-repeat;
     background-size: 100% 100%;
-    width: 3rem;
-    height: 3rem;
+    width: 4rem;
+    height: 4rem;
+    font-size: 22px;
 }
 
 .flex-between {

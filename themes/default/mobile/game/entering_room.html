@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title></title>
+    <link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
+    <link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
+
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/reset.css"/>
     <link href="__PUBLIC__/num_move/css/globle.css" type="text/css" rel="Stylesheet"/>
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/act/guessing_game/css/style.css"/>
@@ -92,6 +95,32 @@
 </head>
 
 <body>
+<div class="lottery-show" style="display: none">
+    <div class="weui_mask weui_mask_visible"></div>
+    <div class="weui_dialog weui_dialog_visible">
+        <div class="weui_dialog_hd">
+            <strong class="weui_dialog_title" style="font-size: 20px;color: red;">胜利者</strong>
+        </div>
+        <div class="weui_dialog_bd" id="lottery-main-user">
+            <img id="lottery-pic" style="float: left;margin-left: 3%" width="40%" src="" alt="">
+            <img width="40%" style="float: right;margin-right: 3%" src="" alt="">
+        </div>
+        <div style="width: 100%;float: left;text-align: left;font-size: 18px;">
+            <p style="padding: 10px;">
+                &nbsp;&nbsp;&nbsp;&nbsp;最高分数：
+                <span id="lottery_max_grade" style="color: red;">0</span>分<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;金豆增加
+                <span id="lottery_amount" style="color: red;">0</span>个<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;胜利者昵称<span id="lottery_nickname" style="color: red;"></span>,
+                </p>
+        </div>
+        <div class="weui_dialog_ft"
+             style="color:#fff;font-size: 20px;font-weight: bold;background: #0bb20c;border-radius: 5px;width: 100%">
+            <a href="/mobile/game/index/" class="base_sound weui_btn_dialog" id="lottery-show"
+               style="color: #fff">确定</a>
+        </div>
+    </div>
+</div>
 <div class="h_header">
     <div class="hea_min hea_min1 fl_l fui-btn">
         <div class="hid_img">
@@ -122,35 +151,29 @@
         <!--        <div class="tuichu"><i class="tcsde"></i></div>-->
     </div>
 </div>
-<div id="div-lottery-main-user" style="position: absolute;margin: 20% 33%;width:auto;text-align:center;display:none; ">
-    <div class="lottety_nickname">恭喜中奖</div>
-    <img id="lottery-main-user" style="border-radius:100px;width: 90px;"
-         src="/public/static/act/guessing_game/img/share/zt_0c3.png" alt="">
-    <div class="lottety_nickname" id="lottery_nickname"></div>
-</div>
 <div id="game_home">
-    <!--    <div id="yanhua" class="none" style="position: absolute;margin-top: 100%;">-->
-    <!--        &lt;!&ndash; 中奖弹框 &ndash;&gt;-->
-    <!--        <button class="close" id="modal-close" data-dismiss="modal" style="visibility: hidden;">-->
-    <!--            <span aria-hidden="true" class="btn_x">&times;</span>-->
-    <!--        </button>-->
-    <!--        <div class="modal fade" id="lottery-result" role="dialog" aria-hidden="true">-->
-    <!--            <canvas id="canvas" style="margin-top:-100%"></canvas>-->
-    <!--            <div class="modal-dialog">-->
-    <!--                <div class="modal-content" style="height: calc(100% - 40px);padding-top: 70%;">-->
-    <!--                    <canvas id="lottery-canvas"></canvas>-->
+    <!--        <div id="yanhua" class="none" style="position: absolute;margin-top: 100%;">-->
+    <!--            &lt;!&ndash; 中奖弹框 &ndash;&gt;-->
+    <!--            <button class="close" id="modal-close" data-dismiss="modal" style="visibility: hidden;">-->
+    <!--                <span aria-hidden="true" class="btn_x">&times;</span>-->
+    <!--            </button>-->
+    <!--            <div class="modal fade" id="lottery-result" role="dialog" aria-hidden="true">-->
+    <!--                <canvas id="canvas" style="margin-top:-100%"></canvas>-->
+    <!--                <div class="modal-dialog">-->
+    <!--                    <div class="modal-content" style="height: calc(100% - 40px);padding-top: 70%;">-->
+    <!--                        <canvas id="lottery-canvas"></canvas>-->
+    <!--                    </div>-->
     <!--                </div>-->
     <!--            </div>-->
-    <!--        </div>-->
-    <!--        &lt;!&ndash;音乐开关&ndash;&gt;-->
-    <!--        <a id="music-control" class="animated infinite bounce" href="javascript:;" data-open="1"></a>-->
-    <!--        &lt;!&ndash;清除数据开关&ndash;&gt;-->
-    <!--        <a id="clear-control" href="javascript:;" data-open="1"></a>-->
+    <!--            &lt;!&ndash;音乐开关&ndash;&gt;-->
+    <!--            <a id="music-control" class="animated infinite bounce" href="javascript:;" data-open="1"></a>-->
+    <!--            &lt;!&ndash;清除数据开关&ndash;&gt;-->
+    <!--            <a id="clear-control" href="javascript:;" data-open="1"></a>-->
 
-    <!--        <audio id="music" loop preload="auto" src="/public/static/js/draw/shiji.mp3">-->
-    <!--            你的浏览器不支持audio标签-->
-    <!--        </audio>-->
-    <!--    </div>-->
+    <!--            <audio id="music" loop preload="auto" src="/public/static/js/draw/shiji.mp3">-->
+    <!--                你的浏览器不支持audio标签-->
+    <!--            </audio>-->
+    <!--        </div>-->
 
     <div class="meinv clearfix">
         <div class="meinv-left fl">
@@ -175,7 +198,8 @@
         </div>
         {notempty name="userRecord"} {eq name="userRecord.is_affirm" value="0"}
         <div class="fl start_game" att="{$userRecord.game_record_id}">
-            <a style="font-weight:bold;text-align:center;color:red" class="weui_btn weui_btn_primary payment ">
+            <a style="font-weight:bold;text-align:center;right:2rem;color:red"
+               class="weui_btn weui_btn_primary payment ">
                 开始对战
             </a>
         </div>
@@ -526,8 +550,22 @@
                             }, residueTime * 1000);
                         }
                     } else {
-                        alert('游戏已结束');
-                        location.href = "/mobile";
+                        var pic = '';
+                        var nickname = '';
+                        var lottery_amount = r.game_home_win_amount;
+                        var max_grade = r.game_home_win_grade;
+                        $.each(r.user_list, function (i, v) {
+                            pic += '<img id="" style="border-radius: 50%;width: 4rem;height: 4rem;"src="' +
+                                v.userpic +
+                                '" >';
+                            nickname += '<span>【' + v.nickname + '】<span/>';
+                        });
+                        $('#lottery-main-user').html(pic);
+                        $('#lottery_nickname').html(nickname);
+                        $('#lottery_max_grade').html('<span>' + max_grade + '</span>');
+                        $('#lottery_amount').html('<span>' + lottery_amount + '</span>');
+                        $('.lottery-show').show();
+                        // location.href = "/mobile";
                     }
                 } else {
                     setTimeout(function () {
@@ -537,10 +575,10 @@
             });
     }
 
-    if (pay_status == 1) {
+    if (pay_status == 1 || game_home_status > 2) {
         setTimeout(function () {
             checkLottery(true)
-        }, 1000);
+        }, 500);
     }
 
     $('#balance-payment-btn').click(balancePayCall);

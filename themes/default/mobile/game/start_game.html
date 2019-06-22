@@ -87,8 +87,9 @@
 </div>
 
 <div class="screen menu" style="">
-    <a href="#" class="btn play" onClick="">
-        <span><span class="js-best-s">4</span>秒后开始</span>
+    <a href="#" class="btn play" onClick="" style="font-size: 30px;">
+        <span>倒计时</span><br>
+        <span class="js-best-s" style="color: red;">4</span>
     </a>
 </div>
 
@@ -96,7 +97,7 @@
     <div class="hud" style="color:red">
         <div class="time">
             <span class="label">时间</span>
-            <span class="value js-time">30</span>
+            <span class="value js-time">25</span>
         </div>
 
         <div class="score">
@@ -275,7 +276,7 @@
                 'grade': score,
             },
             function (r) {
-                location.href = '/mobile/game/draw_room/home_id/' + home_id;
+                // location.href = '/mobile/game/draw_room/home_id/' + home_id;
             });
     }
 </script>

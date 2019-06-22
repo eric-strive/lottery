@@ -96,14 +96,50 @@
     </style>
 </head>
 <body>
-<div id="div-lottery-main-user" style="position: absolute;margin: 50% 33%;width:auto;text-align:center;display:none; ">
+<div id="div-lottery-main-user" style="position: absolute;
+    margin: 50% 10%;
+    width: 80%;
+    text-align: center;
+    display:none; ">
     <div class="lottety_nickname">胜利✌️</div>
-    <img id="lottery-main-user" style="border-radius:100px;width: 90px;"
-         src="/public/static/act/guessing_game/img/share/zt_0c3.png"
-         alt="">
-    <div class="lottety_nickname" id="lottery_nickname"></div>
+    <div id="lottery-main-user" class="flex-row" style="justify-content:center">
+        ️
+    </div>
+    <div class="lottety_nickname" id="lottery_nickname">
+    </div>
+    <div class="lottery_max_grade" id="lottery_max_grade" style="font-size: 20px;
+    color: red;">
+
+    </div>
+    <div class="lottery_amount" id="lottery_amount" style="font-size: 20px;
+    color: red;">
+
+    </div>
 </div>
 <div id="game_home">
+    <div id="yanhua" class="none" style="position: absolute;margin-top: 100%;">
+        <!-- 中奖弹框 -->
+        <button class="close" id="modal-close" data-dismiss="modal" style="visibility: hidden;">
+            <span aria-hidden="true" class="btn_x">&times;</span>
+        </button>
+        <div class="modal fade" id="lottery-result" role="dialog" aria-hidden="true">
+            <canvas id="canvas" style="margin-top:-100%"></canvas>
+            <div class="modal-dialog">
+                <div class="modal-content" style="height: calc(100% - 40px);padding-top: 70%;">
+                    <canvas id="lottery-canvas"></canvas>
+                </div>
+            </div>
+        </div>
+        <!--音乐开关-->
+        <a id="music-control" class="animated infinite bounce" href="javascript:;" data-open="1"></a>
+        <!--清除数据开关-->
+        <a id="clear-control" href="javascript:;" data-open="1"></a>
+
+        <audio id="music" loop preload="auto" src="/public/static/js/draw/shiji.mp3">
+            你的浏览器不支持audio标签
+        </audio>
+    </div>
+
 
     <div class="meinv clearfix">
         <div class="meinv-left fl">
@@ -318,7 +354,7 @@
         $("#serviceView").removeClass('show').addClass('none');
     });
     //定时检查是否开奖
-    var setTime = 10000;
+    var setTime = 4000;
     var home_id = '{$homeInfo["game_home_id"]}';
     var game_home_status = '{$homeInfo["game_home_status"]}';
 
@@ -341,8 +377,9 @@
                             }, residueTime * 1000);
                         }
                     } else {
-                        alert('游戏已结束');
-                        location.href = "/mobile";
+                        drawResult(r)
+                        // alert('游戏已结束');
+                        // location.href = "/mobile";
                     }
                 } else {
                     setTimeout(function () {
@@ -354,30 +391,42 @@
 
     function drawResult(r) {
         lottery_initvars();
-        $('#lottery-main-user').attr('src', r.userpic);
-        $('#lottery_nickname').html(r.nickname+'【'+r.game_home_win_grade+'分】');
+        var pic = '';
+        var nickname = '';
+        var lottery_amount = r.game_home_win_amount;
+        var max_grade = r.game_home_win_grade;
+        $.each(r.user_list,function (i,v) {
+            pic+= '<img id="" style="border-radius: 50%;width: 4rem;height: 4rem;"src="'+v.userpic+'" >';
+            nickname+='<div>'+v.nickname+'</div>';
+        });
+        $('#lottery-main-user').html(pic);
+        $('#lottery_nickname').html(nickname);
+        $('#lottery_max_grade').html('<span>最高分为：'+max_grade+'</span>');
+        $('#lottery_amount').html('<span>中奖金额为：'+lottery_amount+'</span>');
+        // $('#lottery_nickname').html(r.nickname + '【' + r.game_home_win_grade + '分】');
         $("#lottery-dataNums").hide();
+        $('#yanhua').show();
         $('#div-lottery-main-user').show();
-        lottery_jinbi(0);
+        // lottery_jinbi(0);
     }
 
-    function lottery_jinbi(i) {
-        i++;
-        $(".user-jinbi").each(function () {
-            var cart = $('#lottery-main-user');
-            var imgtodrag = $(this);
-            if (imgtodrag) {
-                setTimeout(function () {
-                    animate_jinbi(imgtodrag, cart)
-                }, 600);
-            }
-        })
-        if (i < 6) {
-            setTimeout(function () {
-                lottery_jinbi(i)
-            }, 300);
-        }
-    }
+    // function lottery_jinbi(i) {
+    //     i++;
+    //     $(".user-jinbi").each(function () {
+    //         var cart = $('#lottery-main-user');
+    //         var imgtodrag = $(this);
+    //         if (imgtodrag) {
+    //             setTimeout(function () {
+    //                 animate_jinbi(imgtodrag, cart)
+    //             }, 600);
+    //         }
+    //     })
+    //     if (i < 6) {
+    //         setTimeout(function () {
+    //             lottery_jinbi(i)
+    //         }, 300);
+    //     }
+    // }
 
     setTimeout(function () {
         checkLottery(true)

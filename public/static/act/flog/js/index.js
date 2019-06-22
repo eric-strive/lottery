@@ -88,7 +88,7 @@ function renderScoreBoard() {
 
 function setState() {
   state = {
-    time: 30,
+    time: 25,
     score: 0
   }
 }

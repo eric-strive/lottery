@@ -51,12 +51,21 @@ class LotteryOrder extends MobileBase
         $status = input('status') !== null ? (int)input('param.status', '') : '';
         $this->assign('status', $status);
         $this->assign('top_title', '我的订单');
-        $this->assign('all', true);
+        $this->assign('all', 1);
         $this->assign('SEO', ['title' => '我的订单-' . config('SITE_TITLE')]);
 
         return $this->fetch('index');
     }
+    function index_total()
+    {
+        $status = input('status') !== null ? (int)input('param.status', '') : '';
+        $this->assign('status', $status);
+        $this->assign('top_title', '我的订单');
+        $this->assign('all', 2);
+        $this->assign('SEO', ['title' => '我的订单-' . config('SITE_TITLE')]);
 
+        return $this->fetch('index');
+    }
     function ajax_order_list()
     {
         $page   = (int)input('param.page');//页码
@@ -70,7 +79,9 @@ class LotteryOrder extends MobileBase
             $orders = HomeModel::HomeList('2,3', UID, 10);
         } elseif ($status === HomeModel::NOT_GET) {
             $showTime = time() - 45;
-            if ($all) {
+            if ($all===1) {
+                $where = ['h.status' => ['>=',HomeModel::LOTTERY], 'h.lottery_timestamp' => ['<', $showTime],];
+            }elseif ($all===2) {
                 $where = ['h.status' => HomeModel::LOTTERY, 'h.lottery_timestamp' => ['<', $showTime],];
             } else {
                 $where = [
@@ -86,6 +97,7 @@ class LotteryOrder extends MobileBase
                 ->join('goods_image gi', 'h.gid=gi.goods_id')
                 ->join('member m', 'h.lottery_uid=m.uid')
                 ->where($where)
+                ->order('h.status asc')
                 ->select();
         } else {
             $orders = HomeModel::HomeList($status, UID, $limit);

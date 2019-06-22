@@ -112,10 +112,10 @@ class Game extends MobileBase
         $home_id  = (int)input('param.home_id');
         $homeInfo = GameHome::getHomeInfo($home_id);
         if (empty($homeInfo)) {
-            $this->error('您没有访问权限');
+            //            $this->error('您没有访问权限');
         }
         if ($homeInfo['game_home_status'] < 2) {
-            $this->error('您没有访问权限');
+            //            $this->error('您没有访问权限');
         }
         $this->gameCheck($homeInfo);
         $userRecord = GameHome::getRecordInfo($homeInfo['game_home_id'], UID);
@@ -145,6 +145,7 @@ class Game extends MobileBase
             'game_status' => 1,
             'create_at'   => date('Y-m-d H:i:s'),
         ]);
+
         return GameHome::get_max_record(UID);
     }
 
@@ -214,10 +215,15 @@ class Game extends MobileBase
 
         //是否已完成
         if ($homeInfo['game_home_status'] == 3) {
-            $userInfo             = Member::getMemberInfo($homeInfo['game_home_win_uid']);
-            $homeInfo['nickname'] = $userInfo['nickname'];
-            $homeInfo['userpic']  = $userInfo['userpic'];
-            $homeInfo['is_self']  = $homeInfo['game_home_win_uid'] == UID ? 1 : 0;
+            $winUserList = GameHome::getMaxList($homeId, $homeInfo['game_home_win_grade']);
+            foreach ($winUserList as $key => $item) {
+                $userInfo = Member::getMemberInfo($item['uid']);
+
+                $winUserList[$key]['nickname'] = $userInfo['nickname'];
+                $winUserList[$key]['userpic']  = $userInfo['userpic'];
+            }
+            $homeInfo['user_list'] = $winUserList;
+            //            $homeInfo['is_self'] = $homeInfo['game_home_win_uid'] == UID ? 1 : 0;
 
             $residueTime             = strtotime($homeInfo['lottery_at']) + 10 - time();
             $homeInfo['residueTime'] = $residueTime;
