@@ -41,7 +41,7 @@
 
 <div class='uc-order-sec clearfix base_sound'>
     <a class='uc-order-btn fahuo'
-       href="{:url('lottery_order/index',array('status'=>0))}"><i></i><span style="color: red">待开奖</span>
+       href="{:url('lottery_order/index',array('status'=>0))}"><i></i><span style="color: red">参与记录</span>
         <b class='prices'>{$not_complete|default='0'}</b></a>
     <!--    <a class='uc-order-btn fukuan' href="{:url('lottery_order/index',array('status'=>1))}"><i></i>已开奖-->
     <!--        <b class='prices'>{$lottery|default='0'}</b>-->
@@ -51,10 +51,10 @@
         <b class='prices'>{$luck_not_get|default='0'}</b>
     </a>
     <a class='uc-order-btn fahuo' href="{:url('lottery_order/index',array('status'=>3))}"><i></i>
-        <span style="color: red">对战模式待领取</span>
+        <span style="color: red">中奖记录</span>
         <b class='prices'>{$not_get|default='0'}</b></a>
 <!--    <a class='uc-order-btn fukuan' href="{:url('lottery_order/index',array('status'=>2))}"><i></i>已开奖</a>-->
-    <a class='uc-order-btn fukuan' href="{:url('balance/balance_list',array('type'=>7))}"><i></i>游戏获取</a>
+    <a class='uc-order-btn fukuan' href="{:url('balance/balance_list',array('type'=>7))}"><i></i>金豆增加记录</a>
 </div>
 <!--<div class="uc-section base_sound" onclick="location.href = '{:url(\'lottery_order/luck_list\')}';">-->
 <!--    <i></i><b>查看记录</b>幸运购-->

@@ -121,6 +121,7 @@ class Goods extends controller
         $data = input('post.');
 
         $update['lottery_num'] = (int)$data['lottery_num'];
+        $update['set_at']      = date('Y-m-d H:i:s');
         $update['id']          = (float)$data['home_id'];
 
         if (Db::name('home')->update($update)) {

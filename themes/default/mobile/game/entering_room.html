@@ -541,13 +541,13 @@
                         if (residueTime < 0) {
                             location.href = '/mobile/game/start_game/home_id/' + r.game_home_id;
                         } else {
-                            layer.msg('游戏即将开始，请勿点击页面！', {icon: 4}, 10000);
+                            layer.msg('游戏即将开始，请勿退出！', {icon: 4}, 10000);
                             var index = layer.load(3, {
                                 shade: [0.5, '#000'] //0.1透明度的白色背景
                             });
                             setTimeout(function () {
                                 location.href = '/mobile/game/start_game/home_id/' + r.game_home_id;
-                            }, residueTime * 1000);
+                            }, residueTime * 600);
                         }
                     } else {
                         var pic = '';

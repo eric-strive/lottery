@@ -53,12 +53,12 @@ class Balance extends MobileBase
     function balance_list()
     {
         $startTime = time() - 86400 * 3;
-        $where = [
+        $where     = [
             'uid'         => UID,
             'create_time' => ['>', $startTime],
         ];
-        $type = input('param.type');
-        if($type){
+        $type      = input('param.type');
+        if ($type) {
             $where['type'] = $type;
         }
         $this->assign('user_info', Db::name('member')->where(['uid' => UID])->find());
@@ -68,7 +68,7 @@ class Balance extends MobileBase
             ->limit(10)
             ->select());
         $this->assign('empty', "<span style='margin-left:20px;'>没有数据</span>");
-        $this->assign('top_title', '我的金豆');
+        $this->assign('top_title', '金豆增加记录');
 
         return $this->fetch();
     }

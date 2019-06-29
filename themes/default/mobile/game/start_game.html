@@ -89,7 +89,7 @@
 <div class="screen menu" style="">
     <a href="#" class="btn play" onClick="" style="font-size: 30px;">
         <span>倒计时</span><br>
-        <span class="js-best-s" style="color: red;">4</span>
+        <span class="js-best-s" style="color: red;font-size: 38px;font-weight: bold;">4</span>
     </a>
 </div>
 
@@ -165,7 +165,7 @@
         </div>
 
     </div>
-    <a href="/mobile" class="btn btn--clear" onClick="menu()">确定</a>
+    <a href="/mobile/game/draw_room/home_id/{$recordInfo.game_home_id}" class="btn btn--clear" onClick="menu()">确定</a>
 </div>
 
 <div class="screen settings">
@@ -276,7 +276,7 @@
                 'grade': score,
             },
             function (r) {
-                // location.href = '/mobile/game/draw_room/home_id/' + home_id;
+                location.href = '/mobile/game/draw_room/home_id/' + home_id;
             });
     }
 </script>
