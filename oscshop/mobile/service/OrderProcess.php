@@ -251,6 +251,22 @@ class OrderProcess
         //库存减一
         Goods::buyGoods($homeInfo['gid']);
     }
+
+    /**
+     * 满房后获得金豆
+     *
+     * @param $uid
+     * @param $amount
+     * @param $homeId
+     *
+     * @throws \think\Exception
+     * @throws \think\exception\PDOException
+     */
+    public static function getAmount($uid, $amount, $homeId)
+    {
+        Member::giveBalanceLuck($uid, $amount, 7);
+        Home::confirmGet($homeId);
+    }
 }
 
 ?>

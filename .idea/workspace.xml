@@ -5,17 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab9aee13-d223-48e2-bcc2-f55b7279d7c3" name="默认" comment="提交代码">
+      <change afterPath="$PROJECT_DIR$/themes/default/mobile/cart/buy_good.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/themes/default/mobile/lottery_order/get_bug_record.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/oscshop/admin/service/GameHomeService.php" beforeDir="false" afterPath="$PROJECT_DIR$/oscshop/admin/service/GameHomeService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/oscshop/member/controller/Goods.php" beforeDir="false" afterPath="$PROJECT_DIR$/oscshop/member/controller/Goods.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/oscshop/mobile/controller/Balance.php" beforeDir="false" afterPath="$PROJECT_DIR$/oscshop/mobile/controller/Balance.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/game/entering_room.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/game/entering_room.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/game/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/game/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/game/start_game.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/game/start_game.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/index/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/index/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/default/mobile/user/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/user/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oscshop/admin/model/LuckRecord.php" beforeDir="false" afterPath="$PROJECT_DIR$/oscshop/admin/model/LuckRecord.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oscshop/admin/model/Member.php" beforeDir="false" afterPath="$PROJECT_DIR$/oscshop/admin/model/Member.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oscshop/mobile/controller/Cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/oscshop/mobile/controller/Cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oscshop/mobile/controller/Home.php" beforeDir="false" afterPath="$PROJECT_DIR$/oscshop/mobile/controller/Home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oscshop/mobile/controller/LotteryOrder.php" beforeDir="false" afterPath="$PROJECT_DIR$/oscshop/mobile/controller/LotteryOrder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oscshop/mobile/controller/LotteryPayment.php" beforeDir="false" afterPath="$PROJECT_DIR$/oscshop/mobile/controller/LotteryPayment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oscshop/mobile/service/OrderProcess.php" beforeDir="false" afterPath="$PROJECT_DIR$/oscshop/mobile/service/OrderProcess.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oscshop/mobile/service/WeixinPay.php" beforeDir="false" afterPath="$PROJECT_DIR$/oscshop/mobile/service/WeixinPay.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/default/mobile/goods/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/themes/default/mobile/goods/detail.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,29 +43,111 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/luck.html">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/LotteryOrder.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="121" column="32" selection-start-line="121" selection-start-column="25" selection-end-line="121" selection-end-column="40" />
+            <state relative-caret-position="367">
+              <caret line="167" column="23" lean-forward="true" selection-start-line="167" selection-start-column="23" selection-end-line="167" selection-end-column="23" />
               <folding>
-                <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#p#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#strong#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#398#429#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/themes/default/mobile/lottery_order/get_bug_record.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="513" column="16" lean-forward="true" selection-start-line="513" selection-start-column="16" selection-end-line="513" selection-end-column="16" />
+            <state relative-caret-position="432">
+              <caret line="50" column="52" lean-forward="true" selection-start-line="50" selection-start-column="52" selection-end-line="50" selection-end-column="52" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#section#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#1161#1167#0" expanded="true" />
+                <element signature="e#1167#1173#0" expanded="true" />
+                <element signature="e#1173#1179#0" expanded="true" />
+                <element signature="e#1179#1185#0" expanded="true" />
+                <element signature="e#1185#1190#0" expanded="true" />
+                <element signature="n#style#0;n#div#3;n#section#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#3;n#section#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#1;n#div#3;n#section#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Home.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="69" column="5" lean-forward="true" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
+              <folding>
+                <element signature="e#1949#3086#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/User.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="453">
+              <caret line="43" column="79" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="79" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/oscshop/admin/model/Member.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="321">
+              <caret line="124" column="33" lean-forward="true" selection-start-line="124" selection-start-column="33" selection-end-line="124" selection-end-column="33" />
+              <folding>
+                <element signature="e#1268#1939#0#PHP" />
+                <element signature="e#1945#2626#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/oscshop/mobile/service/WeixinPay.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="556">
+              <caret line="145" column="28" lean-forward="true" selection-start-line="145" selection-start-column="28" selection-end-line="145" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Cart.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="433">
+              <caret line="177" column="33" lean-forward="true" selection-start-line="177" selection-start-column="33" selection-end-line="177" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/LotteryPayment.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="110" column="22" selection-start-line="110" selection-start-column="22" selection-end-line="110" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/buy_good.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="87" column="47" lean-forward="true" selection-start-line="87" selection-start-column="47" selection-end-line="87" selection-end-column="47" />
+              <folding>
+                <element signature="e#1881#1900#0" expanded="true" />
+                <element signature="e#2063#2068#0" expanded="true" />
+                <element signature="e#2263#2287#0" expanded="true" />
+                <element signature="e#3742#3747#0" expanded="true" />
+                <element signature="e#4342#4366#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -73,16 +156,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>icon iconfont icon-mobile</find>
-      <find>light</find>
-      <find>lottery_initvars</find>
-      <find>lottery-dataNums</find>
-      <find>lottery-main-user</find>
-      <find>canvas</find>
-      <find>checkLottery</find>
-      <find>lottery_nickname</find>
-      <find>95</find>
-      <find>开设</find>
       <find>font-size</find>
       <find>penDoor</find>
       <find>取消</find>
@@ -102,7 +175,17 @@
       <find>.right_hid_num</find>
       <find>js-best-s</find>
       <find>img</find>
+      <find>手速</find>
+      <find>homeInfo</find>
+      <find>home_id</find>
+      <find>yanhua</find>
+      <find>pay_mount</find>
       <find>luck-cen-bottom</find>
+      <find>percentage</find>
+      <find>layer</find>
+      <find>order</find>
+      <find>uid</find>
+      <find>name</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -125,31 +208,21 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/oscshop/admin/model/PayOrder.php" />
-        <option value="$PROJECT_DIR$/extend/wechat/Wechat.php" />
-        <option value="$PROJECT_DIR$/oscshop/common/service/templateNews.php" />
-        <option value="$PROJECT_DIR$/themes/default/member/goods/luck_list.html" />
-        <option value="$PROJECT_DIR$/themes/default/mobile/lottery_order/luck_list.html" />
         <option value="$PROJECT_DIR$/themes/default/mobile/lottery_order/index.html" />
         <option value="$PROJECT_DIR$/thinkphp/helper.php" />
-        <option value="$PROJECT_DIR$/oscshop/admin/model/Member.php" />
         <option value="$PROJECT_DIR$/themes/default/mobile/lottery_order/luck_all_list.html" />
         <option value="$PROJECT_DIR$/oscshop/admin/view/goods/edit.html" />
         <option value="$PROJECT_DIR$/oscshop/admin/view/goods/general.html" />
         <option value="$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html" />
-        <option value="$PROJECT_DIR$/oscshop/mobile/controller/Cart.php" />
         <option value="$PROJECT_DIR$/oscshop/mobile/controller/Index.php" />
         <option value="$PROJECT_DIR$/themes/default/mobile/index/new_guidelines.html" />
         <option value="$PROJECT_DIR$/public/static/act/flog/index.html" />
         <option value="$PROJECT_DIR$/oscshop/common.php" />
         <option value="$PROJECT_DIR$/themes/default/member/goods/home_deal.html" />
         <option value="$PROJECT_DIR$/themes/default/member/goods/account_info.html" />
-        <option value="$PROJECT_DIR$/oscshop/mobile/controller/LotteryPayment.php" />
         <option value="$PROJECT_DIR$/oscshop/mobile/controller/Goods.php" />
         <option value="$PROJECT_DIR$/themes/default/mobile/user/recharge.html" />
-        <option value="$PROJECT_DIR$/themes/default/mobile/goods/detail.html" />
         <option value="$PROJECT_DIR$/oscshop/member/controller/LuckBuy.php" />
-        <option value="$PROJECT_DIR$/oscshop/admin/model/LuckRecord.php" />
         <option value="$PROJECT_DIR$/themes/default/member/luck_buy/index.html" />
         <option value="$PROJECT_DIR$/themes/default/mobile/goods/luck.html" />
         <option value="$PROJECT_DIR$/themes/default/member/goods/home_list.html" />
@@ -164,7 +237,6 @@
         <option value="$PROJECT_DIR$/themes/default/mobile/user/wish_list.html" />
         <option value="$PROJECT_DIR$/themes/default/member/goods/game_home_list.html" />
         <option value="$PROJECT_DIR$/oscshop/admin/model/GameHome.php" />
-        <option value="$PROJECT_DIR$/oscshop/mobile/controller/LotteryOrder.php" />
         <option value="$PROJECT_DIR$/themes/default/mobile/lottery_order/ajax_order_list.html" />
         <option value="$PROJECT_DIR$/oscshop/member/controller/Goods.php" />
         <option value="$PROJECT_DIR$/themes/default/mobile/game/index.html" />
@@ -176,6 +248,17 @@
         <option value="$PROJECT_DIR$/themes/default/mobile/user/index.html" />
         <option value="$PROJECT_DIR$/themes/default/mobile/cart/entering_room.html" />
         <option value="$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css" />
+        <option value="$PROJECT_DIR$/oscshop/mobile/service/OrderProcess.php" />
+        <option value="$PROJECT_DIR$/oscshop/admin/model/LuckRecord.php" />
+        <option value="$PROJECT_DIR$/themes/default/mobile/goods/detail.html" />
+        <option value="$PROJECT_DIR$/oscshop/mobile/controller/LotteryPayment.php" />
+        <option value="$PROJECT_DIR$/oscshop/mobile/controller/Cart.php" />
+        <option value="$PROJECT_DIR$/oscshop/admin/model/Member.php" />
+        <option value="$PROJECT_DIR$/themes/default/mobile/cart/buy_good.html" />
+        <option value="$PROJECT_DIR$/oscshop/mobile/service/WeixinPay.php" />
+        <option value="$PROJECT_DIR$/oscshop/mobile/controller/Home.php" />
+        <option value="$PROJECT_DIR$/themes/default/mobile/lottery_order/get_bug_record.html" />
+        <option value="$PROJECT_DIR$/oscshop/mobile/controller/LotteryOrder.php" />
       </list>
     </option>
   </component>
@@ -259,15 +342,7 @@
               <item name="themes" type="462c0819:PsiDirectoryNode" />
               <item name="default" type="462c0819:PsiDirectoryNode" />
               <item name="mobile" type="462c0819:PsiDirectoryNode" />
-              <item name="goods" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lottery" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lottery" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="default" type="462c0819:PsiDirectoryNode" />
-              <item name="mobile" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
+              <item name="lottery_order" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -278,7 +353,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/themes/default/member/goods" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/themes/default/mobile/lottery_order" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -287,19 +362,19 @@
     <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/themes/default/mobile/lottery_order" />
+      <recent name="$PROJECT_DIR$/themes/default/mobile/cart" />
+      <recent name="$PROJECT_DIR$/themes/default/member/goods" />
+      <recent name="$PROJECT_DIR$/public/static/act/flog/image" />
+      <recent name="$PROJECT_DIR$/themes/default/mobile/game" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/static/act/flog/image" />
       <recent name="$PROJECT_DIR$/public/static/image" />
       <recent name="$PROJECT_DIR$/public/static/act/guessing_game/img" />
       <recent name="$PROJECT_DIR$/public/static/act/flog" />
       <recent name="$PROJECT_DIR$/public/static/act" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/themes/default/member/goods" />
-      <recent name="$PROJECT_DIR$/public/static/act/flog/image" />
-      <recent name="$PROJECT_DIR$/themes/default/mobile/game" />
-      <recent name="$PROJECT_DIR$/themes/default/mobile/lottery_order" />
-      <recent name="$PROJECT_DIR$/oscshop/common/service" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -370,14 +445,7 @@
       <workItem from="1560663831632" duration="44000" />
       <workItem from="1560663911606" duration="16136000" />
       <workItem from="1561185054100" duration="2524000" />
-      <workItem from="1561642001342" duration="3618000" />
-    </task>
-    <task id="LOCAL-00015" summary="Merge branch 'master' of https://github.com/18207199230/lottery&#10;&#10;# Conflicts:&#10;#&#9;themes/default/mobile/cart/good_buy.html">
-      <created>1556628233810</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1556628233810</updated>
+      <workItem from="1561642001342" duration="11958000" />
     </task>
     <task id="LOCAL-00016" summary="Merge branch 'master' of https://github.com/18207199230/lottery&#10;&#10;# Conflicts:&#10;#&#9;themes/default/mobile/cart/good_buy.html">
       <created>1556686094564</created>
@@ -715,11 +783,18 @@
       <option name="project" value="LOCAL" />
       <updated>1561186802018</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="提交代码">
+      <created>1561791950370</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1561791950370</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="561478000" />
+    <option name="totallyTimeSpent" value="569818000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="23" width="1380" height="877" extended-state="0" />
@@ -828,133 +903,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="提交代码" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/themes/default/mobile/index/new_guidelines.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/admin/model/duobaoRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="73" column="27" selection-start-line="73" selection-start-column="27" selection-end-line="73" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="185" column="17" selection-start-line="185" selection-start-column="17" selection-end-line="185" selection-end-column="17" />
-          <folding>
-            <element signature="e#10531#10553#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/runtime/temp/47530419b8e058241ea757b1a96e9a06.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="726" column="55" selection-start-line="726" selection-start-column="55" selection-end-line="726" selection-end-column="55" />
-          <folding>
-            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/admin/view/goods/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="591">
-          <caret line="38" column="13" lean-forward="true" selection-start-line="32" selection-start-column="8" selection-end-line="38" selection-end-column="13" />
-          <folding>
-            <element signature="e#19#25#1" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/member/controller/LuckBuy.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/admin/model/LuckRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="207" column="34" lean-forward="true" selection-start-line="207" selection-start-column="34" selection-end-line="207" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/themes/default/member/luck_buy/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="47" column="19" lean-forward="true" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/tables.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="232" column="16" selection-start-line="232" selection-start-column="16" selection-end-line="232" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/themes/default/member/goods/home_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="30" column="25" lean-forward="true" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
-          <folding>
-            <element signature="n#style#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="59" column="5" lean-forward="true" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Cash.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Cart.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="489" column="29" selection-start-line="489" selection-start-column="24" selection-end-line="489" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/admin/model/Home.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="355" column="29" lean-forward="true" selection-start-line="355" selection-start-column="29" selection-end-line="355" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/static/act/flog/image/bg.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/block.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="248" column="16" selection-start-line="248" selection-start-column="16" selection-end-line="248" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/static/js/draw/pc_draw.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="117">
@@ -1007,13 +955,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="34" lean-forward="true" selection-start-line="5" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/themes/default/member/goods/game_home_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="82">
@@ -1056,16 +997,6 @@
           <folding>
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/LotteryOrder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="58" column="24" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="24" />
-          <folding>
-            <element signature="e#398#429#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1239,13 +1170,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/oscshop/admin/service/GameHomeService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="186" column="23" lean-forward="true" selection-start-line="186" selection-start-column="23" selection-end-line="186" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/themes/default/mobile/index/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="370">
@@ -1320,10 +1244,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="513" column="16" lean-forward="true" selection-start-line="513" selection-start-column="16" selection-end-line="513" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oscshop/admin/service/GameHomeService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="189" column="42" selection-start-line="189" selection-start-column="42" selection-end-line="189" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/good_buy.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="34" lean-forward="true" selection-start-line="5" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="267" column="62" selection-start-line="267" selection-start-column="62" selection-end-line="267" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/themes/default/mobile/goods/luck.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
-          <caret line="121" column="32" selection-start-line="121" selection-start-column="25" selection-end-line="121" selection-end-column="40" />
+          <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-end-line="18" />
           <folding>
             <element signature="n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -1336,10 +1288,141 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/static/view_res/mobile/css/alert.css">
+    <entry file="file://$PROJECT_DIR$/oscshop/admin/model/Home.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="513" column="16" lean-forward="true" selection-start-line="513" selection-start-column="16" selection-end-line="513" selection-end-column="16" />
+        <state relative-caret-position="347">
+          <caret line="387" column="14" lean-forward="true" selection-start-line="387" selection-start-column="14" selection-end-line="387" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oscshop/common/service/Goods.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="299" column="34" selection-start-line="299" selection-start-column="20" selection-end-line="299" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oscshop/mobile/service/OrderProcess.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="268" column="5" lean-forward="true" selection-start-line="268" selection-start-column="5" selection-end-line="268" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oscshop/admin/model/LuckRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="155" column="35" selection-start-line="155" selection-start-column="35" selection-end-line="155" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/mobile/cart/buy_good.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="87" column="47" lean-forward="true" selection-start-line="87" selection-start-column="47" selection-end-line="87" selection-end-column="47" />
+          <folding>
+            <element signature="e#1881#1900#0" expanded="true" />
+            <element signature="e#2063#2068#0" expanded="true" />
+            <element signature="e#2263#2287#0" expanded="true" />
+            <element signature="e#3742#3747#0" expanded="true" />
+            <element signature="e#4342#4366#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/LotteryPayment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="110" column="22" selection-start-line="110" selection-start-column="22" selection-end-line="110" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Cart.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="177" column="33" lean-forward="true" selection-start-line="177" selection-start-column="33" selection-end-line="177" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="43" column="79" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oscshop/admin/model/Member.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="124" column="33" lean-forward="true" selection-start-line="124" selection-start-column="33" selection-end-line="124" selection-end-column="33" />
+          <folding>
+            <element signature="e#1268#1939#0#PHP" />
+            <element signature="e#1945#2626#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oscshop/mobile/service/WeixinPay.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="556">
+          <caret line="145" column="28" lean-forward="true" selection-start-line="145" selection-start-column="28" selection-end-line="145" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/mobile/lottery_order/luck_all_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-358" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thinkphp/helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="266" column="24" selection-start-line="266" selection-start-column="24" selection-end-line="266" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/thinkphp/library/think/Debug.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="187" column="27" selection-start-line="187" selection-start-column="27" selection-end-line="187" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/Home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="69" column="5" lean-forward="true" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
+          <folding>
+            <element signature="e#1949#3086#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/default/mobile/lottery_order/get_bug_record.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="50" column="52" lean-forward="true" selection-start-line="50" selection-start-column="52" selection-end-line="50" selection-end-column="52" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#section#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#1161#1167#0" expanded="true" />
+            <element signature="e#1167#1173#0" expanded="true" />
+            <element signature="e#1173#1179#0" expanded="true" />
+            <element signature="e#1179#1185#0" expanded="true" />
+            <element signature="e#1185#1190#0" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#section#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#3;n#section#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#div#3;n#section#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oscshop/mobile/controller/LotteryOrder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="167" column="23" lean-forward="true" selection-start-line="167" selection-start-column="23" selection-end-line="167" selection-end-column="23" />
+          <folding>
+            <element signature="e#398#429#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

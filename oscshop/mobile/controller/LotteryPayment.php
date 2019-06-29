@@ -222,6 +222,11 @@ class LotteryPayment extends Base
                         GameHomeService::participateGame(input('post.'), 1);
                         GameHomeService::subBalance($orderData);
                         break;
+                    case '9':
+                        //购买商品
+                        WeixinPay::goodsBug();
+                        break;
+
                 }
                 Db::commit();
 

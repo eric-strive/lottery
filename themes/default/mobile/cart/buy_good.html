@@ -1,0 +1,110 @@
+{extend name="public:base" /} {block name="jquery"}
+<script src="__PUBLIC__/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+{/block} {block name="head"}
+<link href="__PUBLIC__/num_move/css/globle.css" type="text/css" rel="Stylesheet"/>
+<link href="__PUBLIC__/view_res/mobile/css/cart.css" type="text/css" rel="Stylesheet"/>
+<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
+<link href="__PUBLIC__/jquery-weui/dist/css/jquery-weui.min.css" type="text/css" rel="Stylesheet"/>
+<link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/alert.css" type="text/css">
+<link rel="stylesheet" href="__PUBLIC__/view_res/mobile/css/draw.css" type="text/css">
+<script src="__PUBLIC__/jquery-weui/dist/lib/fastclick.js"></script>
+<script src="__PUBLIC__/jquery-weui/dist/js/jquery-weui.min.js"></script>
+<script src="__PUBLIC__/jquery-weui/dist/js/city-picker.js"></script>
+<script src="__PUBLIC__/js/jquery/jquery-migrate-1.2.1.min.js"></script>
+<script src="__PUBLIC__/artTemplate/template.js"></script>
+<script src="__PUBLIC__/view_res/mobile/load_list.js"></script>
+<script type="text/javascript" src="__PUBLIC__/layer/layer.js"></script>
+
+{/block} {block name="header"} {include file="public/top-nav" /} {/block} {block name="content"}
+<header class="Thead">订单信息</header>
+
+<div id="orderDetailsWrapper" data-minheight="68px">
+    <section class="cartListWrap clearfix" id="">
+
+        <a href="{:url('goods/detail',array('id'=>$goods.goods_id))}">
+            <img width="100px;" height="100px;" alt="{$goods.name}" src="IMG_ROOT{$goods.image}"/></a>
+
+        <div class="cartListDesc">
+            <p class="title">
+                <a style="color:#000;" href="{:url('goods/detail',array('id'=>$goods.goods_id))}">{$goods.name}</a>
+            </p>
+            <p class="count">
+                商品价格：&yen;
+                <span class="dprice prices" id="prices">{$goods.price}
+                </span>
+            </p>
+            <dl id="select_number" class="pd-dsc clearfix">
+                <span style="font-size: 14px;">购买份额：</span>
+                <dt class="productCount clearfix">1份</dt>
+            </dl>
+        </div>
+    </section>
+</div>
+<!-- 订单总额 -->
+<div id="orderSummay">
+    <div>
+        <input type="hidden" id="subject" value="{$goods.name}">
+        <input type="hidden" id="pay_mount" value="{$goods.price}">
+        <input type="hidden" id="goods_id" value="{$goods.goods_id}">
+        支付金额 :
+        <b class="prices"> &yen;</b>
+        <b class="prices font13 last" id="order_amount_sig">{$goods.price}</b>
+    </div>
+</div>
+<div class="weui_btn_area">
+    <a style="font-weight:bold" class="weui_btn weui_btn_primary payment base_sound" id="balance-payment-btn">金豆支付</a>
+</div>
+
+{/block} {block name="script"}
+<!--金豆支付-->
+<script type="text/javascript">
+    $('#balance-payment-btn').click(wepayCall);
+
+    /**
+     * 发起金豆支付
+     * @returns
+     */
+    function wepayCall() {
+        //需要配送的，判断收货地址是否已经获取
+        var pay_mount = $('#pay_mount').val();
+        var goods_id = $('#goods_id').val();
+        var subject = '购买商品';
+
+        $('#balance-payment-btn').addClass('disable').html('支付发起中...');
+
+        $.post("{:url('lottery_payment/balance_pay')}", {
+                'pay_total': pay_mount,
+                'subject': subject,
+                'attach': '9',
+                'gid': goods_id,
+            },
+            function (r) {
+                if (r.error) {
+                    $.toast(r.error, "forbidden");
+                    $('#balance-payment-btn').removeClass('disable').html('金豆支付');
+                    return;
+                }
+                if (r.ret_code === 0) {
+                } else if (r.ret_code === 11) {
+                    $('#balance-payment-btn').removeClass('disable').html('金豆支付');
+                    alert(r.ret_msg);
+                } else if (r.ret_code === 3) {
+                    $('#balance-payment-btn').removeClass('disable').html('金豆支付');
+                    layer.confirm('您的金豆不足，请使用微信支付或充值金豆！', {
+                        btn: ['微信充值', '取消购买'] //按钮
+                    }, function () {
+                        location.href = '/mobile/user/recharge/';
+                    }, function () {
+                        layer.closeAll();
+                    });
+                } else {
+                    $('#balance-payment-btn').removeClass('disable').html('金豆支付');
+                    layer.msg('购买成功', {icon: 1})
+                    setTimeout(function () {
+
+                    }, 3000);
+                }
+            });
+    }
+</script>
+{/block}

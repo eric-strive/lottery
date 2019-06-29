@@ -119,22 +119,35 @@ class WeixinPay
      */
     public static function luckBalancePay($orderNo, $pay_total, $uid)
     {
-        Member::addBalance($uid, $pay_total, Member::REDUCE);
-        Member::addBalanceRecord([
-            'uid'         => $uid,
-            'amount'      => $pay_total,
-            'description' => '用户幸运购',
-            'prefix'      => Member::REDUCE,
-            'create_time' => time(),
-            'type'        => 5,
-        ]);
+        Member::giveBalanceLuck($uid, $pay_total, 5, Member::REDUCE);
         LuckRecord::setStatus($orderNo);
         PayOrder::editStatus($orderNo, PayOrder::STATUS_SUCCESS_PAY);
     }
 
-    public static function gamePay()
+    /**
+     * 购买商品
+     */
+    public static function goodsBug()
     {
-
+        $gid       = input('gid', 0);
+        $attach    = input('attach', 0);
+        $uid       = user('uid');
+        $goodsInfo = osc_goods()->get_goods_info($gid);
+        $userInfo  = Db::name('member')->where('uid', $uid)->find();
+        $price     = $goodsInfo['goods']['price'];
+        $bugInfo   = [
+            'gid'       => $gid,
+            'g_pic'     => $goodsInfo['goods']['image'],
+            'g_name'    => $goodsInfo['goods']['name'],
+            'price'     => $price,
+            'nickname'  => $userInfo['nickname'],
+            'uid'       => $uid,
+            'pay_type'  => 1,
+            'status'    => 1,
+            'create_at' => date("Y-m-d H:i:s"),
+        ];
+        Db::name('buy_record')->insert($bugInfo);
+        Member::giveBalanceLuck($uid, $price, $attach, Member::REDUCE);
     }
 }
 

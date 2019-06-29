@@ -264,9 +264,8 @@
 </div>
 {else/}
 <div id="appCartWrap" class="clearfix flex-row-end">
-
-    <a style="display: none;" href="{:url('cart/good_buy',array('home_id'=>$homeInfo['id']))}" id="buy-button"
-       class="flex-row-center base_sound" data-add="0">参与公众抽奖</a>
+    <a style="" href="{:url('cart/good_buy',array('id'=>$goods['goods_id']))}" id="buy-button"
+       class="flex-row-center base_sound" data-add="0">立即购买</a>
     <a id="addcart-button" data-add="1" href="{:url('goods/luck',array('id'=>$goods['goods_id']))}"
        class="flex-row-end base_sound" data-add="0">幸运购</a>
     <!--<a id="toCart" href="{:url('cart/index')}"></a>-->

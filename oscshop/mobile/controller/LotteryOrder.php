@@ -56,6 +56,7 @@ class LotteryOrder extends MobileBase
 
         return $this->fetch('index');
     }
+
     function index_total()
     {
         $status = input('status') !== null ? (int)input('param.status', '') : '';
@@ -66,6 +67,7 @@ class LotteryOrder extends MobileBase
 
         return $this->fetch('index');
     }
+
     function ajax_order_list()
     {
         $page   = (int)input('param.page');//页码
@@ -79,9 +81,9 @@ class LotteryOrder extends MobileBase
             $orders = HomeModel::HomeList('2,3', UID, 10);
         } elseif ($status === HomeModel::NOT_GET) {
             $showTime = time() - 45;
-            if ($all===1) {
-                $where = ['h.status' => ['>=',HomeModel::LOTTERY], 'h.lottery_timestamp' => ['<', $showTime],];
-            }elseif ($all===2) {
+            if ($all === 1) {
+                $where = ['h.status' => ['>=', HomeModel::LOTTERY], 'h.lottery_timestamp' => ['<', $showTime],];
+            } elseif ($all === 2) {
                 $where = ['h.status' => HomeModel::LOTTERY, 'h.lottery_timestamp' => ['<', $showTime],];
             } else {
                 $where = [
@@ -161,5 +163,15 @@ class LotteryOrder extends MobileBase
                 Member::giveBalanceLuck($luckInfo['uid'], $return_venosa);
             }
         }
+    }
+
+    public function get_bug_record()
+    {
+        $bugList = Home::getBugRecord(null);
+        $this->assign('bugList', $bugList);
+        $this->assign('SEO', ['title' => '购买记录-' . config('SITE_TITLE')]);
+        $this->assign('top_title', '购买记录');
+
+        return $this->fetch();
     }
 }

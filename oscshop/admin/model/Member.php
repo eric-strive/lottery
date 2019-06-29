@@ -95,17 +95,42 @@ class Member
         ]);
     }
 
-    public static function giveBalanceLuck($uid, $return_venosa)
+    /**
+     * 金豆处理
+     *
+     * @param     $uid
+     * @param     $return_venosa
+     * @param int $type
+     * @param int $reduce
+     */
+    public static function giveBalanceLuck($uid, $return_venosa, $type = 4, $reduce = self::ADD)
     {
+        $description = '';
+        switch ($type) {
+            case 4:
+                $description = '用户夺宝获取返还金豆';
+                break;
+            case 5:
+                $description = '用户幸运购花费';
+                break;
+            case 7:
+                $description = '房间对战胜利';
+                break;
+            case 8:
+                $description = '幸运购中奖';
+                break;
+            case 9:
+                $description = '用户购买商品花费';
+        }
         if ($return_venosa > 0) {
-            self::addBalance($uid, $return_venosa);
+            self::addBalance($uid, $return_venosa, $reduce);
             self::addBalanceRecord([
                 'uid'         => $uid,
                 'amount'      => $return_venosa,
-                'description' => '用户夺宝获取返还金豆',
-                'prefix'      => 1,
+                'description' => $description,
+                'prefix'      => $reduce,
                 'create_time' => time(),
-                'type'        => 4,
+                'type'        => $type,
                 'admin_id'    => 1,
             ]);
         }

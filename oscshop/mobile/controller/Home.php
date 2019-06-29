@@ -95,11 +95,26 @@ class Home extends MobileBase
             $homeInfo['remain']      = $remain;
             $homeInfo['residueTime'] = $residueTime;
             $homeInfo['nickname']    = $userInfo['nickname'];
-            $homeInfo['userpic']    = $userInfo['userpic'];
+            $homeInfo['userpic']     = $userInfo['userpic'];
 
             return $homeInfo;
         }
 
         return ['status' => 0, 'remain' => $remain, 'residueTime' => $residueTime];
+    }
+
+    public static function getBugRecord($uid = null)
+    {
+        $where = [
+            'status' => 1,
+        ];
+        if ($uid) {
+            $where['uid'] = $uid;
+        }
+
+        return Db::name('buy_record')
+            ->where($where)
+            ->order('create_at desc')
+            ->select();
     }
 }

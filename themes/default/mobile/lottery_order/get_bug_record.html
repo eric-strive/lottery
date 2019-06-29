@@ -1,0 +1,93 @@
+{/block}{extend name="public:base" /}
+{block name="head"}
+<link href="__PUBLIC__/jquery-weui/dist/lib/weui.min.css" type="text/css" rel="Stylesheet"/>
+<link href="__PUBLIC__/view_res/mobile/css/wshop_company_center.css" type="text/css" rel="Stylesheet"/>
+
+{/block}
+{block name="header"}
+{include file="public/top-nav" /}
+{/block}
+
+{block name="content"}
+
+<style>
+    .confirm_get {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 3px;
+    }
+
+    .ucoi-con {
+        font-size: 18px;
+    }
+
+    .clearfix img {
+        width: 30%;
+        height: 5rem;
+    }
+</style>
+<header class="Thead">购买记录</header>
+<div id="ulist">
+    {volist name="bugList" id="l" empty="暂无数据～"}
+    <section class="ulist clearfix">
+        <img src="IMG_ROOT{$l.g_pic}">
+
+        <div class="ucoi-con" style="margin-top: 10px;">
+            <!-- 商品标题 -->
+            <span class="spec Elipsis">商品名：<strong
+                    style="color: red;font-size: 20px;">{$l.g_name}</strong></span><br>
+            <span class="spec Elipsis">价格：</span>
+            <span class="price">
+                            <span class="dprice">&nbsp;&nbsp;&nbsp;&nbsp;&yen;{$l.price}</span>
+                        </span>
+        </div>
+        <div class="ucoi-con">
+            <span class="spec Elipsis">昵称：{$l.nickname}</span>
+        </div>
+        <div class="ucoi-con">
+            <span class="spec Elipsis">时间：{:substr($l.create_at,10)}</span>
+        </div>
+
+        <div style="margin-top:4%;font-size: 18px;">
+            <span style="position: absolute;left: 0;"></span>
+            <span class="title" style='height:42px;'>
+                <strong style="color: red">&nbsp;&nbsp;【{$l.g_name}】</strong></span>
+            <a class="olbtn wepay confirm_get" style="color: red" att="{$l.bug_id}" href='javascript:void(0)'>确认收货</a>
+        </div>
+    </section>
+    {/volist}
+</div>
+{/block}
+{block name="script"}
+<script>
+    $('.lottery').click(function () {
+        $("#lottery").show();
+        $("#ulist").hide();
+    })
+    $('.not_lottery').click(function () {
+        $("#ulist").show();
+        $("#lottery").hide();
+    })
+    $(".confirm_get").click(function () {
+        if (confirm('你确认已收货吗?')) {
+            var return_venosa = $(this).parent().find('.return_venosa').val();
+            var luck_record_id = $(this).attr('att');
+            $.post('{:url("lottery_order/confirm_get")}', {
+                    luck_record_id: luck_record_id,
+                    return_venosa: return_venosa
+                },
+
+                function (d) {
+                    if (d.error) {
+                        $.toast(d.error, "forbidden");
+                        return;
+                    }
+                    window.location.reload();
+                }
+            )
+            ;
+        }
+    })
+</script>
+{/block}
+

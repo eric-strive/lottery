@@ -119,6 +119,10 @@ class Cart extends MobileBase
             $this->assign('signPackage', $wechat->getJsSign(request()->url(true)));
             session('jssdk_order', null);
         }
+        if (input('id', 0)) {
+            return $this->buy_good();
+        }
+
         $homeId   = input('home_id');
         $sign     = input('sign');
         $homeInfo = HomeModel::home_info_by_gid('', $homeId, 1);
@@ -149,6 +153,32 @@ class Cart extends MobileBase
         $this->assign('top_title', '乐购宝');
 
         return $this->fetch();
+    }
+
+    /**
+     * 购买商品
+     *
+     * @return mixed
+     */
+    public function buy_good()
+    {
+        $gid = input('id', 0);
+        if (!$list = osc_goods()->get_goods_info($gid)) {
+            $this->error('商品不存在！！');
+        }
+        $list['goods']['image'] = resize($list['goods']['image'], 230, 230);
+
+        $this->assign('top_title', $list['goods']['name']);
+        $this->assign('goods', $list['goods']);
+        $this->assign('image', $list['image']);
+        $this->assign('options', $list['options']);
+        $this->assign('discount', $list['discount']);
+        $this->assign('mobile_description', $list['mobile_description']);
+
+        $this->assign('SEO', ['title' => '乐购宝-' . config('SITE_TITLE')]);
+        $this->assign('top_title', '乐购宝');
+
+        return $this->fetch('buy_good');
     }
 
     function add()

@@ -176,6 +176,22 @@ class LuckRecord
         });
     }
 
+    /**
+     * 幸运购获得金额
+     *
+     * @param $uid
+     * @param $amount
+     * @param $luckRecordId
+     *
+     * @throws \think\Exception
+     * @throws \think\exception\PDOException
+     */
+    public static function getAmount($uid, $amount, $luckRecordId)
+    {
+        Member::giveBalanceLuck($uid, $amount, 8);
+        self::setDraw($luckRecordId);
+    }
+
     public static function getRecord($uid = null, $isLottery = null, $is_draw = null, $count = 20)
     {
         $data = input('get.');
@@ -220,6 +236,7 @@ class LuckRecord
             return $query->order('LuckRecord.status asc,LuckRecord.is_draw asc,LuckRecord.luck_record_id desc')
                 ->select();
         }
+
         return $query->order('LuckRecord.status asc,LuckRecord.is_draw asc,LuckRecord.luck_record_id desc')
             ->paginate($count, false);
     }
